@@ -332,6 +332,7 @@
 
     // Show modal
     modal.classList.remove('hidden');
+    modal.style.display = 'flex';
   }
 
   function updateThemeModeButtons(light) {
@@ -354,7 +355,10 @@
     const doneBtn = document.getElementById('btn-save-settings-done');
 
     function closeSettings() {
-      if (modal) modal.classList.add('hidden');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.style.display = 'none';
+      }
       if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) {
         saveToLocalStorage(true);
       }

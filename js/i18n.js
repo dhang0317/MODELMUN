@@ -1,5 +1,5 @@
 // MUN Command - Multilingual I18N Dictionary
-window.I18N = {
+const I18N = {
     en: {
       sessionActive: "Session Active",
       noAgenda: "No agenda has been adopted",
@@ -744,3 +744,7 @@ window.I18N = {
       logoReset: "Réinitialiser le logo"
     }
   };
+  if (typeof window !== 'undefined') {
+    window.I18N = I18N;
+  }
+

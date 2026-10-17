@@ -12,6 +12,7 @@
   }
 
   function renderLanguageTexts() {
+    const t = I18N[state.language] || I18N.zh || I18N.en || {};
     const drawerLang = document.getElementById('label-current-lang');
     if (drawerLang) drawerLang.textContent = state.language.toUpperCase();
     const headerLang = document.getElementById('header-lang-label');
@@ -45,9 +46,9 @@
     const twEl = document.getElementById('stat-twothirds');
     if (twEl && twEl.previousElementSibling) twEl.previousElementSibling.textContent = t.twoThirds;
 
-    // Translate Majority Rule Select Options
+    // Translate Majority Rule Select Options if select element exists
     const threshSelect = document.getElementById('select-vote-threshold');
-    if (threshSelect && threshSelect.options.length >= 3) {
+    if (threshSelect && threshSelect.options && threshSelect.options.length >= 3) {
       if (state.language === 'zh') {
         threshSelect.options[0].text = '簡單多數決 (50% + 1)';
         threshSelect.options[1].text = '絕對多數決 (2/3)';
@@ -65,7 +66,7 @@
 
     // Translate Motion Type Select Options
     const motionTypeSelect = document.getElementById('select-motion-type');
-    if (motionTypeSelect && motionTypeSelect.options.length >= 7) {
+    if (motionTypeSelect && motionTypeSelect.options && motionTypeSelect.options.length >= 7) {
       if (state.language === 'zh') {
         motionTypeSelect.options[0].text = '全會結束';
         motionTypeSelect.options[1].text = '休會動議 - 本日結束 (Adjournment for the Day)';
