@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "scratch/**",
+      "*.zip",
+      "*.backup.*",
+      "iansui_extracted/**"
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  }
+}

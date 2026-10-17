@@ -63,7 +63,23 @@
       });
     }
 
-    // ================= GOOGLE IDENTITY SERVICES (GIS) =================
+    // ================= FIREBASE & GOOGLE AUTHENTICATION =================
+    if (window.firebaseAuth) {
+      window.firebaseAuth.onAuthStateChanged(async (fbUser) => {
+        if (fbUser) {
+          const user = {
+            name: fbUser.displayName || 'MUN Delegate',
+            email: fbUser.email || '',
+            picture: fbUser.photoURL || 'https://lh3.googleusercontent.com/a/default-user',
+            sub: fbUser.uid,
+            uid: fbUser.uid
+          };
+          await onUserAuthenticated(user);
+        }
+      });
+    }
+
+    // ================= GOOGLE IDENTITY SERVICES (GIS FALLBACK) =================
     function decodeJwtResponse(token) {
       const base64Url = token.split('.')[1];
       const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -78,7 +94,7 @@
       localStorage.setItem('MUN_USER_PROFILE', JSON.stringify(state.currentUser));
       updateAuthUI();
 
-      // 檢查該使用者在雲端是否已有專屬的會議紀錄
+      // 檢查該使用者在 Firebase / 雲端是否已有專屬的會議紀錄
       const loaded = await loadFromCloudKV();
       if (!loaded) {
         // 如果此帳號為初次登入或雲端尚無存檔，重置為預設會議範本，避免受到前一位使用者留存資料影響
@@ -99,7 +115,8 @@
           name: payload.name,
           email: payload.email,
           picture: payload.picture,
-          sub: payload.sub
+          sub: payload.sub,
+          uid: payload.sub
         };
         onUserAuthenticated(user);
       } catch (e) {
@@ -116,7 +133,6 @@
         cancel_on_tap_outside: true,
         use_fedcm_for_prompt: false
       });
-      // Do not auto-prompt One Tap to prevent intrusive popups on every page load
     }
 
     if (window.google && window.google.accounts) {
@@ -126,7 +142,7 @@
     }
 
     // If user is already logged in locally, attempt to load latest cloud state
-    if (state.currentUser) {
+    if (state.currentUser && !window.firebaseAuth) {
       loadFromCloudKV();
     }
 
@@ -162,8 +178,15 @@
     }
 
     if (logoutBtn) {
-      logoutBtn.addEventListener('click', (e) => {
+      logoutBtn.addEventListener('click', async (e) => {
         e.stopPropagation();
+        if (window.firebaseAuth) {
+          try {
+            await window.firebaseAuth.signOut();
+          } catch (err) {
+            console.warn('Firebase signOut error:', err);
+          }
+        }
         state.currentUser = null;
         localStorage.removeItem('MUN_USER_PROFILE');
         sessionStorage.removeItem('MUN_PORTAL_GUEST');
@@ -188,7 +211,26 @@
       });
     }
 
-    function triggerStandardGoogleLogin() {
+    async function triggerStandardGoogleLogin() {
+      // Priority 1: Firebase Auth Google Sign In
+      if (window.firebaseAuth && typeof firebase !== 'undefined' && firebase.auth) {
+        try {
+          const provider = new firebase.auth.GoogleAuthProvider();
+          provider.setCustomParameters({ prompt: 'select_account' });
+          await window.firebaseAuth.signInWithPopup(provider);
+          return;
+        } catch (err) {
+          console.warn('Firebase Google Sign-In error:', err);
+          if (err.code === 'auth/popup-closed-by-user') {
+            return;
+          }
+          if (err.code === 'auth/unauthorized-domain') {
+            showToast('Firebase 網域未授權，請至 Firebase Console 新增 authorized domain', 'error');
+          }
+        }
+      }
+
+      // Priority 2: Fallback to GIS
       if (!window.google || !window.google.accounts) {
         showToast('Google 登入服務尚未載入，請稍候重試', 'error');
         return;
@@ -216,7 +258,8 @@
                     name: userInfo.name,
                     email: userInfo.email,
                     picture: userInfo.picture,
-                    sub: userInfo.sub
+                    sub: userInfo.sub,
+                    uid: userInfo.sub
                   };
                   await onUserAuthenticated(user);
                 } catch (err) {

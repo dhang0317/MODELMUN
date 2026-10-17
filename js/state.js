@@ -192,18 +192,40 @@
   async function saveToCloudKV(payload, notify = false) {
     if (state.isViewerMode) return;
 
-    const userId = state.currentUser ? (state.currentUser.sub || state.currentUser.email) : null;
+    const userId = state.currentUser ? (state.currentUser.uid || state.currentUser.sub || state.currentUser.email) : null;
     const roomId = state.roomId;
     if (!userId && !roomId) return;
 
     const statusEl = document.getElementById('cloud-sync-status');
     if (statusEl) statusEl.textContent = '雲端同步中...';
 
+    const payloadToSave = {
+      ...payload,
+      lastUpdated: Date.now()
+    };
+
     try {
+      if (window.firebaseDb) {
+        // Strip out any undefined values for Firestore
+        const cleanData = JSON.parse(JSON.stringify(payloadToSave));
+        const promises = [];
+        if (userId) {
+          promises.push(window.firebaseDb.collection('users').doc(userId).set(cleanData, { merge: true }));
+        }
+        if (roomId) {
+          promises.push(window.firebaseDb.collection('rooms').doc(roomId).set(cleanData, { merge: true }));
+        }
+        await Promise.all(promises);
+        if (statusEl) statusEl.textContent = '雲端已同步最新進度';
+        if (notify) showToast('會議資訊與進度已儲存至 Firebase 雲端！', 'success');
+        return;
+      }
+
+      // Fallback to /api/sync if firebaseDb is not present
       const res = await fetch('/api/sync', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId, roomId, payload })
+        body: JSON.stringify({ userId, roomId, payload: payloadToSave })
       });
       const data = await res.json();
       if (data && data.success) {
@@ -213,9 +235,9 @@
         throw new Error(data.error || 'Sync failed');
       }
     } catch (err) {
-      console.warn('Cloud KV save error:', err);
+      console.warn('Firebase / Cloud save error:', err);
       if (statusEl) statusEl.textContent = '雲端同步失敗';
-      if (notify) showToast('無法同步至雲端，請確認網路連線', 'error');
+      if (notify) showToast('無法同步至雲端：' + (err.message || '請確認網路連線'), 'error');
     }
   }
 
@@ -278,16 +300,40 @@
   }
 
   async function loadFromCloudKV() {
-    const userId = state.currentUser ? (state.currentUser.sub || state.currentUser.email) : null;
+    const userId = state.currentUser ? (state.currentUser.uid || state.currentUser.sub || state.currentUser.email) : null;
     const roomId = state.roomId;
     if (!userId && !roomId) return false;
 
-    // Logged in users prioritize their personal user cloud save, delegates in viewer mode prioritize roomId
-    const query = (state.isViewerMode && roomId) 
-      ? `roomId=${encodeURIComponent(roomId)}` 
-      : (userId ? `userId=${encodeURIComponent(userId)}` : `roomId=${encodeURIComponent(roomId)}`);
-
     try {
+      if (window.firebaseDb) {
+        let docData = null;
+        if (state.isViewerMode && roomId) {
+          const docSnap = await window.firebaseDb.collection('rooms').doc(roomId).get();
+          if (docSnap.exists) docData = docSnap.data();
+        } else if (userId) {
+          const docSnap = await window.firebaseDb.collection('users').doc(userId).get();
+          if (docSnap.exists) docData = docSnap.data();
+        } else if (roomId) {
+          const docSnap = await window.firebaseDb.collection('rooms').doc(roomId).get();
+          if (docSnap.exists) docData = docSnap.data();
+        }
+
+        if (docData && typeof docData === 'object' && Object.keys(docData).length > 0) {
+          loadStateFromData(docData);
+          updateAvailableCountriesPool();
+          renderAll();
+          const statusEl = document.getElementById('cloud-sync-status');
+          if (statusEl) statusEl.textContent = '雲端已同步最新進度';
+          return true;
+        }
+        return false;
+      }
+
+      // Fallback to /api/sync if firebaseDb is not present
+      const query = (state.isViewerMode && roomId) 
+        ? `roomId=${encodeURIComponent(roomId)}` 
+        : (userId ? `userId=${encodeURIComponent(userId)}` : `roomId=${encodeURIComponent(roomId)}`);
+
       const res = await fetch(`/api/sync?${query}`);
       if (res.ok) {
         const data = await res.json();
@@ -301,20 +347,41 @@
         }
       }
     } catch (err) {
-      console.warn('Cloud KV load error:', err);
+      console.warn('Cloud load error:', err);
     }
     return false;
   }
 
-  // Start polling in Viewer (Delegate) Mode
+  // Start polling / real-time listener in Viewer (Delegate) Mode
   function startViewerPolling() {
     if (!state.isViewerMode || !state.roomId) return;
-    if (state.viewerPollingInterval) clearInterval(state.viewerPollingInterval);
 
     // Initial load immediately
     loadFromCloudKV();
 
-    // Poll every 500ms for ultra fast live, real-time timer and motion synchronization
+    // Use Firestore real-time onSnapshot listener for instant updates
+    if (window.firebaseDb) {
+      if (window._viewerUnsubscribe) {
+        try { window._viewerUnsubscribe(); } catch (e) {}
+      }
+      window._viewerUnsubscribe = window.firebaseDb.collection('rooms').doc(state.roomId).onSnapshot((docSnap) => {
+        if (docSnap.exists) {
+          const data = docSnap.data();
+          if (data && typeof data === 'object' && (!state.lastUpdated || data.lastUpdated > state.lastUpdated)) {
+            state.lastUpdated = data.lastUpdated;
+            loadStateFromData(data);
+            updateAvailableCountriesPool();
+            renderAll();
+          }
+        }
+      }, (e) => {
+        console.warn('Firestore viewer real-time error:', e);
+      });
+      return;
+    }
+
+    // Polling fallback
+    if (state.viewerPollingInterval) clearInterval(state.viewerPollingInterval);
     state.viewerPollingInterval = setInterval(async () => {
       try {
         const res = await fetch(`/api/sync?roomId=${encodeURIComponent(state.roomId)}`);
