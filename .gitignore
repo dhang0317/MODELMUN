@@ -1,0 +1,10 @@
+﻿# Dependencies & caches
+.wrangler/
+node_modules/
+.DS_Store
+Thumbs.db
+
+# Archives & Temporary files
+*.zip
+scratch/
+*.backup.*

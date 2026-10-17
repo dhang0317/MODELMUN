@@ -1,0 +1,1719 @@
+@font-face {
+  font-family: 'Iansui';
+  src: url('../Iansui-Regular.ttf') format('truetype'),
+       url('/Iansui-Regular.ttf') format('truetype'),
+       url('Iansui-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+    /* 全域文字一律正常字重（無粗體，但保留 FontAwesome 圖標字重） */
+    *:not(.fa):not(.fas):not(.far):not(.fal):not(.fad):not(.fab):not([class*="fa-"]),
+    *:not(.fa):not(.fas):not(.far):not(.fal):not(.fad):not(.fab):not([class*="fa-"])::before,
+    *:not(.fa):not(.fas):not(.far):not(.fal):not(.fad):not(.fab):not([class*="fa-"])::after {
+      font-weight: 400 !important;
+    }
+    body, button, input, select, textarea, span, p, h1, h2, h3, h4, h5, h6, div, a, label {
+      font-family: 'Iansui', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
+    em {
+      font-family: 'Iansui', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", sans-serif !important;
+      font-weight: 400 !important;
+      font-style: normal !important;
+    }
+    /* Ensure FontAwesome icons keep their dedicated icon font & weight with highest specificity */
+    i.fa, i.fas, i.far, i.fal, i.fad, i.fab, i[class*="fa-"],
+    .fa, .fas, .far, .fal, .fad, .fab, [class*="fa-"],
+    [class*="fa-"]::before, .fa-solid::before, .fa-regular::before {
+      font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important;
+      font-style: normal !important;
+      font-variant: normal !important;
+      text-rendering: auto !important;
+      line-height: 1 !important;
+      display: inline-block !important;
+      visibility: visible !important;
+    }
+    .fa-solid, .fas, [class*="fa-solid"] {
+      font-weight: 900 !important;
+    }
+    .fa-regular, .far, [class*="fa-regular"] {
+      font-weight: 400 !important;
+    }
+    .fa-brands, .fab, [class*="fa-brands"] {
+      font-family: "Font Awesome 6 Brands" !important;
+      font-weight: 400 !important;
+    }
+    .font-bold, .font-semibold, .font-black, .font-medium, strong, b {
+      font-weight: 400 !important;
+    }
+    .italic, em {
+      font-style: normal !important;
+    }
+    /* 全頁面文字顏色規範：深色模式純白、淺色模式純黑 */
+    body:not(.light-mode) {
+      user-select: none;
+      -webkit-user-select: none;
+      background-color: #000000 !important;
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) *:not(i):not(svg):not(path):not(line):not(circle):not(polygon):not(polyline) {
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) i:not([class*="text-"]):not(.text-rose-500):not(.text-emerald-500):not(.text-amber-500) {
+      color: #ffffff;
+    }
+    body:not(.light-mode) svg:not([class*="text-"]) {
+      stroke: currentColor;
+    }
+    body.light-mode {
+      user-select: none;
+      -webkit-user-select: none;
+      background-color: #f8fafc !important;
+      color: #000000 !important;
+    }
+    body.light-mode *:not(i):not(svg):not(path):not(line):not(circle):not(polygon):not(polyline) {
+      color: #000000 !important;
+    }
+    body.light-mode i:not([class*="text-"]) {
+      color: #0f172a;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .crunch-time {
+      animation: pulse-danger 1s infinite alternate;
+    }
+    @keyframes pulse-danger {
+      from { color: #ffffff; border-color: #ffffff; }
+      to { color: #94a3b8; border-color: #cbd5e1; }
+    }
+
+    @keyframes toastSlideInRight {
+      0% {
+        transform: translate3d(120%, 0, 0);
+        opacity: 0;
+      }
+      100% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+      }
+    }
+    @keyframes toastSlideOutRight {
+      0% {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+      }
+      100% {
+        transform: translate3d(120%, 0, 0);
+        opacity: 0;
+      }
+    }
+    .toast-slide-in {
+      animation: toastSlideInRight 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+      will-change: transform, opacity;
+    }
+    .toast-slide-out {
+      animation: toastSlideOutRight 0.32s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
+      will-change: transform, opacity;
+    }
+
+    /* =====================================================
+       DARK MODE — Pure Black (#000000) & Crisp White (#ffffff)
+       ===================================================== */
+    body:not(.light-mode) {
+      user-select: none;
+      -webkit-user-select: none;
+      background-color: #000000 !important;
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) #main-header {
+      background-color: #000000 !important;
+      border-color: #27272a !important;
+    }
+    body:not(.light-mode) #main-header,
+    body:not(.light-mode) #main-header * {
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) #main-header input {
+      background-color: transparent !important;
+      border-color: transparent !important;
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) #main-header input:hover {
+      border-color: #52525b !important;
+    }
+    body:not(.light-mode) #main-header input:focus {
+      border-color: #ffffff !important;
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) #header-attendance-stats {
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    body:not(.light-mode) #header-attendance-stats * {
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) .header-stat-divider {
+      background-color: rgba(255, 255, 255, 0.2) !important;
+    }
+    body:not(.light-mode) #btn-toggle-theme,
+    body:not(.light-mode) #btn-google-login,
+    body:not(.light-mode) #btn-open-qrcode {
+      border: 1px solid #3f3f46 !important;
+      background-color: #18181b !important;
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) #btn-open-qrcode:hover {
+      background-color: #27272a !important;
+      border-color: #52525b !important;
+    }
+    body:not(.light-mode) #btn-open-qrcode * {
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) #user-dropdown-popover {
+      background-color: #000000 !important;
+      border-color: #27272a !important;
+    }
+    body:not(.light-mode) #user-dropdown-popover * {
+      color: #ffffff !important;
+    }
+
+    /* Dark Mode Tabs */
+    body:not(.light-mode) nav#tabs-nav {
+      background-color: #000000 !important;
+      border-color: #27272a !important;
+    }
+    body:not(.light-mode) .tab-btn {
+      background-color: transparent !important;
+      color: #a1a1aa !important;
+      border-color: transparent !important;
+    }
+    body:not(.light-mode) .tab-btn span {
+      color: #a1a1aa !important;
+    }
+    body:not(.light-mode) .tab-btn:hover,
+    body:not(.light-mode) .tab-btn:hover span {
+      color: #ffffff !important;
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    body:not(.light-mode) .tab-active,
+    body:not(.light-mode) .tab-active span {
+      color: #ffffff !important;
+      font-weight: bold !important;
+      border-bottom: 3px solid #ffffff !important;
+      background-color: transparent !important;
+    }
+
+    /* Dark Mode Surfaces & Text */
+    body:not(.light-mode) .view-panel,
+    body:not(.light-mode) main,
+    body:not(.light-mode) .bg-white,
+    body:not(.light-mode) .bg-slate-50,
+    body:not(.light-mode) .bg-slate-100,
+    body:not(.light-mode) .bg-slate-800,
+    body:not(.light-mode) .bg-slate-900,
+    body:not(.light-mode) [class*="bg-zinc"] {
+      background-color: #000000 !important;
+      color: #ffffff !important;
+      border-color: #27272a !important;
+    }
+    body:not(.light-mode) p,
+    body:not(.light-mode) span:not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled),
+    body:not(.light-mode) h1,
+    body:not(.light-mode) h2,
+    body:not(.light-mode) h3,
+    body:not(.light-mode) h4,
+    body:not(.light-mode) h5,
+    body:not(.light-mode) h6,
+    body:not(.light-mode) div:not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled),
+    body:not(.light-mode) label,
+    body:not(.light-mode) td,
+    body:not(.light-mode) th,
+    body:not(.light-mode) li,
+    body:not(.light-mode) .text-slate-800,
+    body:not(.light-mode) .text-slate-700,
+    body:not(.light-mode) .text-slate-900,
+    body:not(.light-mode) .text-slate-600,
+    body:not(.light-mode) .text-slate-500,
+    body:not(.light-mode) .text-slate-400,
+    body:not(.light-mode) .text-slate-300,
+    body:not(.light-mode) .text-slate-200,
+    body:not(.light-mode) .text-slate-100 {
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) .border-slate-100,
+    body:not(.light-mode) .border-slate-200,
+    body:not(.light-mode) .border-slate-300,
+    body:not(.light-mode) .border-slate-700,
+    body:not(.light-mode) .border-zinc-800,
+    body:not(.light-mode) .border-zinc-900 {
+      border-color: #27272a !important;
+    }
+    body:not(.light-mode) .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
+    body:not(.light-mode) .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
+    body:not(.light-mode) .divide-slate-700 > :not([hidden]) ~ :not([hidden]) {
+      border-color: #27272a !important;
+    }
+
+    /* Dark Mode Buttons */
+    body:not(.light-mode) button:not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent):not(.btn-rollcall-present):not(.btn-rollcall-absent):not(#vote-stage-r1):not(#vote-stage-r2):not(#vote-stage-rights) {
+      background-color: transparent !important;
+      background: transparent !important;
+      color: #ffffff !important;
+      box-shadow: none !important;
+    }
+    body:not(.light-mode) button:hover {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+      background: rgba(255, 255, 255, 0.1) !important;
+      color: #ffffff !important;
+    }
+
+    /* Dark Mode Badges & Voting */
+    body:not(.light-mode) .btn-vote-choice.vote-favor,
+    body:not(.light-mode) .btn-vote-favor-active {
+      background-color: rgba(16, 185, 129, 0.25) !important;
+      background: rgba(16, 185, 129, 0.25) !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(16, 185, 129, 0.6) !important;
+    }
+    body:not(.light-mode) .btn-vote-choice.vote-favor:hover,
+    body:not(.light-mode) .btn-vote-favor-active:hover {
+      background-color: rgba(16, 185, 129, 0.35) !important;
+      background: rgba(16, 185, 129, 0.35) !important;
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) .btn-vote-choice.vote-against,
+    body:not(.light-mode) .btn-vote-against-active {
+      background-color: rgba(239, 68, 68, 0.25) !important;
+      background: rgba(239, 68, 68, 0.25) !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(239, 68, 68, 0.6) !important;
+    }
+    body:not(.light-mode) .btn-vote-choice.vote-against:hover,
+    body:not(.light-mode) .btn-vote-against-active:hover {
+      background-color: rgba(239, 68, 68, 0.35) !important;
+      background: rgba(239, 68, 68, 0.35) !important;
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) .btn-vote-choice.vote-abstain {
+      background-color: rgba(245, 158, 11, 0.25) !important;
+      background: rgba(245, 158, 11, 0.25) !important;
+      color: #ffffff !important;
+      border: 1px solid rgba(245, 158, 11, 0.6) !important;
+    }
+    body:not(.light-mode) .btn-vote-choice.vote-pass {
+      background-color: rgba(148, 163, 184, 0.25) !important;
+      background: rgba(148, 163, 184, 0.25) !important;
+      color: #cbd5e1 !important;
+      border: 1px solid rgba(148, 163, 184, 0.6) !important;
+    }
+    body:not(.light-mode) .btn-vote-motion-pass {
+      background-color: transparent !important;
+      color: #ffffff !important;
+      border: 1px solid #ffffff !important;
+    }
+    body:not(.light-mode) .btn-vote-motion-pass:hover {
+      background-color: rgba(255, 255, 255, 0.15) !important;
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) .btn-vote-motion-fail {
+      background-color: transparent !important;
+      color: #ffffff !important;
+      border: 1px solid #71717a !important;
+    }
+    body:not(.light-mode) .btn-vote-motion-fail:hover {
+      background-color: rgba(255, 255, 255, 0.15) !important;
+      border-color: #ffffff !important;
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) .attendance-present {
+      background-color: rgba(16, 185, 129, 0.25) !important;
+      background: rgba(16, 185, 129, 0.25) !important;
+      color: #ffffff !important;
+      border: 1.5px solid rgba(16, 185, 129, 0.8) !important;
+    }
+    body:not(.light-mode) .attendance-present.active-expanded {
+      background-color: rgba(16, 185, 129, 0.4) !important;
+      border: 2px solid #10b981 !important;
+      color: #ffffff !important;
+      transform: scale(1.05);
+    }
+    body:not(.light-mode) .attendance-absent {
+      background-color: rgba(239, 68, 68, 0.25) !important;
+      background: rgba(239, 68, 68, 0.25) !important;
+      color: #f87171 !important;
+      border: 1.5px solid rgba(239, 68, 68, 0.8) !important;
+    }
+    body:not(.light-mode) .attendance-absent.active-expanded {
+      background-color: rgba(239, 68, 68, 0.4) !important;
+      border: 2px solid #ef4444 !important;
+      color: #ffffff !important;
+      transform: scale(1.05);
+    }
+    body:not(.light-mode) .attendance-pv {
+      background-color: rgba(245, 158, 11, 0.25) !important;
+      background: rgba(245, 158, 11, 0.25) !important;
+      color: #fbbf24 !important;
+      border: 1.5px solid rgba(245, 158, 11, 0.8) !important;
+    }
+    body:not(.light-mode) .attendance-pv.active-expanded {
+      background-color: rgba(245, 158, 11, 0.4) !important;
+      border: 2px solid #f59e0b !important;
+      color: #ffffff !important;
+      transform: scale(1.05);
+    }
+    body:not(.light-mode) .attendance-uncalled {
+      background-color: rgba(100, 116, 139, 0.25) !important;
+      background: rgba(100, 116, 139, 0.25) !important;
+      color: #94a3b8 !important;
+      border: 1px solid rgba(100, 116, 139, 0.5) !important;
+    }
+
+
+
+
+
+    /* Dark Mode Buttons border rules */
+    button i, button span, button svg {
+      color: inherit;
+    }
+    body:not(.light-mode) button:not(.tab-btn):not(#btn-open-drawer):not(#btn-close-drawer):not(.btn-close-modal):not(.modal-close-icon):not(#btn-user-avatar):not(#btn-logo-home):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item):not(.btn-extend-unmod):not(:has(i[data-lucide="plus"])):not(:has(i[data-lucide="x"])):not(:has(i[class*="fa-plus"])):not(:has(i[class*="fa-xmark"])) {
+      border: 1px solid #3f3f46 !important;
+    }
+    #btn-open-drawer,
+    #btn-open-drawer i,
+    #btn-open-drawer svg {
+      transition: none !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    #btn-gsl-set-time {
+      border: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+    }
+    body:not(.light-mode) #btn-gsl-set-time {
+      border: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+    }
+    body.light-mode #btn-gsl-set-time {
+      border: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
+    }
+    .btn-close-modal,
+    .modal-close-icon,
+    #btn-close-drawer,
+    .btn-remove-country,
+    .btn-del-mod-queue,
+    .btn-del-queue,
+    .btn-add-country-item,
+    .btn-extend-unmod,
+    #btn-logo-home,
+    #btn-open-drawer,
+    #btn-gsl-set-time,
+    button:has(i[data-lucide="plus"]),
+    button:has(i[data-lucide="x"]),
+    button:has(i[class*="fa-plus"]),
+    button:has(i[class*="fa-xmark"]),
+    button:has(svg.lucide-plus),
+    button:has(svg.lucide-x) {
+      border: none !important;
+      box-shadow: none !important;
+    }
+    .btn-close-modal:hover,
+    .modal-close-icon:hover,
+    #btn-close-drawer:hover,
+    .btn-remove-country:hover,
+    .btn-del-mod-queue:hover,
+    .btn-del-queue:hover,
+    .btn-add-country-item:hover,
+    .btn-extend-unmod:hover,
+    button:has(i[data-lucide="plus"]):hover,
+    button:has(i[data-lucide="x"]):hover,
+    button:has(i[class*="fa-plus"]):hover,
+    button:has(i[class*="fa-xmark"]):hover,
+    button:has(svg.lucide-plus):hover,
+    button:has(svg.lucide-x):hover {
+      background-color: transparent !important;
+      background: transparent !important;
+      border: none !important;
+      opacity: 0.8 !important;
+    }
+    #btn-logo-home {
+      background-color: transparent !important;
+      border: none !important;
+      padding: 0 !important;
+    }
+    body:not(.light-mode) .preset-btn,
+    body:not(.light-mode) .preset-select {
+      border: 1px solid #27272a !important;
+      color: #ffffff !important;
+      background-color: #09090b !important;
+    }
+    body:not(.light-mode) .preset-btn:hover,
+    body:not(.light-mode) .preset-select:hover {
+      border-color: #ffffff !important;
+      color: #ffffff !important;
+    }
+    #header-ga-select {
+      background-color: transparent !important;
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    #header-ga-select option {
+      background-color: #09090b !important;
+      color: #ffffff !important;
+      padding: 6px 12px;
+    }
+    body.light-mode #header-ga-select option {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
+    /* Dark Mode Form Inputs (except header) */
+    body:not(.light-mode) input:not(#main-header input), 
+    body:not(.light-mode) select, 
+    body:not(.light-mode) textarea {
+      background-color: #09090b !important;
+      color: #e4e4e7 !important;
+      border-color: #27272a !important;
+    }
+    body:not(.light-mode) input:not(#main-header input)::placeholder, 
+    body:not(.light-mode) select::placeholder, 
+    body:not(.light-mode) textarea::placeholder {
+      color: #71717a !important;
+    }
+    body:not(.light-mode) input:not(#main-header input):focus, 
+    body:not(.light-mode) select:focus, 
+    body:not(.light-mode) textarea:focus {
+      color: #ffffff !important;
+      border-color: #ffffff !important;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3) !important;
+    }
+    body:not(.light-mode) .hover\:bg-slate-50:hover, 
+    body:not(.light-mode) .hover\:bg-slate-100:hover {
+      background-color: #18181b !important;
+    }
+    body:not(.light-mode) .modal-box, 
+    body:not(.light-mode) #modal-add-speaker > div, 
+    body:not(.light-mode) #modal-define-time > div, 
+    body:not(.light-mode) #modal-mod-config > div, 
+    body:not(.light-mode) #modal-add-motion > div {
+      background-color: #000000 !important;
+      border-color: #27272a !important;
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) .bg-emerald-50, 
+    body:not(.light-mode) .bg-rose-50, 
+    body:not(.light-mode) .bg-amber-50 {
+      background-color: #09090b !important;
+    }
+    body:not(.light-mode) #main-drawer {
+      background-color: #000000 !important;
+      border-right: 1px solid #27272a !important;
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) #main-drawer * {
+      color: #ffffff !important;
+    }
+    #btn-open-drawer {
+      display: flex !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      color: #ffffff !important;
+    }
+    #btn-open-drawer svg {
+      display: block !important;
+      stroke: currentColor !important;
+    }
+    #btn-close-drawer svg {
+      display: block !important;
+      stroke: currentColor !important;
+    }
+
+    /* =====================================================
+       LIGHT MODE — Pure White (#ffffff) & Pure Black/Dark Slate Text (#000000 / #0f172a)
+       ===================================================== */
+    body.light-mode {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    /* Light Mode Header: Clean Pure White (#ffffff) with Crisp Black/Dark Slate text */
+    body.light-mode #main-header {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+    }
+    body.light-mode #main-header,
+    body.light-mode #main-header * {
+      color: #0f172a !important;
+    }
+    body.light-mode #main-header input {
+      background-color: transparent !important;
+      border-color: transparent !important;
+      color: #0f172a !important;
+    }
+    body.light-mode #main-header input:hover {
+      border-color: #cbd5e1 !important;
+    }
+    body.light-mode #main-header input:focus {
+      border-color: #000000 !important;
+      color: #000000 !important;
+    }
+    body.light-mode #header-attendance-stats {
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    body.light-mode #header-attendance-stats * {
+      color: #0f172a !important;
+    }
+    body.light-mode .header-stat-divider {
+      background-color: rgba(0, 0, 0, 0.15) !important;
+    }
+    body.light-mode #btn-toggle-theme,
+    body.light-mode #btn-google-login,
+    body.light-mode #btn-open-qrcode {
+      border: 1px solid #cbd5e1 !important;
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+    }
+    body.light-mode #btn-toggle-theme:hover,
+    body.light-mode #btn-google-login:hover,
+    body.light-mode #btn-open-qrcode:hover {
+      background-color: #f1f5f9 !important;
+      color: #000000 !important;
+    }
+    body.light-mode #btn-open-qrcode * {
+      color: #0f172a !important;
+    }
+    body.light-mode #user-dropdown-popover {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+    }
+    body.light-mode #user-dropdown-popover * {
+      color: #0f172a !important;
+    }
+
+    /* Light Mode Tabs Bar */
+    body.light-mode nav#tabs-nav {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+    }
+    body.light-mode .tab-btn {
+      background-color: transparent !important;
+      color: #64748b !important;
+      border-color: transparent !important;
+    }
+    body.light-mode .tab-btn span {
+      color: #64748b !important;
+    }
+    body.light-mode .tab-btn:hover {
+      background-color: #f8fafc !important;
+    }
+    body.light-mode .tab-btn:hover span {
+      color: #000000 !important;
+    }
+    body.light-mode .tab-active {
+      background-color: transparent !important;
+      border-bottom: 3px solid #000000 !important;
+    }
+    body.light-mode .tab-active span {
+      color: #000000 !important;
+      font-weight: bold !important;
+    }
+
+    /* Light Mode Main & Panels */
+    body.light-mode main {
+      background-color: #ffffff !important;
+    }
+    body.light-mode .view-panel {
+      background-color: #ffffff !important;
+    }
+    body.light-mode main .bg-white,
+    body.light-mode main [class*="bg-white"] {
+      background-color: #ffffff !important;
+    }
+    body.light-mode main .bg-slate-50,
+    body.light-mode main [class*="bg-slate-50"] {
+      background-color: #ffffff !important;
+    }
+    body.light-mode main .bg-slate-100,
+    body.light-mode main [class*="bg-slate-100"] {
+      background-color: #f8fafc !important;
+    }
+    body.light-mode main [class*="bg-black"] {
+      background-color: #ffffff !important;
+    }
+    body.light-mode main [class*="bg-zinc-950"],
+    body.light-mode main [class*="bg-zinc-900"],
+    body.light-mode main [class*="bg-zinc-800"] {
+      background-color: #ffffff !important;
+    }
+
+    /* Light Mode Text in Main View Panels */
+    body.light-mode main p,
+    body.light-mode main h1,
+    body.light-mode main h2,
+    body.light-mode main h3,
+    body.light-mode main h4,
+    body.light-mode main h5,
+    body.light-mode main h6,
+    body.light-mode main label,
+    body.light-mode main td,
+    body.light-mode main th,
+    body.light-mode main li {
+      color: #000000 !important;
+    }
+
+    /* Direct text classes inside main views */
+    body.light-mode main .text-slate-800,
+    body.light-mode main .text-slate-700,
+    body.light-mode main .text-slate-900,
+    body.light-mode main .text-slate-100,
+    body.light-mode main .text-slate-200,
+    body.light-mode main .text-zinc-100,
+    body.light-mode main .text-zinc-200,
+    body.light-mode main .text-white:not(.btn-vote-choice *):not(.attendance-present *):not(.attendance-absent *):not(.attendance-pv *):not(.attendance-uncalled *):not(#btn-gsl-start *):not(#btn-gsl-next *):not(#btn-mod-start *):not(#btn-mod-next *) {
+      color: #000000 !important;
+    }
+    body.light-mode main .text-slate-500,
+    body.light-mode main .text-slate-600 {
+      color: #334155 !important;
+    }
+    body.light-mode main .text-slate-400,
+    body.light-mode main .text-zinc-400 {
+      color: #475569 !important;
+    }
+
+    /* Light Mode Borders */
+    body.light-mode main [class*="border-slate"],
+    body.light-mode main [class*="border-zinc"],
+    body.light-mode main [class*="border-white"] {
+      border-color: #e2e8f0 !important;
+    }
+    body.light-mode .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
+    body.light-mode .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
+    body.light-mode .divide-slate-700 > :not([hidden]) ~ :not([hidden]) {
+      border-color: #e2e8f0 !important;
+    }
+
+    /* Light Mode Normal Buttons (按鈕不要有背景色) */
+    body.light-mode button:not(#main-header button):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent) {
+      background-color: transparent !important;
+      background: transparent !important;
+      color: #000000 !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+    body.light-mode button:not(#main-header button):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent):hover {
+      background-color: rgba(0, 0, 0, 0.05) !important;
+      background: rgba(0, 0, 0, 0.05) !important;
+      color: #000000 !important;
+    }
+
+    /* Light Mode Icon/Borderless Buttons */
+    body.light-mode .btn-close-modal,
+    body.light-mode .modal-close-icon,
+    body.light-mode #btn-close-drawer,
+    body.light-mode .btn-remove-country,
+    body.light-mode .btn-del-mod-queue,
+    body.light-mode .btn-del-queue,
+    body.light-mode .btn-add-country-item,
+    body.light-mode .btn-extend-unmod,
+    body.light-mode #btn-open-drawer,
+    body.light-mode #btn-logo-home,
+    body.light-mode button:has(i[data-lucide="plus"]),
+    body.light-mode button:has(i[data-lucide="x"]),
+    body.light-mode button:has(svg.lucide-plus),
+    body.light-mode button:has(svg.lucide-x) {
+      border: none !important;
+      background: transparent !important;
+      color: #475569 !important;
+    }
+    body.light-mode .btn-add-country-item,
+    body.light-mode button:has(i[data-lucide="plus"]) {
+      color: #0284c7 !important;
+    }
+    body.light-mode .btn-remove-country,
+    body.light-mode .btn-del-mod-queue,
+    body.light-mode .btn-del-queue,
+    body.light-mode button:has(i[data-lucide="x"]) {
+      color: #dc2626 !important;
+    }
+
+    /* Light Mode Input Elements (outside header) */
+    body.light-mode input:not(#main-header input),
+    body.light-mode select,
+    body.light-mode textarea {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+    body.light-mode input:not(#main-header input)::placeholder,
+    body.light-mode textarea::placeholder {
+      color: #94a3b8 !important;
+    }
+    body.light-mode input:not(#main-header input):focus,
+    body.light-mode select:focus,
+    body.light-mode textarea:focus {
+      border-color: #000000 !important;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    /* Light Mode Setup Preset Buttons */
+    body.light-mode .preset-btn,
+    body.light-mode .preset-select {
+      background-color: #f8fafc !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    body.light-mode .preset-btn:hover,
+    body.light-mode .preset-select:hover {
+      background-color: #e2e8f0 !important;
+      border-color: #000000 !important;
+      color: #000000 !important;
+    }
+
+    /* Light Mode Timers & Displays (All timers strictly unified) */
+    body.light-mode #gsl-timer-display,
+    body.light-mode #mod-speaker-timer-display,
+    body.light-mode #single-timer-display,
+    body.light-mode #unmod-timer-display,
+    body.light-mode #recess-timer-display {
+      color: #000000 !important;
+    }
+    body.light-mode #mod-total-timer-text,
+    body.light-mode #badge-queue-count {
+      color: #334155 !important;
+    }
+    body.light-mode #gsl-progress-bar,
+    body.light-mode #mod-speaker-progress,
+    body.light-mode #mod-total-progress {
+      background-color: #000000 !important;
+    }
+    body.light-mode .w-full.bg-slate-100,
+    body.light-mode #gsl-progress-bar-bg {
+      background-color: #e2e8f0 !important;
+    }
+
+    /* Roll Call Attendance Badges in Light Mode: Crisp Black Text (白色模式的出缺席要配黑字) */
+    body.light-mode .attendance-present,
+    body.light-mode .attendance-present * {
+      background-color: #d1fae5 !important;
+      color: #000000 !important;
+      border: 1px solid #10b981 !important;
+    }
+    body.light-mode .attendance-present.active-expanded {
+      background-color: #a7f3d0 !important;
+      border: 2px solid #059669 !important;
+      transform: scale(1.05);
+    }
+    body.light-mode .attendance-absent,
+    body.light-mode .attendance-absent * {
+      background-color: #fee2e2 !important;
+      color: #000000 !important;
+      border: 1px solid #ef4444 !important;
+    }
+    body.light-mode .attendance-absent.active-expanded {
+      background-color: #fecaca !important;
+      border: 2px solid #dc2626 !important;
+      transform: scale(1.05);
+    }
+    body.light-mode .attendance-pv,
+    body.light-mode .attendance-pv * {
+      background-color: #fef3c7 !important;
+      color: #000000 !important;
+      border: 1px solid #f59e0b !important;
+    }
+    body.light-mode .attendance-pv.active-expanded {
+      background-color: #fde68a !important;
+      border: 2px solid #d97706 !important;
+      transform: scale(1.05);
+    }
+    body.light-mode .attendance-uncalled,
+    body.light-mode .attendance-uncalled * {
+      background-color: #f1f5f9 !important;
+      color: #334155 !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+    body.light-mode .btn-rollcall-present,
+    body.light-mode .btn-rollcall-absent {
+      border: 1px solid #cbd5e1 !important;
+      color: #64748b !important;
+      background: #ffffff !important;
+    }
+    body.light-mode .btn-rollcall-present:hover {
+      border-color: #10b981 !important;
+      color: #059669 !important;
+      background-color: #f0fdf4 !important;
+    }
+    body.light-mode .btn-rollcall-absent:hover {
+      border-color: #ef4444 !important;
+      color: #dc2626 !important;
+      background-color: #fef2f2 !important;
+    }
+    body.light-mode .btn-toggle-attendance {
+
+
+      color: #000000 !important;
+    }
+
+    /* Voting Choice Badges in Light Mode */
+    body.light-mode .btn-vote-choice {
+      border: 1px solid #cbd5e1 !important;
+      color: #334155 !important;
+    }
+    body.light-mode .btn-vote-choice.vote-favor,
+    body.light-mode .btn-vote-choice.vote-favor * {
+      background-color: #d1fae5 !important;
+      color: #000000 !important;
+      border: 1.5px solid #10b981 !important;
+    }
+    body.light-mode .btn-vote-choice.vote-against,
+    body.light-mode .btn-vote-choice.vote-against * {
+      background-color: #fee2e2 !important;
+      color: #000000 !important;
+      border: 1.5px solid #ef4444 !important;
+    }
+    body.light-mode .btn-vote-choice.vote-abstain,
+    body.light-mode .btn-vote-choice.vote-abstain * {
+      background-color: #fef3c7 !important;
+      color: #000000 !important;
+      border: 1.5px solid #f59e0b !important;
+    }
+    body.light-mode .btn-vote-choice.vote-pass,
+    body.light-mode .btn-vote-choice.vote-pass * {
+      background-color: #f1f5f9 !important;
+      color: #000000 !important;
+      border: 1.5px solid #94a3b8 !important;
+    }
+
+    /* Scoreboard Cards in Light Mode */
+    body.light-mode .bg-emerald-50 {
+      background-color: #ecfdf5 !important;
+      border: 1px solid #a7f3d0 !important;
+    }
+    body.light-mode .bg-emerald-50 * {
+      color: #000000 !important;
+    }
+    body.light-mode .bg-rose-50 {
+      background-color: #fff1f2 !important;
+      border: 1px solid #fecdd3 !important;
+    }
+    body.light-mode .bg-rose-50 * {
+      color: #991b1b !important;
+    }
+    body.light-mode .bg-amber-50 {
+      background-color: #fffbeb !important;
+      border: 1px solid #fde68a !important;
+    }
+    body.light-mode .bg-amber-50 * {
+      color: #92400e !important;
+    }
+    body.light-mode #voting-scoreboard .bg-slate-100 {
+      background-color: #f8fafc !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+    body.light-mode #voting-scoreboard .bg-slate-100 * {
+      color: #0f172a !important;
+    }
+
+    /* Hero Motion Card in Light Mode - Pure White card with Crisp Black text */
+    body.light-mode #hero-motion-card {
+      background-color: #ffffff !important;
+      border: 1.5px solid #000000 !important;
+    }
+    body.light-mode #hero-motion-card,
+    body.light-mode #hero-motion-card p,
+    body.light-mode #hero-motion-card span,
+    body.light-mode #hero-motion-card h3,
+    body.light-mode #hero-motion-card div {
+      color: #000000 !important;
+    }
+    body.light-mode #btn-hero-motion-pass {
+      background-color: #16a34a !important;
+      color: #ffffff !important;
+      border: 1px solid #16a34a !important;
+    }
+    body.light-mode #btn-hero-motion-pass * {
+      color: #ffffff !important;
+    }
+    body.light-mode #btn-hero-motion-fail {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      border: 1px solid #f87171 !important;
+    }
+    body.light-mode #btn-hero-motion-fail * {
+      color: #000000 !important;
+    }
+
+    /* Motions List Cards in Light Mode */
+    body.light-mode #view-motions .bg-black {
+      background-color: #ffffff !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+    body.light-mode #view-motions .bg-black * {
+      color: #0f172a !important;
+    }
+    body.light-mode #list-motions > div {
+      background-color: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+    body.light-mode #list-motions > div * {
+      color: #0f172a !important;
+    }
+    body.light-mode .btn-vote-motion-pass {
+      color: #000000 !important;
+      border: 1px solid #16a34a !important;
+      background-color: #dcfce7 !important;
+    }
+    body.light-mode .btn-vote-motion-pass:hover {
+      background-color: #bbf7d0 !important;
+      color: #000000 !important;
+    }
+    body.light-mode .btn-vote-motion-fail {
+      color: #000000 !important;
+      border: 1px solid #f87171 !important;
+      background-color: #fee2e2 !important;
+    }
+    body.light-mode .btn-vote-motion-fail:hover {
+      background-color: #fecdd3 !important;
+      color: #000000 !important;
+    }
+
+    /* Drawer Sidebar in Light Mode */
+    body.light-mode #main-drawer {
+      background-color: #ffffff !important;
+      border-right: 1px solid #e2e8f0 !important;
+    }
+    body.light-mode #main-drawer * {
+      color: #0f172a !important;
+    }
+    body.light-mode #main-drawer button:hover {
+      background-color: #f1f5f9 !important;
+    }
+    body.light-mode #main-drawer hr {
+      border-color: #e2e8f0 !important;
+    }
+
+    /* Modals in Light Mode */
+    body.light-mode #modal-add-speaker > div,
+    body.light-mode #modal-define-time > div,
+    body.light-mode #modal-mod-config > div,
+    body.light-mode #modal-add-motion > div {
+      background-color: #ffffff !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+    body.light-mode #modal-add-speaker > div *,
+    body.light-mode #modal-define-time > div *,
+    body.light-mode #modal-mod-config > div *,
+    body.light-mode #modal-add-motion > div * {
+      color: #0f172a !important;
+    }
+    body.light-mode #modal-add-speaker > div input,
+    body.light-mode #modal-define-time > div input,
+    body.light-mode #modal-mod-config > div input,
+    body.light-mode #modal-add-motion > div input,
+    body.light-mode #modal-add-motion > div select {
+      background-color: #ffffff !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+
+    /* Unmoderated Caucus & Recess screens in Light Mode: Pure White with Pure Black text (only when not in custom theme mode) */
+    body.light-mode:not(.has-custom-accent) #view-unmod {
+      background-color: #ffffff !important;
+    }
+    body.light-mode #view-unmod * {
+      color: #000000 !important;
+    }
+    body.light-mode #unmod-timer-display {
+      color: #000000 !important;
+    }
+    body.light-mode #modal-recess {
+      background-color: rgba(255, 255, 255, 0.98) !important;
+    }
+    body.light-mode #modal-recess * {
+      color: #000000 !important;
+    }
+
+    /* Scrollbars & Hover Row Highlights in Light Mode */
+    body.light-mode .custom-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1 !important;
+    }
+    body.light-mode .hover\:bg-slate-50:hover,
+    body.light-mode .hover\:bg-slate-100:hover {
+      background-color: #f1f5f9 !important;
+    }
+
+    /* Custom Theme Accent System (自選顏色：底色與上排變色，卡片框與內部底色保持原樣，當文字檢測到下方顏色與其太過相近應該要換顏色 -> 使用動態 --theme-text) */
+    html body.has-custom-accent,
+    html body.has-custom-accent.light-mode,
+    html body.has-custom-accent:not(.light-mode) {
+      background-color: var(--theme-accent) !important;
+      background: var(--theme-accent) !important;
+    }
+    html body.has-custom-accent #main-header,
+    html body.has-custom-accent.light-mode #main-header,
+    html body.has-custom-accent:not(.light-mode) #main-header {
+      background-color: var(--theme-accent) !important;
+      background: var(--theme-accent) !important;
+      border-color: rgba(0, 0, 0, 0.12) !important;
+    }
+    html body.has-custom-accent #main-header,
+    html body.has-custom-accent #main-header *,
+    html body.has-custom-accent.light-mode #main-header,
+    html body.has-custom-accent.light-mode #main-header *,
+    html body.has-custom-accent:not(.light-mode) #main-header,
+    html body.has-custom-accent:not(.light-mode) #main-header * {
+      color: var(--theme-text, #ffffff) !important;
+    }
+    html body.has-custom-accent #main-header input,
+    html body.has-custom-accent.light-mode #main-header input,
+    html body.has-custom-accent:not(.light-mode) #main-header input {
+      color: var(--theme-text, #ffffff) !important;
+    }
+    html body.has-custom-accent nav#tabs-nav,
+    html body.has-custom-accent.light-mode nav#tabs-nav,
+    html body.has-custom-accent:not(.light-mode) nav#tabs-nav {
+      background-color: var(--theme-accent) !important;
+      background: var(--theme-accent) !important;
+      border-color: rgba(0, 0, 0, 0.15) !important;
+    }
+    html body.has-custom-accent .tab-btn span {
+      color: var(--theme-text, #ffffff) !important;
+      opacity: 0.75;
+    }
+    html body.has-custom-accent .tab-btn:hover span {
+      opacity: 1;
+    }
+    html body.has-custom-accent .tab-active,
+    html body.has-custom-accent .tab-active span,
+    html body.has-custom-accent.light-mode .tab-active,
+    html body.has-custom-accent.light-mode .tab-active span,
+    html body.has-custom-accent:not(.light-mode) .tab-active,
+    html body.has-custom-accent:not(.light-mode) .tab-active span {
+      border-bottom-color: var(--theme-text, #ffffff) !important;
+      color: var(--theme-text, #ffffff) !important;
+      opacity: 1 !important;
+      font-weight: bold !important;
+    }
+    html body.has-custom-accent main,
+    html body.has-custom-accent .view-panel,
+    html body.has-custom-accent #view-unmod,
+    html body.has-custom-accent.light-mode main,
+    html body.has-custom-accent.light-mode .view-panel,
+    html body.has-custom-accent.light-mode #view-unmod,
+    html body.has-custom-accent:not(.light-mode) main,
+    html body.has-custom-accent:not(.light-mode) .view-panel,
+    html body.has-custom-accent:not(.light-mode) #view-unmod {
+      background-color: var(--theme-accent) !important;
+      background: var(--theme-accent) !important;
+    }
+    html body.has-custom-accent #gsl-progress-bar,
+    html body.has-custom-accent #mod-speaker-progress,
+    html body.has-custom-accent #mod-total-progress,
+    html body.has-custom-accent #unmod-total-progress {
+      background-color: var(--theme-text, #000000) !important;
+    }
+
+    /* =====================================================
+       DELEGATE VIEWER (READ-ONLY) MODE
+       ===================================================== */
+    /* Hide all control / action buttons across every view & modal */
+    body.is-viewer-mode button[id^="btn-gsl-"],
+    body.is-viewer-mode button[id^="btn-mod-"],
+    body.is-viewer-mode button[id^="btn-unmod-"],
+    body.is-viewer-mode button[id^="btn-single-"],
+    body.is-viewer-mode #btn-open-motion-modal,
+    body.is-viewer-mode #btn-add-motion,
+    body.is-viewer-mode #btn-clear-motions,
+    body.is-viewer-mode #btn-clear-selection,
+    body.is-viewer-mode .btn-execute-motion,
+    body.is-viewer-mode .btn-remove-motion,
+    body.is-viewer-mode .btn-vote-motion-pass,
+    body.is-viewer-mode .btn-vote-motion-fail,
+    body.is-viewer-mode #btn-hero-motion-pass,
+    body.is-viewer-mode #btn-hero-motion-fail,
+    body.is-viewer-mode #btn-recess-toggle-timer,
+    body.is-viewer-mode #btn-recess-reconvene,
+    body.is-viewer-mode #panel-setup-file,
+    body.is-viewer-mode #segment-btn-template,
+    body.is-viewer-mode #segment-btn-file,
+    body.is-viewer-mode .btn-add-country-item,
+    body.is-viewer-mode .btn-remove-country-item,
+    body.is-viewer-mode .btn-remove-country,
+    body.is-viewer-mode .status-toggle-btn,
+    body.is-viewer-mode .btn-top-queue,
+    body.is-viewer-mode .btn-del-queue,
+    body.is-viewer-mode .btn-del-mod-queue,
+    body.is-viewer-mode .btn-extend-unmod,
+    body.is-viewer-mode #btn-open-add-speaker,
+    body.is-viewer-mode #btn-yield-chair,
+    body.is-viewer-mode #btn-yield-delegate,
+    body.is-viewer-mode #btn-yield-questions,
+    body.is-viewer-mode #btn-rollcall-warning,
+    body.is-viewer-mode #btn-start-session,
+    body.is-viewer-mode #btn-add-custom-country,
+    body.is-viewer-mode #btn-trigger-upload,
+    body.is-viewer-mode #btn-open-drawer,
+    body.is-viewer-mode #btn-floating-confetti,
+    body.is-viewer-mode #btn-open-qrcode,
+    body.is-viewer-mode #panel-rights-speeches button,
+    body.is-viewer-mode #list-rights-speeches button,
+    body.is-viewer-mode #btn-set-all-uncalled,
+    body.is-viewer-mode #btn-set-all-present,
+    body.is-viewer-mode #btn-set-all-absent,
+    body.is-viewer-mode #btn-reset-votes,
+    body.is-viewer-mode #btn-consensus-vote,
+    body.is-viewer-mode #btn-toggle-results,
+    body.is-viewer-mode #btn-edit-resolution-title,
+    body.is-viewer-mode #select-vote-threshold,
+    body.is-viewer-mode #vote-stage-r1,
+    body.is-viewer-mode #vote-stage-r2,
+    body.is-viewer-mode #vote-stage-rights,
+    body.is-viewer-mode .btn-close-modal,
+    body.is-viewer-mode .modal-close-btn,
+    body.is-viewer-mode .modal-close-icon {
+      display: none !important;
+      pointer-events: none !important;
+    }
+
+    /* Disable clicking / changing ballots & roll call attendance */
+    body.is-viewer-mode .btn-toggle-attendance,
+    body.is-viewer-mode .btn-rollcall-present,
+    body.is-viewer-mode .btn-rollcall-absent,
+    body.is-viewer-mode .btn-rollcall-expanded,
+    body.is-viewer-mode .btn-vote-choice {
+      pointer-events: none !important;
+      cursor: default !important;
+      box-shadow: none !important;
+    }
+
+    /* Completely lock all inputs and select fields */
+    body.is-viewer-mode input,
+    body.is-viewer-mode select,
+    body.is-viewer-mode textarea {
+      pointer-events: none !important;
+      cursor: default !important;
+      user-select: none !important;
+    }
+
+    /* ================= PORTAL / COVER LANDING SCREEN ================= */
+    #modal-portal-landing {
+      background-color: #000000;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+    #modal-portal-landing.portal-hidden {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+
+    body.light-mode #modal-portal-landing {
+      background-color: #f8fafc !important;
+      color: #0f172a !important;
+    }
+    body.light-mode #modal-portal-landing .portal-box {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08) !important;
+    }
+    body.light-mode #modal-portal-landing h1,
+    body.light-mode #modal-portal-landing h2 {
+      color: #0f172a !important;
+    }
+    body.light-mode #modal-portal-landing p,
+    body.light-mode #modal-portal-landing .text-zinc-400 {
+      color: #64748b !important;
+    }
+    body.light-mode #modal-portal-landing .text-zinc-600,
+    body.light-mode #modal-portal-landing .text-zinc-500 {
+      color: #94a3b8 !important;
+    }
+    body.light-mode #modal-portal-landing .border-zinc-800 {
+      border-color: #e2e8f0 !important;
+    }
+    body.light-mode #btn-portal-google-login {
+      background-color: #ffffff !important;
+      border: 1px solid #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    body.light-mode #btn-portal-google-login:hover {
+      background-color: #f1f5f9 !important;
+    }
+    body.light-mode #btn-portal-guest-continue {
+      background-color: #0f172a !important;
+      color: #ffffff !important;
+      border-color: #0f172a !important;
+    }
+    body.light-mode #btn-portal-guest-continue:hover {
+      background-color: #1e293b !important;
+    }
+    body.light-mode #modal-portal-landing .bg-zinc-900\/60 {
+      background-color: #f1f5f9 !important;
+      border-color: #e2e8f0 !important;
+      color: #475569 !important;
+    }
+    body.is-viewer-mode #modal-portal-landing {
+      display: none !important;
+      pointer-events: none !important;
+    }
+
+    /* Global Content Scale Slider & Page-wide Scale Styling */
+    #container-global-scale {
+      transition: all 0.2s ease;
+      background-color: transparent;
+      border-color: #27272a;
+    }
+    body:not(.light-mode) #container-global-scale {
+      border: 1px solid #27272a !important;
+      background-color: transparent !important;
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) #container-global-scale #label-global-scale {
+      border-color: #3f3f46 !important;
+      color: #ffffff !important;
+      background-color: #18181b !important;
+    }
+    body.light-mode #container-global-scale {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+    body.light-mode #container-global-scale * {
+      color: #0f172a !important;
+    }
+    body.light-mode #container-global-scale #label-global-scale {
+      border-color: #cbd5e1 !important;
+      background-color: #ffffff !important;
+    }
+    body.light-mode #container-global-scale input[type=range] {
+      background-color: #cbd5e1 !important;
+    }
+
+    input[type=range]#slider-global-scale,
+    input[type=range]#slider-rollcall-size,
+    input[type=range]#slider-voting-size {
+      accent-color: #ffffff;
+    }
+    body.light-mode input[type=range]#slider-global-scale,
+    body.light-mode input[type=range]#slider-rollcall-size,
+    body.light-mode input[type=range]#slider-voting-size {
+      accent-color: #0f172a;
+    }
+
+    /* Global Scale CSS Variable applied to main container */
+    main {
+      --content-scale: 1;
+    }
+
+    /* Scale applied across views: Setup, GSL, Mod, Unmod, Motions, Roll Call, Resolution Vote */
+    /* 1. Roll Call view scaling */
+    #grid-rollcall-delegates > div {
+      padding: calc(1.25rem * var(--content-scale)) calc(1.35rem * var(--content-scale)) !important;
+      border-radius: calc(1rem * var(--content-scale)) !important;
+    }
+    #grid-rollcall-delegates .country-name-text {
+      font-size: calc(1.25rem * var(--content-scale)) !important;
+    }
+    #grid-rollcall-delegates .rollcall-power-text {
+      font-size: calc(0.8rem * var(--content-scale)) !important;
+    }
+    #grid-rollcall-delegates .rollcall-flag {
+      width: calc(2.75rem * var(--content-scale)) !important;
+      height: calc(1.85rem * var(--content-scale)) !important;
+      border-radius: calc(0.375rem * var(--content-scale)) !important;
+    }
+    #grid-rollcall-delegates .rollcall-btn-container {
+      width: calc(13rem * var(--content-scale)) !important;
+    }
+    #grid-rollcall-delegates .btn-rollcall-present,
+    #grid-rollcall-delegates .btn-rollcall-absent {
+      padding: calc(0.55rem * var(--content-scale)) calc(0.5rem * var(--content-scale)) !important;
+      font-size: calc(1rem * var(--content-scale)) !important;
+      border-radius: calc(0.75rem * var(--content-scale)) !important;
+    }
+    #grid-rollcall-delegates .btn-rollcall-expanded {
+      font-size: calc(1.15rem * var(--content-scale)) !important;
+      padding: calc(0.55rem * var(--content-scale)) calc(0.75rem * var(--content-scale)) !important;
+      border-radius: calc(0.75rem * var(--content-scale)) !important;
+    }
+
+    /* 2. Resolution Vote ballots scaling */
+    #grid-substantive-ballots > div {
+      padding: calc(1.1rem * var(--content-scale)) calc(1.25rem * var(--content-scale)) !important;
+      border-radius: calc(1rem * var(--content-scale)) !important;
+    }
+    #grid-substantive-ballots .country-name-text {
+      font-size: calc(1.2rem * var(--content-scale)) !important;
+    }
+    #grid-substantive-ballots img {
+      width: calc(2.75rem * var(--content-scale)) !important;
+      height: calc(1.85rem * var(--content-scale)) !important;
+      border-radius: calc(0.375rem * var(--content-scale)) !important;
+    }
+    #grid-substantive-ballots .btn-vote-choice {
+      padding: calc(0.35rem * var(--content-scale)) calc(0.6rem * var(--content-scale)) !important;
+      font-size: calc(0.85rem * var(--content-scale)) !important;
+      border-radius: calc(0.5rem * var(--content-scale)) !important;
+    }
+
+    /* 3. Setup countries lists scaling */
+    #list-available-countries > div,
+    #list-selected-countries > div {
+      padding: calc(0.5rem * var(--content-scale)) calc(0.75rem * var(--content-scale)) !important;
+      font-size: calc(0.875rem * var(--content-scale)) !important;
+    }
+    #list-available-countries img,
+    #list-selected-countries img {
+      width: calc(1.75rem * var(--content-scale)) !important;
+      height: calc(1.2rem * var(--content-scale)) !important;
+    }
+
+    /* 4. GSL & Mod upcoming speaker queue scaling (comfortable height & spacing) */
+    #list-gsl-queue > div,
+    #list-mod-queue > div,
+    #list-motions > div {
+      padding: calc(0.95rem * var(--content-scale)) calc(1rem * var(--content-scale)) !important;
+      font-size: calc(1.05rem * var(--content-scale)) !important;
+      min-height: calc(3.5rem * var(--content-scale)) !important;
+    }
+    #list-gsl-queue img,
+    #list-mod-queue img {
+      width: calc(2.4rem * var(--content-scale)) !important;
+      height: calc(1.6rem * var(--content-scale)) !important;
+    }
+
+    /* 5. Large Timers & Speaker Card Scaling */
+    #gsl-timer-display,
+    #mod-speaker-timer-display,
+    #unmod-timer-display,
+    #single-timer-display {
+      font-size: calc(4.5rem * var(--content-scale)) !important;
+      line-height: 1.1 !important;
+    }
+    #gsl-current-name,
+    #mod-current-country-name,
+    #single-country-name {
+      font-size: calc(2.25rem * var(--content-scale)) !important;
+    }
+    #gsl-current-flag,
+    #mod-current-flag,
+    #single-flag {
+      width: calc(5rem * var(--content-scale)) !important;
+      height: calc(3.5rem * var(--content-scale)) !important;
+    }
+    /* Controls buttons in timers */
+    #view-gsl button.px-6,
+    #view-mod button.px-6,
+    #view-unmod button.px-6,
+    #view-singleSpeaker button.px-8 {
+      font-size: calc(1rem * var(--content-scale)) !important;
+      padding: calc(0.75rem * var(--content-scale)) calc(1.5rem * var(--content-scale)) !important;
+      border-radius: calc(0.75rem * var(--content-scale)) !important;
+    }
+
+    /* =========================================================
+       ROLL CALL BUTTON COLORS - CLEAN NEUTRAL TEXT (BLACK OR WHITE ONLY)
+       ========================================================= */
+     /* 未點名 - 出席按鈕：綠色邊框與半透明綠色背景 (rgba(16, 185, 129, 0.15))，文字為白/黑 */
+     body:not(.light-mode) .btn-rollcall-present,
+     .btn-rollcall-present {
+       border: 1.5px solid #10b981 !important;
+       color: #ffffff !important;
+       background-color: rgba(16, 185, 129, 0.15) !important;
+       background: rgba(16, 185, 129, 0.15) !important;
+     }
+     body.light-mode .btn-rollcall-present {
+       border: 1.5px solid #10b981 !important;
+       color: #000000 !important;
+       background-color: rgba(16, 185, 129, 0.15) !important;
+       background: rgba(16, 185, 129, 0.15) !important;
+     }
+     body:not(.light-mode) .btn-rollcall-present:hover {
+       background-color: rgba(16, 185, 129, 0.3) !important;
+       background: rgba(16, 185, 129, 0.3) !important;
+       color: #ffffff !important;
+       border-color: #34d399 !important;
+     }
+     body.light-mode .btn-rollcall-present:hover {
+       background-color: rgba(16, 185, 129, 0.3) !important;
+       background: rgba(16, 185, 129, 0.3) !important;
+       color: #000000 !important;
+       border-color: #10b981 !important;
+     }
+
+     /* 未點名 - 缺席按鈕：紅色邊框與半透明紅色背景 (rgba(239, 68, 68, 0.15))，文字為白/黑 */
+     body:not(.light-mode) .btn-rollcall-absent,
+     .btn-rollcall-absent {
+       border: 1.5px solid #ef4444 !important;
+       color: #ffffff !important;
+       background-color: rgba(239, 68, 68, 0.15) !important;
+       background: rgba(239, 68, 68, 0.15) !important;
+     }
+     body.light-mode .btn-rollcall-absent {
+       border: 1.5px solid #ef4444 !important;
+       color: #000000 !important;
+       background-color: rgba(239, 68, 68, 0.15) !important;
+       background: rgba(239, 68, 68, 0.15) !important;
+     }
+     body:not(.light-mode) .btn-rollcall-absent:hover {
+       background-color: rgba(239, 68, 68, 0.3) !important;
+       background: rgba(239, 68, 68, 0.3) !important;
+       color: #ffffff !important;
+       border-color: #f87171 !important;
+     }
+     body.light-mode .btn-rollcall-absent:hover {
+       background-color: rgba(239, 68, 68, 0.3) !important;
+       background: rgba(239, 68, 68, 0.3) !important;
+       color: #000000 !important;
+       border-color: #ef4444 !important;
+     }
+
+     /* 點選後單一展開按鈕共通基礎 */
+     body:not(.light-mode) .btn-rollcall-expanded,
+     body.light-mode .btn-rollcall-expanded,
+     .btn-rollcall-expanded {
+       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25) !important;
+       outline: none !important;
+       cursor: pointer !important;
+       display: inline-flex !important;
+       align-items: center !important;
+       justify-content: center !important;
+       font-weight: 400 !important;
+       transition: all 0.2s ease !important;
+     }
+
+     /* 1. 按下去變成半透明綠色 (出席)：透亮半透明綠底 + 鮮明綠邊框 + 白/黑文字 */
+     body:not(.light-mode) .btn-rollcall-status-present,
+     .btn-rollcall-status-present {
+       background-color: rgba(16, 185, 129, 0.28) !important;
+       background: rgba(16, 185, 129, 0.28) !important;
+       color: #ffffff !important;
+       border: 2px solid #10b981 !important;
+     }
+     body.light-mode .btn-rollcall-status-present {
+       background-color: rgba(16, 185, 129, 0.28) !important;
+       background: rgba(16, 185, 129, 0.28) !important;
+       color: #000000 !important;
+       border: 2px solid #10b981 !important;
+     }
+     body:not(.light-mode) .btn-rollcall-status-present:hover {
+       background-color: rgba(16, 185, 129, 0.4) !important;
+       background: rgba(16, 185, 129, 0.4) !important;
+       border-color: #34d399 !important;
+       color: #ffffff !important;
+       transform: scale(1.02);
+     }
+     body.light-mode .btn-rollcall-status-present:hover {
+       background-color: rgba(16, 185, 129, 0.4) !important;
+       background: rgba(16, 185, 129, 0.4) !important;
+       border-color: #10b981 !important;
+       color: #000000 !important;
+       transform: scale(1.02);
+     }
+
+     /* 2. 再按變成 PV (出席且投票)：透亮半透明琥珀金底 + 琥珀色邊框 + 白/黑文字 */
+     body:not(.light-mode) .btn-rollcall-status-pv,
+     .btn-rollcall-status-pv {
+       background-color: rgba(245, 158, 11, 0.28) !important;
+       background: rgba(245, 158, 11, 0.28) !important;
+       color: #ffffff !important;
+       border: 2px solid #f59e0b !important;
+     }
+     body.light-mode .btn-rollcall-status-pv {
+       background-color: rgba(245, 158, 11, 0.28) !important;
+       background: rgba(245, 158, 11, 0.28) !important;
+       color: #000000 !important;
+       border: 2px solid #f59e0b !important;
+     }
+     body:not(.light-mode) .btn-rollcall-status-pv:hover {
+       background-color: rgba(245, 158, 11, 0.4) !important;
+       background: rgba(245, 158, 11, 0.4) !important;
+       border-color: #fbbf24 !important;
+       color: #ffffff !important;
+       transform: scale(1.02);
+     }
+     body.light-mode .btn-rollcall-status-pv:hover {
+       background-color: rgba(245, 158, 11, 0.4) !important;
+       background: rgba(245, 158, 11, 0.4) !important;
+       border-color: #f59e0b !important;
+       color: #000000 !important;
+       transform: scale(1.02);
+     }
+
+     /* 3. 按下去變成半透明紅色 (缺席)：透亮半透明紅底 + 紅色邊框 + 白/黑文字 */
+     body:not(.light-mode) .btn-rollcall-status-absent,
+     .btn-rollcall-status-absent {
+       background-color: rgba(239, 68, 68, 0.28) !important;
+       background: rgba(239, 68, 68, 0.28) !important;
+       color: #ffffff !important;
+       border: 2px solid #ef4444 !important;
+     }
+     body.light-mode .btn-rollcall-status-absent {
+       background-color: rgba(239, 68, 68, 0.28) !important;
+       background: rgba(239, 68, 68, 0.28) !important;
+       color: #000000 !important;
+       border: 2px solid #ef4444 !important;
+     }
+     body:not(.light-mode) .btn-rollcall-status-absent:hover {
+       background-color: rgba(239, 68, 68, 0.4) !important;
+       background: rgba(239, 68, 68, 0.4) !important;
+       border-color: #f87171 !important;
+       color: #ffffff !important;
+       transform: scale(1.02);
+     }
+     body.light-mode .btn-rollcall-status-absent:hover {
+       background-color: rgba(239, 68, 68, 0.4) !important;
+       background: rgba(239, 68, 68, 0.4) !important;
+       border-color: #ef4444 !important;
+       color: #000000 !important;
+       transform: scale(1.02);
+     }
+
+    /* 投票階段按鈕 (1st Round / 2nd Round / Rights Speeches) 在深色與淺色模式下的高對比清晰呈現 */
+    #vote-stage-r1,
+    #vote-stage-r2,
+    #vote-stage-rights {
+      border: 1px solid #3f3f46 !important;
+      font-weight: 400 !important;
+      transition: all 0.2s ease !important;
+    }
+    body:not(.light-mode) #vote-stage-r1.bg-primary,
+    body:not(.light-mode) #vote-stage-r2.bg-primary,
+    body:not(.light-mode) #vote-stage-rights.bg-primary {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+      border-color: #ffffff !important;
+      font-weight: 400 !important;
+    }
+    body:not(.light-mode) #vote-stage-r1.bg-slate-100,
+    body:not(.light-mode) #vote-stage-r2.bg-slate-100,
+    body:not(.light-mode) #vote-stage-rights.bg-slate-100 {
+      background-color: rgba(255, 255, 255, 0.08) !important;
+      color: #a1a1aa !important;
+      border-color: #3f3f46 !important;
+      font-weight: 400 !important;
+    }
+    body.light-mode #vote-stage-r1.bg-primary,
+    body.light-mode #vote-stage-r2.bg-primary,
+    body.light-mode #vote-stage-rights.bg-primary {
+      background-color: #0f172a !important;
+      color: #ffffff !important;
+      border-color: #0f172a !important;
+      font-weight: 400 !important;
+    }
+    body.light-mode #vote-stage-r1.bg-slate-100,
+    body.light-mode #vote-stage-r2.bg-slate-100,
+    body.light-mode #vote-stage-rights.bg-slate-100 {
+      background-color: #f1f5f9 !important;
+      color: #475569 !important;
+      border-color: #cbd5e1 !important;
+      font-weight: 400 !important;
+    }
+
+    /* Clean & Modern Navigation Tabs (書籤列樣式整理) */
+    nav#tabs-nav {
+      height: 48px !important;
+      min-height: 48px !important;
+      padding: 0 1rem !important;
+      display: flex !important;
+      align-items: stretch !important;
+      gap: 0.5rem !important;
+    }
+    nav#tabs-nav .tab-btn {
+      background: transparent !important;
+      background-color: transparent !important;
+      border: none !important;
+      border-bottom: 2px solid transparent !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      padding: 0 1rem !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      cursor: pointer !important;
+      transition: all 0.2s ease !important;
+    }
+    nav#tabs-nav .tab-btn:hover {
+      background: transparent !important;
+      background-color: transparent !important;
+    }
+    nav#tabs-nav .tab-btn.tab-active {
+      border: none !important;
+      border-bottom: 3px solid currentColor !important;
+    }
+    body:not(.light-mode):not(.has-custom-accent) nav#tabs-nav .tab-btn {
+      color: #a1a1aa !important;
+    }
+    body:not(.light-mode):not(.has-custom-accent) nav#tabs-nav .tab-btn:hover {
+      color: #ffffff !important;
+    }
+    body:not(.light-mode):not(.has-custom-accent) nav#tabs-nav .tab-btn.tab-active {
+      color: #ffffff !important;
+      border-bottom-color: #ffffff !important;
+    }
+    body.light-mode:not(.has-custom-accent) nav#tabs-nav .tab-btn {
+      color: #64748b !important;
+    }
+    body.light-mode:not(.has-custom-accent) nav#tabs-nav .tab-btn:hover {
+      color: #000000 !important;
+    }
+    body.light-mode:not(.has-custom-accent) nav#tabs-nav .tab-btn.tab-active {
+      color: #000000 !important;
+      border-bottom-color: #000000 !important;
+    }
+    body.has-custom-accent nav#tabs-nav .tab-btn {
+      color: var(--theme-text, #ffffff) !important;
+      opacity: 0.75 !important;
+    }
+    body.has-custom-accent nav#tabs-nav .tab-btn:hover {
+      opacity: 1 !important;
+    }
+    body.has-custom-accent nav#tabs-nav .tab-btn.tab-active {
+      opacity: 1 !important;
+      border-bottom-color: var(--theme-text, #ffffff) !important;
+    }
+
+    /* =====================================================
+       FULLSCREEN MODE - Push content down & center vertically
+       ===================================================== */
+    :fullscreen .view-panel,
+    :-webkit-full-screen .view-panel,
+    body.is-fullscreen .view-panel {
+      padding-top: clamp(2rem, 5.5vh, 5rem) !important;
+      transition: padding-top 0.3s ease;
+    }
+
+    :fullscreen #main-header,
+    :-webkit-full-screen #main-header,
+    body.is-fullscreen #main-header {
+      padding-top: clamp(0.35rem, 1.2vh, 1.2rem) !important;
+      padding-bottom: clamp(0.35rem, 1.2vh, 1.2rem) !important;
+      transition: padding 0.3s ease;
+    }
+
+    :fullscreen nav#tabs-nav,
+    :-webkit-full-screen nav#tabs-nav,
+    body.is-fullscreen nav#tabs-nav {
+      padding-top: clamp(0.2rem, 0.8vh, 0.8rem) !important;
+      padding-bottom: clamp(0.2rem, 0.8vh, 0.8rem) !important;
+    }
+
+
+

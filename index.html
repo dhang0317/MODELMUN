@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NNKIEH MUN</title>
+  <link rel="icon" type="image/png" href="logo.png">
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome 6 Free (jsdelivr + cdnjs fallback) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css" crossorigin="anonymous">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+  <!-- QRCode.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- PeerJS WebRTC P2P Direct Connect (0-Latency) -->
+  <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#ffffff',
+            'primary-dark': '#e2e8f0',
+            secondary: '#ffffff',
+            tertiary: '#f1f5f9',
+            success: '#ffffff',
+            danger: '#ef4444',
+            dark: '#030712',
+            light: '#0f172a',
+            'ios-grey': '#1e293b',
+            'card-bg': '#0b0f19'
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/style.css?v=2026100702">
+</head>
+<body class="h-screen w-screen flex flex-col overflow-hidden bg-black">
+
+  <!-- ================= TOP HEADER / STATS BAR ================= -->
+  <header id="main-header" class="border-b text-white shadow-sm z-20 flex-shrink-0 relative">
+    <div class="px-3 sm:px-4 py-2 flex items-center justify-start gap-4 sm:gap-6">
+      <div class="flex items-center space-x-3 shrink-0 min-w-0">
+        <button id="btn-open-drawer" type="button" class="p-2 hover:bg-zinc-900 rounded-lg transition shrink-0 flex items-center justify-center cursor-pointer border-0 text-white" title="Menu" aria-label="Menu">
+          <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="6" x2="20" y2="6"></line>
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="18" x2="20" y2="18"></line>
+          </svg>
+        </button>
+        <button id="btn-logo-home" type="button" class="cursor-pointer hover:opacity-80 transition shrink-0 rounded-full focus:outline-none flex items-center justify-center p-0 border-0" title="返回選擇國家 (Setup)">
+          <img src="logo.png" alt="MUN Logo" class="w-9 h-9 rounded-full shadow-sm object-cover bg-white ring-1 ring-zinc-800">
+        </button>
+        <div class="min-w-0">
+          <div class="relative flex items-center group">
+            <input id="header-committee-input" type="text" value="Your Committee" class="bg-transparent border-b border-transparent hover:border-zinc-700 focus:border-zinc-400 text-base sm:text-lg tracking-wide px-1 py-0.5 rounded focus:outline-none transition max-w-[200px] sm:max-w-xs md:max-w-sm text-white pr-6">
+            <select id="header-ga-select" class="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 hover:opacity-100 group-hover:opacity-60 focus:opacity-100 cursor-pointer w-6 h-6 bg-transparent border-0 text-white outline-none" title="切換大會委員會">
+              <option value="" disabled selected>▾</option>
+              <option value="ga_plenary">UNGA 全體大會</option>
+              <option value="ga1">GA1 裁軍安全 (DISEC)</option>
+              <option value="ga2">GA2 經濟金融 (ECOFIN)</option>
+              <option value="ga3">GA3 社會人道 (SOCHUM)</option>
+              <option value="ga4">GA4 特別政治 (SPECPOL)</option>
+              <option value="ga5">GA5 行政預算</option>
+              <option value="ga6">GA6 法律委員會 (Legal)</option>
+            </select>
+            <i class="fa-solid fa-chevron-down absolute right-1 top-1/2 -translate-y-1/2 text-[10px] text-zinc-500 pointer-events-none group-hover:text-zinc-300 transition"></i>
+          </div>
+          <div class="flex items-center space-x-1.5 text-xs text-zinc-400 mt-0.5">
+            <i class="fa-solid fa-file-lines text-xs text-zinc-500 shrink-0"></i>
+            <input id="header-agenda-input" type="text" value="" class="bg-transparent border-b border-transparent hover:border-zinc-600 focus:border-white text-xs px-1 py-0.5 rounded focus:outline-none transition max-w-[200px] sm:max-w-sm md:max-w-md not-italic">
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Attendance / Quorum Indicators (Moved left directly beside agenda, no box border) -->
+      <div id="header-attendance-stats" class="hidden lg:flex items-center space-x-3 text-xs shrink-0">
+        <div class="text-center">
+          <div class="text-zinc-400 text-[10px] uppercase font-semibold" data-i18n="present">Present</div>
+          <div id="stat-present" class="text-sm font-bold">0</div>
+        </div>
+        <div class="h-6 w-px bg-zinc-800 header-stat-divider"></div>
+        <div class="text-center">
+          <div class="text-zinc-400 text-[10px] uppercase font-semibold" data-i18n="pv">P & Voting</div>
+          <div id="stat-pv" class="text-sm font-bold">0</div>
+        </div>
+        <div class="h-6 w-px bg-zinc-800 header-stat-divider"></div>
+        <div class="text-center">
+          <div class="text-zinc-400 text-[10px] uppercase font-semibold" data-i18n="quorum">Quorum (1/3)</div>
+          <div id="stat-quorum" class="text-sm font-bold">0</div>
+        </div>
+        <div class="h-6 w-px bg-zinc-800 header-stat-divider"></div>
+        <div class="text-center">
+          <div class="text-zinc-400 text-[10px] uppercase font-semibold" data-i18n="majority">Majority (1/2)</div>
+          <div id="stat-majority" class="text-sm font-bold">0</div>
+        </div>
+        <div class="h-6 w-px bg-zinc-800 header-stat-divider"></div>
+        <div class="text-center">
+          <div class="text-zinc-400 text-[10px] uppercase font-semibold" data-i18n="twoThirds">Two-Thirds (2/3)</div>
+          <div id="stat-twothirds" class="text-sm font-bold">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS BAR -->
+    <nav id="tabs-nav" class="bg-white border-b border-slate-200 flex items-center justify-around px-2 text-slate-600 font-medium text-xs sm:text-sm overflow-x-auto shadow-sm">
+      <button data-tab="rollcall" class="tab-btn py-3 px-4 flex items-center justify-center border-b-2 border-transparent hover:text-primary transition whitespace-nowrap">
+        <span data-i18n="tabRollCall">點名</span>
+      </button>
+      <button data-tab="mod" class="tab-btn py-3 px-4 flex items-center justify-center border-b-2 border-transparent hover:text-primary transition whitespace-nowrap">
+        <span data-i18n="tabMod">有主持磋商</span>
+      </button>
+      <button data-tab="unmod" class="tab-btn py-3 px-4 flex items-center justify-center border-b-2 border-transparent hover:text-primary transition whitespace-nowrap">
+        <span data-i18n="tabUnmod">無主持磋商</span>
+      </button>
+      <button data-tab="gsl" class="tab-btn py-3 px-4 flex items-center justify-center border-b-2 border-transparent hover:text-primary transition whitespace-nowrap">
+        <span data-i18n="tabGsl">發言</span>
+      </button>
+      <button data-tab="motions" class="tab-btn py-3 px-4 flex items-center justify-center border-b-2 border-transparent hover:text-primary transition whitespace-nowrap">
+        <span data-i18n="tabMotions">動議</span>
+      </button>
+      <button data-tab="vote" class="tab-btn py-3 px-4 flex items-center justify-center border-b-2 border-transparent hover:text-primary transition whitespace-nowrap">
+        <span data-i18n="tabVote">投票</span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ================= MAIN CONTENT VIEWS ================= -->
+  <main class="flex-1 relative overflow-hidden flex flex-col">
+
+    <!-- 1. SETUP VIEW (/setup) -->
+    <div id="view-setup" class="view-panel absolute inset-0 overflow-y-auto p-4 sm:p-8 bg-slate-100 custom-scroll z-10">
+      <div class="max-w-6xl mx-auto space-y-6">
+        
+
+
+        <!-- File Upload Helper -->
+        <div id="panel-setup-file" class="bg-white rounded-2xl p-8 shadow-sm border-2 border-dashed border-slate-300 text-center space-y-3 hidden">
+          <i data-lucide="file-up" class="w-12 h-12 mx-auto text-secondary"></i>
+          <h3 class="text-lg font-bold text-slate-800" data-i18n="importExistingTitle">Import Existing Committee</h3>
+          <p class="text-xs text-slate-500 max-w-md mx-auto" data-i18n="importExistingDesc">Upload a previously exported JSON configuration file to immediately restore your committee details and country delegation list.</p>
+          <div>
+            <button id="btn-trigger-upload" class="px-5 py-2.5 bg-primary text-white text-xs font-bold rounded-xl shadow hover:bg-primary-dark transition" data-i18n="browseFile">Browse JSON File</button>
+          </div>
+        </div>
+
+        <!-- Committee Info & Presets Grid -->
+        <div id="panel-setup-template" class="space-y-6">
+          
+          <!-- Column 1 & 2: Country Selector & Selected List -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            
+            <!-- Available Countries Pool -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col h-[640px]">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 class="font-bold text-slate-800 text-lg" data-i18n="availableCountries">Available Countries</h3>
+                <span id="badge-available-count" class="text-xs bg-slate-100 px-2.5 py-1 rounded-full font-semibold text-slate-600">0</span>
+              </div>
+              <div class="mt-3 relative">
+                <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3 text-slate-400"></i>
+                <input id="search-countries" type="text" data-i18n-placeholder="searchCountryPlaceholder" placeholder="搜尋國家名稱或 ISO 代碼..." class="w-full pl-10 pr-3 py-2.5 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none">
+              </div>
+              <div id="list-available-countries" class="flex-1 overflow-y-auto mt-3 divide-y divide-slate-100 custom-scroll pr-1">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <!-- Selected Delegations -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col h-[640px]">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div class="flex items-center space-x-2">
+                  <h3 class="font-bold text-slate-800 text-lg" data-i18n="selectedMembers">Selected Members</h3>
+                  <span id="badge-selected-count" class="text-xs bg-primary/10 text-primary px-2.5 py-1 rounded-full font-bold">0</span>
+                </div>
+                <button id="btn-clear-selection" class="text-xs text-rose-500 hover:text-rose-700 font-semibold" data-i18n="clearSelection">Clear Selection</button>
+              </div>
+              <div id="list-selected-countries" class="flex-1 overflow-y-auto mt-2 divide-y divide-slate-100 custom-scroll pr-1">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom: Committee Presets (輸入範本放到選取國家的最底下) -->
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <div class="flex items-center space-x-2">
+                <i data-lucide="layout-grid" class="w-5 h-5 text-slate-400"></i>
+                <h3 class="font-bold text-slate-800 text-lg" data-i18n="selectTemplate">Select Template</h3>
+              </div>
+              <span class="text-xs text-slate-400" data-i18n="clickToLoad">Click to load</span>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 text-sm">
+              <button data-preset="unsc" class="preset-btn p-3 bg-slate-50 hover:bg-primary/10 hover:text-primary font-semibold border border-slate-200 rounded-xl transition text-center">UNSC (15)</button>
+              <button data-preset="ga" class="preset-btn p-3 bg-slate-50 hover:bg-primary/10 hover:text-primary font-semibold border border-slate-200 rounded-xl transition text-center">UNGA (193)</button>
+              <button data-preset="unicef" class="preset-btn p-3 bg-slate-50 hover:bg-primary/10 hover:text-primary font-semibold border border-slate-200 rounded-xl transition text-center">UNICEF (36)</button>
+              <button data-preset="who" class="preset-btn p-3 bg-slate-50 hover:bg-primary/10 hover:text-primary font-semibold border border-slate-200 rounded-xl transition text-center">WHO (34)</button>
+              <button data-preset="unhrc" class="preset-btn p-3 bg-slate-50 hover:bg-primary/10 hover:text-primary font-semibold border border-slate-200 rounded-xl transition text-center">UNHRC (47)</button>
+              <button data-preset="unhcr" class="preset-btn p-3 bg-slate-50 hover:bg-primary/10 hover:text-primary font-semibold border border-slate-200 rounded-xl transition text-center">UNHCR (102)</button>
+              <button data-preset="ecosoc" class="preset-btn p-3 bg-slate-50 hover:bg-primary/10 hover:text-primary font-semibold border border-slate-200 rounded-xl transition text-center">ECOSOC (54)</button>
+              <button data-preset="g20" class="preset-btn p-3 bg-slate-50 hover:bg-primary/10 hover:text-primary font-semibold border border-slate-200 rounded-xl transition text-center">G20 (20)</button>
+              <button data-preset="nato" class="preset-btn p-3 bg-slate-50 hover:bg-primary/10 hover:text-primary font-semibold border border-slate-200 rounded-xl transition text-center">NATO (32)</button>
+              <button data-preset="asean" class="preset-btn p-3 bg-slate-50 hover:bg-primary/10 hover:text-primary font-semibold border border-slate-200 rounded-xl transition text-center">ASEAN (11)</button>
+              <button data-preset="eu" class="preset-btn p-3 bg-slate-50 hover:bg-primary/10 hover:text-primary font-semibold border border-slate-200 rounded-xl transition text-center">EU (27)</button>
+              <button data-preset="au" class="preset-btn p-3 bg-slate-50 hover:bg-primary/10 hover:text-primary font-semibold border border-slate-200 rounded-xl transition text-center">AU (55)</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 2. GSL VIEW (/tabs/gsl) -->
+    <div id="view-gsl" class="view-panel absolute inset-0 overflow-y-auto p-4 sm:p-6 bg-slate-50 custom-scroll hidden">
+      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Left: Current Speaker & Big Timer (7 cols on lg) -->
+        <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
+          <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-center relative overflow-hidden flex-1 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between border-b pb-3 mb-6">
+                <span class="text-xs uppercase tracking-wider font-bold text-slate-400" data-i18n="currentSpeaker">Current Speaker</span>
+                <button id="btn-gsl-set-time" class="text-xs text-primary hover:underline font-semibold flex items-center space-x-1.5">
+                  <i class="fa-solid fa-clock text-xs"></i>
+                  <span id="label-gsl-default-time">90s</span>
+                </button>
+              </div>
+
+              <!-- Country Banner (Selected Speaker or Empty State) -->
+              <div id="gsl-current-empty" class="py-6 text-slate-400">
+                <p class="text-base font-bold text-slate-600 dark:text-slate-300" data-i18n="noSpeakerFloor">No speaker on the floor</p>
+              </div>
+
+              <div id="gsl-current-active" class="hidden py-4">
+                <div class="flex items-center justify-center space-x-5">
+                  <img id="gsl-current-flag" src="https://flagcdn.com/w80/un.png" alt="flag" class="w-20 h-14 sm:w-24 sm:h-16 object-cover rounded-xl shadow-md border border-slate-700/40">
+                  <div class="text-left">
+                    <h2 id="gsl-current-name" class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 leading-tight">United States</h2>
+                    <span id="gsl-current-status" class="text-xs sm:text-sm bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-medium inline-block mt-1">Delegate</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Main Big Timer Display (Always visible) -->
+              <div class="py-4">
+                <div id="gsl-timer-display" class="text-7xl sm:text-8xl font-mono font-black text-primary tracking-tight">01:30</div>
+                <div id="gsl-progress-bar-bg" class="w-full bg-slate-100 h-2.5 rounded-full mt-4 overflow-hidden">
+                  <div id="gsl-progress-bar" class="bg-secondary h-full transition-all duration-300 w-full"></div>
+                </div>
+              </div>
+
+              <!-- Timer Controls (Always visible with FontAwesome icons) -->
+              <div class="flex items-center justify-center space-x-3 pt-2">
+                <button id="btn-gsl-start" class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
+                  <i class="fa-solid fa-play text-sm"></i>
+                  <span data-i18n="start">Start</span>
+                </button>
+                <button id="btn-gsl-pause" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden">
+                  <i class="fa-solid fa-pause text-sm"></i>
+                  <span data-i18n="pause">Pause</span>
+                </button>
+                <button id="btn-gsl-reset" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition flex items-center space-x-1.5" data-i18n="reset" title="Reset">
+                  <i class="fa-solid fa-rotate-left text-sm"></i>
+                </button>
+                <button id="btn-gsl-next" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
+                  <span data-i18n="nextSpeaker">Next Speaker</span>
+                  <i class="fa-solid fa-forward-step text-sm"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Yield Options -->
+            <div id="gsl-yield-options" class="border-t border-slate-100 pt-5 mt-6">
+              <div class="text-xs font-semibold text-slate-400 mb-2" data-i18n="yieldRemaining">YIELD TIME REMAINING</div>
+              <div class="flex flex-wrap items-center justify-center gap-2">
+                <button id="btn-yield-chair" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center space-x-1.5">
+                  <i class="fa-solid fa-gavel text-xs"></i>
+                  <span data-i18n="yieldChair">Yield to the Chair</span>
+                </button>
+                <button id="btn-yield-delegate" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center space-x-1.5">
+                  <i class="fa-solid fa-users text-xs"></i>
+                  <span data-i18n="yieldDelegate">Yield to another Delegate</span>
+                </button>
+                <button id="btn-yield-questions" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center space-x-1.5">
+                  <i class="fa-solid fa-circle-question text-xs"></i>
+                  <span data-i18n="yieldQuestions">Yield to Questions</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right: Speakers Queue (5 cols on lg, height stretch, min-h-[640px]) -->
+        <div class="lg:col-span-5 bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col min-h-[640px] h-full">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <div>
+              <h3 class="font-bold text-slate-800 text-base" data-i18n="upcomingSpeakers">Upcoming Speakers</h3>
+              <span id="badge-queue-count" class="text-xs text-slate-400">0 queued</span>
+            </div>
+            <button id="btn-open-add-speaker" class="px-3.5 py-1.5 bg-primary text-white rounded-lg text-xs font-semibold hover:bg-primary-dark flex items-center space-x-1.5">
+              <i class="fa-solid fa-user-plus text-xs"></i>
+              <span data-i18n="addSpeaker">Add Speaker</span>
+            </button>
+          </div>
+          <div id="list-gsl-queue" class="flex-1 overflow-y-auto mt-3 divide-y divide-slate-100 custom-scroll pr-1">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 3. MODERATED CAUCUS VIEW (/tabs/mod) -->
+    <div id="view-mod" class="view-panel absolute inset-0 overflow-y-auto p-4 sm:p-6 bg-slate-50 custom-scroll hidden">
+      <div class="max-w-6xl mx-auto space-y-6">
+        
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+          
+          <!-- Individual Speaker Timer -->
+          <div class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-center space-y-6 flex flex-col justify-between">
+            <div>
+              <span class="text-xs uppercase tracking-wider font-bold text-slate-400" data-i18n="currentSpeakerInCaucus">Current Speaker in Caucus</span>
+              
+              <div id="mod-speaker-display" class="space-y-4 my-4">
+                <div class="flex items-center justify-center space-x-4">
+                  <img id="mod-current-flag" src="https://flagcdn.com/w80/un.png" class="w-16 h-11 sm:w-20 sm:h-14 object-cover rounded-xl shadow-md border border-slate-700/40">
+                  <h3 id="mod-current-country-name" class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 leading-tight">None selected</h3>
+                </div>
+                <div id="mod-speaker-timer-display" class="text-7xl sm:text-8xl font-mono font-black text-primary">01:00</div>
+                
+                <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                  <div id="mod-speaker-progress" class="bg-secondary h-full w-full"></div>
+                </div>
+              </div>
+
+              <!-- Controls -->
+              <div class="flex items-center justify-center space-x-3 pt-2">
+                <button id="btn-mod-start" class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
+                  <i data-lucide="play" class="w-5 h-5"></i>
+                  <span data-i18n="startSpeaker">Start Speaker</span>
+                </button>
+                <button id="btn-mod-pause" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden">
+                  <i data-lucide="pause" class="w-5 h-5"></i>
+                  <span data-i18n="pause">Pause</span>
+                </button>
+                <button id="btn-mod-reset" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl">
+                  <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
+                </button>
+                <button id="btn-mod-next" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
+                  <span data-i18n="nextSpeaker">Next</span>
+                  <i data-lucide="skip-forward" class="w-4 h-4"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Total Caucus Progress -->
+            <div class="border-t pt-4 text-left mt-6">
+              <div class="flex justify-between text-xs font-semibold text-slate-500 mb-1">
+                <span data-i18n="caucusTotalElapsed">Caucus Total Elapsed</span>
+                <span id="mod-total-timer-text">00:00 / 10:00</span>
+              </div>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div id="mod-total-progress" class="bg-primary h-full w-0"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mod Speakers Queue -->
+          <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col min-h-[640px] h-full">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div>
+                <h3 class="font-bold text-slate-800 text-base" data-i18n="upcomingSpeakers">Upcoming Speakers</h3>
+                <div class="text-xs text-slate-400 mt-0.5">
+                  <span id="mod-total-timer-text">00:00 / 10:00</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-1.5">
+                <button id="btn-mod-add-speaker" class="px-3 py-1.5 bg-primary text-white rounded-lg text-xs font-semibold hover:bg-primary-dark flex items-center space-x-1">
+                  <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+            <!-- Hidden JS reference elements -->
+            <span id="mod-current-topic" class="hidden"></span>
+            <span id="mod-label-total-time" class="hidden"></span>
+            <span id="mod-label-speaker-time" class="hidden"></span>
+            <div id="list-mod-queue" class="flex-1 overflow-y-auto mt-2 divide-y divide-slate-100 custom-scroll pr-1">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 4. UNMODERATED CAUCUS VIEW (/tabs/unmod) -->
+    <div id="view-unmod" class="view-panel absolute inset-0 overflow-y-auto p-4 sm:p-6 bg-slate-50 custom-scroll hidden">
+      <div class="max-w-4xl mx-auto space-y-6">
+        
+        <!-- Main Caucus Timer Card (Consistent with Mod Caucus UI) -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 text-center space-y-6">
+          <div class="flex items-center justify-between border-b pb-4 border-slate-100">
+            <div>
+              <span class="text-xs uppercase tracking-wider font-bold text-slate-400" data-i18n="unmod">Unmoderated Caucus</span>
+              <h2 class="text-2xl font-black text-slate-800 tracking-tight" data-i18n="tabUnmod">自由磋商 / 非主持核心磋商</h2>
+            </div>
+          </div>
+
+          <div class="space-y-4 py-2">
+            <div id="unmod-timer-display" class="text-7xl sm:text-8xl md:text-9xl font-mono font-black text-primary tracking-tight">15:00</div>
+            
+            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+              <div id="unmod-total-progress" class="bg-primary h-full w-full transition-all duration-300"></div>
+            </div>
+            
+            <div class="flex items-center justify-between text-xs font-semibold text-slate-500 pt-1">
+              <span data-i18n="caucusTotalElapsed">剩餘時間 / 總時長</span>
+              <span id="unmod-total-timer-text">15:00</span>
+            </div>
+          </div>
+
+          <!-- Controls (Same unified style as Mod Caucus) -->
+          <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <button id="btn-unmod-start" class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
+              <i data-lucide="play" class="w-5 h-5"></i>
+              <span data-i18n="startCaucus">Start Caucus</span>
+            </button>
+            <button id="btn-unmod-pause" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden">
+              <i data-lucide="pause" class="w-5 h-5"></i>
+              <span data-i18n="pause">Pause</span>
+            </button>
+            <button id="btn-unmod-reset" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition">
+              <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
+            </button>
+            
+            <!-- Quick Extension Buttons -->
+            <div class="flex items-center space-x-1.5 pl-2 border-l border-slate-200">
+              <button class="btn-extend-unmod px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition" data-add="60">+1 min</button>
+              <button class="btn-extend-unmod px-3 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-xl transition" data-add="300">+5 min</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 5. SINGLE SPEAKER VIEW (/tabs/singleSpeaker) -->
+    <div id="view-singleSpeaker" class="view-panel absolute inset-0 overflow-y-auto p-4 sm:p-6 bg-slate-50 custom-scroll hidden">
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl p-8 shadow-sm border border-slate-200 text-center space-y-6">
+        <div class="flex items-center justify-between border-b pb-4">
+          <div>
+            <span class="text-xs uppercase font-bold text-slate-400" data-i18n="singleSpeaker">Single Speaker / Presentation</span>
+            <h2 class="text-xl font-black text-slate-800" data-i18n="draftIntro">Introduction of Draft Resolution and Amendments</h2>
+          </div>
+          <button id="btn-single-select-country" class="px-4 py-2 border border-slate-300 rounded-xl text-xs font-semibold hover:bg-slate-50 flex items-center space-x-1">
+            <i data-lucide="user" class="w-4 h-4"></i>
+            <span data-i18n="selectSpeaker">Select Speaker</span>
+          </button>
+        </div>
+
+        <div class="flex items-center justify-center space-x-5 py-4">
+          <img id="single-flag" src="https://flagcdn.com/w80/un.png" class="w-20 h-14 sm:w-24 sm:h-16 object-cover rounded-xl shadow-md border border-slate-700/40">
+          <div class="text-left">
+            <h3 id="single-country-name" class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 leading-tight" data-i18n="selectDelegate">Select Delegate</h3>
+            <p id="single-purpose" class="text-xs sm:text-sm text-slate-400 mt-1 font-medium">Sponsor Presentation</p>
+          </div>
+        </div>
+
+        <div id="single-timer-display" class="text-8xl sm:text-9xl font-mono font-black text-primary py-4">03:00</div>
+
+        <!-- Controls -->
+        <div class="flex items-center justify-center space-x-3 pt-2">
+          <button id="btn-single-start" class="px-8 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
+            <i data-lucide="play" class="w-5 h-5"></i>
+            <span data-i18n="start">Start</span>
+          </button>
+          <button id="btn-single-pause" class="px-8 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden">
+            <i data-lucide="pause" class="w-5 h-5"></i>
+            <span data-i18n="pause">Pause</span>
+          </button>
+          <button id="btn-single-reset" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl">
+            <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
+          </button>
+          <button id="btn-single-set-time" class="px-5 py-3 border border-slate-200 hover:bg-slate-50 rounded-xl text-xs font-semibold text-slate-600" data-i18n="setDuration">Set Time</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. MOTIONS VIEW (/tabs/motions) -->
+    <div id="view-motions" class="view-panel absolute inset-0 overflow-y-auto p-4 sm:p-6 bg-slate-50 custom-scroll hidden">
+      <div class="max-w-5xl mx-auto space-y-6">
+        
+
+        <!-- Most Disruptive Motion Hero -->
+        <div id="hero-motion-card" class="bg-black rounded-2xl p-6 text-white shadow-md border border-white relative overflow-hidden hidden">
+          <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 border border-white/60 text-white rounded-full" data-i18n="mostDisruptive">Most Disruptive Motion (Vote First)</span>
+          <div class="mt-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div class="flex items-center space-x-2">
+                <img id="hero-motion-flag" src="https://flagcdn.com/w80/un.png" class="w-6 h-4 object-cover rounded shadow-sm">
+                <span id="hero-motion-type" class="text-white/70 font-bold text-sm">Moderated Caucus</span>
+                <span class="text-white/40">•</span>
+                <span id="hero-motion-proposer" class="text-white font-semibold">France</span>
+              </div>
+              <h3 id="hero-motion-topic" class="text-xl font-bold mt-1 text-white">Cybersecurity in Critical Infrastructure</h3>
+              <p id="hero-motion-details" class="text-xs text-white/60 mt-1">Total: 10 mins • Individual: 60s</p>
+            </div>
+            <div class="flex items-center space-x-3">
+              <button id="btn-hero-motion-fail" class="btn-vote-motion-fail px-5 py-2.5 rounded-xl text-xs font-bold transition" data-i18n="fail">Fail</button>
+              <button id="btn-hero-motion-pass" class="btn-vote-motion-pass px-6 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-1">
+                <i data-lucide="check" class="w-4 h-4"></i>
+                <span data-i18n="passAndExecute">Pass & Execute</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Motions List -->
+        <div class="bg-black rounded-2xl p-5 shadow-sm border border-white">
+          <div class="flex items-center justify-between pb-3 border-b border-white">
+            <h3 class="font-bold text-white text-base">動議清單</h3>
+            <div class="flex items-center space-x-2">
+              <button id="btn-clear-motions" class="px-3 py-1.5 text-white/60 hover:text-rose-400 rounded-lg text-xs font-semibold transition" data-i18n="clearAllMotions">清除全部</button>
+              <button id="btn-add-motion" class="px-4 py-1.5 border border-white text-white rounded-lg text-xs font-bold flex items-center space-x-1 transition hover:bg-white/10">
+                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                <span>新增動議</span>
+              </button>
+            </div>
+          </div>
+          <div id="list-motions" class="flex flex-col gap-3 mt-4">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- 7. ROLL CALL VIEW (/tabs/rollcall) -->
+    <div id="view-rollcall" class="view-panel absolute inset-0 overflow-y-auto p-4 sm:p-6 bg-slate-50 custom-scroll hidden">
+      <div class="max-w-6xl mx-auto space-y-6">
+        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+          <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-200">
+            <div class="flex items-center space-x-2">
+              <span class="text-xs font-bold text-slate-500" data-i18n="quickSetAttendance">快速批次設定全場出席狀態：</span>
+              <button id="btn-set-all-uncalled" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition border border-slate-300" data-i18n="setAllUncalled">全設為未點名</button>
+              <button id="btn-set-all-present" class="px-3 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-white rounded-lg text-xs font-bold transition border border-emerald-500/50" data-i18n="setAllPresent">全設為出席</button>
+              <button id="btn-set-all-absent" class="px-3 py-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-white rounded-lg text-xs font-bold transition border border-rose-500/50" data-i18n="setAllAbsent">全設為缺席</button>
+            </div>
+          </div>
+          <div id="grid-rollcall-delegates" class="grid grid-cols-1 md:grid-cols-2 gap-3.5 transition-all duration-200">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. RESOLUTION VOTE VIEW (/tabs/vote) - MUN Command Style -->
+    <div id="view-vote" class="view-panel absolute inset-0 overflow-y-auto p-4 sm:p-6 pb-28 sm:pb-36 bg-slate-50 custom-scroll hidden">
+      <div class="max-w-6xl mx-auto space-y-6">
+
+        <!-- Top Header & Stages Bar -->
+        <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+          <!-- View / Sub-Tab Toggle & Stage Bar -->
+          <div class="flex flex-wrap items-center gap-3">
+            <!-- View Sub-tabs -->
+            <div class="flex items-center space-x-1 p-1 bg-slate-100 rounded-xl border border-slate-200">
+              <button id="btn-voting-subtab-ballots" class="px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800" data-i18n="subtabBallots">
+                名冊總覽 (Ballots)
+              </button>
+              <button id="btn-voting-subtab-rollcall" class="px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900" data-i18n="subtabRollcall">
+                唱票輪次 (ROLLCALL VOTING)
+              </button>
+            </div>
+
+            <!-- Stage Buttons -->
+            <div class="flex items-center space-x-1.5">
+              <span class="text-xs text-slate-400 uppercase tracking-wider ml-1" data-i18n="stage">Stage:</span>
+              <button id="vote-stage-r1" class="px-3 py-1.5 bg-primary text-white rounded-lg text-xs transition" data-i18n="stage1st">1st Round</button>
+              <button id="vote-stage-r2" class="px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg text-xs hover:bg-slate-200 transition" data-i18n="stage2nd">2nd Round (Passes)</button>
+              <button id="vote-stage-rights" class="px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg text-xs hover:bg-slate-200 transition" data-i18n="stageRights">Rights Speeches</button>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-2 text-xs">
+            <button id="btn-configure-vote" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-300 transition flex items-center space-x-1.5">
+              <i class="fa-solid fa-sliders text-xs"></i>
+              <span data-i18n="votingConfig">Configure</span>
+            </button>
+            <button id="btn-consensus-vote" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-300 transition" data-i18n="consensusVote">Consensus Vote</button>
+            <button id="btn-toggle-results" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-300 transition" data-i18n="hideResults">Hide Results</button>
+            <button id="btn-reset-votes" class="px-3 py-1.5 text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition flex items-center space-x-1" data-i18n="resetVotes">
+              <i class="fa-solid fa-rotate-right text-xs"></i>
+              <span>Reset</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- MUN Command Dashboard Card: Four Stats + Progress Bar + Verdict -->
+        <div id="card-voting-details" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4 transition-all duration-300">
+          <div id="voting-header-row" class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-4 gap-4">
+            <div>
+              <div class="flex items-center space-x-2">
+                <span class="text-xs uppercase tracking-wider text-slate-400" id="label-vote-type-badge">Substantive Vote</span>
+                <span class="text-slate-300">•</span>
+                <span class="text-xs text-slate-500 font-mono" id="label-vote-threshold-badge">Simple Majority</span>
+              </div>
+              <div class="flex items-center space-x-2 mt-1">
+                <h3 id="vote-resolution-title" class="text-xl text-slate-800">Draft Resolution 1.1</h3>
+                <button id="btn-edit-resolution-title" class="p-1 hover:bg-slate-100 rounded text-slate-400 hover:text-slate-600 transition" title="Edit Title">
+                  <i class="fa-solid fa-pen-to-square text-xs"></i>
+                </button>
+              </div>
+            </div>
+            <!-- Quick select threshold inside card -->
+            <div class="flex items-center space-x-2 text-xs">
+              <span class="text-slate-500" data-i18n="majorityRule">Majority Rule:</span>
+              <select id="select-vote-threshold" class="px-3 py-1.5 border border-slate-200 rounded-lg text-slate-700 bg-transparent">
+                <option value="simple">Simple Majority (50% + 1)</option>
+                <option value="twothirds">Two-Thirds Majority (2/3)</option>
+                <option value="unsc9">Security Council (9/15)</option>
+                <option value="consensus">Consensus (All Votes)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- VETO ALERT BANNER -->
+          <div id="veto-alert-banner" class="bg-rose-50 border-2 border-rose-300 p-4 rounded-xl flex items-center space-x-3 text-rose-800 hidden">
+            <i class="fa-solid fa-triangle-exclamation text-rose-600 text-xl flex-shrink-0"></i>
+            <div>
+              <div class="text-sm uppercase tracking-wide text-rose-700" data-i18n="vetoTitle">Resolution Vetoed by Permanent Member(s)</div>
+              <div id="veto-countries-list" class="text-xs text-rose-600 mt-0.5">United States, Russian Federation</div>
+            </div>
+          </div>
+
+          <!-- Live Scoreboard (MUN Command Dashboard: In Favor / Against / Abstaining / Majority) -->
+          <div id="voting-scoreboard" class="space-y-4">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+              <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl flex flex-col justify-center">
+                <div class="text-xs uppercase tracking-wider text-slate-500" data-i18n="inFavor">In Favor</div>
+                <div id="vote-count-favor" class="text-3xl text-slate-900 mt-1">0</div>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl flex flex-col justify-center">
+                <div class="text-xs uppercase tracking-wider text-slate-500" data-i18n="against">Against</div>
+                <div id="vote-count-against" class="text-3xl text-slate-900 mt-1">0</div>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl flex flex-col justify-center">
+                <div class="text-xs uppercase tracking-wider text-slate-500" data-i18n="abstaining">Abstaining</div>
+                <div id="vote-count-abstain" class="text-3xl text-slate-900 mt-1">0</div>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl flex flex-col justify-center">
+                <div class="text-xs uppercase tracking-wider text-slate-500" data-i18n="majority">Majority Required</div>
+                <div id="vote-count-majority" class="text-3xl text-slate-900 mt-1">0</div>
+              </div>
+            </div>
+
+            <!-- MUN Command Voting Percentage Progress Bar -->
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between text-xs text-slate-500 px-1">
+                <span id="vote-progress-label-favor">Favor: 0%</span>
+                <span id="vote-verdict" class="text-sm tracking-wide text-slate-600">PENDING</span>
+                <span id="vote-progress-label-against">Against: 0%</span>
+              </div>
+              <div class="w-full h-3 bg-slate-200 rounded-full overflow-hidden flex">
+                <div id="bar-vote-favor" class="h-full bg-emerald-500 transition-all duration-300" style="width: 0%;"></div>
+                <div id="bar-vote-abstain" class="h-full bg-amber-400 transition-all duration-300" style="width: 0%;"></div>
+                <div id="bar-vote-against" class="h-full bg-rose-500 transition-all duration-300" style="width: 0%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MUN Command Active Calling Card (當前正在點名投票的國家卡片 - ROLLCALL VOTING 子分頁) -->
+        <div id="panel-active-voter-card" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 flex flex-col items-center text-center space-y-4 hidden">
+          <div class="text-xs uppercase tracking-wider text-slate-400" id="label-active-voter-stage">Round 1 Roll Call</div>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <img id="active-voter-flag" src="" alt="Flag" class="w-16 h-11 object-cover rounded-lg shadow border border-slate-200 shrink-0">
+            <div class="text-center sm:text-left">
+              <div id="active-voter-name" class="text-2xl text-slate-800">Select or Start Voting</div>
+              <div id="active-voter-status" class="text-xs text-slate-400 mt-0.5">Present and voting</div>
+            </div>
+          </div>
+
+          <!-- MUN Command Primary Voting Action Buttons (With Rights 整合在按鈕內原位循環) -->
+          <div id="active-voter-actions" class="w-full max-w-xl grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
+            <!-- Favor (Cycle: Favor -> Favor+Rights -> None) -->
+            <button id="btn-cast-favor" type="button" class="w-full min-h-[46px] py-2.5 px-3 rounded-xl border border-slate-300 bg-slate-100 hover:bg-slate-200 text-xs transition" data-i18n="yes">
+              贊成
+            </button>
+            <!-- Against (Cycle: Against -> Against+Rights -> None) -->
+            <button id="btn-cast-against" type="button" class="w-full min-h-[46px] py-2.5 px-3 rounded-xl border border-slate-300 bg-slate-100 hover:bg-slate-200 text-xs transition" data-i18n="no">
+              反對
+            </button>
+            <!-- Abstain -->
+            <button id="btn-cast-abstain" type="button" class="w-full min-h-[46px] py-2.5 px-3 rounded-xl border border-slate-300 bg-slate-100 hover:bg-slate-200 text-xs transition" data-i18n="abs">
+              棄權
+            </button>
+            <!-- Pass -->
+            <button id="btn-cast-pass" type="button" class="w-full min-h-[46px] py-2.5 px-3 rounded-xl border border-slate-300 bg-slate-100 hover:bg-slate-200 text-xs transition" data-i18n="pass">
+              跳過 (Pass)
+            </button>
+          </div>
+
+          <div class="flex items-center space-x-4 text-xs text-slate-400 pt-1">
+            <button id="btn-prev-voter" class="hover:text-slate-700 transition flex items-center space-x-1">
+              <i class="fa-solid fa-chevron-left mr-1"></i>
+              <span data-i18n="previousVoter">上一個 (Previous)</span>
+            </button>
+            <span id="label-voter-queue-status">1 / 15</span>
+            <button id="btn-next-voter" class="hover:text-slate-700 transition flex items-center space-x-1">
+              <span data-i18n="nextVoter">下一個 (Next)</span>
+              <i class="fa-solid fa-chevron-right ml-1"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Rights Speeches View -->
+        <div id="panel-rights-speeches" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hidden space-y-4">
+          <div class="flex items-center justify-between border-b pb-3">
+            <h4 class="text-slate-800 text-sm" data-i18n="rightsDelegations">Delegations with Rights Speeches</h4>
+            <span class="text-xs text-slate-400">60s speech limit</span>
+          </div>
+          <div id="list-rights-speeches" class="divide-y divide-slate-100">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- Roll Call Vote Delegations Full Grid (可隨時手動直接點擊切換) -->
+        <div id="panel-ballots-container" class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
+            <h4 class="text-slate-800 text-sm" data-i18n="rollCallBallots">Roll-Call Ballots</h4>
+            <span class="text-xs text-slate-400" id="label-ballots-summary"></span>
+          </div>
+          <div id="grid-substantive-ballots" class="grid grid-cols-1 md:grid-cols-2 gap-3.5 transition-all duration-200">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ================= SIDEBAR DRAWER ================= -->
+  <div id="drawer-backdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden transition-opacity"></div>
+  <aside id="main-drawer" class="fixed left-0 top-0 bottom-0 w-80 shadow-2xl z-50 transform -translate-x-full transition-transform duration-300 flex flex-col border-r border-zinc-900">
+    <div class="p-5 flex items-center justify-between border-b border-zinc-900">
+      <div>
+        <h2 class="font-bold text-lg tracking-wide">NNKIEH MUN</h2>
+      </div>
+      <button id="btn-close-drawer" class="p-1.5 hover:opacity-80 rounded-lg text-white" aria-label="Close">
+        <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Drawer Menu Items -->
+    <div class="flex-1 overflow-y-auto p-4 space-y-2">
+      <!-- 1. Language Button (Placed at the very top as requested) -->
+      <button id="drawer-btn-language" class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-medium text-sm transition border">
+        <div class="flex items-center space-x-3">
+          <i class="fa-solid fa-earth-americas text-lg"></i>
+          <span data-i18n="language">Language</span>
+        </div>
+        <span id="label-current-lang" class="text-xs border px-2 py-0.5 rounded font-bold">ZH</span>
+      </button>
+
+      <!-- 2. Theme Toggle Button inside Drawer -->
+      <button id="btn-toggle-theme" class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-medium text-sm transition border">
+        <div class="flex items-center space-x-3">
+          <i id="theme-icon" class="fa-solid fa-sun text-lg"></i>
+          <span id="label-theme-mode" data-i18n="themeModeLabel">深色 / 淺色模式</span>
+        </div>
+        <span class="text-xs text-zinc-400" data-i18n="toggleAction">切換</span>
+      </button>
+
+      <!-- 2.1 Custom Color Scheme Button -->
+      <button id="btn-custom-color" class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-medium text-sm transition border">
+        <div class="flex items-center space-x-3">
+          <i class="fa-solid fa-palette text-lg text-primary"></i>
+          <span data-i18n="customColorTheme">自選主題顏色</span>
+        </div>
+        <div class="flex items-center space-x-1.5">
+          <span id="theme-color-preview" class="w-4 h-4 rounded-full border border-white/30 inline-block bg-slate-700"></span>
+          <span class="text-xs text-zinc-400" data-i18n="customizeAction">自訂</span>
+        </div>
+      </button>
+
+
+      <!-- 2.3 Global Content Scale Slider inside Drawer -->
+      <div id="container-global-scale" class="w-full px-4 py-3 rounded-xl font-medium text-sm transition border flex flex-col space-y-2">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <i class="fa-solid fa-up-right-and-down-left-from-center text-lg text-primary"></i>
+            <span data-i18n="globalScale">介面縮放</span>
+          </div>
+          <span id="label-global-scale" class="text-xs font-mono font-bold px-2 py-0.5 rounded border">100%</span>
+        </div>
+        <div class="pt-1 flex items-center space-x-2">
+          <input id="slider-global-scale" type="range" min="0.5" max="2.5" step="0.05" value="1" class="w-full accent-white cursor-pointer h-2 bg-zinc-700 rounded-lg">
+        </div>
+      </div>
+
+      <!-- 3. Google Login / Logout inside Drawer (No avatar, clean logout) -->
+      <div id="drawer-auth-container" class="w-full">
+        <!-- Unauthenticated -->
+        <button id="btn-google-login" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm transition border">
+          <svg class="w-4 h-4" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span data-i18n="googleLoginSync">Google 登入同步</span>
+        </button>
+
+        <!-- Authenticated: Clean Logout Button (No avatar) -->
+        <div id="user-profile-menu" class="w-full" style="display:none">
+          <button id="btn-google-logout" class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-medium text-sm transition border text-rose-500 hover:bg-rose-500/10 border-rose-500/30 cursor-pointer">
+            <div class="flex items-center space-x-3">
+              <i class="fa-solid fa-right-from-bracket text-lg"></i>
+              <span id="user-menu-name" data-i18n="googleLogout">登出</span>
+            </div>
+            <span class="text-xs text-rose-400" data-i18n="googleLogout">登出</span>
+          </button>
+        </div>
+      </div>
+      <hr class="my-3 border-zinc-900">
+
+      <!-- Upload Committee Logo Button -->
+      <button id="drawer-btn-upload-logo" class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-medium text-sm transition border">
+        <div class="flex items-center space-x-3">
+          <i class="fa-solid fa-image text-lg text-primary"></i>
+          <span data-i18n="uploadLogo">上傳會議圖標</span>
+        </div>
+        <span class="text-xs text-zinc-400" data-i18n="changeAction">更換</span>
+      </button>
+      <input type="file" id="input-logo-file" class="hidden" accept="image/*">
+
+      <button id="drawer-btn-export" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm transition">
+        <i class="fa-solid fa-file-arrow-down text-lg"></i>
+        <span data-i18n="exportCommittee">Export Committee</span>
+      </button>
+      <button id="drawer-btn-import" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm transition">
+        <i class="fa-solid fa-file-arrow-up text-lg"></i>
+        <span data-i18n="importCommittee">Import Committee</span>
+      </button>
+      <input type="file" id="input-import-file" class="hidden" accept=".json">
+    </div>
+
+    <div class="p-4 border-t text-xs text-center">
+      NNKIEH MUN Conference System
+    </div>
+  </aside>
+
+  <!-- ================= MODALS & POPUPS ================= -->
+  
+  <!-- Modal: Delegate QR Code Join (Removed as requested) -->
+
+  <!-- Modal: Add Speaker to Queue -->
+  <div id="modal-add-speaker" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-800 text-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 max-h-[85vh] flex flex-col border border-slate-700">
+      <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+        <h3 class="font-bold text-lg text-slate-100" data-i18n="addSpeaker">Add Speaker</h3>
+        <button class="btn-close-modal p-1 text-slate-400 hover:text-slate-200"><i data-lucide="x" class="w-5 h-5"></i></button>
+      </div>
+      <input id="search-queue-speaker" type="text" data-i18n-placeholder="searchSpeakerPlaceholder" placeholder="搜尋出席代表國..." class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate-400">
+      <div id="list-selectable-speakers" class="flex-1 overflow-y-auto divide-y divide-slate-700 custom-scroll pr-1">
+        <!-- Injected via JS -->
+      </div>
+      <div id="modal-add-speaker-footer" class="pt-3 border-t border-slate-700 flex items-center justify-between">
+        <span id="modal-add-speaker-status" class="text-xs text-slate-400 font-medium"></span>
+        <button id="btn-done-add-speaker" class="px-5 py-2 bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold rounded-xl shadow border border-slate-600 transition" data-i18n="done">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Define Speaking Time -->
+  <div id="modal-define-time" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-800 text-white rounded-2xl max-w-sm w-full p-6 shadow-2xl space-y-4 border border-slate-700">
+      <h3 class="font-bold text-lg text-slate-100" data-i18n="defineSpeakingTime">Define Speaking Time</h3>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="minutes">Minutes</label>
+          <input id="input-time-minutes" type="number" min="0" max="60" value="1" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm font-bold text-center">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="seconds">Seconds</label>
+          <input id="input-time-seconds" type="number" min="0" max="59" value="30" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm font-bold text-center">
+        </div>
+      </div>
+      <div class="flex justify-end space-x-2 pt-2">
+        <button class="btn-close-modal px-4 py-2 border border-slate-700 hover:bg-slate-700 rounded-lg text-xs font-semibold text-slate-300" data-i18n="cancel">Cancel</button>
+        <button id="btn-save-speaking-time" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-bold border border-slate-600" data-i18n="apply">Apply</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Configure Moderated Caucus -->
+  <div id="modal-mod-config" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-800 text-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 border border-slate-700">
+      <h3 class="font-bold text-lg text-slate-100" data-i18n="configureCaucus">Configure Moderated Caucus</h3>
+      <div>
+        <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="topic">Topic</label>
+        <input id="input-mod-topic" type="text" data-i18n-placeholder="topicPlaceholder" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm" placeholder="請輸入議題名稱...">
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="totalCaucusTime">Total Caucus Time (mins)</label>
+          <input id="input-mod-total-mins" type="number" value="10" min="1" max="120" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm font-bold">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="individualSpeakingTime">Individual Speaking Time (secs)</label>
+          <input id="input-mod-speaker-secs" type="number" value="60" min="10" max="600" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm font-bold">
+        </div>
+      </div>
+      <div class="flex justify-end space-x-2 pt-2">
+        <button class="btn-close-modal px-4 py-2 border border-slate-700 hover:bg-slate-700 rounded-lg text-xs font-semibold text-slate-300" data-i18n="cancel">Cancel</button>
+        <button id="btn-save-mod-config" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-bold border border-slate-600" data-i18n="saveAndUpdate">Save & Update</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add Motion -->
+  <div id="modal-add-motion" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-800 text-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 border border-slate-700">
+      <h3 class="font-bold text-lg text-slate-100" data-i18n="addMotion">Add Motion</h3>
+      <div>
+        <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="submittingCountry">Submitting Country</label>
+        <select id="select-motion-proposer" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm font-medium">
+          <!-- Populated from selectedCountries -->
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="motionType">Type</label>
+        <select id="select-motion-type" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm font-medium">
+          <option value="adjourn_session">全會結束 (Adjournment of Meeting)</option>
+          <option value="adjourn_day">休會動議 - 本日結束 (Adjournment for the Day)</option>
+          <option value="suspend" selected>暫停會議動議 (Suspension of Meeting)</option>
+          <option value="unmod">非主持核心磋商 (Unmoderated Caucus)</option>
+          <option value="mod">主持核心磋商 (Moderated Caucus)</option>
+          <option value="singlespeaker">介紹決議案草案及修正案 (Introduce DR & Amendments)</option>
+          <option value="close">結束辯論動議 (Closure of Debate)</option>
+        </select>
+      </div>
+      <div id="motion-field-topic">
+        <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="topic">Topic</label>
+        <input id="input-motion-topic" type="text" data-i18n-placeholder="topicPlaceholder" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm" placeholder="請輸入議題名稱...">
+      </div>
+      <div class="grid grid-cols-2 gap-3" id="motion-time-fields">
+        <div id="motion-field-total-mins">
+          <label id="label-motion-total-mins" class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="durationMins">Duration (mins)</label>
+          <input id="input-motion-total-mins" type="number" value="10" min="1" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm">
+        </div>
+        <div id="motion-field-speaker-secs">
+          <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="speakingTimeSecs">Speaking Time (secs)</label>
+          <input id="input-motion-speaker-secs" type="number" value="60" min="10" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm">
+        </div>
+      </div>
+      <div class="flex justify-end space-x-2 pt-2">
+        <button class="btn-close-modal px-4 py-2 border border-slate-700 hover:bg-slate-700 rounded-lg text-xs font-semibold text-slate-300" data-i18n="cancel">Cancel</button>
+        <button id="btn-submit-motion" class="px-5 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-bold border border-slate-600" data-i18n="submit">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Configure Voting (MUN Command Style app-setup-vote) -->
+  <div id="modal-configure-voting" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-slate-800 text-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-5 border border-slate-700">
+      <div class="flex items-center justify-between border-b border-slate-700 pb-3">
+        <h3 class="text-base text-slate-100 flex items-center space-x-2">
+          <i class="fa-solid fa-sliders text-primary"></i>
+          <span data-i18n="configureVoting">Configure Voting</span>
+        </h3>
+        <button type="button" class="btn-close-modal text-slate-400 hover:text-white p-1">
+          <i class="fa-solid fa-xmark text-base"></i>
+        </button>
+      </div>
+
+      <!-- Voting Type: Procedural vs Substantive -->
+      <div class="space-y-2">
+        <label class="block text-xs uppercase tracking-wider text-slate-400">Voting Type (表決性質)</label>
+        <div class="grid grid-cols-2 gap-3">
+          <label class="flex items-center space-x-2.5 p-3 rounded-xl border border-slate-700 bg-slate-900/50 cursor-pointer hover:border-slate-500 transition">
+            <input type="radio" name="modal-vote-type" value="substantive" class="accent-white" checked>
+            <div class="text-xs">
+              <div class="text-slate-100">Substantive (實質性)</div>
+              <div class="text-[10px] text-slate-400">可棄權、可發言權</div>
+            </div>
+          </label>
+          <label class="flex items-center space-x-2.5 p-3 rounded-xl border border-slate-700 bg-slate-900/50 cursor-pointer hover:border-slate-500 transition">
+            <input type="radio" name="modal-vote-type" value="procedural" class="accent-white">
+            <div class="text-xs">
+              <div class="text-slate-100">Procedural (程序性)</div>
+              <div class="text-[10px] text-slate-400">不可棄權</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Required Majority -->
+      <div class="space-y-2">
+        <label class="block text-xs uppercase tracking-wider text-slate-400">Required Majority (所需多數)</label>
+        <div class="space-y-2">
+          <label class="flex items-center space-x-2.5 p-2.5 rounded-xl border border-slate-700 bg-slate-900/50 cursor-pointer hover:border-slate-500 transition">
+            <input type="radio" name="modal-vote-threshold" value="simple" class="accent-white" checked>
+            <div class="text-xs text-slate-100">Simple Majority (簡單多數決 50% + 1)</div>
+          </label>
+          <label class="flex items-center space-x-2.5 p-2.5 rounded-xl border border-slate-700 bg-slate-900/50 cursor-pointer hover:border-slate-500 transition">
+            <input type="radio" name="modal-vote-threshold" value="twothirds" class="accent-white">
+            <div class="text-xs text-slate-100">Two-Thirds Majority (三分之二絕對多數 2/3)</div>
+          </label>
+          <label class="flex items-center space-x-2.5 p-2.5 rounded-xl border border-slate-700 bg-slate-900/50 cursor-pointer hover:border-slate-500 transition">
+            <input type="radio" name="modal-vote-threshold" value="unsc9" class="accent-white">
+            <div class="text-xs text-slate-100">Security Council (安理會 9 票 + 無常任否決)</div>
+          </label>
+          <label class="flex items-center space-x-2.5 p-2.5 rounded-xl border border-slate-700 bg-slate-900/50 cursor-pointer hover:border-slate-500 transition">
+            <input type="radio" name="modal-vote-threshold" value="consensus" class="accent-white">
+            <div class="text-xs text-slate-100">Consensus Vote (共識決 / 無反對票)</div>
+          </label>
+        </div>
+      </div>
+
+      <div class="flex justify-end space-x-2 pt-2 border-t border-slate-700">
+        <button type="button" class="btn-close-modal px-4 py-2 border border-slate-700 hover:bg-slate-700 rounded-lg text-xs text-slate-300" data-i18n="cancel">Cancel</button>
+        <button id="btn-save-vote-config" type="button" class="px-5 py-2 bg-slate-100 hover:bg-white text-slate-900 rounded-lg text-xs font-medium transition" data-i18n="save">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Recess / Meeting Suspended Screen -->
+  <div id="modal-recess" class="fixed inset-0 bg-slate-900/95 backdrop-blur-md z-[100] flex flex-col items-center justify-center p-6 hidden">
+    <div class="max-w-2xl w-full text-center space-y-6 text-white">
+      <div>
+        <span id="recess-badge" class="px-3 py-1 bg-amber-500/20 text-amber-300 rounded-full text-xs font-bold tracking-wider uppercase border border-amber-500/30">Procedural Action</span>
+        <h2 id="recess-title" class="text-3xl sm:text-5xl font-black mt-3 tracking-tight">會議暫停 / 休會中</h2>
+        <p id="recess-subtitle" class="text-slate-300 text-sm sm:text-base mt-1">Session Suspended • Recess</p>
+      </div>
+      
+      <!-- Big Recess Countdown Timer -->
+      <div id="recess-timer-container" class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm max-w-md mx-auto shadow-2xl">
+        <div class="text-xs font-bold tracking-widest text-slate-400 uppercase mb-2">預計復會倒數 (Time Until Reconvene)</div>
+        <div id="recess-timer-display" class="font-mono text-6xl sm:text-7xl font-black text-amber-400 tracking-wider">15:00</div>
+        <div id="recess-reconvene-time" class="text-xs text-slate-400 mt-3 font-medium">復會時間：--:--</div>
+      </div>
+
+      <div class="pt-4 flex items-center justify-center space-x-4">
+        <button id="btn-recess-toggle-timer" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-2xl shadow-lg transition flex items-center space-x-2">
+          <i data-lucide="play" class="w-5 h-5"></i>
+          <span id="recess-toggle-label">開始計時</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PORTAL / COVER LANDING SCREEN ================= -->
+  <div id="modal-portal-landing" class="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-8 transition-opacity duration-500 bg-black text-white hidden" style="display: none;">
+    <div class="portal-box w-full max-w-4xl border border-zinc-800 bg-black/90 backdrop-blur-xl rounded-3xl p-8 sm:p-12 shadow-2xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+      
+      <!-- Left Column: Branding & Intro (No images) -->
+      <div class="flex flex-col justify-between space-y-6">
+        <div>
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full border border-zinc-800 bg-zinc-900/60 text-xs text-zinc-400 font-medium mb-4">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>NNKIEH MUN Command Center</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            Give every voice a global destination.
+          </h1>
+          <p class="text-sm sm:text-base text-zinc-400 mt-4 leading-relaxed">
+            A fast, modern, and unified Model United Nations conference command center. Real-time synchronizations, procedural motions, and seamless roll-call balloting.
+          </p>
+        </div>
+
+        <div class="text-xs text-zinc-600">
+          Designed for delegates, chairs, and secretariats worldwide.
+        </div>
+      </div>
+
+      <!-- Right Column: Sign in & Guest Options (No CAPTCHA / No images) -->
+      <div class="flex flex-col justify-center space-y-6 md:pl-6 md:border-l border-zinc-800">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">Get started</h2>
+          <p class="text-xs sm:text-sm text-zinc-400 mt-1">
+            Sign in to sync your conference across devices, or enter immediately as a guest.
+          </p>
+        </div>
+
+        <div class="space-y-3 pt-2">
+          <!-- Button 1: Google Login -->
+          <button id="btn-portal-google-login" type="button" class="w-full flex items-center justify-center space-x-3 px-5 py-3.5 rounded-2xl bg-white hover:bg-zinc-100 text-zinc-900 font-semibold text-sm transition shadow-lg hover:shadow-xl cursor-pointer">
+            <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
+              <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+              <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+              <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+              <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+            </svg>
+            <span>Sign in with Google</span>
+          </button>
+
+          <!-- Button 2: Guest Continue (免登入選項) -->
+          <button id="btn-portal-guest-continue" type="button" class="w-full flex items-center justify-center space-x-2 px-5 py-3.5 rounded-2xl bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-sm transition border border-zinc-700/70 hover:border-zinc-500 cursor-pointer">
+            <span>免登入直接體驗 (Continue as Guest)</span>
+            <i class="fa-solid fa-arrow-right text-xs text-zinc-400"></i>
+          </button>
+        </div>
+
+        <div class="text-[11px] text-zinc-500 text-center pt-2">
+          By proceeding, you agree to our conference terms and local state persistence policies.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Load Extracted Data & App Logic -->
+  <!-- Application Data & Translations -->
+    <script src="data.js?v=2026092502"></script>
+    <script src="js/i18n.js?v=2026092613"></script>
+    <script src="js/countries.js?v=2026092502"></script>
+    <script src="js/state.js?v=2026092608"></script>
+    <!-- Utilities, Dialogs & Visual Effects -->
+    <script src="js/dialogs.js?v=2026092601"></script>
+    <script src="js/confetti.js?v=2026092601"></script>
+    <script src="js/theme.js?v=2026092601"></script>
+    <script src="js/modals.js?v=2026100602"></script>
+    <script src="js/p2p.js?v=2026092601"></script>
+    <!-- View Renderers -->
+    <script src="js/views/header.js?v=2026092601"></script>
+    <script src="js/views/setup.js?v=2026100602"></script>
+    <script src="js/views/gsl.js?v=2026100602"></script>
+    <script src="js/views/mod.js?v=2026092611"></script>
+    <script src="js/views/unmod.js?v=2026092601"></script>
+    <script src="js/views/single.js?v=2026092601"></script>
+    <script src="js/views/motions.js?v=2026092611"></script>
+    <script src="js/views/voting.js?v=2026100602"></script>
+    <!-- Events, Auth & Entry Point -->
+    <script src="js/events.js?v=2026100701"></script>
+    <script src="js/auth.js?v=2026092601"></script>
+    <script src="app.js?v=2026100701"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
