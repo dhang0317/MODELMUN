@@ -1,6 +1,31 @@
 
+  // --- DEFAULT SETTINGS SCHEMA ---
+  const defaultSettings = {
+    conference: {
+      committeeName: '聯合國安全理事會 (UNSC)',
+      agenda: '對國際和平與安全之威脅',
+      logoUrl: null
+    },
+    rules: {
+      gslDefaultTime: 90,
+      modDefaultTotalMins: 10,
+      modDefaultSpeakerSecs: 60,
+      unmodDefaultTotalSecs: 900,
+      singleDefaultTime: 180,
+      defaultVoteThreshold: 'simple',
+      enableVeto: true
+    },
+    display: {
+      themeMode: 'dark',
+      customAccent: '#3683a8',
+      globalScale: 1.0,
+      showLiveResults: true
+    }
+  };
+
   // --- APP STATE ---
   const state = {
+    settings: JSON.parse(JSON.stringify(defaultSettings)),
     committeeName: '聯合國安全理事會 (UNSC)',
     agenda: '對國際和平與安全之威脅',
     currentTab: 'setup',
@@ -134,6 +159,7 @@
       language: state.language,
       themeMode: document.body.classList.contains('light-mode') ? 'light' : 'dark',
       customAccent: localStorage.getItem('mun-custom-accent') || null,
+      settings: state.settings,
       lastUpdated: Date.now()
     };
   }
@@ -402,6 +428,23 @@
 
   function loadStateFromData(parsed) {
     if (!parsed) return;
+    if (parsed.settings) {
+      state.settings = {
+        conference: { ...defaultSettings.conference, ...(parsed.settings.conference || {}) },
+        rules: { ...defaultSettings.rules, ...(parsed.settings.rules || {}) },
+        display: { ...defaultSettings.display, ...(parsed.settings.display || {}) }
+      };
+    } else {
+      if (!state.settings) state.settings = JSON.parse(JSON.stringify(defaultSettings));
+      if (parsed.committeeName) state.settings.conference.committeeName = parsed.committeeName;
+      if (parsed.agenda) state.settings.conference.agenda = parsed.agenda;
+      if (typeof parsed.gslDefaultTime !== 'undefined') state.settings.rules.gslDefaultTime = parsed.gslDefaultTime;
+      if (typeof parsed.modTotalMins !== 'undefined') state.settings.rules.modDefaultTotalMins = parsed.modTotalMins;
+      if (typeof parsed.modSpeakerSecs !== 'undefined') state.settings.rules.modDefaultSpeakerSecs = parsed.modSpeakerSecs;
+      if (parsed.voteThreshold) state.settings.rules.defaultVoteThreshold = parsed.voteThreshold;
+      if (parsed.themeMode) state.settings.display.themeMode = parsed.themeMode;
+      if (parsed.customAccent) state.settings.display.customAccent = parsed.customAccent;
+    }
     if (parsed.committeeName) state.committeeName = parsed.committeeName;
     if (parsed.agenda) state.agenda = parsed.agenda;
     if (parsed.currentTab && state.isViewerMode) {

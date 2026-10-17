@@ -242,7 +242,16 @@ window.I18N = {
       unsc9RequiredRule: "UNSC 9 Required",
       consensusMajorityRule: "Consensus",
       withRightsTag: "(+Rights)",
-      withRightsShort: "(+R)"
+      withRightsShort: "(+R)",
+      settings: "Settings",
+      settingsCenterTitle: "Settings Center",
+      settingsCenterSubtitle: "Unified conference configuration, rules, display, and cloud sync",
+      settingsTabConference: "Conference",
+      settingsTabRules: "Rules & Timing",
+      settingsTabDisplay: "Display & Theme",
+      settingsTabSync: "Sync & Backup",
+      openAction: "Open",
+      logoReset: "Reset Logo"
     },
     zh: {
       sessionActive: "會議進行中",
@@ -487,7 +496,16 @@ window.I18N = {
       unsc9RequiredRule: "安理會常任決 (9/15)",
       consensusMajorityRule: "協商一致 (Consensus)",
       withRightsTag: "(+權利發言)",
-      withRightsShort: "(+R)"
+      withRightsShort: "(+R)",
+      settings: "設定",
+      settingsCenterTitle: "會議與系統設定",
+      settingsCenterSubtitle: "統一管理會議資訊、議事計時、顯示投影與雲端備份",
+      settingsTabConference: "會議資訊",
+      settingsTabRules: "議事與計時",
+      settingsTabDisplay: "顯示與外觀",
+      settingsTabSync: "同步與備份",
+      openAction: "開啟",
+      logoReset: "重設預設圖標"
     },
     fr: {
       sessionActive: "Session Active",
@@ -714,6 +732,15 @@ window.I18N = {
       unsc9RequiredRule: "9 Voix Requises (CSNU)",
       consensusMajorityRule: "Consensus",
       withRightsTag: "(+Droits)",
-      withRightsShort: "(+D)"
+      withRightsShort: "(+D)",
+      settings: "Paramètres",
+      settingsCenterTitle: "Centre des Paramètres",
+      settingsCenterSubtitle: "Configuration unifiée de la session, des règles, de l'affichage et de la synchronisation",
+      settingsTabConference: "Conférence",
+      settingsTabRules: "Règles & Chrono",
+      settingsTabDisplay: "Affichage & Thème",
+      settingsTabSync: "Synchro & Sauvegarde",
+      openAction: "Ouvrir",
+      logoReset: "Réinitialiser le logo"
     }
-  };;
+  };

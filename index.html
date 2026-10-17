@@ -45,7 +45,7 @@
 
   <!-- ================= TOP HEADER / STATS BAR ================= -->
   <header id="main-header" class="border-b text-white shadow-sm z-20 flex-shrink-0 relative">
-    <div class="px-3 sm:px-4 py-2 flex items-center justify-start gap-4 sm:gap-6">
+    <div class="px-3 sm:px-4 py-2 flex items-center justify-between gap-4 sm:gap-6">
       <div class="flex items-center space-x-3 shrink-0 min-w-0">
         <button id="btn-open-drawer" type="button" class="p-2 hover:bg-zinc-900 rounded-lg transition shrink-0 flex items-center justify-center cursor-pointer border-0 text-white" title="Menu" aria-label="Menu">
           <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -105,6 +105,26 @@
           <div class="text-zinc-400 text-[10px] uppercase font-semibold" data-i18n="twoThirds">Two-Thirds (2/3)</div>
           <div id="stat-twothirds" class="text-sm font-bold">0</div>
         </div>
+      </div>
+
+      <!-- Header Right Toolbar: Quick Controls -->
+      <div class="flex items-center space-x-2 shrink-0 ml-auto">
+        <!-- Language Switcher button -->
+        <button id="btn-header-lang" type="button" class="px-2.5 py-1.5 hover:bg-zinc-900 rounded-xl transition flex items-center space-x-1.5 text-xs font-semibold text-zinc-300 border border-zinc-800 cursor-pointer" title="切換語言 (Language)">
+          <i class="fa-solid fa-earth-americas text-xs text-zinc-400"></i>
+          <span id="header-lang-label">ZH</span>
+        </button>
+
+        <!-- Theme Toggle button -->
+        <button id="btn-header-theme" type="button" class="p-2 hover:bg-zinc-900 rounded-xl transition text-zinc-300 border border-zinc-800 cursor-pointer" title="切換深淺色主題">
+          <i id="header-theme-icon" class="fa-solid fa-sun text-xs"></i>
+        </button>
+
+        <!-- Unified Settings Gear Button -->
+        <button id="btn-open-settings" type="button" class="px-3 py-1.5 hover:bg-zinc-800 rounded-xl transition flex items-center space-x-1.5 text-xs font-bold text-white border border-zinc-700 bg-zinc-800/90 shadow-sm cursor-pointer" title="全域會議與系統設定">
+          <i class="fa-solid fa-gear text-xs text-zinc-300"></i>
+          <span class="hidden sm:inline" data-i18n="settings">設定</span>
+        </button>
       </div>
     </div>
 
@@ -767,6 +787,15 @@
 
     <!-- Drawer Menu Items -->
     <div class="flex-1 overflow-y-auto p-4 space-y-2">
+      <!-- 0. Unified Settings Button -->
+      <button id="drawer-btn-settings" class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-medium text-sm transition border border-zinc-700 bg-zinc-800/80 hover:bg-zinc-800 text-white cursor-pointer">
+        <div class="flex items-center space-x-3">
+          <i class="fa-solid fa-gear text-lg text-primary"></i>
+          <span data-i18n="settingsCenterTitle">會議與系統設定</span>
+        </div>
+        <span class="text-xs text-zinc-400" data-i18n="openAction">開啟</span>
+      </button>
+
       <!-- 1. Language Button (Placed at the very top as requested) -->
       <button id="drawer-btn-language" class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-medium text-sm transition border">
         <div class="flex items-center space-x-3">
@@ -1059,6 +1088,262 @@
         <button id="btn-recess-toggle-timer" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-2xl shadow-lg transition flex items-center space-x-2">
           <i data-lucide="play" class="w-5 h-5"></i>
           <span id="recess-toggle-label">開始計時</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= UNIFIED SETTINGS CENTER MODAL ================= -->
+  <div id="modal-unified-settings" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[110] flex items-center justify-center p-3 sm:p-6 hidden">
+    <div class="bg-zinc-900 text-white rounded-3xl max-w-3xl w-full shadow-2xl border border-zinc-800 flex flex-col max-h-[90vh] overflow-hidden">
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-zinc-800 flex items-center justify-between shrink-0 bg-zinc-900/90">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-2xl bg-zinc-800 flex items-center justify-center text-primary border border-zinc-700/80 shadow-inner">
+            <i class="fa-solid fa-sliders text-base"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-lg text-white tracking-wide" data-i18n="settingsCenterTitle">會議與系統設定</h3>
+            <p class="text-xs text-zinc-400" data-i18n="settingsCenterSubtitle">統一管理會議資訊、議事計時、顯示投影與雲端備份</p>
+          </div>
+        </div>
+        <button id="btn-close-settings-modal" type="button" class="p-2 text-zinc-400 hover:text-white rounded-xl hover:bg-zinc-800 transition cursor-pointer">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Tab Buttons Navigation -->
+      <div class="flex border-b border-zinc-800 bg-zinc-950/50 px-6 gap-2 overflow-x-auto shrink-0">
+        <button id="tab-btn-cfg-conference" type="button" class="cfg-nav-btn py-3 px-3 text-xs sm:text-sm font-semibold border-b-2 border-white text-white flex items-center space-x-2 transition cursor-pointer">
+          <i class="fa-solid fa-landmark text-xs"></i>
+          <span data-i18n="settingsTabConference">會議資訊</span>
+        </button>
+        <button id="tab-btn-cfg-rules" type="button" class="cfg-nav-btn py-3 px-3 text-xs sm:text-sm font-medium border-b-2 border-transparent text-zinc-400 hover:text-zinc-200 flex items-center space-x-2 transition cursor-pointer">
+          <i class="fa-solid fa-stopwatch text-xs"></i>
+          <span data-i18n="settingsTabRules">議事與計時</span>
+        </button>
+        <button id="tab-btn-cfg-display" type="button" class="cfg-nav-btn py-3 px-3 text-xs sm:text-sm font-medium border-b-2 border-transparent text-zinc-400 hover:text-zinc-200 flex items-center space-x-2 transition cursor-pointer">
+          <i class="fa-solid fa-palette text-xs"></i>
+          <span data-i18n="settingsTabDisplay">顯示與外觀</span>
+        </button>
+        <button id="tab-btn-cfg-sync" type="button" class="cfg-nav-btn py-3 px-3 text-xs sm:text-sm font-medium border-b-2 border-transparent text-zinc-400 hover:text-zinc-200 flex items-center space-x-2 transition cursor-pointer">
+          <i class="fa-solid fa-cloud-arrow-up text-xs"></i>
+          <span data-i18n="settingsTabSync">同步與備份</span>
+        </button>
+      </div>
+
+      <!-- Settings Content Panels (Scrollable) -->
+      <div class="p-6 overflow-y-auto space-y-6 flex-1 custom-scroll bg-zinc-900/60">
+
+        <!-- Panel 1: Conference -->
+        <div id="cfg-panel-conference" class="cfg-panel space-y-5">
+          <div>
+            <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">委員會名稱 (Committee Name)</label>
+            <div class="flex items-center space-x-2">
+              <input id="cfg-input-committee" type="text" class="flex-1 px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-medium text-white focus:outline-none focus:border-zinc-400">
+              <select id="cfg-select-ga" class="px-3 py-2.5 bg-zinc-800 border border-zinc-700 rounded-xl text-xs font-medium text-zinc-200 focus:outline-none">
+                <option value="" disabled selected>快速切換大會</option>
+                <option value="ga_plenary">UNGA 全體大會</option>
+                <option value="ga1">GA1 裁軍安全 (DISEC)</option>
+                <option value="ga2">GA2 經濟金融 (ECOFIN)</option>
+                <option value="ga3">GA3 社會人道 (SOCHUM)</option>
+                <option value="ga4">GA4 特別政治 (SPECPOL)</option>
+                <option value="ga5">GA5 行政預算</option>
+                <option value="ga6">GA6 法律委員會 (Legal)</option>
+                <option value="unsc">UNSC 安全理事會</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">會議議題 (Agenda Topic)</label>
+            <input id="cfg-input-agenda" type="text" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-medium text-white focus:outline-none focus:border-zinc-400">
+          </div>
+
+          <div class="p-4 rounded-2xl bg-zinc-950/60 border border-zinc-800 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <div class="w-12 h-12 rounded-full border border-zinc-700 bg-white flex items-center justify-center overflow-hidden shrink-0 shadow">
+                <img id="cfg-preview-logo" src="logo.png" alt="Logo Preview" class="w-full h-full object-cover">
+              </div>
+              <div>
+                <div class="text-sm font-bold text-white">會議專屬 Logo 圖標</div>
+                <div class="text-xs text-zinc-400">支援 PNG, JPG, SVG 格式</div>
+              </div>
+            </div>
+            <div class="flex items-center space-x-2">
+              <button id="cfg-btn-upload-logo" type="button" class="px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-xs font-semibold transition border border-zinc-700 cursor-pointer">
+                更換圖標
+              </button>
+              <button id="cfg-btn-reset-logo" type="button" class="px-3 py-2 text-zinc-400 hover:text-rose-400 rounded-xl text-xs font-medium transition cursor-pointer">
+                重設
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 2: Rules & Timing -->
+        <div id="cfg-panel-rules" class="cfg-panel space-y-5 hidden">
+          <div>
+            <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">GSL 常規發言每人時長 (秒)</label>
+            <div class="flex items-center space-x-3">
+              <input id="cfg-input-gsl-time" type="number" min="10" max="600" step="5" class="w-32 px-4 py-2 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-bold text-white text-center">
+              <div class="flex items-center space-x-2">
+                <button type="button" data-gsl-preset="60" class="btn-gsl-quick px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-xs font-semibold border border-zinc-700 cursor-pointer">60s</button>
+                <button type="button" data-gsl-preset="90" class="btn-gsl-quick px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-xs font-semibold border border-zinc-700 cursor-pointer">90s</button>
+                <button type="button" data-gsl-preset="120" class="btn-gsl-quick px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-xs font-semibold border border-zinc-700 cursor-pointer">120s</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">Mod 預設總磋商時長 (分鐘)</label>
+              <input id="cfg-input-mod-total" type="number" min="1" max="120" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-bold text-white">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">Mod 預設個人發言時間 (秒)</label>
+              <input id="cfg-input-mod-speaker" type="number" min="10" max="300" step="5" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-bold text-white">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">Unmod 自由磋商預設時長 (分鐘)</label>
+              <input id="cfg-input-unmod-mins" type="number" min="1" max="180" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-bold text-white">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">決議文預設通過門檻</label>
+              <select id="cfg-select-vote-threshold" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-medium text-white">
+                <option value="simple">簡單多數決 (50% + 1)</option>
+                <option value="twothirds">絕對多數決 (2/3)</option>
+                <option value="unsc9">安理會常任決 (9/15)</option>
+                <option value="consensus">協商一致共識決 (Consensus)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Panel 3: Display & Theme -->
+        <div id="cfg-panel-display" class="cfg-panel space-y-5 hidden">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">介面語系 (Language)</label>
+              <select id="cfg-select-language" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-medium text-white">
+                <option value="zh">繁體中文 (Traditional Chinese)</option>
+                <option value="en">English (US)</option>
+                <option value="fr">Français (French)</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">深淺色外觀模式 (Appearance)</label>
+              <div class="grid grid-cols-2 gap-2">
+                <button type="button" id="cfg-btn-theme-dark" class="px-3 py-2.5 rounded-xl border border-zinc-700 text-xs font-bold transition flex items-center justify-center space-x-2 bg-zinc-800 text-white cursor-pointer">
+                  <i class="fa-solid fa-moon"></i>
+                  <span>深色模式</span>
+                </button>
+                <button type="button" id="cfg-btn-theme-light" class="px-3 py-2.5 rounded-xl border border-zinc-800 text-xs font-bold transition flex items-center justify-center space-x-2 bg-zinc-950 text-zinc-400 hover:text-white cursor-pointer">
+                  <i class="fa-solid fa-sun"></i>
+                  <span>淺色模式</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-zinc-950/60 border border-zinc-800 space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-sm font-bold text-white">介面與投影縮放比例</div>
+                <div class="text-xs text-zinc-400">適應大螢幕投影機與高解析度顯示器</div>
+              </div>
+              <span id="cfg-label-scale" class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg border border-zinc-700 bg-zinc-900">100%</span>
+            </div>
+            <div class="flex items-center space-x-3">
+              <input id="cfg-slider-scale" type="range" min="0.5" max="2.0" step="0.05" value="1.0" class="w-full accent-white cursor-pointer h-2 bg-zinc-700 rounded-lg">
+              <button id="cfg-btn-reset-scale" type="button" class="text-xs text-zinc-400 hover:text-white whitespace-nowrap px-2 py-1 rounded border border-zinc-800 cursor-pointer">重設 100%</button>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-zinc-950/60 border border-zinc-800 flex items-center justify-between">
+            <div>
+              <div class="text-sm font-bold text-white">自訂主題品牌色 (Accent Color)</div>
+              <div class="text-xs text-zinc-400">即時更換標題、重點提示色調</div>
+            </div>
+            <button id="cfg-btn-open-palette" type="button" class="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-xs font-semibold transition border border-zinc-700 flex items-center space-x-2 cursor-pointer">
+              <span id="cfg-swatch-preview" class="w-4 h-4 rounded-full border border-white/40 inline-block bg-sky-500"></span>
+              <span>開啟色票調色盤</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Panel 4: Sync & Backup -->
+        <div id="cfg-panel-sync" class="cfg-panel space-y-5 hidden">
+          <!-- Auth Status -->
+          <div class="p-4 rounded-2xl bg-zinc-950/60 border border-zinc-800 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <div id="cfg-auth-avatar" class="w-10 h-10 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400 overflow-hidden shrink-0">
+                <i class="fa-solid fa-user"></i>
+              </div>
+              <div>
+                <div id="cfg-auth-name" class="text-sm font-bold text-white">訪客模式 (未登入)</div>
+                <div id="cfg-auth-email" class="text-xs text-zinc-400">登入 Google 帳號可享有跨裝置永久存檔</div>
+              </div>
+            </div>
+            <button id="cfg-btn-auth-action" type="button" class="px-4 py-2 bg-white text-zinc-900 hover:bg-zinc-200 rounded-xl text-xs font-bold transition shadow cursor-pointer">
+              登入 Google
+            </button>
+          </div>
+
+          <!-- Cloud Sync -->
+          <div class="p-4 rounded-2xl bg-zinc-950/60 border border-zinc-800 flex items-center justify-between">
+            <div>
+              <div class="text-sm font-bold text-white">Firebase 雲端即時同步</div>
+              <div id="cfg-sync-status-text" class="text-xs text-emerald-400 flex items-center space-x-1.5 mt-0.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>雲端資料庫已就緒</span>
+              </div>
+            </div>
+            <button id="cfg-btn-sync-now" type="button" class="px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-xs font-semibold transition border border-zinc-700 cursor-pointer">
+              立即推播備份
+            </button>
+          </div>
+
+          <!-- Backup & Restore -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            <button id="cfg-btn-export-file" type="button" class="p-3.5 rounded-2xl border border-zinc-800 bg-zinc-950/60 hover:bg-zinc-800/80 text-left transition flex items-center space-x-3 cursor-pointer">
+              <i class="fa-solid fa-file-arrow-down text-lg text-primary"></i>
+              <div>
+                <div class="text-xs font-bold text-white">匯出會議設定檔</div>
+                <div class="text-[10px] text-zinc-400">下載為本機 JSON 備份</div>
+              </div>
+            </button>
+            <button id="cfg-btn-import-file" type="button" class="p-3.5 rounded-2xl border border-zinc-800 bg-zinc-950/60 hover:bg-zinc-800/80 text-left transition flex items-center space-x-3 cursor-pointer">
+              <i class="fa-solid fa-file-arrow-up text-lg text-primary"></i>
+              <div>
+                <div class="text-xs font-bold text-white">匯入會議設定檔</div>
+                <div class="text-[10px] text-zinc-400">上傳 JSON 還原進度</div>
+              </div>
+            </button>
+          </div>
+
+          <!-- Reset Conference -->
+          <div class="pt-2 border-t border-zinc-800/80 flex items-center justify-between">
+            <div>
+              <div class="text-xs font-bold text-rose-400">重置會議進度 (Danger Zone)</div>
+              <div class="text-[10px] text-zinc-500">將會議重置為預設空白範本，清除所有點名與投票紀錄</div>
+            </div>
+            <button id="cfg-btn-reset-conference" type="button" class="px-3 py-1.5 rounded-lg border border-rose-500/30 text-rose-400 hover:bg-rose-500/10 text-xs font-semibold transition cursor-pointer">
+              重置會議
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-4 border-t border-zinc-800 bg-zinc-950/60 flex items-center justify-between shrink-0">
+        <div id="settings-save-hint" class="text-xs text-zinc-500">所有變更將即時自動儲存並同步</div>
+        <button id="btn-save-settings-done" type="button" class="px-6 py-2.5 bg-white text-zinc-900 hover:bg-zinc-200 font-bold text-xs rounded-xl transition shadow cursor-pointer">
+          完成 (Done)
         </button>
       </div>
     </div>

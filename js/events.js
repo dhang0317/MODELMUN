@@ -947,6 +947,43 @@
       });
     }
 
+    const headerLangBtn = document.getElementById('btn-header-lang');
+    if (headerLangBtn) {
+      headerLangBtn.addEventListener('click', () => {
+        openLanguageModal();
+      });
+    }
+
+    // Header Theme Toggle Button
+    const headerThemeBtn = document.getElementById('btn-header-theme');
+    if (headerThemeBtn) {
+      headerThemeBtn.addEventListener('click', () => {
+        const drawerThemeBtn = document.getElementById('btn-toggle-theme');
+        if (drawerThemeBtn) {
+          drawerThemeBtn.click();
+        } else {
+          const isLight = document.body.classList.toggle('light-mode');
+          localStorage.setItem('mun-theme', isLight ? 'light' : 'dark');
+        }
+      });
+    }
+
+    // Unified Settings Center Modal Openers
+    const openSettingsBtn = document.getElementById('btn-open-settings');
+    if (openSettingsBtn) {
+      openSettingsBtn.addEventListener('click', () => {
+        if (typeof openUnifiedSettingsModal === 'function') openUnifiedSettingsModal('conference');
+      });
+    }
+
+    const drawerSettingsBtn = document.getElementById('drawer-btn-settings');
+    if (drawerSettingsBtn) {
+      drawerSettingsBtn.addEventListener('click', () => {
+        closeDrawer();
+        if (typeof openUnifiedSettingsModal === 'function') openUnifiedSettingsModal('conference');
+      });
+    }
+
     // Custom Color Scheme Picker Dialog
     const customColorBtn = document.getElementById('btn-custom-color');
     if (customColorBtn) {

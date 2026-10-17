@@ -12,8 +12,10 @@
   }
 
   function renderLanguageTexts() {
-    const t = I18N[state.language] || I18N.en;
-    document.getElementById('label-current-lang').textContent = state.language.toUpperCase();
+    const drawerLang = document.getElementById('label-current-lang');
+    if (drawerLang) drawerLang.textContent = state.language.toUpperCase();
+    const headerLang = document.getElementById('header-lang-label');
+    if (headerLang) headerLang.textContent = state.language.toUpperCase();
 
     // Universal tag translation for all data-i18n elements
     document.querySelectorAll('[data-i18n]').forEach(el => {
