@@ -51,13 +51,92 @@
     .italic, em {
       font-style: normal !important;
     }
-    /* 全頁面文字顏色規範：深色模式純白、淺色模式純黑 */
-    body:not(.light-mode) {
-      user-select: none;
-      -webkit-user-select: none;
-      background-color: #000000 !important;
-      color: #ffffff !important;
-    }
+/* ==========================================================
+   DESIGN TOKENS (CSS VARIABLES) - SYSTEM STANDARDIZATION
+   ========================================================== */
+:root {
+  /* Surfaces & Backgrounds (Light Mode) */
+  --surface-canvas: #f8fafc;
+  --surface-primary: #ffffff;
+  --surface-secondary: #f1f5f9;
+  --surface-tertiary: #e2e8f0;
+  --surface-overlay: rgba(15, 23, 42, 0.6);
+
+  /* Content & Typography (Light Mode) - WCAG AA Standards */
+  --content-primary: #0f172a;
+  --content-secondary: #475569;
+  --content-muted: #64748b;
+  --content-inverse: #ffffff;
+
+  /* Borders & Outlines (Light Mode) */
+  --border-subtle: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --border-focus: #3b82f6;
+
+  /* Brand Accents */
+  --brand-primary: #2563eb;
+  --brand-hover: #1d4ed8;
+  --brand-active: #1e40af;
+  --brand-surface: #eff6ff;
+
+  /* Feedback Colors */
+  --color-success: #16a34a;
+  --color-success-bg: #dcfce7;
+  --color-danger: #dc2626;
+  --color-danger-bg: #fee2e2;
+  --color-warning: #d97706;
+  --color-warning-bg: #fef3c7;
+
+  /* Shadows (Light Mode Elevation) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+
+  /* Fixed Metrics (Ensures Zero Layout Shift) */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+body:not(.light-mode) {
+  /* Surfaces & Backgrounds (Dark Mode - Stepped Luminance) */
+  --surface-canvas: #000000;
+  --surface-primary: #0d0d11;
+  --surface-secondary: #17171d;
+  --surface-tertiary: #23232b;
+  --surface-overlay: rgba(0, 0, 0, 0.85);
+
+  /* Content & Typography (Dark Mode) - WCAG AA Standards */
+  --content-primary: #ffffff;
+  --content-secondary: #a1a1aa;
+  --content-muted: #71717a;
+  --content-inverse: #000000;
+
+  /* Borders (Dark Mode - Micro-translucent Alpha Borders) */
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+  --border-focus: #60a5fa;
+
+  /* Brand Accents */
+  --brand-primary: #3b82f6;
+  --brand-hover: #60a5fa;
+  --brand-active: #2563eb;
+  --brand-surface: rgba(59, 130, 246, 0.15);
+
+  /* Shadows (Dark Mode - Ambient Depth) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.7);
+  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.8);
+  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.9);
+}
+
+/* 全頁面文字顏色規範：深色模式純白、淺色模式純黑 */
+body:not(.light-mode) {
+  user-select: none;
+  -webkit-user-select: none;
+  background-color: var(--surface-canvas) !important;
+  color: var(--content-primary) !important;
+}
     body:not(.light-mode) *:not(i):not(svg):not(path):not(line):not(circle):not(polygon):not(polyline) {
       color: #ffffff !important;
     }

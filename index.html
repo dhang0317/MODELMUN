@@ -33,7 +33,37 @@
             dark: '#030712',
             light: '#0f172a',
             'ios-grey': '#1e293b',
-            'card-bg': '#0b0f19'
+            'card-bg': '#0b0f19',
+            /* Semantic Design Tokens */
+            surface: {
+              canvas: 'var(--surface-canvas)',
+              primary: 'var(--surface-primary)',
+              secondary: 'var(--surface-secondary)',
+              tertiary: 'var(--surface-tertiary)',
+              overlay: 'var(--surface-overlay)'
+            },
+            content: {
+              primary: 'var(--content-primary)',
+              secondary: 'var(--content-secondary)',
+              muted: 'var(--content-muted)',
+              inverse: 'var(--content-inverse)'
+            },
+            brand: {
+              DEFAULT: 'var(--brand-primary)',
+              hover: 'var(--brand-hover)',
+              active: 'var(--brand-active)',
+              surface: 'var(--brand-surface)'
+            }
+          },
+          borderColor: {
+            subtle: 'var(--border-subtle)',
+            strong: 'var(--border-strong)',
+            focus: 'var(--border-focus)'
+          },
+          boxShadow: {
+            subtle: 'var(--shadow-sm)',
+            card: 'var(--shadow-md)',
+            modal: 'var(--shadow-lg)'
           }
         }
       }
@@ -522,22 +552,22 @@
         
 
         <!-- Most Disruptive Motion Hero -->
-        <div id="hero-motion-card" class="bg-black rounded-2xl p-6 text-white shadow-md border border-white relative overflow-hidden hidden">
-          <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 border border-white/60 text-white rounded-full" data-i18n="mostDisruptive">Most Disruptive Motion (Vote First)</span>
+        <div id="hero-motion-card" class="bg-surface-primary rounded-2xl p-6 text-content-primary shadow-card border border-subtle relative overflow-hidden hidden transition-all">
+          <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 border border-subtle text-content-secondary bg-surface-secondary rounded-full" data-i18n="mostDisruptive">Most Disruptive Motion (Vote First)</span>
           <div class="mt-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div class="flex items-center space-x-2">
-                <img id="hero-motion-flag" src="https://flagcdn.com/w80/un.png" class="w-6 h-4 object-cover rounded shadow-sm">
-                <span id="hero-motion-type" class="text-white/70 font-bold text-sm">Moderated Caucus</span>
-                <span class="text-white/40">•</span>
-                <span id="hero-motion-proposer" class="text-white font-semibold">France</span>
+                <img id="hero-motion-flag" src="https://flagcdn.com/w80/un.png" class="w-6 h-4 object-cover rounded shadow-sm border border-subtle">
+                <span id="hero-motion-type" class="text-content-secondary font-medium text-sm">Moderated Caucus</span>
+                <span class="text-content-muted">•</span>
+                <span id="hero-motion-proposer" class="text-content-primary font-medium">France</span>
               </div>
-              <h3 id="hero-motion-topic" class="text-xl font-bold mt-1 text-white">Cybersecurity in Critical Infrastructure</h3>
-              <p id="hero-motion-details" class="text-xs text-white/60 mt-1">Total: 10 mins • Individual: 60s</p>
+              <h3 id="hero-motion-topic" class="text-xl font-medium mt-1 text-content-primary">Cybersecurity in Critical Infrastructure</h3>
+              <p id="hero-motion-details" class="text-xs text-content-muted mt-1">Total: 10 mins • Individual: 60s</p>
             </div>
             <div class="flex items-center space-x-3">
-              <button id="btn-hero-motion-fail" class="btn-vote-motion-fail px-5 py-2.5 rounded-xl text-xs font-bold transition" data-i18n="fail">Fail</button>
-              <button id="btn-hero-motion-pass" class="btn-vote-motion-pass px-6 py-2.5 rounded-xl text-xs font-bold transition flex items-center space-x-1">
+              <button id="btn-hero-motion-fail" class="btn-vote-motion-fail px-5 py-2.5 rounded-xl text-xs font-medium transition border border-subtle bg-surface-secondary text-content-secondary hover:text-content-primary hover:bg-surface-tertiary" data-i18n="fail">Fail</button>
+              <button id="btn-hero-motion-pass" class="btn-vote-motion-pass px-6 py-2.5 rounded-xl text-xs font-medium transition flex items-center space-x-1.5 shadow-sm bg-brand text-content-inverse hover:opacity-90 active:scale-95">
                 <i data-lucide="check" class="w-4 h-4"></i>
                 <span data-i18n="passAndExecute">Pass & Execute</span>
               </button>
