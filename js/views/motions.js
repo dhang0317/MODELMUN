@@ -56,33 +56,33 @@
       for (let i = 1; i < state.motions.length; i++) {
         const m = state.motions[i];
         const row = document.createElement('div');
-        row.className = 'p-3.5 bg-black border border-white/40 hover:border-white rounded-xl flex items-center justify-between gap-3 transition';
+        row.className = 'p-3.5 bg-surface-secondary border border-subtle hover:border-strong rounded-xl flex items-center justify-between gap-3 transition';
         const motionTimeLabel = formatMotionDetails(m);
         const proposerCountry = state.selectedCountries.find(c => getCountryDisplayName(c) === m.proposer);
         const flagUrl = getFlagUrl(proposerCountry);
 
         row.innerHTML = `
           <div class="flex items-center space-x-3 min-w-0">
-            <span class="flex-shrink-0 w-6 h-6 rounded-full border border-white/40 flex items-center justify-center text-[10px] font-mono text-white font-bold">#${i + 1}</span>
-            <img src="${flagUrl}" class="w-6 h-4 object-cover rounded shadow-sm flex-shrink-0" onerror="this.src='https://flagcdn.com/w80/un.png'">
+            <span class="flex-shrink-0 w-6 h-6 rounded-full border border-subtle bg-surface-tertiary flex items-center justify-center text-[10px] font-mono text-content-secondary font-medium">#${i + 1}</span>
+            <img src="${flagUrl}" class="w-6 h-4 object-cover rounded shadow-sm flex-shrink-0 border border-subtle" onerror="this.src='https://flagcdn.com/w80/un.png'">
             <div class="min-w-0">
               <div class="flex items-center space-x-2 flex-wrap">
-                <span class="text-xs font-bold text-white">${formatMotionType(m.type)}</span>
-                <span class="text-white/40 text-xs">•</span>
-                <span class="text-xs font-medium text-white truncate">${m.proposer}</span>
+                <span class="text-xs font-medium text-content-primary">${formatMotionType(m.type)}</span>
+                <span class="text-content-muted text-xs">•</span>
+                <span class="text-xs font-medium text-content-secondary truncate">${m.proposer}</span>
               </div>
-              <div class="text-sm font-bold text-white truncate mt-0.5">${m.topic || t.generalDiscussion}</div>
-              <div class="text-[11px] text-white/70 mt-0.5 flex items-center space-x-1">
-                <i class="fa-regular fa-clock text-[10px] mr-1 text-white/50"></i>
+              <div class="text-sm font-medium text-content-primary truncate mt-0.5">${m.topic || t.generalDiscussion}</div>
+              <div class="text-[11px] text-content-muted mt-0.5 flex items-center space-x-1">
+                <i class="fa-regular fa-clock text-[10px] mr-1 text-content-muted"></i>
                 <span>${motionTimeLabel}</span>
               </div>
             </div>
           </div>
           <div class="flex items-center space-x-2 flex-shrink-0">
-            <button class="btn-vote-motion-pass px-3 py-1.5 rounded-lg text-xs font-bold border transition">
+            <button class="btn-vote-motion-pass px-3 py-1.5 rounded-lg text-xs font-medium border border-subtle transition cursor-pointer">
               ${t.pass}
             </button>
-            <button class="btn-vote-motion-fail px-3 py-1.5 rounded-lg text-xs font-bold border transition">
+            <button class="btn-vote-motion-fail px-3 py-1.5 rounded-lg text-xs font-medium border border-subtle transition cursor-pointer">
               ${t.fail}
             </button>
           </div>
