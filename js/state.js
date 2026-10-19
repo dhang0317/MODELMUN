@@ -84,6 +84,9 @@
     voteStage: 'r1',
     voteResolutionTitle: 'Draft Resolution 1.1',
     voteThreshold: 'simple',
+    voteType: 'substantive', // 'substantive' or 'procedural'
+    activeVoteTarget: 'resolution', // 'resolution' or 'motion'
+    votingMotion: null, // Holds motion object currently being voted on { id, proposer, type, topic, totalMins, speakerSecs, threshold }
     showResults: true,
     rightsSpeeches: [],
 
@@ -513,6 +516,9 @@
     if (parsed.voteMode) state.voteMode = parsed.voteMode;
     if (parsed.voteStage) state.voteStage = parsed.voteStage;
     if (parsed.voteThreshold) state.voteThreshold = parsed.voteThreshold;
+    if (parsed.voteType) state.voteType = parsed.voteType;
+    if (parsed.activeVoteTarget) state.activeVoteTarget = parsed.activeVoteTarget;
+    if (typeof parsed.votingMotion !== 'undefined') state.votingMotion = parsed.votingMotion;
     if (parsed.voteResolutionTitle) state.voteResolutionTitle = parsed.voteResolutionTitle;
     if (typeof parsed.showResults !== 'undefined') state.showResults = parsed.showResults;
     if (Array.isArray(parsed.rightsSpeeches)) state.rightsSpeeches = parsed.rightsSpeeches;

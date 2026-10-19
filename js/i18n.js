@@ -251,7 +251,17 @@ const I18N = {
       settingsTabDisplay: "Display & Theme",
       settingsTabSync: "Sync & Backup",
       openAction: "Open",
-      logoReset: "Reset Logo"
+      logoReset: "Reset Logo",
+      targetResolutionVote: "Resolution Vote (Substantive)",
+      targetMotionVote: "Motion Vote (Procedural)",
+      putToVote: "Put to Vote",
+      passSecond: "Pass (Second)",
+      motionPreviousQuestion: "Motion to the Previous Question (Closure of Debate)",
+      ruleTwoThirdsMandatory: "Mandatory 2/3 Procedural Vote",
+      ruleSecondOrVote: "Second / Procedural Vote",
+      executeMotionBtn: "Execute Motion",
+      enterSubstantiveVotePrompt: "Motion passed! Proceeding to Substantive Vote on Resolution.",
+      noMotionsAvailableToVote: "No motions pending on the floor."
     },
     zh: {
       sessionActive: "會議進行中",
@@ -505,7 +515,17 @@ const I18N = {
       settingsTabDisplay: "顯示與外觀",
       settingsTabSync: "同步與備份",
       openAction: "開啟",
-      logoReset: "重設預設圖標"
+      logoReset: "重設預設圖標",
+      targetResolutionVote: "決議案實質表決",
+      targetMotionVote: "動議程序性表決",
+      putToVote: "交付程序表決",
+      passSecond: "附議無異議通過",
+      motionPreviousQuestion: "結束辯論動議 / 提請表決 (Previous Question)",
+      ruleTwoThirdsMandatory: "強制 2/3 程序性表決 (禁止棄權)",
+      ruleSecondOrVote: "附議無異議通過 / 程序性表決",
+      executeMotionBtn: "通過並執行動議",
+      enterSubstantiveVotePrompt: "結束辯論動議已通過！大會立即關閉辯論，進入決議案實質性表決。",
+      noMotionsAvailableToVote: "場上目前無待決動議可供表決。"
     },
     fr: {
       sessionActive: "Session Active",
@@ -741,7 +761,17 @@ const I18N = {
       settingsTabDisplay: "Affichage & Thème",
       settingsTabSync: "Synchro & Sauvegarde",
       openAction: "Ouvrir",
-      logoReset: "Réinitialiser le logo"
+      logoReset: "Réinitialiser le logo",
+      targetResolutionVote: "Vote sur la Résolution (Substantiel)",
+      targetMotionVote: "Vote sur la Motion (Procédural)",
+      putToVote: "Mettre aux voix",
+      passSecond: "Adopté sans objection (Second)",
+      motionPreviousQuestion: "Motion d'ajournement du débat / Question préalable (Previous Question)",
+      ruleTwoThirdsMandatory: "Vote procédural obligatoire aux 2/3 (Sans abstention)",
+      ruleSecondOrVote: "Appui ou Vote Procédural",
+      executeMotionBtn: "Exécuter la motion",
+      enterSubstantiveVotePrompt: "Motion adoptée ! Passage au vote substantiel sur la résolution.",
+      noMotionsAvailableToVote: "Aucune motion en attente."
     }
   };
   if (typeof window !== 'undefined') {

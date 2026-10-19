@@ -553,7 +553,10 @@
 
         <!-- Most Disruptive Motion Hero -->
         <div id="hero-motion-card" class="bg-surface-primary rounded-2xl p-6 text-content-primary shadow-card border border-subtle relative overflow-hidden hidden transition-all">
-          <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 border border-subtle text-content-secondary bg-surface-secondary rounded-full" data-i18n="mostDisruptive">Most Disruptive Motion (Vote First)</span>
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 border border-subtle text-content-secondary bg-surface-secondary rounded-full" data-i18n="mostDisruptive">Most Disruptive Motion</span>
+            <span id="hero-motion-rule-tag" class="text-[11px] font-semibold px-2.5 py-0.5 rounded-full border"></span>
+          </div>
           <div class="mt-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div class="flex items-center space-x-2">
@@ -565,11 +568,18 @@
               <h3 id="hero-motion-topic" class="text-xl font-medium mt-1 text-content-primary">Cybersecurity in Critical Infrastructure</h3>
               <p id="hero-motion-details" class="text-xs text-content-muted mt-1">Total: 10 mins • Individual: 60s</p>
             </div>
-            <div class="flex items-center space-x-3">
-              <button id="btn-hero-motion-fail" class="btn-vote-motion-fail px-5 py-2.5 rounded-xl text-xs font-medium transition border border-subtle bg-surface-secondary text-content-secondary hover:text-content-primary hover:bg-surface-tertiary" data-i18n="fail">Fail</button>
-              <button id="btn-hero-motion-pass" class="btn-vote-motion-pass px-6 py-2.5 rounded-xl text-xs font-medium transition flex items-center space-x-1.5 shadow-sm bg-brand text-content-inverse hover:opacity-90 active:scale-95">
-                <i data-lucide="check" class="w-4 h-4"></i>
-                <span data-i18n="passAndExecute">Pass & Execute</span>
+            <div class="flex items-center flex-wrap gap-2" id="hero-motion-actions">
+              <!-- Rendered via JS depending on motion type (Second / Vote / Fail) -->
+              <button id="btn-hero-motion-fail" class="btn-vote-motion-fail px-4 py-2 rounded-xl text-xs font-medium transition border border-subtle bg-surface-secondary text-content-secondary hover:text-content-primary hover:bg-surface-tertiary cursor-pointer" data-i18n="fail">
+                否決 / 撤銷
+              </button>
+              <button id="btn-hero-motion-vote" class="px-4 py-2 rounded-xl text-xs font-medium transition flex items-center space-x-1.5 border border-amber-500/30 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20 active:scale-95 cursor-pointer">
+                <i class="fa-solid fa-check-to-slot text-xs"></i>
+                <span data-i18n="putToVote">交付表決</span>
+              </button>
+              <button id="btn-hero-motion-second" class="px-5 py-2 rounded-xl text-xs font-medium transition flex items-center space-x-1.5 shadow-sm bg-brand text-content-inverse hover:opacity-90 active:scale-95 cursor-pointer">
+                <i class="fa-solid fa-hands-clapping text-xs"></i>
+                <span id="hero-motion-second-text" data-i18n="passSecond">附議通過</span>
               </button>
             </div>
           </div>
@@ -622,6 +632,18 @@
         <div class="bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-4">
           <!-- View / Sub-Tab Toggle & Stage Bar -->
           <div class="flex flex-wrap items-center gap-3">
+            <!-- Vote Target: Resolution vs Motion -->
+            <div class="flex items-center space-x-1 p-1 bg-slate-100 rounded-xl border border-slate-200">
+              <button id="btn-vote-target-resolution" class="px-3 py-1.5 rounded-lg text-xs font-medium transition bg-white shadow-sm text-slate-800 flex items-center space-x-1.5 cursor-pointer">
+                <i class="fa-solid fa-file-contract text-xs text-primary"></i>
+                <span data-i18n="targetResolutionVote">決議案實質表決</span>
+              </button>
+              <button id="btn-vote-target-motion" class="px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-600 hover:text-slate-900 flex items-center space-x-1.5 cursor-pointer">
+                <i class="fa-solid fa-gavel text-xs text-amber-500"></i>
+                <span data-i18n="targetMotionVote">動議程序性表決</span>
+              </button>
+            </div>
+
             <!-- View Sub-tabs -->
             <div class="flex items-center space-x-1 p-1 bg-slate-100 rounded-xl border border-slate-200">
               <button id="btn-voting-subtab-ballots" class="px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800" data-i18n="subtabBallots">
@@ -633,7 +655,7 @@
             </div>
 
             <!-- Stage Buttons -->
-            <div class="flex items-center space-x-1.5">
+            <div id="vote-stages-group" class="flex items-center space-x-1.5">
               <span class="text-xs text-slate-400 uppercase tracking-wider ml-1" data-i18n="stage">Stage:</span>
               <button id="vote-stage-r1" class="px-3 py-1.5 bg-primary text-white rounded-lg text-xs transition" data-i18n="stage1st">1st Round</button>
               <button id="vote-stage-r2" class="px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg text-xs hover:bg-slate-200 transition" data-i18n="stage2nd">2nd Round (Passes)</button>
@@ -660,9 +682,10 @@
           <div id="voting-header-row" class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-4 gap-4">
             <div>
               <div class="flex items-center space-x-2">
-                <span class="text-xs uppercase tracking-wider text-slate-400" id="label-vote-type-badge">Substantive Vote</span>
+                <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold" id="label-vote-type-badge">Substantive Vote</span>
                 <span class="text-slate-300">•</span>
                 <span class="text-xs text-slate-500 font-mono" id="label-vote-threshold-badge">Simple Majority</span>
+                <span id="badge-motion-vote-rule" class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300 hidden"></span>
               </div>
               <div class="flex items-center space-x-2 mt-1">
                 <h3 id="vote-resolution-title" class="text-xl text-slate-800">Draft Resolution 1.1</h3>
@@ -670,8 +693,12 @@
                   <i class="fa-solid fa-pen-to-square text-xs"></i>
                 </button>
               </div>
+              <div id="motion-vote-desc" class="text-xs text-slate-500 mt-1 hidden">
+                <span id="motion-vote-proposer-flag"></span>
+                <span id="motion-vote-details-text"></span>
+              </div>
             </div>
-            <!-- Quick select threshold inside card -->
+            <!-- Quick select threshold & Action buttons -->
             <div class="flex items-center space-x-2 text-xs">
               <span class="text-slate-500" data-i18n="majorityRule">Majority Rule:</span>
               <select id="select-vote-threshold" class="px-3 py-1.5 border border-slate-200 rounded-lg text-slate-700 bg-transparent">
@@ -680,6 +707,10 @@
                 <option value="unsc9">Security Council (9/15)</option>
                 <option value="consensus">Consensus (All Votes)</option>
               </select>
+              <button id="btn-motion-vote-execute" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition shadow-sm hidden flex items-center space-x-1.5">
+                <i class="fa-solid fa-check text-xs"></i>
+                <span id="btn-motion-vote-execute-text">執行動議</span>
+              </button>
             </div>
           </div>
 
@@ -1007,10 +1038,10 @@
           <option value="adjourn_session">全會結束 (Adjournment of Meeting)</option>
           <option value="adjourn_day">休會動議 - 本日結束 (Adjournment for the Day)</option>
           <option value="suspend" selected>暫停會議動議 (Suspension of Meeting)</option>
+          <option value="previous_question">結束辯論動議 / 提請表決 (Motion to the Previous Question - 2/3 強制表決)</option>
           <option value="unmod">非主持核心磋商 (Unmoderated Caucus)</option>
           <option value="mod">主持核心磋商 (Moderated Caucus)</option>
           <option value="singlespeaker">介紹決議案草案及修正案 (Introduce DR & Amendments)</option>
-          <option value="close">結束辯論動議 (Closure of Debate)</option>
         </select>
       </div>
       <div id="motion-field-topic">

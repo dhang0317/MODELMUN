@@ -537,12 +537,35 @@
       renderAll();
     });
 
-    document.getElementById('btn-hero-motion-pass').addEventListener('click', () => {
-      if (state.motions.length > 0) executeMotion(state.motions[0], 0);
-    });
-    document.getElementById('btn-hero-motion-fail').addEventListener('click', () => {
-      if (state.motions.length > 0) removeMotion(0);
-    });
+    const btnHeroSecond = document.getElementById('btn-hero-motion-second');
+    if (btnHeroSecond) {
+      btnHeroSecond.addEventListener('click', () => {
+        if (state.motions.length > 0) executeMotion(state.motions[0], 0);
+      });
+    }
+
+    const btnHeroPassLegacy = document.getElementById('btn-hero-motion-pass');
+    if (btnHeroPassLegacy) {
+      btnHeroPassLegacy.addEventListener('click', () => {
+        if (state.motions.length > 0) executeMotion(state.motions[0], 0);
+      });
+    }
+
+    const btnHeroVote = document.getElementById('btn-hero-motion-vote');
+    if (btnHeroVote) {
+      btnHeroVote.addEventListener('click', () => {
+        if (state.motions.length > 0) {
+          sendMotionToVotingTab(state.motions[0], 0);
+        }
+      });
+    }
+
+    const btnHeroFail = document.getElementById('btn-hero-motion-fail');
+    if (btnHeroFail) {
+      btnHeroFail.addEventListener('click', () => {
+        if (state.motions.length > 0) removeMotion(0);
+      });
+    }
 
     // Recess modal buttons
     const btnRecessToggle = document.getElementById('btn-recess-toggle-timer');
@@ -645,6 +668,47 @@
         }
       });
     });
+
+    // Vote Target Switcher (Resolution vs Motion)
+    const btnTargetRes = document.getElementById('btn-vote-target-resolution');
+    if (btnTargetRes) {
+      btnTargetRes.addEventListener('click', () => {
+        state.activeVoteTarget = 'resolution';
+        state.votingMotion = null;
+        state.voteType = 'substantive';
+        state.voteThreshold = state.settings?.rules?.defaultVoteThreshold || 'simple';
+        saveToLocalStorage(true, true);
+        renderResolutionVoteGrid();
+      });
+    }
+
+    const btnTargetMot = document.getElementById('btn-vote-target-motion');
+    if (btnTargetMot) {
+      btnTargetMot.addEventListener('click', () => {
+        state.activeVoteTarget = 'motion';
+        state.voteType = 'procedural';
+        if (state.motions && state.motions.length > 0 && !state.votingMotion) {
+          state.votingMotion = { ...state.motions[0], originalIndex: 0 };
+        }
+        if (state.votingMotion) {
+          const rule = (typeof MOTION_RULES !== 'undefined' && MOTION_RULES[state.votingMotion.type]) ? MOTION_RULES[state.votingMotion.type] : { threshold: 'simple' };
+          state.voteThreshold = rule.threshold || 'simple';
+        }
+        saveToLocalStorage(true, true);
+        renderResolutionVoteGrid();
+      });
+    }
+
+    // Execute Motion from Vote Tab when passed
+    const btnMotionExecute = document.getElementById('btn-motion-vote-execute');
+    if (btnMotionExecute) {
+      btnMotionExecute.addEventListener('click', () => {
+        const curMot = state.votingMotion || (state.motions && state.motions[0]);
+        if (!curMot) return;
+        const targetIdx = (typeof curMot.originalIndex === 'number') ? curMot.originalIndex : 0;
+        executeMotion(curMot, targetIdx);
+      });
+    }
 
     // Voting Mode & Configure Modal Handlers
     const modalConfigureVote = document.getElementById('modal-configure-voting');

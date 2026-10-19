@@ -180,6 +180,81 @@
       if (pActiveCard) pActiveCard.classList.add('hidden');
     }
 
+    const isMotionVote = state.activeVoteTarget === 'motion';
+    const btnTargetRes = document.getElementById('btn-vote-target-resolution');
+    const btnTargetMot = document.getElementById('btn-vote-target-motion');
+    const stagesGroup = document.getElementById('vote-stages-group');
+    const btnMotionExecute = document.getElementById('btn-motion-vote-execute');
+    const btnMotionExecuteText = document.getElementById('btn-motion-vote-execute-text');
+    const badgeMotionRule = document.getElementById('badge-motion-vote-rule');
+    const motionDescEl = document.getElementById('motion-vote-desc');
+    const motionDetailsText = document.getElementById('motion-vote-details-text');
+    const motionProposerFlag = document.getElementById('motion-vote-proposer-flag');
+
+    if (btnTargetRes && btnTargetMot) {
+      if (isMotionVote) {
+        btnTargetRes.className = 'px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-600 hover:text-slate-900 flex items-center space-x-1.5 cursor-pointer';
+        btnTargetMot.className = 'px-3 py-1.5 rounded-lg text-xs font-medium transition bg-white shadow-sm text-slate-800 flex items-center space-x-1.5 cursor-pointer font-bold';
+      } else {
+        btnTargetRes.className = 'px-3 py-1.5 rounded-lg text-xs font-medium transition bg-white shadow-sm text-slate-800 flex items-center space-x-1.5 cursor-pointer font-bold';
+        btnTargetMot.className = 'px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-600 hover:text-slate-900 flex items-center space-x-1.5 cursor-pointer';
+      }
+    }
+
+    // In procedural motion vote, rights speeches don't apply; hide stage buttons or lock to R1
+    if (stagesGroup) {
+      if (isMotionVote) {
+        // Only allow R1 in procedural vote
+        const btnR2 = document.getElementById('vote-stage-r2');
+        const btnRightsStage = document.getElementById('vote-stage-rights');
+        if (btnR2) btnR2.classList.add('hidden');
+        if (btnRightsStage) btnRightsStage.classList.add('hidden');
+      } else {
+        const btnR2 = document.getElementById('vote-stage-r2');
+        const btnRightsStage = document.getElementById('vote-stage-rights');
+        if (btnR2) btnR2.classList.remove('hidden');
+        if (btnRightsStage) btnRightsStage.classList.remove('hidden');
+      }
+    }
+
+    const titleElem = document.getElementById('vote-resolution-title');
+    const btnEditTitle = document.getElementById('btn-edit-resolution-title');
+
+    if (isMotionVote) {
+      const activeMotion = state.votingMotion || (state.motions && state.motions[0]) || null;
+      if (activeMotion) {
+        const motionTitle = `${formatMotionType(activeMotion.type)}`;
+        if (titleElem) titleElem.textContent = motionTitle;
+        if (btnEditTitle) btnEditTitle.classList.add('hidden');
+        
+        if (motionDescEl) {
+          motionDescEl.classList.remove('hidden');
+          const mCountry = state.selectedCountries.find(c => getCountryDisplayName(c) === activeMotion.proposer);
+          const flagHtml = mCountry ? `<img src="${getFlagUrl(mCountry)}" class="w-4 h-3 inline-block rounded object-cover mr-1.5 align-middle border border-slate-300">` : '';
+          if (motionProposerFlag) motionProposerFlag.innerHTML = flagHtml;
+          if (motionDetailsText) {
+            motionDetailsText.textContent = `${activeMotion.proposer} • ${activeMotion.topic || t.generalDiscussion || 'General Discussion'}`;
+          }
+        }
+
+        const mRule = (typeof MOTION_RULES !== 'undefined' && MOTION_RULES[activeMotion.type]) ? MOTION_RULES[activeMotion.type] : { threshold: 'simple' };
+        if (badgeMotionRule) {
+          badgeMotionRule.classList.remove('hidden');
+          badgeMotionRule.textContent = mRule.requiresVote ? (t.ruleTwoThirdsMandatory || '2/3 強制表決 (不可棄權)') : (t.ruleSecondOrVote || '程序性表決 (不可棄權)');
+        }
+      } else {
+        if (titleElem) titleElem.textContent = t.noMotionsAvailableToVote || '無待表決之動議';
+        if (btnEditTitle) btnEditTitle.classList.add('hidden');
+        if (motionDescEl) motionDescEl.classList.add('hidden');
+        if (badgeMotionRule) badgeMotionRule.classList.add('hidden');
+      }
+    } else {
+      if (titleElem) titleElem.textContent = state.voteResolutionTitle || 'Draft Resolution 1.1';
+      if (btnEditTitle) btnEditTitle.classList.remove('hidden');
+      if (motionDescEl) motionDescEl.classList.add('hidden');
+      if (badgeMotionRule) badgeMotionRule.classList.add('hidden');
+    }
+
     const scoreboard = document.getElementById('voting-scoreboard');
     const detailsCard = document.getElementById('card-voting-details');
     const headerRow = document.getElementById('voting-header-row');
@@ -213,11 +288,6 @@
     if (elFavor) elFavor.textContent = favorCount;
     if (elAgainst) elAgainst.textContent = againstCount;
     if (elAbstain) elAbstain.textContent = abstainCount;
-
-    const titleElem = document.getElementById('vote-resolution-title');
-    if (titleElem) {
-      titleElem.textContent = state.voteResolutionTitle || 'Draft Resolution 1.1';
-    }
 
     const threshElem = document.getElementById('select-vote-threshold');
     if (threshElem) {
@@ -340,6 +410,24 @@
           } else {
             verdictElem.textContent = (t.failed || 'FAILED').toUpperCase();
           }
+        }
+      }
+
+      // If this is a motion vote and it passed, show the "Execute Motion" button
+      if (btnMotionExecute) {
+        const isPassed = verdictElem.textContent.includes((t.passed || 'PASSED').toUpperCase());
+        if (isMotionVote && isPassed && (state.votingMotion || state.motions.length > 0)) {
+          btnMotionExecute.classList.remove('hidden');
+          const curMot = state.votingMotion || state.motions[0];
+          if (btnMotionExecuteText) {
+            if (curMot && (curMot.type === 'previous_question' || curMot.type === 'close')) {
+              btnMotionExecuteText.textContent = state.language === 'zh' ? '結束辯論，進入決議案實質表決' : (t.enterSubstantiveVotePrompt || 'Close Debate & Enter Resolution Vote');
+            } else {
+              btnMotionExecuteText.textContent = t.executeMotionBtn || '執行動議';
+            }
+          }
+        } else {
+          btnMotionExecute.classList.add('hidden');
         }
       }
     }

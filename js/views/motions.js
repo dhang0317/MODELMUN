@@ -44,6 +44,8 @@
 
     heroCard.classList.remove('hidden');
     const top = state.motions[0];
+    const topRule = (typeof MOTION_RULES !== 'undefined' && MOTION_RULES[top.type]) ? MOTION_RULES[top.type] : { requiresVote: false, threshold: 'simple', voteType: 'procedural', canSecond: true };
+
     document.getElementById('hero-motion-type').textContent = formatMotionType(top.type);
     document.getElementById('hero-motion-proposer').textContent = top.proposer;
     document.getElementById('hero-motion-topic').textContent = top.topic || t.generalDiscussion;
@@ -52,17 +54,49 @@
     const topFlagEl = document.getElementById('hero-motion-flag');
     if (topFlagEl) topFlagEl.src = getFlagUrl(topCountry);
 
+    // Rule tag on Hero Card
+    const ruleTag = document.getElementById('hero-motion-rule-tag');
+    if (ruleTag) {
+      if (topRule.requiresVote) {
+        ruleTag.className = 'text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-rose-500/40 bg-rose-500/10 text-rose-500';
+        ruleTag.textContent = t.ruleTwoThirdsMandatory || 'Mandatory 2/3 Procedural Vote';
+      } else {
+        ruleTag.className = 'text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-amber-500/40 bg-amber-500/10 text-amber-500';
+        ruleTag.textContent = t.ruleSecondOrVote || 'Second / Procedural Vote';
+      }
+    }
+
+    // Hero buttons setup
+    const btnHeroSecond = document.getElementById('btn-hero-motion-second');
+    const btnHeroVote = document.getElementById('btn-hero-motion-vote');
+    const btnHeroSecondText = document.getElementById('hero-motion-second-text');
+
+    if (btnHeroSecond) {
+      if (topRule.requiresVote) {
+        // Motions that MUST vote (e.g. Previous Question / Closure) cannot be informally seconded
+        btnHeroSecond.classList.add('hidden');
+      } else {
+        btnHeroSecond.classList.remove('hidden');
+        if (btnHeroSecondText) btnHeroSecondText.textContent = t.passSecond || '附議通過';
+      }
+    }
+
     if (state.motions.length > 1) {
       for (let i = 1; i < state.motions.length; i++) {
         const m = state.motions[i];
+        const mRule = (typeof MOTION_RULES !== 'undefined' && MOTION_RULES[m.type]) ? MOTION_RULES[m.type] : { requiresVote: false, threshold: 'simple', voteType: 'procedural', canSecond: true };
         const row = document.createElement('div');
-        row.className = 'p-3.5 bg-surface-secondary border border-subtle hover:border-strong rounded-xl flex items-center justify-between gap-3 transition';
+        row.className = 'p-3.5 bg-surface-secondary border border-subtle hover:border-strong rounded-xl flex items-center justify-between gap-3 transition flex-wrap sm:flex-nowrap';
         const motionTimeLabel = formatMotionDetails(m);
         const proposerCountry = state.selectedCountries.find(c => getCountryDisplayName(c) === m.proposer);
         const flagUrl = getFlagUrl(proposerCountry);
 
+        const ruleBadgeHtml = mRule.requiresVote
+          ? `<span class="text-[10px] font-semibold px-2 py-0.5 rounded-md border border-rose-500/30 bg-rose-500/10 text-rose-500">${t.ruleTwoThirdsMandatory || '2/3 強制表決'}</span>`
+          : `<span class="text-[10px] font-semibold px-2 py-0.5 rounded-md border border-amber-500/30 bg-amber-500/10 text-amber-500">${t.ruleSecondOrVote || '附議/表決'}</span>`;
+
         row.innerHTML = `
-          <div class="flex items-center space-x-3 min-w-0">
+          <div class="flex items-center space-x-3 min-w-0 flex-1">
             <span class="flex-shrink-0 w-6 h-6 rounded-full border border-subtle bg-surface-tertiary flex items-center justify-center text-[10px] font-mono text-content-secondary font-medium">#${i + 1}</span>
             <img src="${flagUrl}" class="w-6 h-4 object-cover rounded shadow-sm flex-shrink-0 border border-subtle" onerror="this.src='https://flagcdn.com/w80/un.png'">
             <div class="min-w-0">
@@ -70,6 +104,7 @@
                 <span class="text-xs font-medium text-content-primary">${formatMotionType(m.type)}</span>
                 <span class="text-content-muted text-xs">•</span>
                 <span class="text-xs font-medium text-content-secondary truncate">${m.proposer}</span>
+                ${ruleBadgeHtml}
               </div>
               <div class="text-sm font-medium text-content-primary truncate mt-0.5">${m.topic || t.generalDiscussion}</div>
               <div class="text-[11px] text-content-muted mt-0.5 flex items-center space-x-1">
@@ -79,16 +114,25 @@
             </div>
           </div>
           <div class="flex items-center space-x-2 flex-shrink-0">
-            <button class="btn-vote-motion-pass px-3 py-1.5 rounded-lg text-xs font-medium border border-subtle transition cursor-pointer">
-              ${t.pass}
+            <button class="btn-vote-motion-fail px-3 py-1.5 rounded-lg text-xs font-medium border border-subtle transition cursor-pointer text-content-muted hover:text-content-primary hover:bg-surface-tertiary">
+              ${t.fail || '否決'}
             </button>
-            <button class="btn-vote-motion-fail px-3 py-1.5 rounded-lg text-xs font-medium border border-subtle transition cursor-pointer">
-              ${t.fail}
+            <button class="btn-vote-motion-vote px-3 py-1.5 rounded-lg text-xs font-medium border border-amber-500/30 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20 transition cursor-pointer">
+              ${t.putToVote || '交付表決'}
             </button>
+            ${!mRule.requiresVote ? `
+              <button class="btn-vote-motion-pass px-3 py-1.5 rounded-lg text-xs font-medium border border-subtle bg-brand text-content-inverse hover:opacity-90 transition cursor-pointer">
+                ${t.passSecond || '附議通過'}
+              </button>
+            ` : ''}
           </div>
         `;
 
-        row.querySelector('.btn-vote-motion-pass').addEventListener('click', () => executeMotion(m, i));
+        if (!mRule.requiresVote) {
+          const passBtn = row.querySelector('.btn-vote-motion-pass');
+          if (passBtn) passBtn.addEventListener('click', () => executeMotion(m, i));
+        }
+        row.querySelector('.btn-vote-motion-vote').addEventListener('click', () => sendMotionToVotingTab(m, i));
         row.querySelector('.btn-vote-motion-fail').addEventListener('click', () => removeMotion(i));
         listContainer.appendChild(row);
       }
@@ -97,10 +141,32 @@
     }
   }
 
+  function sendMotionToVotingTab(motion, index) {
+    if (!ensureRollCallDone()) return;
+    state.activeVoteTarget = 'motion';
+    state.votingMotion = { ...motion, originalIndex: index };
+    state.voteType = 'procedural';
+    const rule = (typeof MOTION_RULES !== 'undefined' && MOTION_RULES[motion.type]) ? MOTION_RULES[motion.type] : { threshold: 'simple' };
+    state.voteThreshold = rule.threshold || 'simple';
+    
+    // Clear previous votes to ready a fresh procedural ballot
+    state.selectedCountries.forEach(c => {
+      c.vote = 'none';
+      c.hasRights = false;
+    });
+    state.voteStage = 'r1';
+    state.activeVoterIndex = 0;
+
+    saveToLocalStorage(true, true);
+    switchTab('vote');
+  }
+
   function formatMotionType(type) {
     const t = I18N[state.language] || I18N.en;
     if (state.language === 'zh') {
       switch (type) {
+        case 'previous_question': return '結束辯論動議 / 提請表決 (Previous Question)';
+        case 'close': return '結束辯論動議 (Closure of Debate)';
         case 'unmod': return '非主持核心磋商 (Unmod)';
         case 'mod': return '主持核心磋商 (Mod)';
         case 'singlespeaker': return '介紹決議案草案及修正案';
@@ -108,12 +174,13 @@
         case 'adjourn_session': return t.motionAdjournSession;
         case 'adjourn_day': return '休會動議 - 本日結束 (Adjournment for the Day)';
         case 'adjourn': return '休會動議 (Adjournment)';
-        case 'close': return '結束辯論動議 (Closure)';
         default: return type;
       }
     }
     if (state.language === 'fr') {
       switch (type) {
+        case 'previous_question': return "Motion d'ajournement du débat (Previous Question)";
+        case 'close': return 'Clôture du Débat (Closure of Debate)';
         case 'unmod': return 'Caucus Non-Modéré';
         case 'mod': return 'Caucus Modéré';
         case 'singlespeaker': return 'Présentation du Projet de Résolution et Amendements';
@@ -121,11 +188,12 @@
         case 'adjourn_session': return t.motionAdjournSession;
         case 'adjourn_day': return 'Ajournement pour la journée';
         case 'adjourn': return 'Ajournement de la séance';
-        case 'close': return 'Clôture du Débat';
         default: return type;
       }
     }
     switch (type) {
+      case 'previous_question': return 'Motion to the Previous Question (Closure of Debate)';
+      case 'close': return 'Closure of Debate';
       case 'unmod': return 'Unmoderated Caucus';
       case 'mod': return 'Moderated Caucus';
       case 'singlespeaker': return 'Introduce Draft Resolution & Amendments';
@@ -133,7 +201,6 @@
       case 'adjourn_session': return t.motionAdjournSession;
       case 'adjourn_day': return 'Adjournment for the Day';
       case 'adjourn': return 'Adjournment of Meeting';
-      case 'close': return 'Closure of Debate';
       default: return type;
     }
   }
@@ -194,9 +261,20 @@
       const t = I18N[state.language] || I18N.en;
       openRecessScreen(0, motion.topic || t.motionAdjournMeeting, 'adjourn_day');
       renderAll();
-    } else if (motion.type === 'close') {
+    } else if (motion.type === 'close' || motion.type === 'previous_question') {
       const t = I18N[state.language] || I18N.en;
-      showToast(t.debateClosedToast, 'info', 3500);
+      showToast(t.enterSubstantiveVotePrompt || t.debateClosedToast, 'success', 4000);
+      state.activeVoteTarget = 'resolution';
+      state.votingMotion = null;
+      state.voteType = 'substantive';
+      state.voteThreshold = state.settings?.rules?.defaultVoteThreshold || 'simple';
+      // Clear votes for a fresh substantive resolution ballot
+      state.selectedCountries.forEach(c => {
+        c.vote = 'none';
+        c.hasRights = false;
+      });
+      state.voteStage = 'r1';
+      state.activeVoterIndex = 0;
       switchTab('vote');
     }
     saveToLocalStorage(true, true);

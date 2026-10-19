@@ -97,12 +97,30 @@
   const PRECEDENCE = {
     adjourn_session: 100,
     adjourn_day: 98,
-    adjourn: 98, 
+    adjourn: 98,
     suspend: 95,
-    unmod: 80,   
-    mod: 60,     
-    singlespeaker: 40,
-    close: 20
+    previous_question: 90, // Closure of debate / Previous question
+    close: 90,
+    unmod: 80,
+    mod: 60,
+    singlespeaker: 40
+  };
+
+  // Motion procedural rules classification:
+  // - requiresVote: true if must go directly to a vote without informal consensus/second
+  // - defaultThreshold: 'twothirds' or 'simple'
+  // - voteType: 'procedural'
+  // - canSecond: true if chair can ask for seconds/objections and pass immediately if no objection
+  const MOTION_RULES = {
+    previous_question: { requiresVote: true, threshold: 'twothirds', voteType: 'procedural', canSecond: false },
+    close: { requiresVote: true, threshold: 'twothirds', voteType: 'procedural', canSecond: false },
+    adjourn_session: { requiresVote: false, threshold: 'simple', voteType: 'procedural', canSecond: true },
+    adjourn_day: { requiresVote: false, threshold: 'simple', voteType: 'procedural', canSecond: true },
+    adjourn: { requiresVote: false, threshold: 'simple', voteType: 'procedural', canSecond: true },
+    suspend: { requiresVote: false, threshold: 'simple', voteType: 'procedural', canSecond: true },
+    unmod: { requiresVote: false, threshold: 'simple', voteType: 'procedural', canSecond: true },
+    mod: { requiresVote: false, threshold: 'simple', voteType: 'procedural', canSecond: true },
+    singlespeaker: { requiresVote: false, threshold: 'simple', voteType: 'procedural', canSecond: true }
   };
 
   const iso3ToIso2 = {
