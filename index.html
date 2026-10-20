@@ -93,10 +93,10 @@
               <option value="ga5">GA5 行政預算</option>
               <option value="ga6">GA6 法律委員會 (Legal)</option>
             </select>
-            <i class="fa-solid fa-chevron-down absolute right-1 top-1/2 -translate-y-1/2 text-[10px] text-zinc-500 pointer-events-none group-hover:text-zinc-300 transition"></i>
+            
           </div>
           <div class="flex items-center space-x-1.5 text-xs text-zinc-400 mt-0.5">
-            <i class="fa-solid fa-file-lines text-xs text-zinc-500 shrink-0"></i>
+            
             <input id="header-agenda-input" type="text" value="" class="bg-transparent border-b border-transparent hover:border-zinc-600 focus:border-white text-xs px-1 py-0.5 rounded focus:outline-none transition max-w-[200px] sm:max-w-sm md:max-w-md not-italic">
           </div>
         </div>
@@ -134,7 +134,7 @@
       <div class="flex items-center space-x-2 shrink-0 ml-auto">
         <!-- Unified Settings Gear Button -->
         <button id="btn-open-settings" type="button" class="px-3.5 py-1.5 rounded-xl transition flex items-center space-x-2 text-xs font-semibold cursor-pointer shadow-sm border" title="全域會議與系統設定">
-          <i class="fa-solid fa-gear text-xs"></i>
+          
           <span class="hidden sm:inline" data-i18n="settings">設定</span>
         </button>
       </div>
@@ -174,7 +174,7 @@
 
         <!-- File Upload Helper -->
         <div id="panel-setup-file" class="bg-white rounded-2xl p-8 shadow-sm border-2 border-dashed border-slate-300 text-center space-y-3 hidden">
-          <i data-lucide="file-up" class="w-12 h-12 mx-auto text-secondary"></i>
+          
           <h3 class="text-lg font-bold text-slate-800" data-i18n="importExistingTitle">Import Existing Committee</h3>
           <p class="text-xs text-slate-500 max-w-md mx-auto" data-i18n="importExistingDesc">Upload a previously exported JSON configuration file to immediately restore your committee details and country delegation list.</p>
           <div>
@@ -195,7 +195,7 @@
                 <span id="badge-available-count" class="text-xs bg-slate-100 px-2.5 py-1 rounded-full font-semibold text-slate-600">0</span>
               </div>
               <div class="mt-3 relative">
-                <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3 text-slate-400"></i>
+                
                 <input id="search-countries" type="text" data-i18n-placeholder="searchCountryPlaceholder" placeholder="搜尋國家名稱或 ISO 代碼..." class="w-full pl-10 pr-3 py-2.5 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-primary focus:outline-none">
               </div>
               <div id="list-available-countries" class="flex-1 overflow-y-auto mt-3 divide-y divide-slate-100 custom-scroll pr-1">
@@ -223,7 +223,7 @@
           <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
             <div class="flex items-center justify-between pb-2 border-b border-slate-100">
               <div class="flex items-center space-x-2">
-                <i data-lucide="layout-grid" class="w-5 h-5 text-slate-400"></i>
+                
                 <h3 class="font-bold text-slate-800 text-lg" data-i18n="selectTemplate">Select Template</h3>
               </div>
               <span class="text-xs text-slate-400" data-i18n="clickToLoad">Click to load</span>
@@ -260,7 +260,7 @@
               <div class="flex items-center justify-between border-b pb-3 mb-6">
                 <span class="text-xs uppercase tracking-wider font-bold text-slate-400" data-i18n="currentSpeaker">Current Speaker</span>
                 <button id="btn-gsl-set-time" class="text-xs text-primary hover:underline font-semibold flex items-center space-x-1.5">
-                  <i class="fa-solid fa-clock text-xs"></i>
+                  
                   <span id="label-gsl-default-time">90s</span>
                 </button>
               </div>
@@ -291,19 +291,19 @@
               <!-- Timer Controls (Always visible with FontAwesome icons) -->
               <div class="flex items-center justify-center space-x-3 pt-2">
                 <button id="btn-gsl-start" class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
-                  <i class="fa-solid fa-play text-sm"></i>
+                  
                   <span data-i18n="start">Start</span>
                 </button>
                 <button id="btn-gsl-pause" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden">
-                  <i class="fa-solid fa-pause text-sm"></i>
+                  
                   <span data-i18n="pause">Pause</span>
                 </button>
                 <button id="btn-gsl-reset" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition flex items-center space-x-1.5" data-i18n="reset" title="Reset">
-                  <i class="fa-solid fa-rotate-left text-sm"></i>
+                  <span data-i18n="reset">Reset</span>
                 </button>
                 <button id="btn-gsl-next" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
                   <span data-i18n="nextSpeaker">Next Speaker</span>
-                  <i class="fa-solid fa-forward-step text-sm"></i>
+                  
                 </button>
               </div>
             </div>
@@ -313,15 +313,15 @@
               <div class="text-xs font-semibold text-slate-400 mb-2" data-i18n="yieldRemaining">YIELD TIME REMAINING</div>
               <div class="flex flex-wrap items-center justify-center gap-2">
                 <button id="btn-yield-chair" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center space-x-1.5">
-                  <i class="fa-solid fa-gavel text-xs"></i>
+                  
                   <span data-i18n="yieldChair">Yield to the Chair</span>
                 </button>
                 <button id="btn-yield-delegate" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center space-x-1.5">
-                  <i class="fa-solid fa-users text-xs"></i>
+                  
                   <span data-i18n="yieldDelegate">Yield to another Delegate</span>
                 </button>
                 <button id="btn-yield-questions" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center space-x-1.5">
-                  <i class="fa-solid fa-circle-question text-xs"></i>
+                  
                   <span data-i18n="yieldQuestions">Yield to Questions</span>
                 </button>
               </div>
@@ -338,7 +338,7 @@
               <span id="badge-queue-count" class="text-xs text-slate-400">0 queued</span>
             </div>
             <button id="btn-open-add-speaker" class="px-3.5 py-1.5 bg-primary text-white rounded-lg text-xs font-semibold hover:bg-primary-dark flex items-center space-x-1.5">
-              <i class="fa-solid fa-user-plus text-xs"></i>
+              
               <span data-i18n="addSpeaker">Add Speaker</span>
             </button>
           </div>
@@ -377,19 +377,19 @@
               <!-- Controls -->
               <div class="flex items-center justify-center space-x-3 pt-2">
                 <button id="btn-mod-start" class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
-                  <i data-lucide="play" class="w-5 h-5"></i>
+                  
                   <span data-i18n="startSpeaker">Start Speaker</span>
                 </button>
                 <button id="btn-mod-pause" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden">
-                  <i data-lucide="pause" class="w-5 h-5"></i>
+                  
                   <span data-i18n="pause">Pause</span>
                 </button>
-                <button id="btn-mod-reset" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl">
-                  <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
+                <button id="btn-mod-reset" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl" title="Reset">
+                  <span data-i18n="reset">Reset</span>
                 </button>
                 <button id="btn-mod-next" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
                   <span data-i18n="nextSpeaker">Next</span>
-                  <i data-lucide="skip-forward" class="w-4 h-4"></i>
+                  
                 </button>
               </div>
             </div>
@@ -417,7 +417,7 @@
               </div>
               <div class="flex items-center gap-1.5">
                 <button id="btn-mod-add-speaker" class="px-3 py-1.5 bg-primary text-white rounded-lg text-xs font-semibold hover:bg-primary-dark flex items-center space-x-1">
-                  <i data-lucide="user-plus" class="w-3.5 h-3.5"></i>
+                  
                 </button>
               </div>
             </div>
@@ -464,15 +464,15 @@
           <!-- Controls (Same unified style as Mod Caucus) -->
           <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
             <button id="btn-unmod-start" class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
-              <i data-lucide="play" class="w-5 h-5"></i>
+              
               <span data-i18n="startCaucus">Start Caucus</span>
             </button>
             <button id="btn-unmod-pause" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden">
-              <i data-lucide="pause" class="w-5 h-5"></i>
+              
               <span data-i18n="pause">Pause</span>
             </button>
-            <button id="btn-unmod-reset" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition">
-              <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
+            <button id="btn-unmod-reset" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition" title="Reset">
+              <span data-i18n="reset">Reset</span>
             </button>
             
             <!-- Quick Extension Buttons -->
@@ -495,7 +495,7 @@
             <h2 class="text-xl font-black text-slate-800" data-i18n="draftIntro">Introduction of Draft Resolution and Amendments</h2>
           </div>
           <button id="btn-single-select-country" class="px-4 py-2 border border-slate-300 rounded-xl text-xs font-semibold hover:bg-slate-50 flex items-center space-x-1">
-            <i data-lucide="user" class="w-4 h-4"></i>
+            
             <span data-i18n="selectSpeaker">Select Speaker</span>
           </button>
         </div>
@@ -513,15 +513,15 @@
         <!-- Controls -->
         <div class="flex items-center justify-center space-x-3 pt-2">
           <button id="btn-single-start" class="px-8 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
-            <i data-lucide="play" class="w-5 h-5"></i>
+            
             <span data-i18n="start">Start</span>
           </button>
           <button id="btn-single-pause" class="px-8 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden">
-            <i data-lucide="pause" class="w-5 h-5"></i>
+            
             <span data-i18n="pause">Pause</span>
           </button>
-          <button id="btn-single-reset" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl">
-            <i data-lucide="rotate-ccw" class="w-5 h-5"></i>
+          <button id="btn-single-reset" class="px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl" title="Reset">
+            <span data-i18n="reset">Reset</span>
           </button>
           <button id="btn-single-set-time" class="px-5 py-3 border border-slate-200 hover:bg-slate-50 rounded-xl text-xs font-semibold text-slate-600" data-i18n="setDuration">Set Time</button>
         </div>
@@ -556,11 +556,11 @@
                 否決 / 撤銷
               </button>
               <button id="btn-hero-motion-vote" class="px-4 py-2 rounded-xl text-xs font-medium transition flex items-center space-x-1.5 border border-amber-500/30 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20 active:scale-95 cursor-pointer">
-                <i class="fa-solid fa-check-to-slot text-xs"></i>
+                
                 <span data-i18n="putToVote">交付表決</span>
               </button>
               <button id="btn-hero-motion-second" class="px-5 py-2 rounded-xl text-xs font-medium transition flex items-center space-x-1.5 shadow-sm bg-brand text-content-inverse hover:opacity-90 active:scale-95 cursor-pointer">
-                <i class="fa-solid fa-hands-clapping text-xs"></i>
+                
                 <span id="hero-motion-second-text" data-i18n="passSecond">附議通過</span>
               </button>
             </div>
@@ -574,7 +574,7 @@
             <div class="flex items-center space-x-2">
               <button id="btn-clear-motions" class="px-3 py-1.5 text-content-muted hover:text-rose-400 rounded-lg text-xs font-medium transition cursor-pointer" data-i18n="clearAllMotions">清除全部</button>
               <button id="btn-add-motion" class="px-4 py-1.5 border border-subtle bg-surface-secondary text-content-primary rounded-lg text-xs font-medium flex items-center space-x-1 transition hover:bg-surface-tertiary cursor-pointer">
-                <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+                
                 <span>新增動議</span>
               </button>
             </div>
@@ -617,11 +617,11 @@
             <!-- Vote Target: Resolution vs Motion -->
             <div class="flex items-center space-x-1 p-1 bg-slate-100 rounded-xl border border-slate-200">
               <button id="btn-vote-target-resolution" class="px-3 py-1.5 rounded-lg text-xs font-medium transition bg-white shadow-sm text-slate-800 flex items-center space-x-1.5 cursor-pointer">
-                <i class="fa-solid fa-file-contract text-xs text-primary"></i>
+                
                 <span data-i18n="targetResolutionVote">決議案實質表決</span>
               </button>
               <button id="btn-vote-target-motion" class="px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-600 hover:text-slate-900 flex items-center space-x-1.5 cursor-pointer">
-                <i class="fa-solid fa-gavel text-xs text-amber-500"></i>
+                
                 <span data-i18n="targetMotionVote">動議程序性表決</span>
               </button>
             </div>
@@ -633,6 +633,9 @@
               </button>
               <button id="btn-voting-subtab-rollcall" class="px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900" data-i18n="subtabRollcall">
                 唱票輪次 (ROLLCALL VOTING)
+              </button>
+              <button id="btn-voting-subtab-session" class="px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900 cursor-pointer" data-i18n="subtabSession">
+                非投票點名 / 會期表決 (Session)
               </button>
             </div>
 
@@ -647,13 +650,13 @@
 
           <div class="flex items-center space-x-2 text-xs">
             <button id="btn-configure-vote" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-300 transition flex items-center space-x-1.5">
-              <i class="fa-solid fa-sliders text-xs"></i>
+              
               <span data-i18n="votingConfig">Configure</span>
             </button>
             <button id="btn-consensus-vote" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-300 transition" data-i18n="consensusVote">Consensus Vote</button>
             <button id="btn-toggle-results" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-300 transition" data-i18n="hideResults">Hide Results</button>
             <button id="btn-reset-votes" class="px-3 py-1.5 text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition flex items-center space-x-1" data-i18n="resetVotes">
-              <i class="fa-solid fa-rotate-right text-xs"></i>
+              
               <span>Reset</span>
             </button>
           </div>
@@ -672,7 +675,7 @@
               <div class="flex items-center space-x-2 mt-1">
                 <h3 id="vote-resolution-title" class="text-xl text-slate-800">Draft Resolution 1.1</h3>
                 <button id="btn-edit-resolution-title" class="p-1 hover:bg-slate-100 rounded text-slate-400 hover:text-slate-600 transition" title="Edit Title">
-                  <i class="fa-solid fa-pen-to-square text-xs"></i>
+                  
                 </button>
               </div>
               <div id="motion-vote-desc" class="text-xs text-slate-500 mt-1 hidden">
@@ -690,7 +693,7 @@
                 <option value="consensus">Consensus (All Votes)</option>
               </select>
               <button id="btn-motion-vote-execute" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition shadow-sm hidden flex items-center space-x-1.5">
-                <i class="fa-solid fa-check text-xs"></i>
+                
                 <span id="btn-motion-vote-execute-text">執行動議</span>
               </button>
             </div>
@@ -698,7 +701,7 @@
 
           <!-- VETO ALERT BANNER -->
           <div id="veto-alert-banner" class="bg-rose-50 border-2 border-rose-300 p-4 rounded-xl flex items-center space-x-3 text-rose-800 hidden">
-            <i class="fa-solid fa-triangle-exclamation text-rose-600 text-xl flex-shrink-0"></i>
+            
             <div>
               <div class="text-sm uppercase tracking-wide text-rose-700" data-i18n="vetoTitle">Resolution Vetoed by Permanent Member(s)</div>
               <div id="veto-countries-list" class="text-xs text-rose-600 mt-0.5">United States, Russian Federation</div>
@@ -775,13 +778,13 @@
 
           <div class="flex items-center space-x-4 text-xs text-slate-400 pt-1">
             <button id="btn-prev-voter" class="hover:text-slate-700 transition flex items-center space-x-1">
-              <i class="fa-solid fa-chevron-left mr-1"></i>
+              
               <span data-i18n="previousVoter">上一個 (Previous)</span>
             </button>
             <span id="label-voter-queue-status">1 / 15</span>
             <button id="btn-next-voter" class="hover:text-slate-700 transition flex items-center space-x-1">
               <span data-i18n="nextVoter">下一個 (Next)</span>
-              <i class="fa-solid fa-chevron-right ml-1"></i>
+              
             </button>
           </div>
         </div>
@@ -804,6 +807,30 @@
             <span class="text-xs text-slate-400" id="label-ballots-summary"></span>
           </div>
           <div id="grid-substantive-ballots" class="grid grid-cols-1 md:grid-cols-2 gap-3.5 transition-all duration-200">
+            <!-- Injected via JS -->
+          </div>
+        </div>
+
+        <!-- 3. Non-Voting Session Records Subtab (會期表決 / 非投票點名) -->
+        <div id="panel-session-votes-container" class="space-y-6 hidden">
+          <!-- Session Setup Bar -->
+          <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider" data-i18n="sessionCountLabel">會期 / Session 數量：</span>
+              <div class="flex items-center space-x-1.5">
+                <button id="btn-session-dec" type="button" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center transition border border-slate-300 cursor-pointer">-</button>
+                <input id="input-session-count" type="number" min="1" max="20" value="3" class="w-16 h-8 text-center text-sm font-bold border border-slate-300 rounded-lg bg-transparent text-slate-800 focus:outline-none focus:ring-2 focus:ring-primary">
+                <button id="btn-session-inc" type="button" class="w-8 h-8 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center transition border border-slate-300 cursor-pointer">+</button>
+              </div>
+              <button id="btn-add-new-session" type="button" class="px-3.5 py-1.5 bg-primary text-white rounded-lg text-xs font-semibold hover:bg-primary-dark transition shadow-sm cursor-pointer" data-i18n="addSessionBtn">+ 新增會期 (Session)</button>
+            </div>
+            <div class="flex items-center space-x-2">
+              <button id="btn-reset-current-session" type="button" class="px-3 py-1.5 text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition cursor-pointer" data-i18n="resetCurrentSession">重設當前會期票數</button>
+            </div>
+          </div>
+
+          <!-- Session Cards Grid -->
+          <div id="grid-session-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <!-- Injected via JS -->
           </div>
         </div>
@@ -833,7 +860,7 @@
       <!-- 0. Unified Settings Button -->
       <button id="drawer-btn-settings" class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-medium text-sm transition border border-zinc-700 bg-zinc-800/80 hover:bg-zinc-800 text-white cursor-pointer">
         <div class="flex items-center space-x-3">
-          <i class="fa-solid fa-gear text-lg text-primary"></i>
+          
           <span data-i18n="settingsCenterTitle">會議與系統設定</span>
         </div>
         <span class="text-xs text-zinc-400" data-i18n="openAction">開啟</span>
@@ -842,7 +869,7 @@
       <!-- 1. Language Button (Placed at the very top as requested) -->
       <button id="drawer-btn-language" class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-medium text-sm transition border">
         <div class="flex items-center space-x-3">
-          <i class="fa-solid fa-earth-americas text-lg"></i>
+          
           <span data-i18n="language">Language</span>
         </div>
         <span id="label-current-lang" class="text-xs border px-2 py-0.5 rounded font-bold">ZH</span>
@@ -851,7 +878,7 @@
       <!-- 2. Theme Toggle Button inside Drawer -->
       <button id="btn-toggle-theme" class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-medium text-sm transition border">
         <div class="flex items-center space-x-3">
-          <i id="theme-icon" class="fa-solid fa-sun text-lg"></i>
+          
           <span id="label-theme-mode" data-i18n="themeModeLabel">深色 / 淺色模式</span>
         </div>
         <span class="text-xs text-zinc-400" data-i18n="toggleAction">切換</span>
@@ -860,7 +887,7 @@
       <!-- 2.1 Custom Color Scheme Button -->
       <button id="btn-custom-color" class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-medium text-sm transition border">
         <div class="flex items-center space-x-3">
-          <i class="fa-solid fa-palette text-lg text-primary"></i>
+          
           <span data-i18n="customColorTheme">自選主題顏色</span>
         </div>
         <div class="flex items-center space-x-1.5">
@@ -874,7 +901,7 @@
       <div id="container-global-scale" class="w-full px-4 py-3 rounded-xl font-medium text-sm transition border flex flex-col space-y-2">
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-3">
-            <i class="fa-solid fa-up-right-and-down-left-from-center text-lg text-primary"></i>
+            
             <span data-i18n="globalScale">介面縮放</span>
           </div>
           <span id="label-global-scale" class="text-xs font-mono font-bold px-2 py-0.5 rounded border">100%</span>
@@ -901,7 +928,7 @@
         <div id="user-profile-menu" class="w-full" style="display:none">
           <button id="btn-google-logout" class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-medium text-sm transition border text-rose-500 hover:bg-rose-500/10 border-rose-500/30 cursor-pointer">
             <div class="flex items-center space-x-3">
-              <i class="fa-solid fa-right-from-bracket text-lg"></i>
+              
               <span id="user-menu-name" data-i18n="googleLogout">登出</span>
             </div>
             <span class="text-xs text-rose-400" data-i18n="googleLogout">登出</span>
@@ -913,7 +940,7 @@
       <!-- Upload Committee Logo Button -->
       <button id="drawer-btn-upload-logo" class="w-full flex items-center justify-between px-4 py-3 rounded-xl font-medium text-sm transition border">
         <div class="flex items-center space-x-3">
-          <i class="fa-solid fa-image text-lg text-primary"></i>
+          
           <span data-i18n="uploadLogo">上傳會議圖標</span>
         </div>
         <span class="text-xs text-zinc-400" data-i18n="changeAction">更換</span>
@@ -921,11 +948,11 @@
       <input type="file" id="input-logo-file" class="hidden" accept="image/*">
 
       <button id="drawer-btn-export" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm transition">
-        <i class="fa-solid fa-file-arrow-down text-lg"></i>
+        
         <span data-i18n="exportCommittee">Export Committee</span>
       </button>
       <button id="drawer-btn-import" class="w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-sm transition">
-        <i class="fa-solid fa-file-arrow-up text-lg"></i>
+        
         <span data-i18n="importCommittee">Import Committee</span>
       </button>
       <input type="file" id="input-import-file" class="hidden" accept=".json">
@@ -945,7 +972,7 @@
     <div class="bg-slate-800 text-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 max-h-[85vh] flex flex-col border border-slate-700">
       <div class="flex items-center justify-between border-b border-slate-700 pb-3">
         <h3 class="font-bold text-lg text-slate-100" data-i18n="addSpeaker">Add Speaker</h3>
-        <button class="btn-close-modal p-1 text-slate-400 hover:text-slate-200"><i data-lucide="x" class="w-5 h-5"></i></button>
+        <button class="btn-close-modal p-1 text-slate-400 hover:text-slate-200"></button>
       </div>
       <input id="search-queue-speaker" type="text" data-i18n-placeholder="searchSpeakerPlaceholder" placeholder="搜尋出席代表國..." class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate-400">
       <div id="list-selectable-speakers" class="flex-1 overflow-y-auto divide-y divide-slate-700 custom-scroll pr-1">
@@ -1052,11 +1079,11 @@
     <div class="bg-slate-800 text-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-5 border border-slate-700">
       <div class="flex items-center justify-between border-b border-slate-700 pb-3">
         <h3 class="text-base text-slate-100 flex items-center space-x-2">
-          <i class="fa-solid fa-sliders text-primary"></i>
+          
           <span data-i18n="configureVoting">Configure Voting</span>
         </h3>
         <button type="button" class="btn-close-modal text-slate-400 hover:text-white p-1">
-          <i class="fa-solid fa-xmark text-base"></i>
+          
         </button>
       </div>
 
@@ -1129,7 +1156,7 @@
 
       <div class="pt-4 flex items-center justify-center space-x-4">
         <button id="btn-recess-toggle-timer" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-2xl shadow-lg transition flex items-center space-x-2">
-          <i data-lucide="play" class="w-5 h-5"></i>
+          
           <span id="recess-toggle-label">開始計時</span>
         </button>
       </div>
@@ -1143,7 +1170,7 @@
       <div class="px-6 py-4 border-b border-zinc-800 flex items-center justify-between shrink-0 bg-zinc-900/90">
         <div class="flex items-center space-x-3">
           <div class="w-10 h-10 rounded-2xl bg-zinc-800 flex items-center justify-center text-primary border border-zinc-700/80 shadow-inner">
-            <i class="fa-solid fa-sliders text-base"></i>
+            
           </div>
           <div>
             <h3 class="font-bold text-lg text-white tracking-wide" data-i18n="settingsCenterTitle">會議與系統設定</h3>
@@ -1151,26 +1178,26 @@
           </div>
         </div>
         <button id="btn-close-settings-modal" type="button" class="p-2 text-zinc-400 hover:text-white rounded-xl hover:bg-zinc-800 transition cursor-pointer">
-          <i class="fa-solid fa-xmark text-lg"></i>
+          
         </button>
       </div>
 
       <!-- Tab Buttons Navigation -->
       <div class="flex border-b border-zinc-800 bg-zinc-950/50 px-6 gap-2 overflow-x-auto shrink-0">
         <button id="tab-btn-cfg-conference" type="button" class="cfg-nav-btn py-3 px-3 text-xs sm:text-sm font-semibold border-b-2 border-white text-white flex items-center space-x-2 transition cursor-pointer">
-          <i class="fa-solid fa-landmark text-xs"></i>
+          
           <span data-i18n="settingsTabConference">會議資訊</span>
         </button>
         <button id="tab-btn-cfg-rules" type="button" class="cfg-nav-btn py-3 px-3 text-xs sm:text-sm font-medium border-b-2 border-transparent text-zinc-400 hover:text-zinc-200 flex items-center space-x-2 transition cursor-pointer">
-          <i class="fa-solid fa-stopwatch text-xs"></i>
+          
           <span data-i18n="settingsTabRules">議事與計時</span>
         </button>
         <button id="tab-btn-cfg-display" type="button" class="cfg-nav-btn py-3 px-3 text-xs sm:text-sm font-medium border-b-2 border-transparent text-zinc-400 hover:text-zinc-200 flex items-center space-x-2 transition cursor-pointer">
-          <i class="fa-solid fa-palette text-xs"></i>
+          
           <span data-i18n="settingsTabDisplay">顯示與外觀</span>
         </button>
         <button id="tab-btn-cfg-sync" type="button" class="cfg-nav-btn py-3 px-3 text-xs sm:text-sm font-medium border-b-2 border-transparent text-zinc-400 hover:text-zinc-200 flex items-center space-x-2 transition cursor-pointer">
-          <i class="fa-solid fa-cloud-arrow-up text-xs"></i>
+          
           <span data-i18n="settingsTabSync">同步與備份</span>
         </button>
       </div>
@@ -1281,11 +1308,11 @@
               <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">深淺色外觀模式 (Appearance)</label>
               <div class="grid grid-cols-2 gap-2">
                 <button type="button" id="cfg-btn-theme-dark" class="px-3 py-2.5 rounded-xl border border-zinc-700 text-xs font-bold transition flex items-center justify-center space-x-2 bg-zinc-800 text-white cursor-pointer">
-                  <i class="fa-solid fa-moon"></i>
+                  
                   <span>深色模式</span>
                 </button>
                 <button type="button" id="cfg-btn-theme-light" class="px-3 py-2.5 rounded-xl border border-zinc-800 text-xs font-bold transition flex items-center justify-center space-x-2 bg-zinc-950 text-zinc-400 hover:text-white cursor-pointer">
-                  <i class="fa-solid fa-sun"></i>
+                  
                   <span>淺色模式</span>
                 </button>
               </div>
@@ -1324,7 +1351,7 @@
           <div class="p-4 rounded-2xl bg-zinc-950/60 border border-zinc-800 flex items-center justify-between">
             <div class="flex items-center space-x-3">
               <div id="cfg-auth-avatar" class="w-10 h-10 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-400 overflow-hidden shrink-0">
-                <i class="fa-solid fa-user"></i>
+                
               </div>
               <div>
                 <div id="cfg-auth-name" class="text-sm font-bold text-white">訪客模式 (未登入)</div>
@@ -1353,14 +1380,14 @@
           <!-- Backup & Restore -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
             <button id="cfg-btn-export-file" type="button" class="p-3.5 rounded-2xl border border-zinc-800 bg-zinc-950/60 hover:bg-zinc-800/80 text-left transition flex items-center space-x-3 cursor-pointer">
-              <i class="fa-solid fa-file-arrow-down text-lg text-primary"></i>
+              
               <div>
                 <div class="text-xs font-bold text-white">匯出會議設定檔</div>
                 <div class="text-[10px] text-zinc-400">下載為本機 JSON 備份</div>
               </div>
             </button>
             <button id="cfg-btn-import-file" type="button" class="p-3.5 rounded-2xl border border-zinc-800 bg-zinc-950/60 hover:bg-zinc-800/80 text-left transition flex items-center space-x-3 cursor-pointer">
-              <i class="fa-solid fa-file-arrow-up text-lg text-primary"></i>
+              
               <div>
                 <div class="text-xs font-bold text-white">匯入會議設定檔</div>
                 <div class="text-[10px] text-zinc-400">上傳 JSON 還原進度</div>
@@ -1440,7 +1467,7 @@
           <!-- Button 2: Guest Continue (免登入選項) -->
           <button id="btn-portal-guest-continue" type="button" class="w-full flex items-center justify-center space-x-2 px-5 py-3.5 rounded-2xl bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-sm transition border border-zinc-700/70 hover:border-zinc-500 cursor-pointer">
             <span>免登入直接體驗 (Continue as Guest)</span>
-            <i class="fa-solid fa-arrow-right text-xs text-zinc-400"></i>
+            
           </button>
         </div>
 

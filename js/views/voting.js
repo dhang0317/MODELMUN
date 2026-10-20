@@ -129,8 +129,11 @@
     const pRights = document.getElementById('panel-rights-speeches');
     const pBallots = document.getElementById('panel-ballots-container');
     const pActiveCard = document.getElementById('panel-active-voter-card');
+    const pSession = document.getElementById('panel-session-votes-container');
+    const detailsCard = document.getElementById('card-voting-details');
     const btnSubtabBallots = document.getElementById('btn-voting-subtab-ballots');
     const btnSubtabRollcall = document.getElementById('btn-voting-subtab-rollcall');
+    const btnSubtabSession = document.getElementById('btn-voting-subtab-session');
 
     // Default votingSubtab is ballots
     if (!state.votingSubtab) {
@@ -139,13 +142,38 @@
 
     // Update Subtab button styling
     if (btnSubtabBallots && btnSubtabRollcall) {
-      if (state.votingSubtab === 'ballots') {
-        btnSubtabBallots.className = 'px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800';
-        btnSubtabRollcall.className = 'px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900';
-      } else {
-        btnSubtabBallots.className = 'px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900';
-        btnSubtabRollcall.className = 'px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800';
+      const isBallots = state.votingSubtab === 'ballots';
+      const isRollcall = state.votingSubtab === 'rollcall';
+      const isSession = state.votingSubtab === 'session';
+
+      btnSubtabBallots.className = isBallots
+        ? 'px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800 font-bold'
+        : 'px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900';
+
+      btnSubtabRollcall.className = isRollcall
+        ? 'px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800 font-bold'
+        : 'px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900';
+
+      if (btnSubtabSession) {
+        btnSubtabSession.className = isSession
+          ? 'px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800 font-bold'
+          : 'px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900';
       }
+    }
+
+    // If Session Subtab is active: hide details card, ballots & active card, and render Session Grid
+    if (state.votingSubtab === 'session') {
+      if (detailsCard) detailsCard.classList.add('hidden');
+      if (pBallots) pBallots.classList.add('hidden');
+      if (pActiveCard) pActiveCard.classList.add('hidden');
+      if (pRights) pRights.classList.add('hidden');
+      if (pSession) pSession.classList.remove('hidden');
+
+      renderSessionVotesGrid();
+      return;
+    } else {
+      if (detailsCard) detailsCard.classList.remove('hidden');
+      if (pSession) pSession.classList.add('hidden');
     }
 
     // Stage button styles
@@ -256,7 +284,6 @@
     }
 
     const scoreboard = document.getElementById('voting-scoreboard');
-    const detailsCard = document.getElementById('card-voting-details');
     const headerRow = document.getElementById('voting-header-row');
     const t = I18N[state.language] || I18N.en;
 
@@ -702,4 +729,261 @@
         grid.appendChild(card);
       });
     }
+  }
+
+  // ================= NON-VOTING / SESSION VOTES GRID =================
+  function renderSessionVotesGrid() {
+    const grid = document.getElementById('grid-session-cards');
+    const inputCount = document.getElementById('input-session-count');
+    if (!grid) return;
+
+    // Ensure sessionVotes array is consistent with sessionCount
+    if (!Array.isArray(state.sessionVotes) || state.sessionVotes.length === 0) {
+      const count = state.sessionCount || 3;
+      state.sessionVotes = [];
+      for (let i = 1; i <= count; i++) {
+        state.sessionVotes.push({
+          id: i,
+          name: `Session ${i}`,
+          favor: 0,
+          against: 0,
+          abstain: 0,
+          note: ''
+        });
+      }
+    }
+
+    if (inputCount) {
+      inputCount.value = state.sessionVotes.length;
+    }
+
+    grid.innerHTML = '';
+    const t = I18N[state.language] || I18N.en;
+
+    state.sessionVotes.forEach((sess) => {
+      const isSelected = (sess.id === state.activeSessionId);
+      const totalVotes = (sess.favor || 0) + (sess.against || 0) + (sess.abstain || 0);
+
+      const card = document.createElement('div');
+      card.className = `p-5 rounded-2xl border transition-all duration-200 shadow-sm flex flex-col justify-between ${
+        isSelected
+          ? 'bg-white border-primary shadow-md ring-2 ring-primary/20'
+          : 'bg-white border-slate-200 hover:border-slate-300'
+      }`;
+
+      card.innerHTML = `
+        <div>
+          <!-- Header: Title & Total Badge -->
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100 gap-2">
+            <div class="flex items-center space-x-2 min-w-0">
+              <span class="w-2.5 h-2.5 rounded-full ${isSelected ? 'bg-primary' : 'bg-slate-300'} shrink-0"></span>
+              <input type="text" class="session-name-input font-bold text-slate-800 text-sm bg-transparent border-b border-transparent hover:border-slate-300 focus:border-primary focus:outline-none transition px-1 py-0.5 rounded truncate" value="${sess.name || `Session ${sess.id}`}" placeholder="Session Name">
+            </div>
+            <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold shrink-0">
+              ${t.totalVotesLabel || '總票數'}: ${totalVotes}
+            </span>
+          </div>
+
+          <!-- Quick Counters: Agree / Disagree / Abstain -->
+          <div class="space-y-3 pt-3">
+            <!-- Agree (Favor) -->
+            <div class="p-2.5 rounded-xl border border-emerald-500/20 bg-emerald-500/5 flex items-center justify-between gap-3">
+              <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span class="text-xs font-bold text-emerald-600">${t.yes || '同意'}</span>
+              </div>
+              <div class="flex items-center space-x-1.5">
+                <button type="button" class="btn-dec-favor w-7 h-7 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-700 font-black text-sm flex items-center justify-center transition cursor-pointer" data-id="${sess.id}">-</button>
+                <input type="number" min="0" class="input-val-favor w-14 h-7 text-center font-mono font-bold text-sm bg-white border border-emerald-500/30 rounded-lg text-emerald-700 focus:outline-none focus:ring-1 focus:ring-emerald-500" value="${sess.favor || 0}" data-id="${sess.id}">
+                <button type="button" class="btn-inc-favor w-7 h-7 rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 font-black text-sm flex items-center justify-center transition cursor-pointer shadow-sm" data-id="${sess.id}">+</button>
+              </div>
+            </div>
+
+            <!-- Disagree (Against) -->
+            <div class="p-2.5 rounded-xl border border-rose-500/20 bg-rose-500/5 flex items-center justify-between gap-3">
+              <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                <span class="text-xs font-bold text-rose-600">${t.no || '不同意'}</span>
+              </div>
+              <div class="flex items-center space-x-1.5">
+                <button type="button" class="btn-dec-against w-7 h-7 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-700 font-black text-sm flex items-center justify-center transition cursor-pointer" data-id="${sess.id}">-</button>
+                <input type="number" min="0" class="input-val-against w-14 h-7 text-center font-mono font-bold text-sm bg-white border border-rose-500/30 rounded-lg text-rose-700 focus:outline-none focus:ring-1 focus:ring-rose-500" value="${sess.against || 0}" data-id="${sess.id}">
+                <button type="button" class="btn-inc-against w-7 h-7 rounded-lg bg-rose-500 text-white hover:bg-rose-600 font-black text-sm flex items-center justify-center transition cursor-pointer shadow-sm" data-id="${sess.id}">+</button>
+              </div>
+            </div>
+
+            <!-- Abstain -->
+            <div class="p-2.5 rounded-xl border border-amber-500/20 bg-amber-500/5 flex items-center justify-between gap-3">
+              <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                <span class="text-xs font-bold text-amber-600">${t.abs || '棄票'}</span>
+              </div>
+              <div class="flex items-center space-x-1.5">
+                <button type="button" class="btn-dec-abstain w-7 h-7 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-700 font-black text-sm flex items-center justify-center transition cursor-pointer" data-id="${sess.id}">-</button>
+                <input type="number" min="0" class="input-val-abstain w-14 h-7 text-center font-mono font-bold text-sm bg-white border border-amber-500/30 rounded-lg text-amber-700 focus:outline-none focus:ring-1 focus:ring-amber-500" value="${sess.abstain || 0}" data-id="${sess.id}">
+                <button type="button" class="btn-inc-abstain w-7 h-7 rounded-lg bg-amber-500 text-white hover:bg-amber-600 font-black text-sm flex items-center justify-center transition cursor-pointer shadow-sm" data-id="${sess.id}">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Note / Topic line -->
+          <div class="pt-3">
+            <input type="text" class="session-note-input w-full text-xs text-slate-500 bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 focus:outline-none focus:bg-white focus:border-slate-400 transition" placeholder="點擊備註議程或表決事項..." value="${sess.note || ''}">
+          </div>
+        </div>
+
+        <!-- Footer / Card Actions -->
+        <div class="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs">
+          <button type="button" class="btn-select-session px-2.5 py-1 rounded font-medium transition cursor-pointer ${
+            isSelected ? 'text-primary font-bold bg-primary/10' : 'text-slate-500 hover:text-slate-800'
+          }" data-id="${sess.id}">
+            ${isSelected ? '● 當前會期' : '設為當前'}
+          </button>
+          <button type="button" class="btn-clear-session px-2.5 py-1 text-slate-400 hover:text-rose-600 transition cursor-pointer" data-id="${sess.id}" title="清空票數">
+            清空
+          </button>
+        </div>
+      `;
+
+      // Event Bindings for this session card
+      const nameInput = card.querySelector('.session-name-input');
+      if (nameInput) {
+        nameInput.addEventListener('change', (e) => {
+          sess.name = e.target.value.trim() || `Session ${sess.id}`;
+          saveToLocalStorage(true, true);
+        });
+      }
+
+      const noteInput = card.querySelector('.session-note-input');
+      if (noteInput) {
+        noteInput.addEventListener('change', (e) => {
+          sess.note = e.target.value.trim();
+          saveToLocalStorage(true, true);
+        });
+      }
+
+      // Favor
+      const btnIncFavor = card.querySelector('.btn-inc-favor');
+      const btnDecFavor = card.querySelector('.btn-dec-favor');
+      const inputFavor = card.querySelector('.input-val-favor');
+      if (btnIncFavor) {
+        btnIncFavor.addEventListener('click', (e) => {
+          e.stopPropagation();
+          sess.favor = (sess.favor || 0) + 1;
+          saveToLocalStorage(true, true);
+          renderSessionVotesGrid();
+        });
+      }
+      if (btnDecFavor) {
+        btnDecFavor.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if ((sess.favor || 0) > 0) {
+            sess.favor--;
+            saveToLocalStorage(true, true);
+            renderSessionVotesGrid();
+          }
+        });
+      }
+      if (inputFavor) {
+        inputFavor.addEventListener('change', (e) => {
+          sess.favor = Math.max(0, parseInt(e.target.value) || 0);
+          saveToLocalStorage(true, true);
+          renderSessionVotesGrid();
+        });
+      }
+
+      // Against
+      const btnIncAgainst = card.querySelector('.btn-inc-against');
+      const btnDecAgainst = card.querySelector('.btn-dec-against');
+      const inputAgainst = card.querySelector('.input-val-against');
+      if (btnIncAgainst) {
+        btnIncAgainst.addEventListener('click', (e) => {
+          e.stopPropagation();
+          sess.against = (sess.against || 0) + 1;
+          saveToLocalStorage(true, true);
+          renderSessionVotesGrid();
+        });
+      }
+      if (btnDecAgainst) {
+        btnDecAgainst.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if ((sess.against || 0) > 0) {
+            sess.against--;
+            saveToLocalStorage(true, true);
+            renderSessionVotesGrid();
+          }
+        });
+      }
+      if (inputAgainst) {
+        inputAgainst.addEventListener('change', (e) => {
+          sess.against = Math.max(0, parseInt(e.target.value) || 0);
+          saveToLocalStorage(true, true);
+          renderSessionVotesGrid();
+        });
+      }
+
+      // Abstain
+      const btnIncAbstain = card.querySelector('.btn-inc-abstain');
+      const btnDecAbstain = card.querySelector('.btn-dec-abstain');
+      const inputAbstain = card.querySelector('.input-val-abstain');
+      if (btnIncAbstain) {
+        btnIncAbstain.addEventListener('click', (e) => {
+          e.stopPropagation();
+          sess.abstain = (sess.abstain || 0) + 1;
+          saveToLocalStorage(true, true);
+          renderSessionVotesGrid();
+        });
+      }
+      if (btnDecAbstain) {
+        btnDecAbstain.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if ((sess.abstain || 0) > 0) {
+            sess.abstain--;
+            saveToLocalStorage(true, true);
+            renderSessionVotesGrid();
+          }
+        });
+      }
+      if (inputAbstain) {
+        inputAbstain.addEventListener('change', (e) => {
+          sess.abstain = Math.max(0, parseInt(e.target.value) || 0);
+          saveToLocalStorage(true, true);
+          renderSessionVotesGrid();
+        });
+      }
+
+      // Select Session
+      const btnSelect = card.querySelector('.btn-select-session');
+      if (btnSelect) {
+        btnSelect.addEventListener('click', (e) => {
+          e.stopPropagation();
+          state.activeSessionId = sess.id;
+          saveToLocalStorage(true, true);
+          renderSessionVotesGrid();
+        });
+      }
+
+      // Clear Session
+      const btnClear = card.querySelector('.btn-clear-session');
+      if (btnClear) {
+        btnClear.addEventListener('click', (e) => {
+          e.stopPropagation();
+          sess.favor = 0;
+          sess.against = 0;
+          sess.abstain = 0;
+          saveToLocalStorage(true, true);
+          renderSessionVotesGrid();
+        });
+      }
+
+      card.addEventListener('click', () => {
+        if (state.activeSessionId !== sess.id) {
+          state.activeSessionId = sess.id;
+          saveToLocalStorage(true, true);
+          renderSessionVotesGrid();
+        }
+      });
+
+      grid.appendChild(card);
+    });
   }

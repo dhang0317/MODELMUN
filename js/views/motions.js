@@ -108,7 +108,6 @@
               </div>
               <div class="text-sm font-medium text-content-primary truncate mt-0.5">${m.topic || t.generalDiscussion}</div>
               <div class="text-[11px] text-content-muted mt-0.5 flex items-center space-x-1">
-                <i class="fa-regular fa-clock text-[10px] mr-1 text-content-muted"></i>
                 <span>${motionTimeLabel}</span>
               </div>
             </div>

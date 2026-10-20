@@ -68,10 +68,10 @@
           </div>
           <div class="flex items-center space-x-2 shrink-0 ml-2">
             <button class="btn-top-queue p-1.5 text-xs text-slate-400 hover:text-primary rounded-lg transition" title="Move to Next">
-              <i class="fa-solid fa-arrow-up text-xs"></i>
+              ▲
             </button>
             <button class="btn-del-queue p-1.5 text-xs text-slate-400 hover:text-rose-500 rounded-lg transition" title="Delete">
-              <i class="fa-solid fa-xmark text-xs"></i>
+              ✕
             </button>
           </div>
         `;

@@ -28,9 +28,11 @@
       drawer.classList.add('-translate-x-full');
       backdrop.classList.add('hidden');
     }
-    document.getElementById('btn-open-drawer').addEventListener('click', openDrawer);
-    document.getElementById('btn-close-drawer').addEventListener('click', closeDrawer);
-    backdrop.addEventListener('click', closeDrawer);
+    const openDrawerBtn = document.getElementById('btn-open-drawer');
+    const closeDrawerBtn = document.getElementById('btn-close-drawer');
+    if (openDrawerBtn) openDrawerBtn.addEventListener('click', openDrawer);
+    if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', closeDrawer);
+    if (backdrop) backdrop.addEventListener('click', closeDrawer);
 
     // Floating Confetti Cannon Button
     const btnFloatingConfetti = document.getElementById('btn-floating-confetti');
@@ -741,7 +743,7 @@
       });
     }
 
-    // Voting Subtabs Switching (Ballots vs Rollcall Calling Card)
+    // Voting Subtabs Switching (Ballots vs Rollcall Calling Card vs Session)
     const btnSubtabBallots = document.getElementById('btn-voting-subtab-ballots');
     if (btnSubtabBallots) {
       btnSubtabBallots.addEventListener('click', () => {
@@ -756,6 +758,117 @@
         state.votingSubtab = 'rollcall';
         saveToLocalStorage(true, true);
         renderResolutionVoteGrid();
+      });
+    }
+    const btnSubtabSession = document.getElementById('btn-voting-subtab-session');
+    if (btnSubtabSession) {
+      btnSubtabSession.addEventListener('click', () => {
+        state.votingSubtab = 'session';
+        saveToLocalStorage(true, true);
+        renderResolutionVoteGrid();
+      });
+    }
+
+    // Session Subtab Controls
+    const btnSessionInc = document.getElementById('btn-session-inc');
+    if (btnSessionInc) {
+      btnSessionInc.addEventListener('click', () => {
+        if (state.isViewerMode) return;
+        state.sessionCount = (state.sessionCount || 3) + 1;
+        if (!state.sessionVotes) state.sessionVotes = [];
+        state.sessionVotes.push({
+          id: state.sessionCount,
+          name: `Session ${state.sessionCount}`,
+          favor: 0,
+          against: 0,
+          abstain: 0,
+          note: ''
+        });
+        saveToLocalStorage(true, true);
+        renderResolutionVoteGrid();
+      });
+    }
+
+    const btnSessionDec = document.getElementById('btn-session-dec');
+    if (btnSessionDec) {
+      btnSessionDec.addEventListener('click', () => {
+        if (state.isViewerMode) return;
+        if ((state.sessionCount || 1) <= 1) return;
+        state.sessionCount--;
+        if (state.sessionVotes && state.sessionVotes.length > state.sessionCount) {
+          state.sessionVotes = state.sessionVotes.slice(0, state.sessionCount);
+        }
+        if (state.activeSessionId > state.sessionCount) {
+          state.activeSessionId = state.sessionCount;
+        }
+        saveToLocalStorage(true, true);
+        renderResolutionVoteGrid();
+      });
+    }
+
+    const inputSessionCount = document.getElementById('input-session-count');
+    if (inputSessionCount) {
+      inputSessionCount.addEventListener('change', (e) => {
+        if (state.isViewerMode) return;
+        let val = parseInt(e.target.value) || 1;
+        if (val < 1) val = 1;
+        if (val > 50) val = 50;
+        state.sessionCount = val;
+        if (!state.sessionVotes) state.sessionVotes = [];
+        while (state.sessionVotes.length < val) {
+          const nextId = state.sessionVotes.length + 1;
+          state.sessionVotes.push({
+            id: nextId,
+            name: `Session ${nextId}`,
+            favor: 0,
+            against: 0,
+            abstain: 0,
+            note: ''
+          });
+        }
+        if (state.sessionVotes.length > val) {
+          state.sessionVotes = state.sessionVotes.slice(0, val);
+        }
+        if (state.activeSessionId > val) {
+          state.activeSessionId = val;
+        }
+        saveToLocalStorage(true, true);
+        renderResolutionVoteGrid();
+      });
+    }
+
+    const btnAddNewSession = document.getElementById('btn-add-new-session');
+    if (btnAddNewSession) {
+      btnAddNewSession.addEventListener('click', () => {
+        if (state.isViewerMode) return;
+        state.sessionCount = (state.sessionCount || 3) + 1;
+        if (!state.sessionVotes) state.sessionVotes = [];
+        state.sessionVotes.push({
+          id: state.sessionCount,
+          name: `Session ${state.sessionCount}`,
+          favor: 0,
+          against: 0,
+          abstain: 0,
+          note: ''
+        });
+        state.activeSessionId = state.sessionCount;
+        saveToLocalStorage(true, true);
+        renderResolutionVoteGrid();
+      });
+    }
+
+    const btnResetCurrentSession = document.getElementById('btn-reset-current-session');
+    if (btnResetCurrentSession) {
+      btnResetCurrentSession.addEventListener('click', () => {
+        if (state.isViewerMode) return;
+        const curSession = (state.sessionVotes || []).find(s => s.id === state.activeSessionId);
+        if (curSession) {
+          curSession.favor = 0;
+          curSession.against = 0;
+          curSession.abstain = 0;
+          saveToLocalStorage(true, true);
+          renderResolutionVoteGrid();
+        }
       });
     }
 

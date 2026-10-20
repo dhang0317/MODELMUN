@@ -80,7 +80,7 @@
 
     // Voting
     voteMode: 'rollcall',
-    votingSubtab: 'ballots', // 'ballots' (default overview grid) or 'rollcall' (calling card)
+    votingSubtab: 'ballots', // 'ballots' (default overview grid) or 'rollcall' (calling card) or 'session' (非投票點名/會期表決)
     voteStage: 'r1',
     voteResolutionTitle: 'Draft Resolution 1.1',
     voteThreshold: 'simple',
@@ -89,6 +89,15 @@
     votingMotion: null, // Holds motion object currently being voted on { id, proposer, type, topic, totalMins, speakerSecs, threshold }
     showResults: true,
     rightsSpeeches: [],
+
+    // Non-voting Session Records
+    sessionCount: 3,
+    activeSessionId: 1,
+    sessionVotes: [
+      { id: 1, name: 'Session 1', favor: 0, against: 0, abstain: 0, note: '' },
+      { id: 2, name: 'Session 2', favor: 0, against: 0, abstain: 0, note: '' },
+      { id: 3, name: 'Session 3', favor: 0, against: 0, abstain: 0, note: '' }
+    ],
 
     // Theme & Background sync
     themeMode: 'dark', // 'dark' or 'light'
@@ -159,6 +168,10 @@
       voteResolutionTitle: state.voteResolutionTitle,
       showResults: state.showResults,
       rightsSpeeches: state.rightsSpeeches,
+      votingSubtab: state.votingSubtab,
+      sessionCount: state.sessionCount,
+      activeSessionId: state.activeSessionId,
+      sessionVotes: state.sessionVotes,
       language: state.language,
       themeMode: document.body.classList.contains('light-mode') ? 'light' : 'dark',
       customAccent: localStorage.getItem('mun-custom-accent') || null,
@@ -522,6 +535,10 @@
     if (parsed.voteResolutionTitle) state.voteResolutionTitle = parsed.voteResolutionTitle;
     if (typeof parsed.showResults !== 'undefined') state.showResults = parsed.showResults;
     if (Array.isArray(parsed.rightsSpeeches)) state.rightsSpeeches = parsed.rightsSpeeches;
+    if (parsed.votingSubtab) state.votingSubtab = parsed.votingSubtab;
+    if (typeof parsed.sessionCount === 'number') state.sessionCount = parsed.sessionCount;
+    if (typeof parsed.activeSessionId === 'number') state.activeSessionId = parsed.activeSessionId;
+    if (Array.isArray(parsed.sessionVotes)) state.sessionVotes = parsed.sessionVotes;
     if (parsed.language) state.language = parsed.language;
 
     // Synchronize dark/light theme and background color with Chair
