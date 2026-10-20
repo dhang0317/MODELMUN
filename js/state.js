@@ -1,4 +1,97 @@
 
+  // --- MOTION RULES & PRECEDENCE DEFINITION ---
+  const PRECEDENCE = {
+    adjourn_session: 100,
+    adjourn_day: 98,
+    adjourn: 98,
+    suspend: 95,
+    previous_question: 90,
+    close: 90,
+    unmod: 80,
+    mod: 60,
+    singlespeaker: 40
+  };
+
+  const MOTION_RULES = {
+    // 結束辯論 / 提請表決：強制 2/3 絕對多數程序表決，不得以快速表決/附議帶過，必須逐一唱名表決 (Roll Call Only)
+    previous_question: {
+      requiresVote: true,
+      allowQuickSession: false,
+      threshold: 'twothirds',
+      voteType: 'procedural',
+      canSecond: false
+    },
+    close: {
+      requiresVote: true,
+      allowQuickSession: false,
+      threshold: 'twothirds',
+      voteType: 'procedural',
+      canSecond: false
+    },
+    // 休會 / 散會動議：重大程序動議，禁止快速表決帶過，必須正式唱票
+    adjourn: {
+      requiresVote: true,
+      allowQuickSession: false,
+      threshold: 'simple',
+      voteType: 'procedural',
+      canSecond: false
+    },
+    adjourn_day: {
+      requiresVote: true,
+      allowQuickSession: false,
+      threshold: 'simple',
+      voteType: 'procedural',
+      canSecond: false
+    },
+    adjourn_session: {
+      requiresVote: true,
+      allowQuickSession: false,
+      threshold: 'simple',
+      voteType: 'procedural',
+      canSecond: false
+    },
+    // 暫停會議動議：一般休會/磋商前暫停，可快速表決或附議通過
+    suspend: {
+      requiresVote: false,
+      allowQuickSession: true,
+      threshold: 'simple',
+      voteType: 'procedural',
+      canSecond: true
+    },
+    // 非主持核心磋商：一般程序動議，允許快速表決/附議通過
+    unmod: {
+      requiresVote: false,
+      allowQuickSession: true,
+      threshold: 'simple',
+      voteType: 'procedural',
+      canSecond: true
+    },
+    // 主持核心磋商：一般程序動議，允許快速表決/附議通過
+    mod: {
+      requiresVote: false,
+      allowQuickSession: true,
+      threshold: 'simple',
+      voteType: 'procedural',
+      canSecond: true
+    },
+    // 介紹決議案草案及修正案 / 單一發言者
+    singlespeaker: {
+      requiresVote: false,
+      allowQuickSession: true,
+      threshold: 'simple',
+      voteType: 'procedural',
+      canSecond: true
+    }
+  };
+
+  // Helper to determine if a motion allows quick session vote
+  function canMotionUseQuickSession(motionType) {
+    if (!motionType) return true;
+    const rule = MOTION_RULES[motionType];
+    if (!rule) return true;
+    return rule.allowQuickSession !== false;
+  }
+
   // --- DEFAULT SETTINGS SCHEMA ---
   const defaultSettings = {
     conference: {

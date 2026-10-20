@@ -763,6 +763,15 @@
     const btnSubtabSession = document.getElementById('btn-voting-subtab-session');
     if (btnSubtabSession) {
       btnSubtabSession.addEventListener('click', () => {
+        // Guard: check if current motion vote prohibits quick session
+        if (state.activeVoteTarget === 'motion') {
+          const curMot = state.votingMotion || (state.motions && state.motions[0]);
+          if (curMot && typeof canMotionUseQuickSession === 'function' && !canMotionUseQuickSession(curMot.type)) {
+            const t = I18N[state.language] || I18N.en;
+            showToast(state.language === 'zh' ? '此動議依議事規則強制正式唱名表決，禁止快速表決帶過！' : 'This motion requires formal roll call vote!', 'warning');
+            return;
+          }
+        }
         state.votingSubtab = 'session';
         saveToLocalStorage(true, true);
         renderResolutionVoteGrid();

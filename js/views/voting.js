@@ -220,7 +220,15 @@
         const mRule = (typeof MOTION_RULES !== 'undefined' && MOTION_RULES[activeMotion.type]) ? MOTION_RULES[activeMotion.type] : { threshold: 'simple' };
         if (badgeMotionRule) {
           badgeMotionRule.classList.remove('hidden');
-          badgeMotionRule.textContent = mRule.requiresVote ? (t.ruleTwoThirdsMandatory || '2/3 強制表決 (不可棄權)') : (t.ruleSecondOrVote || '程序性表決 (不可棄權)');
+          if (mRule.allowQuickSession === false) {
+            badgeMotionRule.className = 'text-[10px] font-semibold px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-300';
+            badgeMotionRule.textContent = mRule.requiresVote
+              ? (t.ruleTwoThirdsMandatory || '2/3 強制唱名表決 (禁止快速表決)')
+              : (t.ruleMandatoryRollCall || '強制唱名表決 (禁止快速表決)');
+          } else {
+            badgeMotionRule.className = 'text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300';
+            badgeMotionRule.textContent = mRule.requiresVote ? (t.ruleTwoThirdsMandatory || '2/3 強制表決 (不可棄權)') : (t.ruleSecondOrVote || '程序性表決 (不可棄權)');
+          }
         }
       } else {
         if (titleElem) titleElem.textContent = t.noMotionsAvailableToVote || '無待表決之動議';
@@ -249,12 +257,23 @@
     const btnSubtabRollcall = document.getElementById('btn-voting-subtab-rollcall');
     const btnSubtabSession = document.getElementById('btn-voting-subtab-session');
 
+    // Check if motion prohibits quick session vote
+    const isMotionVote = state.activeVoteTarget === 'motion';
+    const curMotion = isMotionVote ? (state.votingMotion || (state.motions && state.motions[0])) : null;
+    const motionType = curMotion ? curMotion.type : null;
+    const isSessionAllowed = !isMotionVote || (typeof canMotionUseQuickSession === 'function' ? canMotionUseQuickSession(motionType) : true);
+
+    // If session is prohibited for this motion, auto redirect out of session to rollcall
+    if (!isSessionAllowed && state.votingSubtab === 'session') {
+      state.votingSubtab = 'rollcall';
+    }
+
     // Default votingSubtab is ballots
     if (!state.votingSubtab) {
       state.votingSubtab = 'ballots';
     }
 
-    // Update Subtab button styling
+    // Update Subtab button styling and disable Session subtab if not allowed
     if (btnSubtabBallots && btnSubtabRollcall) {
       const isBallots = state.votingSubtab === 'ballots';
       const isRollcall = state.votingSubtab === 'rollcall';
@@ -269,16 +288,28 @@
         : 'px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900';
 
       if (btnSubtabSession) {
-        btnSubtabSession.className = isSession
-          ? 'px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800 font-bold'
-          : 'px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900';
+        if (!isSessionAllowed) {
+          // Disabled state with tooltip
+          btnSubtabSession.disabled = true;
+          btnSubtabSession.style.opacity = '0.4';
+          btnSubtabSession.style.cursor = 'not-allowed';
+          btnSubtabSession.title = '此動議依議事規則強制正式唱名表決，禁止快速表決帶過';
+          btnSubtabSession.className = 'px-3 py-1.5 rounded-lg text-xs transition text-slate-400 bg-slate-200/50 cursor-not-allowed';
+        } else {
+          btnSubtabSession.disabled = false;
+          btnSubtabSession.style.opacity = '1';
+          btnSubtabSession.style.cursor = 'pointer';
+          btnSubtabSession.title = '';
+          btnSubtabSession.className = isSession
+            ? 'px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800 font-bold'
+            : 'px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900 cursor-pointer';
+        }
       }
     }
 
     // If Session Subtab is active: handle details card and visibility
     const hintBanner = document.getElementById('motion-session-hint-banner');
     const scoreboard = document.getElementById('voting-scoreboard');
-    const isMotionVote = state.activeVoteTarget === 'motion';
 
     if (state.votingSubtab === 'session') {
       if (pBallots) pBallots.classList.add('hidden');
