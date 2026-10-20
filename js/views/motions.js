@@ -148,13 +148,40 @@
     const rule = (typeof MOTION_RULES !== 'undefined' && MOTION_RULES[motion.type]) ? MOTION_RULES[motion.type] : { threshold: 'simple' };
     state.voteThreshold = rule.threshold || 'simple';
     
-    // Clear previous votes to ready a fresh procedural ballot
+    // Clear previous roll call votes to ready a fresh procedural ballot
     state.selectedCountries.forEach(c => {
       c.vote = 'none';
       c.hasRights = false;
     });
     state.voteStage = 'r1';
     state.activeVoterIndex = 0;
+
+    // Default voting mode to SESSION for motion voting (while keeping ROLLCALL / Ballots selectable)
+    state.votingSubtab = 'session';
+
+    // Ensure sessionVotes exists and active session note is populated with motion info
+    if (!Array.isArray(state.sessionVotes) || state.sessionVotes.length === 0) {
+      const count = state.sessionCount || 3;
+      state.sessionVotes = [];
+      for (let i = 1; i <= count; i++) {
+        state.sessionVotes.push({
+          id: i,
+          name: `Session ${i}`,
+          favor: 0,
+          against: 0,
+          abstain: 0,
+          note: ''
+        });
+      }
+    }
+    if (!state.activeSessionId) {
+      state.activeSessionId = 1;
+    }
+    const currentSess = state.sessionVotes.find(s => s.id === state.activeSessionId) || state.sessionVotes[0];
+    if (currentSess) {
+      const motionName = formatMotionType(motion.type);
+      currentSess.note = `${motionName} (${motion.proposer})`;
+    }
 
     saveToLocalStorage(true, true);
     switchTab('vote');

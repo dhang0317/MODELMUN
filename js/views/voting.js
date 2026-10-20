@@ -122,6 +122,66 @@
     });
   }
 
+  function updateMotionVoteHeaderInfo() {
+    const isMotionVote = state.activeVoteTarget === 'motion';
+    const titleElem = document.getElementById('vote-resolution-title');
+    const btnEditTitle = document.getElementById('btn-edit-resolution-title');
+    const motionDescEl = document.getElementById('motion-vote-desc');
+    const motionDetailsText = document.getElementById('motion-vote-details-text');
+    const motionProposerFlag = document.getElementById('motion-vote-proposer-flag');
+    const badgeMotionRule = document.getElementById('badge-motion-vote-rule');
+    const badgeType = document.getElementById('label-vote-type-badge');
+    const badgeThresh = document.getElementById('label-vote-threshold-badge');
+    const threshElem = document.getElementById('select-vote-threshold');
+    const t = I18N[state.language] || I18N.en;
+
+    if (badgeType) {
+      badgeType.textContent = (state.voteType === 'procedural') ? (t.proceduralVote || 'Procedural Vote') : (t.substantiveVote || 'Substantive Vote');
+    }
+    if (badgeThresh) {
+      const th = state.voteThreshold || 'simple';
+      badgeThresh.textContent = th === 'twothirds' ? (t.twoThirdsMajorityRule || '2/3 Majority') : (th === 'unsc9' ? (t.unsc9RequiredRule || 'UNSC 9 Required') : (th === 'consensus' ? (t.consensusMajorityRule || 'Consensus') : (t.simpleMajorityRule || 'Simple Majority')));
+    }
+    if (threshElem) {
+      threshElem.value = state.voteThreshold || 'simple';
+    }
+
+    if (isMotionVote) {
+      const activeMotion = state.votingMotion || (state.motions && state.motions[0]) || null;
+      if (activeMotion) {
+        const motionTitle = `${formatMotionType(activeMotion.type)}`;
+        if (titleElem) titleElem.textContent = motionTitle;
+        if (btnEditTitle) btnEditTitle.classList.add('hidden');
+        
+        if (motionDescEl) {
+          motionDescEl.classList.remove('hidden');
+          const mCountry = state.selectedCountries.find(c => getCountryDisplayName(c) === activeMotion.proposer);
+          const flagHtml = mCountry ? `<img src="${getFlagUrl(mCountry)}" class="w-4 h-3 inline-block rounded object-cover mr-1.5 align-middle border border-slate-300">` : '';
+          if (motionProposerFlag) motionProposerFlag.innerHTML = flagHtml;
+          if (motionDetailsText) {
+            motionDetailsText.textContent = `${activeMotion.proposer} • ${activeMotion.topic || t.generalDiscussion || 'General Discussion'}`;
+          }
+        }
+
+        const mRule = (typeof MOTION_RULES !== 'undefined' && MOTION_RULES[activeMotion.type]) ? MOTION_RULES[activeMotion.type] : { threshold: 'simple' };
+        if (badgeMotionRule) {
+          badgeMotionRule.classList.remove('hidden');
+          badgeMotionRule.textContent = mRule.requiresVote ? (t.ruleTwoThirdsMandatory || '2/3 強制表決 (不可棄權)') : (t.ruleSecondOrVote || '程序性表決 (不可棄權)');
+        }
+      } else {
+        if (titleElem) titleElem.textContent = t.noMotionsAvailableToVote || '無待表決之動議';
+        if (btnEditTitle) btnEditTitle.classList.add('hidden');
+        if (motionDescEl) motionDescEl.classList.add('hidden');
+        if (badgeMotionRule) badgeMotionRule.classList.add('hidden');
+      }
+    } else {
+      if (titleElem) titleElem.textContent = state.voteResolutionTitle || 'Draft Resolution 1.1';
+      if (btnEditTitle) btnEditTitle.classList.remove('hidden');
+      if (motionDescEl) motionDescEl.classList.add('hidden');
+      if (badgeMotionRule) badgeMotionRule.classList.add('hidden');
+    }
+  }
+
   function renderResolutionVoteGrid() {
     const btnR1 = document.getElementById('vote-stage-r1');
     const btnR2 = document.getElementById('vote-stage-r2');
@@ -161,19 +221,43 @@
       }
     }
 
-    // If Session Subtab is active: hide details card, ballots & active card, and render Session Grid
+    // If Session Subtab is active: handle details card and visibility
+    const hintBanner = document.getElementById('motion-session-hint-banner');
+    const scoreboard = document.getElementById('voting-scoreboard');
+    const isMotionVote = state.activeVoteTarget === 'motion';
+
     if (state.votingSubtab === 'session') {
-      if (detailsCard) detailsCard.classList.add('hidden');
       if (pBallots) pBallots.classList.add('hidden');
       if (pActiveCard) pActiveCard.classList.add('hidden');
       if (pRights) pRights.classList.add('hidden');
       if (pSession) pSession.classList.remove('hidden');
 
+      if (isMotionVote) {
+        // Keep header and execute button accessible, but hide rollcall-only scoreboard
+        if (detailsCard) detailsCard.classList.remove('hidden');
+        if (scoreboard) scoreboard.classList.add('hidden');
+        if (hintBanner) {
+          hintBanner.classList.remove('hidden');
+          const hintText = document.getElementById('motion-session-hint-text');
+          if (hintText) {
+            const m = state.votingMotion || (state.motions && state.motions[0]);
+            hintText.textContent = m ? `正在進行動議會期快速表決：${formatMotionType(m.type)} (${m.proposer})` : '正在進行動議會期快速表決';
+          }
+        }
+      } else {
+        if (detailsCard) detailsCard.classList.add('hidden');
+        if (hintBanner) hintBanner.classList.add('hidden');
+      }
+
+      // Populate titles and motion badges even in session mode
+      updateMotionVoteHeaderInfo();
       renderSessionVotesGrid();
       return;
     } else {
       if (detailsCard) detailsCard.classList.remove('hidden');
       if (pSession) pSession.classList.add('hidden');
+      if (hintBanner) hintBanner.classList.add('hidden');
+      if (scoreboard && state.showResults) scoreboard.classList.remove('hidden');
     }
 
     // Stage button styles
@@ -208,7 +292,7 @@
       if (pActiveCard) pActiveCard.classList.add('hidden');
     }
 
-    const isMotionVote = state.activeVoteTarget === 'motion';
+    // Stages Group & Target Buttons
     const btnTargetRes = document.getElementById('btn-vote-target-resolution');
     const btnTargetMot = document.getElementById('btn-vote-target-motion');
     const stagesGroup = document.getElementById('vote-stages-group');
@@ -245,45 +329,9 @@
       }
     }
 
-    const titleElem = document.getElementById('vote-resolution-title');
-    const btnEditTitle = document.getElementById('btn-edit-resolution-title');
+    // Update motion vote header info and badge labels
+    updateMotionVoteHeaderInfo();
 
-    if (isMotionVote) {
-      const activeMotion = state.votingMotion || (state.motions && state.motions[0]) || null;
-      if (activeMotion) {
-        const motionTitle = `${formatMotionType(activeMotion.type)}`;
-        if (titleElem) titleElem.textContent = motionTitle;
-        if (btnEditTitle) btnEditTitle.classList.add('hidden');
-        
-        if (motionDescEl) {
-          motionDescEl.classList.remove('hidden');
-          const mCountry = state.selectedCountries.find(c => getCountryDisplayName(c) === activeMotion.proposer);
-          const flagHtml = mCountry ? `<img src="${getFlagUrl(mCountry)}" class="w-4 h-3 inline-block rounded object-cover mr-1.5 align-middle border border-slate-300">` : '';
-          if (motionProposerFlag) motionProposerFlag.innerHTML = flagHtml;
-          if (motionDetailsText) {
-            motionDetailsText.textContent = `${activeMotion.proposer} • ${activeMotion.topic || t.generalDiscussion || 'General Discussion'}`;
-          }
-        }
-
-        const mRule = (typeof MOTION_RULES !== 'undefined' && MOTION_RULES[activeMotion.type]) ? MOTION_RULES[activeMotion.type] : { threshold: 'simple' };
-        if (badgeMotionRule) {
-          badgeMotionRule.classList.remove('hidden');
-          badgeMotionRule.textContent = mRule.requiresVote ? (t.ruleTwoThirdsMandatory || '2/3 強制表決 (不可棄權)') : (t.ruleSecondOrVote || '程序性表決 (不可棄權)');
-        }
-      } else {
-        if (titleElem) titleElem.textContent = t.noMotionsAvailableToVote || '無待表決之動議';
-        if (btnEditTitle) btnEditTitle.classList.add('hidden');
-        if (motionDescEl) motionDescEl.classList.add('hidden');
-        if (badgeMotionRule) badgeMotionRule.classList.add('hidden');
-      }
-    } else {
-      if (titleElem) titleElem.textContent = state.voteResolutionTitle || 'Draft Resolution 1.1';
-      if (btnEditTitle) btnEditTitle.classList.remove('hidden');
-      if (motionDescEl) motionDescEl.classList.add('hidden');
-      if (badgeMotionRule) badgeMotionRule.classList.add('hidden');
-    }
-
-    const scoreboard = document.getElementById('voting-scoreboard');
     const headerRow = document.getElementById('voting-header-row');
     const t = I18N[state.language] || I18N.en;
 
@@ -834,11 +882,18 @@
 
         <!-- Footer / Card Actions -->
         <div class="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-          <button type="button" class="btn-select-session px-2.5 py-1 rounded font-medium transition cursor-pointer ${
-            isSelected ? 'text-primary font-bold bg-primary/10' : 'text-slate-500 hover:text-slate-800'
-          }" data-id="${sess.id}">
-            ${isSelected ? '● 當前會期' : '設為當前'}
-          </button>
+          <div class="flex items-center space-x-1.5">
+            <button type="button" class="btn-select-session px-2.5 py-1 rounded font-medium transition cursor-pointer ${
+              isSelected ? 'text-primary font-bold bg-primary/10' : 'text-slate-500 hover:text-slate-800'
+            }" data-id="${sess.id}">
+              ${isSelected ? '● 當前會期' : '設為當前'}
+            </button>
+            ${
+              (state.activeVoteTarget === 'motion' && isSelected && ((sess.favor || 0) > (sess.against || 0)))
+                ? `<button type="button" class="btn-quick-adopt-motion px-2 py-0.5 rounded bg-emerald-600 text-white font-bold text-[10px] hover:bg-emerald-700 transition shadow-sm cursor-pointer" title="以此會期票數通過並執行動議">通過動議</button>`
+                : ''
+            }
+          </div>
           <button type="button" class="btn-clear-session px-2.5 py-1 text-slate-400 hover:text-rose-600 transition cursor-pointer" data-id="${sess.id}" title="清空票數">
             清空
           </button>
@@ -960,6 +1015,18 @@
           state.activeSessionId = sess.id;
           saveToLocalStorage(true, true);
           renderSessionVotesGrid();
+        });
+      }
+
+      // Quick Adopt Motion from Session Card
+      const btnQuickAdopt = card.querySelector('.btn-quick-adopt-motion');
+      if (btnQuickAdopt) {
+        btnQuickAdopt.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const curMot = state.votingMotion || (state.motions && state.motions[0]);
+          if (!curMot) return;
+          const targetIdx = (typeof curMot.originalIndex === 'number') ? curMot.originalIndex : 0;
+          executeMotion(curMot, targetIdx);
         });
       }
 

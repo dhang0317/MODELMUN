@@ -769,6 +769,15 @@
       });
     }
 
+    const btnSwitchRollcallInline = document.getElementById('btn-switch-to-rollcall-inline');
+    if (btnSwitchRollcallInline) {
+      btnSwitchRollcallInline.addEventListener('click', () => {
+        state.votingSubtab = 'rollcall';
+        saveToLocalStorage(true, true);
+        renderResolutionVoteGrid();
+      });
+    }
+
     // Session Subtab Controls
     const btnSessionInc = document.getElementById('btn-session-inc');
     if (btnSessionInc) {
