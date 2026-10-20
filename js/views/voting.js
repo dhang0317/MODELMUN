@@ -1,3 +1,57 @@
+  // Check if roll call voting for a motion has finished, determine pass/fail, and auto-navigate
+  function checkMotionVotingAutoFinish(eligibleVoters, favorCount, againstCount, remainingToVote, requiredMajority) {
+    if (state.activeVoteTarget !== 'motion' || state.currentTab !== 'vote') return;
+    const curMot = state.votingMotion || (state.motions && state.motions[0]);
+    if (!curMot) return;
+
+    // Only auto finish if all eligible voters have cast their votes
+    if (remainingToVote > 0 || eligibleVoters.length === 0) return;
+
+    const t = I18N[state.language] || I18N.en;
+    let isPassed = false;
+
+    if (state.voteThreshold === 'twothirds') {
+      isPassed = (favorCount > 0 && favorCount >= requiredMajority);
+    } else {
+      isPassed = (favorCount > againstCount);
+    }
+
+    const motName = formatMotionType(curMot.type);
+    const motProposer = curMot.proposer || '';
+    const originalIdx = (typeof curMot.originalIndex === 'number') ? curMot.originalIndex : 0;
+
+    // Prevent re-triggering during transition
+    state.activeVoteTarget = 'resolution';
+    state.votingMotion = null;
+
+    if (isPassed) {
+      if (typeof showToast === 'function') {
+        const passMsg = state.language === 'zh'
+          ? `動議【${motName}】(${motProposer}) 表決通過！`
+          : `Motion "${motName}" passed!`;
+        showToast(passMsg, 'success', 3500);
+      }
+      setTimeout(() => {
+        executeMotion(curMot, originalIdx);
+      }, 500);
+    } else {
+      if (typeof showToast === 'function') {
+        const failMsg = state.language === 'zh'
+          ? `動議【${motName}】(${motProposer}) 表決未獲通過（否決）。`
+          : `Motion "${motName}" failed.`;
+        showToast(failMsg, 'error', 3500);
+      }
+      setTimeout(() => {
+        if (typeof removeMotion === 'function') {
+          removeMotion(originalIdx);
+        } else if (typeof originalIdx === 'number' && originalIdx >= 0 && state.motions) {
+          state.motions.splice(originalIdx, 1);
+        }
+        switchTab('motions');
+      }, 700);
+    }
+  }
+
   function renderVotingView() {
     // Render roll call grid if rollcall tab is active
     if (state.currentTab === 'rollcall') {
@@ -504,6 +558,11 @@
         } else {
           btnMotionExecute.classList.add('hidden');
         }
+      }
+
+      // Check if all countries finished voting on a motion, auto-judge and auto-navigate
+      if (isMotionVote && remainingToVote === 0 && eligibleVoters.length > 0) {
+        checkMotionVotingAutoFinish(eligibleVoters, favorCount, againstCount, remainingToVote, requiredMajority);
       }
     }
 
