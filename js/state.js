@@ -13,42 +13,42 @@
   };
 
   const MOTION_RULES = {
-    // 結束辯論 / 提請表決：2/3 絕對多數程序表決
+    // 結束辯論 / 提請表決：2/3 絕對多數程序表決，支援附議通過或表決
     previous_question: {
-      requiresVote: true,
+      requiresVote: false,
       allowQuickSession: true,
       threshold: 'twothirds',
       voteType: 'procedural',
-      canSecond: false
+      canSecond: true
     },
     close: {
-      requiresVote: true,
+      requiresVote: false,
       allowQuickSession: true,
       threshold: 'twothirds',
       voteType: 'procedural',
-      canSecond: false
+      canSecond: true
     },
-    // 休會 / 散會動議：重大程序動議
+    // 休會 / 散會動議：重大程序動議，支援附議通過或表決
     adjourn: {
-      requiresVote: true,
+      requiresVote: false,
       allowQuickSession: true,
       threshold: 'simple',
       voteType: 'procedural',
-      canSecond: false
+      canSecond: true
     },
     adjourn_day: {
-      requiresVote: true,
+      requiresVote: false,
       allowQuickSession: true,
       threshold: 'simple',
       voteType: 'procedural',
-      canSecond: false
+      canSecond: true
     },
     adjourn_session: {
-      requiresVote: true,
+      requiresVote: false,
       allowQuickSession: true,
       threshold: 'simple',
       voteType: 'procedural',
-      canSecond: false
+      canSecond: true
     },
     // 暫停會議動議：一般休會/磋商前暫停，可快速表決或附議通過
     suspend: {
