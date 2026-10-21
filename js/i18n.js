@@ -533,9 +533,9 @@ const I18N = {
       putToVote: "交付程序表決",
       passSecond: "附議無異議通過",
       motionPreviousQuestion: "結束辯論動議 / 提請表決 (Previous Question)",
-      ruleTwoThirdsMandatory: "強制 2/3 唱名表決 (禁止快速表決/不可棄權)",
-      ruleMandatoryRollCall: "強制唱名表決 (禁止快速表決帶過)",
-      ruleSecondOrVote: "附議無異議通過 / 程序性表決",
+      ruleTwoThirdsMandatory: "2/3 多數表決 / 附議通過",
+      ruleMandatoryRollCall: "程序性表決 / 附議通過",
+      ruleSecondOrVote: "附議通過 / 程序性表決",
       executeMotionBtn: "通過並執行動議",
       enterSubstantiveVotePrompt: "結束辯論動議已通過！大會立即關閉辯論，進入決議案實質性表決。",
       noMotionsAvailableToVote: "場上目前無待決動議可供表決。"

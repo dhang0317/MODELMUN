@@ -220,15 +220,8 @@
         const mRule = (typeof MOTION_RULES !== 'undefined' && MOTION_RULES[activeMotion.type]) ? MOTION_RULES[activeMotion.type] : { threshold: 'simple' };
         if (badgeMotionRule) {
           badgeMotionRule.classList.remove('hidden');
-          if (mRule.allowQuickSession === false) {
-            badgeMotionRule.className = 'text-[10px] font-semibold px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-300';
-            badgeMotionRule.textContent = mRule.requiresVote
-              ? (t.ruleTwoThirdsMandatory || '2/3 強制唱名表決 (禁止快速表決)')
-              : (t.ruleMandatoryRollCall || '強制唱名表決 (禁止快速表決)');
-          } else {
-            badgeMotionRule.className = 'text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300';
-            badgeMotionRule.textContent = mRule.requiresVote ? (t.ruleTwoThirdsMandatory || '2/3 強制表決 (不可棄權)') : (t.ruleSecondOrVote || '程序性表決 (不可棄權)');
-          }
+          badgeMotionRule.className = 'text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300';
+          badgeMotionRule.textContent = mRule.threshold === 'twothirds' ? (t.twoThirdsMajorityRule || '2/3 多數') : (t.simpleMajorityRule || '簡單多數');
         }
       } else {
         if (titleElem) titleElem.textContent = t.noMotionsAvailableToVote || '無待表決之動議';
