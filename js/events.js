@@ -604,14 +604,31 @@
         renderAll();
       });
     }
-    document.getElementById('btn-reset-votes').addEventListener('click', () => {
-      state.selectedCountries.forEach(c => {
-        c.vote = 'none';
-        c.hasRights = false;
+    const btnResetVotes = document.getElementById('btn-reset-votes');
+    if (btnResetVotes) {
+      btnResetVotes.addEventListener('click', () => {
+        // 1. Reset Rollcall & Substantive Ballots for all delegates
+        state.selectedCountries.forEach(c => {
+          c.vote = 'none';
+          c.hasRights = false;
+        });
+        state.voteStage = 'r1';
+        state.activeVoterIndex = 0;
+
+        // 2. If currently in Session voting subtab, also reset the active session votes
+        if (state.votingSubtab === 'session' && Array.isArray(state.sessionVotes)) {
+          const curSess = state.sessionVotes.find(s => s.id === state.activeSessionId) || state.sessionVotes[0];
+          if (curSess) {
+            curSess.favor = 0;
+            curSess.against = 0;
+            curSess.abstain = 0;
+          }
+        }
+
+        saveToLocalStorage(true, true);
+        renderAll();
       });
-      saveToLocalStorage(true, true);
-      renderAll();
-    });
+    }
     document.getElementById('select-vote-threshold').addEventListener('change', (e) => {
       state.voteThreshold = e.target.value;
       saveToLocalStorage(true, true);
@@ -1005,11 +1022,14 @@
       });
     }
 
-    document.getElementById('btn-toggle-results').addEventListener('click', () => {
-      state.showResults = !state.showResults;
-      saveToLocalStorage(true, true);
-      renderResolutionVoteGrid();
-    });
+    const btnToggleResults = document.getElementById('btn-toggle-results');
+    if (btnToggleResults) {
+      btnToggleResults.addEventListener('click', () => {
+        state.showResults = !state.showResults;
+        saveToLocalStorage(true, true);
+        renderResolutionVoteGrid();
+      });
+    }
 
     // Global Page-Wide Content Scale Slider
     function setupGlobalScaleSlider() {
