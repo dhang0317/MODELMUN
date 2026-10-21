@@ -53,10 +53,8 @@
   }
 
   function renderVotingView() {
-    // Render roll call grid if rollcall tab is active
-    if (state.currentTab === 'rollcall') {
-      renderRollCallGrid();
-    }
+    // Always render roll call grid so it's ready when viewing rollcall
+    renderRollCallGrid();
     // Render resolution vote grid if vote tab is active
     if (state.currentTab === 'vote') {
       renderResolutionVoteGrid();
