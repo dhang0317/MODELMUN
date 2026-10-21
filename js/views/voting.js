@@ -246,7 +246,6 @@
     const pActiveCard = document.getElementById('panel-active-voter-card');
     const pSession = document.getElementById('panel-session-votes-container');
     const detailsCard = document.getElementById('card-voting-details');
-    const btnSubtabBallots = document.getElementById('btn-voting-subtab-ballots');
     const btnSubtabRollcall = document.getElementById('btn-voting-subtab-rollcall');
     const btnSubtabSession = document.getElementById('btn-voting-subtab-session');
 
@@ -256,20 +255,15 @@
     const motionType = curMotion ? curMotion.type : null;
     const isSessionAllowed = true;
 
-    // Default votingSubtab is session if voting for motion, otherwise ballots
-    if (!state.votingSubtab) {
-      state.votingSubtab = isMotionVote ? 'session' : 'ballots';
+    // Default votingSubtab is session if voting for motion, otherwise rollcall
+    if (!state.votingSubtab || state.votingSubtab === 'ballots') {
+      state.votingSubtab = isMotionVote ? 'session' : 'rollcall';
     }
 
-    // Update Subtab button styling and disable Session subtab if not allowed
-    if (btnSubtabBallots && btnSubtabRollcall) {
-      const isBallots = state.votingSubtab === 'ballots';
+    // Update Subtab button styling
+    if (btnSubtabRollcall) {
       const isRollcall = state.votingSubtab === 'rollcall';
       const isSession = state.votingSubtab === 'session';
-
-      btnSubtabBallots.className = isBallots
-        ? 'px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800 font-bold'
-        : 'px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900';
 
       btnSubtabRollcall.className = isRollcall
         ? 'px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800 font-bold'
@@ -332,23 +326,13 @@
     if (state.voteStage === 'r1') {
       if (btnR1) btnR1.className = 'px-3 py-1.5 bg-primary text-white rounded-lg text-xs transition shadow-sm';
       if (pRights) pRights.classList.add('hidden');
-      if (state.votingSubtab === 'rollcall') {
-        if (pBallots) pBallots.classList.add('hidden');
-        if (pActiveCard) pActiveCard.classList.remove('hidden');
-      } else {
-        if (pBallots) pBallots.classList.remove('hidden');
-        if (pActiveCard) pActiveCard.classList.add('hidden');
-      }
+      if (pBallots) pBallots.classList.add('hidden');
+      if (pActiveCard) pActiveCard.classList.remove('hidden');
     } else if (state.voteStage === 'r2') {
       if (btnR2) btnR2.className = 'px-3 py-1.5 bg-primary text-white rounded-lg text-xs transition shadow-sm';
       if (pRights) pRights.classList.add('hidden');
-      if (state.votingSubtab === 'rollcall') {
-        if (pBallots) pBallots.classList.add('hidden');
-        if (pActiveCard) pActiveCard.classList.remove('hidden');
-      } else {
-        if (pBallots) pBallots.classList.remove('hidden');
-        if (pActiveCard) pActiveCard.classList.add('hidden');
-      }
+      if (pBallots) pBallots.classList.add('hidden');
+      if (pActiveCard) pActiveCard.classList.remove('hidden');
     } else {
       if (btnRights) btnRights.className = 'px-3 py-1.5 bg-primary text-white rounded-lg text-xs transition shadow-sm';
       if (pRights) pRights.classList.remove('hidden');

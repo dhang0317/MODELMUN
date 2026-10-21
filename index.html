@@ -631,10 +631,7 @@
 
             <!-- View Sub-tabs -->
             <div class="flex items-center space-x-1 p-1 bg-slate-100 rounded-xl border border-slate-200">
-              <button id="btn-voting-subtab-ballots" class="px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800" data-i18n="subtabBallots">
-                名冊總覽 (Ballots)
-              </button>
-              <button id="btn-voting-subtab-rollcall" class="px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900" data-i18n="subtabRollcall">
+              <button id="btn-voting-subtab-rollcall" class="px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800" data-i18n="subtabRollcall">
                 唱票輪次 (ROLLCALL VOTING)
               </button>
               <button id="btn-voting-subtab-session" class="px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900 cursor-pointer" data-i18n="subtabSession">
@@ -811,16 +808,7 @@
           </div>
         </div>
 
-        <!-- Roll Call Vote Delegations Full Grid (可隨時手動直接點擊切換) -->
-        <div id="panel-ballots-container" class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
-          <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-100">
-            <h4 class="text-slate-800 text-sm" data-i18n="rollCallBallots">Roll-Call Ballots</h4>
-            <span class="text-xs text-slate-400" id="label-ballots-summary"></span>
-          </div>
-          <div id="grid-substantive-ballots" class="grid grid-cols-1 md:grid-cols-2 gap-3.5 transition-all duration-200">
-            <!-- Injected via JS -->
-          </div>
-        </div>
+
 
         <!-- 3. Non-Voting Session Records Subtab (會期表決 / 非投票點名) -->
         <div id="panel-session-votes-container" class="space-y-6 hidden">

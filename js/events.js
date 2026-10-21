@@ -767,15 +767,7 @@
       });
     }
 
-    // Voting Subtabs Switching (Ballots vs Rollcall Calling Card vs Session)
-    const btnSubtabBallots = document.getElementById('btn-voting-subtab-ballots');
-    if (btnSubtabBallots) {
-      btnSubtabBallots.addEventListener('click', () => {
-        state.votingSubtab = 'ballots';
-        saveToLocalStorage(true, true);
-        renderResolutionVoteGrid();
-      });
-    }
+    // Voting Subtabs Switching (Rollcall Calling Card vs Session)
     const btnSubtabRollcall = document.getElementById('btn-voting-subtab-rollcall');
     if (btnSubtabRollcall) {
       btnSubtabRollcall.addEventListener('click', () => {

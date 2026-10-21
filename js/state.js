@@ -173,7 +173,7 @@
 
     // Voting
     voteMode: 'rollcall',
-    votingSubtab: 'ballots', // 'ballots' (default overview grid) or 'rollcall' (calling card) or 'session' (非投票點名/會期表決)
+    votingSubtab: 'rollcall', // 'rollcall' (calling card) or 'session' (非投票點名/會期表決)
     voteStage: 'r1',
     voteResolutionTitle: 'Draft Resolution 1.1',
     voteThreshold: 'simple',
