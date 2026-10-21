@@ -257,7 +257,7 @@
     if (btnQuickRollcall) {
       btnQuickRollcall.addEventListener('click', () => {
         state.voteMode = 'rollcall';
-        switchTab('voting');
+        switchTab('vote');
       });
     }
 
@@ -689,6 +689,7 @@
       btnTargetMot.addEventListener('click', () => {
         state.activeVoteTarget = 'motion';
         state.voteType = 'procedural';
+        state.votingSubtab = 'session';
         if (state.motions && state.motions.length > 0 && !state.votingMotion) {
           state.votingMotion = { ...state.motions[0], originalIndex: 0 };
         }

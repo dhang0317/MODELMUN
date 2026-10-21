@@ -268,9 +268,9 @@
       state.votingSubtab = 'rollcall';
     }
 
-    // Default votingSubtab is ballots
+    // Default votingSubtab is session if voting for motion, otherwise ballots
     if (!state.votingSubtab) {
-      state.votingSubtab = 'ballots';
+      state.votingSubtab = isMotionVote && isSessionAllowed ? 'session' : 'ballots';
     }
 
     // Update Subtab button styling and disable Session subtab if not allowed
