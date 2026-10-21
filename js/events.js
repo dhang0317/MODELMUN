@@ -535,8 +535,14 @@
       state.motions.push(motion);
       addMotionModal.classList.add('hidden');
       document.getElementById('input-motion-topic').value = '';
-      saveToLocalStorage(true, true);
-      renderAll();
+
+      // 提動議後自動跳轉至表決頁面（預設進入 Session 表決）
+      state.motions.sort((a, b) => {
+        if (b.precedence !== a.precedence) return b.precedence - a.precedence;
+        return (b.totalMins || 0) - (a.totalMins || 0);
+      });
+      const topIdx = state.motions.findIndex(m => m.id === motion.id);
+      sendMotionToVotingTab(motion, topIdx >= 0 ? topIdx : 0);
     });
 
     const btnHeroSecond = document.getElementById('btn-hero-motion-second');
