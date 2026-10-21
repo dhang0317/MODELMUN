@@ -5,6 +5,11 @@ function playAlertChime() {}
   function init() {
     loadFromLocalStorage();
 
+    // 如果目前尚未選取任何國家（如初次進入或重設），自動帶入 UNSC (15國) 作為預設名冊，防止國家名單全空
+    if (!state.selectedCountries || state.selectedCountries.length === 0) {
+      applyPreset('unsc');
+    }
+
     const rawList = window.MUN_COUNTRIES || [];
     state.availableCountries = rawList.map(c => ({
       id: c.id,

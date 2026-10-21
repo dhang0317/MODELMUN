@@ -1,13 +1,15 @@
   function renderSetupView() {
     const t = I18N[state.language] || I18N.en;
-    document.getElementById('badge-available-count').textContent = state.availableCountries.length;
-    document.getElementById('badge-selected-count').textContent = state.selectedCountries.length;
+    const badgeAvail = document.getElementById('badge-available-count');
+    if (badgeAvail) badgeAvail.textContent = state.availableCountries.length;
+    const badgeSelected = document.getElementById('badge-selected-count');
+    if (badgeSelected) badgeSelected.textContent = state.selectedCountries.length;
 
-    const commNameInput = document.getElementById('input-committee-name');
+    const commNameInput = document.getElementById('input-committee-name') || document.getElementById('header-committee-input');
     if (commNameInput && document.activeElement !== commNameInput) {
       commNameInput.value = state.committeeName;
     }
-    const agendaInput = document.getElementById('input-agenda-title');
+    const agendaInput = document.getElementById('input-agenda-title') || document.getElementById('header-agenda-input');
     if (agendaInput && document.activeElement !== agendaInput) {
       agendaInput.value = state.agenda;
     }
@@ -32,7 +34,9 @@
     }
 
     const availContainer = document.getElementById('list-available-countries');
-    const searchVal = document.getElementById('search-countries').value || '';
+    if (!availContainer) return;
+    const searchInput = document.getElementById('search-countries');
+    const searchVal = searchInput ? (searchInput.value || '') : '';
     
     availContainer.innerHTML = '';
     const filteredAvail = state.availableCountries.filter(c => countryMatchesSearch(c, searchVal));
@@ -49,7 +53,7 @@
             <span class="text-base sm:text-lg font-bold text-slate-100 truncate">${getCountryDisplayName(c)}</span>
             <span class="text-xs text-slate-400 font-mono shrink-0">(${c.id})</span>
           </div>
-          <button class="btn-add-country-item p-1.5 hover:opacity-80 text-white rounded-lg shrink-0 ml-2" style="background: transparent !important; border: none !important;"><i data-lucide="plus" class="w-5 h-5"></i></button>
+          <button class="btn-add-country-item px-2.5 py-1 text-xs font-semibold rounded-lg shrink-0 ml-2 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10">＋</button>
         `;
         row.addEventListener('click', () => {
           selectCountry(c);
@@ -59,6 +63,7 @@
     }
 
     const selectedContainer = document.getElementById('list-selected-countries');
+    if (!selectedContainer) return;
     selectedContainer.innerHTML = '';
     if (state.selectedCountries.length === 0) {
       selectedContainer.innerHTML = `<div class="p-6 text-center text-sm text-slate-400">${t.noDelegatesSelected}</div>`;
@@ -82,7 +87,7 @@
           </div>
           <div class="flex items-center space-x-2.5 shrink-0 ml-2">
             <div class="status-toggle-btn">${powerBadge}</div>
-            <button class="btn-remove-country p-1.5 text-slate-400 hover:text-rose-400 rounded-lg"><i data-lucide="x" class="w-5 h-5"></i></button>
+            <button class="btn-remove-country px-2.5 py-1 text-xs font-semibold text-rose-400 hover:bg-rose-500/10 rounded-lg border border-rose-500/30">✕</button>
           </div>
         `;
 

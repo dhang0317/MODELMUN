@@ -430,8 +430,12 @@
     state.showResults = true;
     state.rightsSpeeches = [];
 
-    // 預設代表名單為空
-    state.selectedCountries = [];
+    // 預設自動載入安理會 15 國代表
+    if (typeof applyPreset === 'function') {
+      applyPreset('unsc');
+    } else {
+      state.selectedCountries = [];
+    }
   }
 
   async function loadFromCloudKV() {
