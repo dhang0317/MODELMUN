@@ -257,20 +257,15 @@
     const btnSubtabRollcall = document.getElementById('btn-voting-subtab-rollcall');
     const btnSubtabSession = document.getElementById('btn-voting-subtab-session');
 
-    // Check if motion prohibits quick session vote
+    // Check if motion vote is active
     const isMotionVote = state.activeVoteTarget === 'motion';
     const curMotion = isMotionVote ? (state.votingMotion || (state.motions && state.motions[0])) : null;
     const motionType = curMotion ? curMotion.type : null;
-    const isSessionAllowed = !isMotionVote || (typeof canMotionUseQuickSession === 'function' ? canMotionUseQuickSession(motionType) : true);
-
-    // If session is prohibited for this motion, auto redirect out of session to rollcall
-    if (!isSessionAllowed && state.votingSubtab === 'session') {
-      state.votingSubtab = 'rollcall';
-    }
+    const isSessionAllowed = true;
 
     // Default votingSubtab is session if voting for motion, otherwise ballots
     if (!state.votingSubtab) {
-      state.votingSubtab = isMotionVote && isSessionAllowed ? 'session' : 'ballots';
+      state.votingSubtab = isMotionVote ? 'session' : 'ballots';
     }
 
     // Update Subtab button styling and disable Session subtab if not allowed
@@ -288,22 +283,13 @@
         : 'px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900';
 
       if (btnSubtabSession) {
-        if (!isSessionAllowed) {
-          // Disabled state with tooltip
-          btnSubtabSession.disabled = true;
-          btnSubtabSession.style.opacity = '0.4';
-          btnSubtabSession.style.cursor = 'not-allowed';
-          btnSubtabSession.title = '此動議依議事規則強制正式唱名表決，禁止快速表決帶過';
-          btnSubtabSession.className = 'px-3 py-1.5 rounded-lg text-xs transition text-slate-400 bg-slate-200/50 cursor-not-allowed';
-        } else {
-          btnSubtabSession.disabled = false;
-          btnSubtabSession.style.opacity = '1';
-          btnSubtabSession.style.cursor = 'pointer';
-          btnSubtabSession.title = '';
-          btnSubtabSession.className = isSession
-            ? 'px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800 font-bold'
-            : 'px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900 cursor-pointer';
-        }
+        btnSubtabSession.disabled = false;
+        btnSubtabSession.style.opacity = '1';
+        btnSubtabSession.style.cursor = 'pointer';
+        btnSubtabSession.title = '';
+        btnSubtabSession.className = isSession
+          ? 'px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800 font-bold'
+          : 'px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900 cursor-pointer';
       }
     }
 

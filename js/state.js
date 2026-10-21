@@ -13,39 +13,39 @@
   };
 
   const MOTION_RULES = {
-    // 結束辯論 / 提請表決：強制 2/3 絕對多數程序表決，不得以快速表決/附議帶過，必須逐一唱名表決 (Roll Call Only)
+    // 結束辯論 / 提請表決：2/3 絕對多數程序表決
     previous_question: {
       requiresVote: true,
-      allowQuickSession: false,
+      allowQuickSession: true,
       threshold: 'twothirds',
       voteType: 'procedural',
       canSecond: false
     },
     close: {
       requiresVote: true,
-      allowQuickSession: false,
+      allowQuickSession: true,
       threshold: 'twothirds',
       voteType: 'procedural',
       canSecond: false
     },
-    // 休會 / 散會動議：重大程序動議，禁止快速表決帶過，必須正式唱票
+    // 休會 / 散會動議：重大程序動議
     adjourn: {
       requiresVote: true,
-      allowQuickSession: false,
+      allowQuickSession: true,
       threshold: 'simple',
       voteType: 'procedural',
       canSecond: false
     },
     adjourn_day: {
       requiresVote: true,
-      allowQuickSession: false,
+      allowQuickSession: true,
       threshold: 'simple',
       voteType: 'procedural',
       canSecond: false
     },
     adjourn_session: {
       requiresVote: true,
-      allowQuickSession: false,
+      allowQuickSession: true,
       threshold: 'simple',
       voteType: 'procedural',
       canSecond: false
