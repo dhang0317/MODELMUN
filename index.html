@@ -631,7 +631,6 @@
             <div id="vote-stages-group" class="flex items-center space-x-1.5">
               <span class="text-xs text-slate-400 uppercase tracking-wider ml-1" data-i18n="stage">Stage:</span>
               <button id="vote-stage-r1" class="px-3 py-1.5 bg-primary text-white rounded-lg text-xs transition" data-i18n="stage1st">1st Round</button>
-              <button id="vote-stage-r2" class="px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg text-xs hover:bg-slate-200 transition" data-i18n="stage2nd">2nd Round (Passes)</button>
               <button id="vote-stage-rights" class="px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg text-xs hover:bg-slate-200 transition" data-i18n="stageRights">Rights Speeches</button>
             </div>
           </div>
@@ -741,7 +740,7 @@
           </div>
 
           <!-- MUN Command Primary Voting Action Buttons (With Rights 整合在按鈕內原位循環) -->
-          <div id="active-voter-actions" class="w-full max-w-xl grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2">
+          <div id="active-voter-actions" class="w-full max-w-xl grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2">
             <!-- Favor (Cycle: Favor -> Favor+Rights -> None) -->
             <button id="btn-cast-favor" type="button" class="w-full min-h-[46px] py-2.5 px-3 rounded-xl border border-slate-300 bg-slate-100 hover:bg-slate-200 text-xs transition" data-i18n="yes">
               贊成
@@ -753,10 +752,6 @@
             <!-- Abstain -->
             <button id="btn-cast-abstain" type="button" class="w-full min-h-[46px] py-2.5 px-3 rounded-xl border border-slate-300 bg-slate-100 hover:bg-slate-200 text-xs transition" data-i18n="abs">
               棄權
-            </button>
-            <!-- Pass -->
-            <button id="btn-cast-pass" type="button" class="w-full min-h-[46px] py-2.5 px-3 rounded-xl border border-slate-300 bg-slate-100 hover:bg-slate-200 text-xs transition" data-i18n="pass">
-              跳過 (Pass)
             </button>
           </div>
 

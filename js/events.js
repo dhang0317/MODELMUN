@@ -655,21 +655,30 @@
       });
     }
 
-    document.getElementById('vote-stage-r1').addEventListener('click', () => {
-      state.voteStage = 'r1';
-      saveToLocalStorage(true, true);
-      renderResolutionVoteGrid();
-    });
-    document.getElementById('vote-stage-r2').addEventListener('click', () => {
-      state.voteStage = 'r2';
-      saveToLocalStorage(true, true);
-      renderResolutionVoteGrid();
-    });
-    document.getElementById('vote-stage-rights').addEventListener('click', () => {
-      state.voteStage = 'rights';
-      saveToLocalStorage(true, true);
-      renderResolutionVoteGrid();
-    });
+    const btnStageR1 = document.getElementById('vote-stage-r1');
+    if (btnStageR1) {
+      btnStageR1.addEventListener('click', () => {
+        state.voteStage = 'r1';
+        saveToLocalStorage(true, true);
+        renderResolutionVoteGrid();
+      });
+    }
+    const btnStageR2 = document.getElementById('vote-stage-r2');
+    if (btnStageR2) {
+      btnStageR2.addEventListener('click', () => {
+        state.voteStage = 'r2';
+        saveToLocalStorage(true, true);
+        renderResolutionVoteGrid();
+      });
+    }
+    const btnStageRights = document.getElementById('vote-stage-rights');
+    if (btnStageRights) {
+      btnStageRights.addEventListener('click', () => {
+        state.voteStage = 'rights';
+        saveToLocalStorage(true, true);
+        renderResolutionVoteGrid();
+      });
+    }
 
     // Consensus vote with Custom Modal
     document.getElementById('btn-consensus-vote').addEventListener('click', () => {
