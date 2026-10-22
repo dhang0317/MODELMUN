@@ -32,14 +32,6 @@
     updateBtn(btnMod, sub === 'mod');
     updateBtn(btnIntro, sub === 'intro');
     updateBtn(btnProcon, sub === 'procon');
-
-    const t = I18N[state.language] || I18N.en;
-    if (badgeEl) {
-      if (sub === 'gsl') badgeEl.textContent = t.speakingBadgeGsl || 'General Speakers List (GSL)';
-      else if (sub === 'mod') badgeEl.textContent = t.speakingBadgeMod || 'Moderated Caucus';
-      else if (sub === 'intro') badgeEl.textContent = t.speakingBadgeIntro || 'Introduction of Draft Resolution & Amendments (INTRO)';
-      else if (sub === 'procon') badgeEl.textContent = t.speakingBadgeProCon || 'Pro / Con Debate';
-    }
   }
 
   function renderGslView() {
