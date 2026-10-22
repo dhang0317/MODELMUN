@@ -24,8 +24,8 @@
     const updateBtn = (btn, isActive) => {
       if (!btn) return;
       btn.className = isActive
-        ? 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition bg-white shadow-sm text-slate-800 cursor-pointer'
-        : 'px-3.5 py-1.5 rounded-lg text-xs font-medium transition text-slate-600 hover:text-slate-900 cursor-pointer';
+        ? 'w-full text-center px-3 py-2 rounded-lg text-xs font-bold transition bg-white shadow-sm text-slate-800 cursor-pointer'
+        : 'w-full text-center px-3 py-2 rounded-lg text-xs font-medium transition text-slate-600 hover:text-slate-900 cursor-pointer';
     };
 
     updateBtn(btnGsl, sub === 'gsl');
@@ -33,11 +33,12 @@
     updateBtn(btnIntro, sub === 'intro');
     updateBtn(btnProcon, sub === 'procon');
 
+    const t = I18N[state.language] || I18N.en;
     if (badgeEl) {
-      if (sub === 'gsl') badgeEl.textContent = 'General Speakers List (GSL)';
-      else if (sub === 'mod') badgeEl.textContent = 'Moderated Caucus (有主持磋商)';
-      else if (sub === 'intro') badgeEl.textContent = 'Introduction of Draft Resolution & Amendments (INTRO)';
-      else if (sub === 'procon') badgeEl.textContent = 'Pro / Con Debate (正反方辯論發言)';
+      if (sub === 'gsl') badgeEl.textContent = t.speakingBadgeGsl || 'General Speakers List (GSL)';
+      else if (sub === 'mod') badgeEl.textContent = t.speakingBadgeMod || 'Moderated Caucus';
+      else if (sub === 'intro') badgeEl.textContent = t.speakingBadgeIntro || 'Introduction of Draft Resolution & Amendments (INTRO)';
+      else if (sub === 'procon') badgeEl.textContent = t.speakingBadgeProCon || 'Pro / Con Debate';
     }
   }
 
@@ -230,16 +231,16 @@
 
     if (btnSidePro && btnSideCon) {
       if (isPro) {
-        btnSidePro.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition bg-emerald-600 text-white shadow-sm cursor-pointer';
-        btnSideCon.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900 bg-slate-100 cursor-pointer';
+        btnSidePro.className = 'w-full text-center px-4 py-2 rounded-lg text-xs font-bold transition bg-emerald-600 text-white shadow-sm cursor-pointer';
+        btnSideCon.className = 'w-full text-center px-4 py-2 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900 bg-slate-100 cursor-pointer';
       } else {
-        btnSidePro.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900 bg-slate-100 cursor-pointer';
-        btnSideCon.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition bg-rose-600 text-white shadow-sm cursor-pointer';
+        btnSidePro.className = 'w-full text-center px-4 py-2 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900 bg-slate-100 cursor-pointer';
+        btnSideCon.className = 'w-full text-center px-4 py-2 rounded-lg text-xs font-bold transition bg-rose-600 text-white shadow-sm cursor-pointer';
       }
     }
 
     if (badgeSide) {
-      badgeSide.textContent = isPro ? 'PRO (正方)' : 'CON (反方)';
+      badgeSide.textContent = isPro ? (t.proSideBadge || 'PRO (正方)') : (t.conSideBadge || 'CON (反方)');
       badgeSide.className = isPro
         ? 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300'
         : 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-300';

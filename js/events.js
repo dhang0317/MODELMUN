@@ -510,10 +510,18 @@
       });
     }
 
-    // Single Speaker
+    // Single Speaker (Intro)
     document.getElementById('btn-single-start').addEventListener('click', startSingleTimer);
     document.getElementById('btn-single-pause').addEventListener('click', pauseSingleTimer);
     document.getElementById('btn-single-reset').addEventListener('click', resetSingleTimer);
+    const btnIntroToProcon = document.getElementById('btn-intro-to-procon');
+    if (btnIntroToProcon) {
+      btnIntroToProcon.addEventListener('click', () => {
+        state.speakingSubtab = 'procon';
+        saveToLocalStorage(true, true);
+        renderAll();
+      });
+    }
     document.getElementById('btn-single-select-country').addEventListener('click', () => {
       openAddSpeakerModal((c) => {
         state.singleSpeaker = c;

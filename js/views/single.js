@@ -37,6 +37,10 @@
       } else {
         pauseSingleTimer();
         playAlertChime();
+        // Prompt or transition directly to Pro/Con debate
+        state.speakingSubtab = 'procon';
+        saveToLocalStorage(true, true);
+        renderAll();
       }
     }, 1000);
     renderAll();
