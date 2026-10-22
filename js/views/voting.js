@@ -582,7 +582,8 @@
           item.querySelector('button').addEventListener('click', () => {
             state.singleSpeaker = c;
             state.singleTimeRemaining = 60;
-            switchTab('singleSpeaker');
+            state.speakingSubtab = 'intro';
+            switchTab('gsl');
           });
           rightsContainer.appendChild(item);
         });

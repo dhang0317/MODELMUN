@@ -409,6 +409,107 @@
       });
     });
 
+    // Speaking Subtabs Switching (GSL, MOD, INTRO, PROCON)
+    const btnSubGsl = document.getElementById('btn-speaking-subtab-gsl');
+    if (btnSubGsl) {
+      btnSubGsl.addEventListener('click', () => {
+        state.speakingSubtab = 'gsl';
+        saveToLocalStorage(true, true);
+        renderGslView();
+      });
+    }
+    const btnSubMod = document.getElementById('btn-speaking-subtab-mod');
+    if (btnSubMod) {
+      btnSubMod.addEventListener('click', () => {
+        state.speakingSubtab = 'mod';
+        saveToLocalStorage(true, true);
+        renderGslView();
+        renderModView();
+      });
+    }
+    const btnSubIntro = document.getElementById('btn-speaking-subtab-intro');
+    if (btnSubIntro) {
+      btnSubIntro.addEventListener('click', () => {
+        state.speakingSubtab = 'intro';
+        saveToLocalStorage(true, true);
+        renderGslView();
+        renderSingleSpeakerView();
+      });
+    }
+    const btnSubProcon = document.getElementById('btn-speaking-subtab-procon');
+    if (btnSubProcon) {
+      btnSubProcon.addEventListener('click', () => {
+        state.speakingSubtab = 'procon';
+        saveToLocalStorage(true, true);
+        renderGslView();
+      });
+    }
+
+    // Pro / Con Debate Controls
+    const btnProSide = document.getElementById('btn-procon-side-pro');
+    if (btnProSide) {
+      btnProSide.addEventListener('click', () => {
+        state.currentProConSide = 'pro';
+        saveToLocalStorage(true, true);
+        renderGslView();
+      });
+    }
+    const btnConSide = document.getElementById('btn-procon-side-con');
+    if (btnConSide) {
+      btnConSide.addEventListener('click', () => {
+        state.currentProConSide = 'con';
+        saveToLocalStorage(true, true);
+        renderGslView();
+      });
+    }
+    const btnProconStart = document.getElementById('btn-procon-start');
+    if (btnProconStart) btnProconStart.addEventListener('click', startProConTimer);
+    const btnProconPause = document.getElementById('btn-procon-pause');
+    if (btnProconPause) btnProconPause.addEventListener('click', pauseProConTimer);
+    const btnProconReset = document.getElementById('btn-procon-reset');
+    if (btnProconReset) btnProconReset.addEventListener('click', resetProConTimer);
+    const btnProconNext = document.getElementById('btn-procon-next');
+    if (btnProconNext) btnProconNext.addEventListener('click', nextProConSpeaker);
+
+    const btnProconSetTime = document.getElementById('btn-procon-set-time');
+    if (btnProconSetTime) {
+      btnProconSetTime.addEventListener('click', () => {
+        customPrompt('Pro / Con Debate', '請輸入個別代表發言時間（秒）：', String(state.proConSpeakerSecs || 60), (val) => {
+          if (val) {
+            const secs = parseInt(val, 10) || 60;
+            state.proConSpeakerSecs = secs;
+            state.proConSecsRemaining = secs;
+            saveToLocalStorage(true, true);
+            renderAll();
+          }
+        });
+      });
+    }
+
+    const btnAddPro = document.getElementById('btn-procon-add-pro');
+    if (btnAddPro) {
+      btnAddPro.addEventListener('click', () => {
+        openAddSpeakerModal((c) => {
+          if (!state.proQueue) state.proQueue = [];
+          state.proQueue.push(c);
+          saveToLocalStorage(true, true);
+          renderAll();
+        }, true, 'procon');
+      });
+    }
+
+    const btnAddCon = document.getElementById('btn-procon-add-con');
+    if (btnAddCon) {
+      btnAddCon.addEventListener('click', () => {
+        openAddSpeakerModal((c) => {
+          if (!state.conQueue) state.conQueue = [];
+          state.conQueue.push(c);
+          saveToLocalStorage(true, true);
+          renderAll();
+        }, true, 'procon');
+      });
+    }
+
     // Single Speaker
     document.getElementById('btn-single-start').addEventListener('click', startSingleTimer);
     document.getElementById('btn-single-pause').addEventListener('click', pauseSingleTimer);

@@ -1,8 +1,55 @@
+  function renderSpeakingSubtabs() {
+    if (!state.speakingSubtab) state.speakingSubtab = 'gsl';
+
+    const pGsl = document.getElementById('panel-speaking-gsl');
+    const pMod = document.getElementById('panel-speaking-mod');
+    const pIntro = document.getElementById('panel-speaking-intro');
+    const pProcon = document.getElementById('panel-speaking-procon');
+
+    const btnGsl = document.getElementById('btn-speaking-subtab-gsl');
+    const btnMod = document.getElementById('btn-speaking-subtab-mod');
+    const btnIntro = document.getElementById('btn-speaking-subtab-intro');
+    const btnProcon = document.getElementById('btn-speaking-subtab-procon');
+    const badgeEl = document.getElementById('speaking-subtab-badge');
+
+    const sub = state.speakingSubtab;
+
+    // Toggle panels visibility
+    if (pGsl) pGsl.classList.toggle('hidden', sub !== 'gsl');
+    if (pMod) pMod.classList.toggle('hidden', sub !== 'mod');
+    if (pIntro) pIntro.classList.toggle('hidden', sub !== 'intro');
+    if (pProcon) pProcon.classList.toggle('hidden', sub !== 'procon');
+
+    // Update active button styling
+    const updateBtn = (btn, isActive) => {
+      if (!btn) return;
+      btn.className = isActive
+        ? 'px-3.5 py-1.5 rounded-lg text-xs font-bold transition bg-white shadow-sm text-slate-800 cursor-pointer'
+        : 'px-3.5 py-1.5 rounded-lg text-xs font-medium transition text-slate-600 hover:text-slate-900 cursor-pointer';
+    };
+
+    updateBtn(btnGsl, sub === 'gsl');
+    updateBtn(btnMod, sub === 'mod');
+    updateBtn(btnIntro, sub === 'intro');
+    updateBtn(btnProcon, sub === 'procon');
+
+    if (badgeEl) {
+      if (sub === 'gsl') badgeEl.textContent = 'General Speakers List (GSL)';
+      else if (sub === 'mod') badgeEl.textContent = 'Moderated Caucus (有主持磋商)';
+      else if (sub === 'intro') badgeEl.textContent = 'Introduction of Draft Resolution & Amendments (INTRO)';
+      else if (sub === 'procon') badgeEl.textContent = 'Pro / Con Debate (正反方辯論發言)';
+    }
+  }
+
   function renderGslView() {
+    renderSpeakingSubtabs();
+    renderProConView();
+
     const emptyDiv = document.getElementById('gsl-current-empty');
     const activeDiv = document.getElementById('gsl-current-active');
     const t = I18N[state.language] || I18N.en;
-    document.getElementById('label-gsl-default-time').textContent = `${state.gslDefaultTime}s`;
+    const labelTime = document.getElementById('label-gsl-default-time');
+    if (labelTime) labelTime.textContent = `${state.gslDefaultTime}s`;
 
     const stats = computeStats();
     if (stats.presentCount === 0 && state.selectedCountries.length > 0) {
@@ -163,6 +210,194 @@
       state.gslRemainingTime = state.gslDefaultTime;
     } else {
       state.currentGslSpeaker = null;
+    }
+    saveToLocalStorage(true);
+    renderAll();
+  }
+
+  function renderProConView() {
+    const t = I18N[state.language] || I18N.en;
+    const isPro = state.currentProConSide !== 'con';
+
+    const btnSidePro = document.getElementById('btn-procon-side-pro');
+    const btnSideCon = document.getElementById('btn-procon-side-con');
+    const badgeSide = document.getElementById('procon-badge-side');
+    const nameEl = document.getElementById('procon-current-name');
+    const flagEl = document.getElementById('procon-current-flag');
+    const labelTime = document.getElementById('label-procon-speaker-time');
+
+    if (labelTime) labelTime.textContent = `${state.proConSpeakerSecs || 60}s`;
+
+    if (btnSidePro && btnSideCon) {
+      if (isPro) {
+        btnSidePro.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition bg-emerald-600 text-white shadow-sm cursor-pointer';
+        btnSideCon.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900 bg-slate-100 cursor-pointer';
+      } else {
+        btnSidePro.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900 bg-slate-100 cursor-pointer';
+        btnSideCon.className = 'px-4 py-1.5 rounded-lg text-xs font-bold transition bg-rose-600 text-white shadow-sm cursor-pointer';
+      }
+    }
+
+    if (badgeSide) {
+      badgeSide.textContent = isPro ? 'PRO (正方)' : 'CON (反方)';
+      badgeSide.className = isPro
+        ? 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300'
+        : 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-rose-100 text-rose-800 border border-rose-300';
+    }
+
+    if (state.currentProConSpeaker) {
+      if (flagEl) flagEl.src = getFlagUrl(state.currentProConSpeaker);
+      if (nameEl) nameEl.textContent = getCountryDisplayName(state.currentProConSpeaker);
+    } else {
+      if (flagEl) flagEl.src = 'https://flagcdn.com/w80/un.png';
+      if (nameEl) nameEl.textContent = t.noneSelected || 'None selected';
+    }
+
+    formatTimerDisplay('procon-timer-display', state.proConSecsRemaining);
+
+    const indPct = Math.max(0, (state.proConSecsRemaining / (state.proConSpeakerSecs || 60)) * 100);
+    const pBar = document.getElementById('procon-speaker-progress');
+    if (pBar) {
+      pBar.style.width = `${indPct}%`;
+      pBar.className = isPro ? 'bg-emerald-500 h-full transition-all duration-300 w-full' : 'bg-rose-500 h-full transition-all duration-300 w-full';
+    }
+
+    const startBtn = document.getElementById('btn-procon-start');
+    const pauseBtn = document.getElementById('btn-procon-pause');
+    if (state.proConRunning) {
+      if (startBtn) startBtn.classList.add('hidden');
+      if (pauseBtn) pauseBtn.classList.remove('hidden');
+    } else {
+      if (startBtn) startBtn.classList.remove('hidden');
+      if (pauseBtn) pauseBtn.classList.add('hidden');
+    }
+
+    // Render Pro Queue
+    const proList = document.getElementById('list-pro-queue');
+    const proBadge = document.getElementById('badge-pro-queue-count');
+    if (proBadge) proBadge.textContent = (state.proQueue || []).length;
+    if (proList) {
+      proList.innerHTML = '';
+      (state.proQueue || []).forEach((c, idx) => {
+        const item = document.createElement('div');
+        item.className = 'py-2 px-2.5 flex items-center justify-between hover:bg-emerald-50/60 rounded-xl transition';
+        item.innerHTML = `
+          <div class="flex items-center space-x-2 cursor-pointer select-pro-item min-w-0">
+            <span class="text-xs font-mono font-bold text-slate-400 w-4 shrink-0">${idx + 1}.</span>
+            <img src="${getFlagUrl(c)}" class="w-6 h-4 object-cover rounded shadow-sm shrink-0">
+            <span class="text-xs font-bold text-slate-800 truncate">${getCountryDisplayName(c)}</span>
+          </div>
+          <button class="btn-del-pro p-1 text-xs text-slate-400 hover:text-rose-500 rounded transition" title="Delete">✕</button>
+        `;
+        item.querySelector('.select-pro-item').addEventListener('click', () => {
+          setProConSpeaker(c, 'pro');
+          state.proQueue.splice(idx, 1);
+          renderAll();
+        });
+        item.querySelector('.btn-del-pro').addEventListener('click', () => {
+          state.proQueue.splice(idx, 1);
+          renderAll();
+        });
+        proList.appendChild(item);
+      });
+    }
+
+    // Render Con Queue
+    const conList = document.getElementById('list-con-queue');
+    const conBadge = document.getElementById('badge-con-queue-count');
+    if (conBadge) conBadge.textContent = (state.conQueue || []).length;
+    if (conList) {
+      conList.innerHTML = '';
+      (state.conQueue || []).forEach((c, idx) => {
+        const item = document.createElement('div');
+        item.className = 'py-2 px-2.5 flex items-center justify-between hover:bg-rose-50/60 rounded-xl transition';
+        item.innerHTML = `
+          <div class="flex items-center space-x-2 cursor-pointer select-con-item min-w-0">
+            <span class="text-xs font-mono font-bold text-slate-400 w-4 shrink-0">${idx + 1}.</span>
+            <img src="${getFlagUrl(c)}" class="w-6 h-4 object-cover rounded shadow-sm shrink-0">
+            <span class="text-xs font-bold text-slate-800 truncate">${getCountryDisplayName(c)}</span>
+          </div>
+          <button class="btn-del-con p-1 text-xs text-slate-400 hover:text-rose-500 rounded transition" title="Delete">✕</button>
+        `;
+        item.querySelector('.select-con-item').addEventListener('click', () => {
+          setProConSpeaker(c, 'con');
+          state.conQueue.splice(idx, 1);
+          renderAll();
+        });
+        item.querySelector('.btn-del-con').addEventListener('click', () => {
+          state.conQueue.splice(idx, 1);
+          renderAll();
+        });
+        conList.appendChild(item);
+      });
+    }
+  }
+
+  function setProConSpeaker(country, side) {
+    pauseProConTimer();
+    state.currentProConSpeaker = country;
+    if (side) state.currentProConSide = side;
+    state.proConSecsRemaining = state.proConSpeakerSecs || 60;
+    saveToLocalStorage(true);
+  }
+
+  function startProConTimer() {
+    if (!ensureRollCallDone()) return;
+    if (!state.currentProConSpeaker) {
+      const isPro = state.currentProConSide !== 'con';
+      const targetQueue = isPro ? state.proQueue : state.conQueue;
+      if (targetQueue && targetQueue.length > 0) {
+        state.currentProConSpeaker = targetQueue.shift();
+        state.proConSecsRemaining = state.proConSpeakerSecs || 60;
+      } else {
+        const t = I18N[state.language] || I18N.en;
+        customAlert('Pro / Con Debate', '請先從名單點選或加入發言代表！');
+        return;
+      }
+    }
+    state.proConRunning = true;
+    saveToLocalStorage(true);
+    clearInterval(state.proConTimerInterval);
+    state.proConTimerInterval = setInterval(() => {
+      if (state.proConSecsRemaining > 0) {
+        state.proConSecsRemaining--;
+        saveToLocalStorage(true, true);
+        if (state.proConSecsRemaining === 10) playAlertChime();
+        formatTimerDisplay('procon-timer-display', state.proConSecsRemaining);
+        const pct = Math.max(0, (state.proConSecsRemaining / (state.proConSpeakerSecs || 60)) * 100);
+        const pBar = document.getElementById('procon-speaker-progress');
+        if (pBar) pBar.style.width = `${pct}%`;
+      } else {
+        pauseProConTimer();
+        playAlertChime();
+      }
+    }, 1000);
+    renderAll();
+  }
+
+  function pauseProConTimer() {
+    state.proConRunning = false;
+    clearInterval(state.proConTimerInterval);
+    saveToLocalStorage(true);
+    renderAll();
+  }
+
+  function resetProConTimer() {
+    pauseProConTimer();
+    state.proConSecsRemaining = state.proConSpeakerSecs || 60;
+    saveToLocalStorage(true);
+    renderAll();
+  }
+
+  function nextProConSpeaker() {
+    pauseProConTimer();
+    const isPro = state.currentProConSide !== 'con';
+    const targetQueue = isPro ? state.proQueue : state.conQueue;
+    if (targetQueue && targetQueue.length > 0) {
+      state.currentProConSpeaker = targetQueue.shift();
+      state.proConSecsRemaining = state.proConSpeakerSecs || 60;
+    } else {
+      state.currentProConSpeaker = null;
     }
     saveToLocalStorage(true);
     renderAll();

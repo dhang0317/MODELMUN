@@ -251,7 +251,8 @@
       state.modSpeakerSecsRemaining = speakerSecs;
       state.modQueue = [];
       state.currentModSpeaker = null;
-      switchTab('mod');
+      state.speakingSubtab = 'mod';
+      switchTab('gsl');
     } else if (motion.type === 'unmod') {
       pauseUnmodTimer();
       const totalMins = parseInt(motion.totalMins, 10) || 10;
@@ -269,7 +270,8 @@
           state.singleSpeaker = found;
         }
       }
-      switchTab('singleSpeaker');
+      state.speakingSubtab = 'intro';
+      switchTab('gsl');
     } else if (motion.type === 'suspend') {
       const totalMins = parseInt(motion.totalMins, 10) || 15;
       const t = I18N[state.language] || I18N.en;

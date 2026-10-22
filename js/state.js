@@ -160,6 +160,18 @@
     singleRunning: false,
     singleTimerInterval: null,
 
+    // Pro / Con Debate (正反方發言)
+    speakingSubtab: 'gsl', // 'gsl' | 'mod' | 'intro' | 'procon'
+    proConTopic: '',
+    proConSpeakerSecs: 60,
+    proConSecsRemaining: 60,
+    proConRunning: false,
+    proConTimerInterval: null,
+    currentProConSide: 'pro', // 'pro' or 'con'
+    currentProConSpeaker: null,
+    proQueue: [],
+    conQueue: [],
+
     // Recess / Suspension
     recessSecsRemaining: 900,
     recessRunning: false,
@@ -249,6 +261,15 @@
       singleSpeaker: state.singleSpeaker,
       singleTimeRemaining: state.singleTimeRemaining,
       singleRunning: state.singleRunning,
+      speakingSubtab: state.speakingSubtab || 'gsl',
+      proConTopic: state.proConTopic || '',
+      proConSpeakerSecs: state.proConSpeakerSecs || 60,
+      proConSecsRemaining: state.proConSecsRemaining || 60,
+      proConRunning: state.proConRunning,
+      currentProConSide: state.currentProConSide || 'pro',
+      currentProConSpeaker: state.currentProConSpeaker,
+      proQueue: state.proQueue || [],
+      conQueue: state.conQueue || [],
       recessSecsRemaining: state.recessSecsRemaining,
       recessRunning: state.recessRunning,
       recessModalOpen: !!state.recessModalOpen,
@@ -599,6 +620,15 @@
     if (typeof parsed.singleSpeaker !== 'undefined') state.singleSpeaker = parsed.singleSpeaker;
     if (typeof parsed.singleTimeRemaining !== 'undefined') state.singleTimeRemaining = parsed.singleTimeRemaining;
     if (typeof parsed.singleRunning !== 'undefined') state.singleRunning = parsed.singleRunning;
+    if (parsed.speakingSubtab) state.speakingSubtab = parsed.speakingSubtab;
+    if (typeof parsed.proConTopic !== 'undefined') state.proConTopic = parsed.proConTopic;
+    if (typeof parsed.proConSpeakerSecs !== 'undefined') state.proConSpeakerSecs = parsed.proConSpeakerSecs;
+    if (typeof parsed.proConSecsRemaining !== 'undefined') state.proConSecsRemaining = parsed.proConSecsRemaining;
+    if (typeof parsed.proConRunning !== 'undefined') state.proConRunning = parsed.proConRunning;
+    if (parsed.currentProConSide) state.currentProConSide = parsed.currentProConSide;
+    if (typeof parsed.currentProConSpeaker !== 'undefined') state.currentProConSpeaker = parsed.currentProConSpeaker;
+    if (Array.isArray(parsed.proQueue)) state.proQueue = parsed.proQueue;
+    if (Array.isArray(parsed.conQueue)) state.conQueue = parsed.conQueue;
 
     if (typeof parsed.recessSecsRemaining !== 'undefined') state.recessSecsRemaining = parsed.recessSecsRemaining;
     if (typeof parsed.recessRunning !== 'undefined') state.recessRunning = parsed.recessRunning;
