@@ -494,7 +494,7 @@
           state.proQueue.push(c);
           saveToLocalStorage(true, true);
           renderAll();
-        }, true, 'procon');
+        }, true, 'pro');
       });
     }
 
@@ -506,7 +506,7 @@
           state.conQueue.push(c);
           saveToLocalStorage(true, true);
           renderAll();
-        }, true, 'procon');
+        }, true, 'con');
       });
     }
 
@@ -1247,6 +1247,7 @@
       reader.readAsText(file);
     });
 
+    // Modal Close Buttons (General & Settings)
     document.querySelectorAll('.btn-close-modal').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('#modal-add-speaker, #modal-define-time, #modal-mod-config, #modal-add-motion').forEach(m => m.classList.add('hidden'));
@@ -1255,9 +1256,48 @@
 
     const doneSpeakerBtn = document.getElementById('btn-done-add-speaker');
     if (doneSpeakerBtn) {
-      doneSpeakerBtn.addEventListener('click', () => {
+      doneSpeakerBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const modal = document.getElementById('modal-add-speaker');
-        if (modal) modal.classList.add('hidden');
+        if (modal) {
+          modal.classList.add('hidden');
+          modal.style.display = 'none';
+        }
+      });
+    }
+
+    const settingsDoneBtn = document.getElementById('btn-save-settings-done');
+    if (settingsDoneBtn) {
+      settingsDoneBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const sModal = document.getElementById('modal-unified-settings');
+        if (sModal) {
+          sModal.classList.add('hidden');
+          sModal.style.display = 'none';
+        }
+        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) {
+          saveToLocalStorage(true);
+        }
+        if (typeof renderAll === 'function') renderAll();
+      });
+    }
+
+    const settingsCloseBtn = document.getElementById('btn-close-settings-modal');
+    if (settingsCloseBtn) {
+      settingsCloseBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const sModal = document.getElementById('modal-unified-settings');
+        if (sModal) {
+          sModal.classList.add('hidden');
+          sModal.style.display = 'none';
+        }
+        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) {
+          saveToLocalStorage(true);
+        }
+        if (typeof renderAll === 'function') renderAll();
       });
     }
 

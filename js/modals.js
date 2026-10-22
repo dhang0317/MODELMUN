@@ -78,7 +78,12 @@
     const statusText = document.getElementById('modal-add-speaker-status');
     const t = I18N[state.language] || I18N.en;
 
-    const getQueueList = () => queueType === 'gsl' ? state.gslQueue : state.modQueue;
+    const getQueueList = () => {
+      if (queueType === 'gsl') return state.gslQueue || [];
+      if (queueType === 'pro') return state.proQueue || [];
+      if (queueType === 'con') return state.conQueue || [];
+      return state.modQueue || [];
+    };
 
     searchInput.value = '';
     if (statusText) {
