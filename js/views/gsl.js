@@ -10,7 +10,6 @@
     const btnMod = document.getElementById('btn-speaking-subtab-mod');
     const btnIntro = document.getElementById('btn-speaking-subtab-intro');
     const btnProcon = document.getElementById('btn-speaking-subtab-procon');
-    const badgeEl = document.getElementById('speaking-subtab-badge');
 
     const sub = state.speakingSubtab;
 
@@ -24,8 +23,8 @@
     const updateBtn = (btn, isActive) => {
       if (!btn) return;
       btn.className = isActive
-        ? 'w-full text-center px-3 py-2 rounded-lg text-xs font-bold transition bg-white shadow-sm text-slate-800 cursor-pointer'
-        : 'w-full text-center px-3 py-2 rounded-lg text-xs font-medium transition text-slate-600 hover:text-slate-900 cursor-pointer';
+        ? 'w-full text-center px-3 py-2.5 rounded-lg text-xs font-bold transition bg-white shadow-sm text-slate-800 cursor-pointer'
+        : 'w-full text-center px-3 py-2.5 rounded-lg text-xs font-medium transition text-slate-600 hover:text-slate-900 cursor-pointer';
     };
 
     updateBtn(btnGsl, sub === 'gsl');
@@ -37,6 +36,8 @@
   function renderGslView() {
     renderSpeakingSubtabs();
     renderProConView();
+    if (typeof renderModView === 'function') renderModView();
+    if (typeof renderSingleSpeakerView === 'function') renderSingleSpeakerView();
 
     const emptyDiv = document.getElementById('gsl-current-empty');
     const activeDiv = document.getElementById('gsl-current-active');

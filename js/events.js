@@ -415,7 +415,7 @@
       btnSubGsl.addEventListener('click', () => {
         state.speakingSubtab = 'gsl';
         saveToLocalStorage(true, true);
-        renderGslView();
+        renderAll();
       });
     }
     const btnSubMod = document.getElementById('btn-speaking-subtab-mod');
@@ -423,8 +423,7 @@
       btnSubMod.addEventListener('click', () => {
         state.speakingSubtab = 'mod';
         saveToLocalStorage(true, true);
-        renderGslView();
-        renderModView();
+        renderAll();
       });
     }
     const btnSubIntro = document.getElementById('btn-speaking-subtab-intro');
@@ -432,8 +431,7 @@
       btnSubIntro.addEventListener('click', () => {
         state.speakingSubtab = 'intro';
         saveToLocalStorage(true, true);
-        renderGslView();
-        renderSingleSpeakerView();
+        renderAll();
       });
     }
     const btnSubProcon = document.getElementById('btn-speaking-subtab-procon');
@@ -441,7 +439,7 @@
       btnSubProcon.addEventListener('click', () => {
         state.speakingSubtab = 'procon';
         saveToLocalStorage(true, true);
-        renderGslView();
+        renderAll();
       });
     }
 
