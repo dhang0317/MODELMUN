@@ -537,11 +537,14 @@
     });
 
     // Motions
-    document.getElementById('btn-clear-motions').addEventListener('click', () => {
-      state.motions = [];
-      saveToLocalStorage();
-      renderAll();
-    });
+    const btnClearMotions = document.getElementById('btn-clear-motions');
+    if (btnClearMotions) {
+      btnClearMotions.addEventListener('click', () => {
+        state.motions = [];
+        saveToLocalStorage();
+        renderAll();
+      });
+    }
 
     const addMotionModal = document.getElementById('modal-add-motion');
     const selectMotionType = document.getElementById('select-motion-type');
