@@ -1095,6 +1095,22 @@
         <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="topic">Topic</label>
         <input id="input-motion-topic" type="text" data-i18n-placeholder="topicPlaceholder" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm" placeholder="請輸入議題名稱...">
       </div>
+      <div id="motion-field-dr-select" class="hidden">
+        <label class="block text-xs font-semibold text-slate-300 mb-1">決議案草案 (Draft Resolution)</label>
+        <div class="flex gap-2">
+          <select id="select-motion-dr" class="flex-1 px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm font-medium">
+            <option value="DR 1.1" selected>DR 1.1</option>
+            <option value="DR 1.2">DR 1.2</option>
+            <option value="DR 1.3">DR 1.3</option>
+            <option value="DR 2.1">DR 2.1</option>
+            <option value="DR 2.2">DR 2.2</option>
+            <option value="Amendment A">Amendment A (修正案 A)</option>
+            <option value="Amendment B">Amendment B (修正案 B)</option>
+            <option value="custom">自訂草案名稱...</option>
+          </select>
+          <input id="input-motion-dr-custom" type="text" class="hidden flex-1 px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm" placeholder="輸入自訂草案名稱...">
+        </div>
+      </div>
       <div class="grid grid-cols-2 gap-3" id="motion-time-fields">
         <div id="motion-field-total-mins">
           <label id="label-motion-total-mins" class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="durationMins">Duration (mins)</label>

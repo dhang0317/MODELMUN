@@ -3,11 +3,11 @@
     if (state.singleSpeaker) {
       document.getElementById('single-flag').src = getFlagUrl(state.singleSpeaker);
       document.getElementById('single-country-name').textContent = getCountryDisplayName(state.singleSpeaker);
-      document.getElementById('single-purpose').textContent = t.designatedSpeaker;
+      document.getElementById('single-purpose').textContent = state.singleTopic || t.designatedSpeaker;
     } else {
       document.getElementById('single-flag').src = 'https://flagcdn.com/w80/un.png';
       document.getElementById('single-country-name').textContent = t.selectDelegate;
-      document.getElementById('single-purpose').textContent = t.sponsorPresentation;
+      document.getElementById('single-purpose').textContent = state.singleTopic || t.sponsorPresentation;
     }
 
     formatTimerDisplay('single-timer-display', state.singleTimeRemaining);

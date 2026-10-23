@@ -260,7 +260,7 @@
       switchTab('unmod');
     } else if (motion.type === 'singlespeaker') {
       pauseSingleTimer();
-      const durationSecs = (parseInt(motion.totalMins, 10) || 3) * 60;
+      const durationSecs = (parseInt(motion.totalMins, 10) || 1) * 60;
       state.singleTimeRemaining = durationSecs;
       
       // Match the proposer country to state.singleSpeaker
@@ -269,6 +269,10 @@
         if (found) {
           state.singleSpeaker = found;
         }
+      }
+      if (motion.topic) {
+        state.singleTopic = motion.topic;
+        state.voteResolutionTitle = motion.topic;
       }
       state.speakingSubtab = 'intro';
       switchTab('gsl');
