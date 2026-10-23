@@ -88,24 +88,17 @@
     saveToLocalStorage(true, true);
 
     if (isPassed) {
-      if (typeof launchConfettiCannon === 'function') {
-        launchConfettiCannon();
-      }
       if (typeof customAlert === 'function') {
         customAlert(
-          state.language === 'zh' ? '表決結算：決議案通過！' : 'Vote Concluded: Resolution Passed!',
-          state.language === 'zh'
-            ? `所有代表已完成投票！【${resTitle}】已達通過門檻，正式表決通過！\n(贊成: ${favorCount}，反對: ${againstCount})`
-            : `All votes recorded! 【${resTitle}】 has met the required threshold and is officially PASSED!\n(In Favor: ${favorCount}, Against: ${againstCount})`
+          state.language === 'zh' ? '通過' : 'Passed',
+          ''
         );
       }
     } else {
       if (typeof customAlert === 'function') {
         customAlert(
-          state.language === 'zh' ? '表決結算：決議案未獲通過' : 'Vote Concluded: Resolution Failed',
-          state.language === 'zh'
-            ? `所有代表已完成投票！【${resTitle}】未達通過門檻，表決未獲通過。\n(贊成: ${favorCount}，反對: ${againstCount})`
-            : `All votes recorded! 【${resTitle}】 did not meet the required threshold and is FAILED.\n(In Favor: ${favorCount}, Against: ${againstCount})`
+          state.language === 'zh' ? '未通過' : 'Failed',
+          ''
         );
       }
     }
@@ -947,10 +940,6 @@
               <input type="text" class="session-name-input font-bold text-slate-800 text-sm bg-transparent border-b border-transparent hover:border-slate-300 focus:border-primary focus:outline-none transition px-1 py-0.5 rounded truncate" value="${sess.name || `Session ${sess.id}`}" placeholder="Session Name">
             </div>
             <div class="flex items-center space-x-1 shrink-0">
-              <button type="button" class="btn-adopt-session px-2 py-0.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] transition cursor-pointer shadow-sm flex items-center space-x-1" data-id="${sess.id}" title="通過此會期表決">
-                <span>✓</span>
-                <span>${t.pass || '通過'}</span>
-              </button>
               <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold">
                 ${t.totalVotesLabel || '總票'}: ${totalVotes}
               </span>
@@ -1208,11 +1197,11 @@
     // Resolution Vote
     const resTitle = (state.voteResolutionTitle || state.resolutionTitle) || 'Draft Resolution 1.1';
     showModal({
-      title: state.language === 'zh' ? '宣布決議案通過' : 'Adopt Draft Resolution',
+      title: state.language === 'zh' ? '宣布決議案結算' : 'Conclude Draft Resolution',
       message: state.language === 'zh' 
-        ? `確定主席正式宣布【${resTitle}】通過嗎？`
-        : `Confirm official adoption and passing of 【${resTitle}】?`,
-      confirmText: state.language === 'zh' ? '正式通過' : 'Formally Adopt',
+        ? `確定主席正式結算並宣布【${resTitle}】通過嗎？`
+        : `Confirm official conclusion and passing of 【${resTitle}】?`,
+      confirmText: state.language === 'zh' ? '結算通過' : 'Conclude & Pass',
       cancelText: t.cancel || '取消',
       onConfirm: () => {
         state.resolutionPassed = true;
@@ -1225,8 +1214,8 @@
         saveToLocalStorage(true, true);
         renderResolutionVoteGrid();
         customAlert(
-          state.language === 'zh' ? '決議案通過' : 'Resolution Passed',
-          state.language === 'zh' ? `主席已宣布【${resTitle}】正式通過！` : `Chair has officially declared 【${resTitle}】 passed!`
+          state.language === 'zh' ? '通過' : 'Passed',
+          ''
         );
       }
     });

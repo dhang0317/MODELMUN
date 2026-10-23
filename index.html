@@ -724,37 +724,35 @@
             <!-- View Sub-tabs -->
             <div class="flex items-center space-x-1 p-1 bg-slate-100 rounded-xl border border-slate-200">
               <button id="btn-voting-subtab-rollcall" class="px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800" data-i18n="subtabRollcall">
-                唱票輪次 (ROLLCALL VOTING)
+                唱票
               </button>
               <button id="btn-voting-subtab-session" class="px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900 cursor-pointer" data-i18n="subtabSession">
-                非投票點名 / 會期表決 (Session)
+                點名
               </button>
             </div>
 
-            <!-- Stage Buttons (Roll Call only) -->
-            <div id="vote-stages-group" class="flex items-center space-x-1.5">
+            <!-- Stage Buttons (Roll Call only) - Hidden as requested -->
+            <div id="vote-stages-group" class="hidden flex items-center space-x-1.5">
               <span class="text-xs text-slate-400 uppercase tracking-wider ml-1" data-i18n="stage">Stage:</span>
               <button id="vote-stage-r1" class="px-3 py-1.5 bg-primary text-white rounded-lg text-xs transition" data-i18n="stage1st">1st Round</button>
             </div>
 
             <!-- Session Controls (Visible when in Session mode) -->
             <div id="vote-session-top-controls" class="hidden flex items-center space-x-2 pl-2 border-l border-slate-200">
-              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider" data-i18n="sessionCountLabel">會期數:</span>
+              <span class="text-xs font-bold text-slate-500 uppercase tracking-wider" data-i18n="sessionCountLabel">會期數量：</span>
               <div class="flex items-center space-x-1">
                 <button id="btn-session-dec" type="button" class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center transition border border-slate-300 cursor-pointer">-</button>
                 <input id="input-session-count" type="number" min="1" max="20" value="3" class="w-12 h-7 text-center text-xs font-bold border border-slate-300 rounded-lg bg-transparent text-slate-800 focus:outline-none focus:ring-1 focus:ring-primary">
                 <button id="btn-session-inc" type="button" class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center transition border border-slate-300 cursor-pointer">+</button>
               </div>
-              <button id="btn-reset-current-session" type="button" class="ml-2 px-2.5 py-1 text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition cursor-pointer" data-i18n="resetCurrentSession">重設當前會期</button>
+              <button id="btn-reset-current-session" type="button" class="ml-2 px-2.5 py-1 text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition cursor-pointer" data-i18n="resetCurrentSession">重設當前會期票數</button>
             </div>
           </div>
 
           <div class="flex items-center space-x-2 text-xs">
-            <button id="btn-adopt-vote" type="button" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg shadow-sm transition flex items-center space-x-1.5 cursor-pointer" title="通過當前表決 (Pass Vote)">
-              <span class="text-sm">✓</span>
-              <span data-i18n="adoptVote">通過 (Pass)</span>
+            <button id="btn-adopt-vote" type="button" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg shadow-sm transition flex items-center space-x-1.5 cursor-pointer" title="結算當前表決 (Conclude Vote)">
+              <span data-i18n="concludeVote">結算</span>
             </button>
-            <button id="btn-consensus-vote" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-300 transition cursor-pointer" data-i18n="consensusVote">Consensus Vote</button>
             <button id="btn-reset-votes" class="px-3 py-1.5 text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition flex items-center space-x-1 cursor-pointer" data-i18n="resetVotes">
               <span>Reset</span>
             </button>

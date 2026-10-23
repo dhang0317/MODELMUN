@@ -819,28 +819,31 @@
       });
     }
 
-    // Consensus vote with Custom Modal
-    document.getElementById('btn-consensus-vote').addEventListener('click', () => {
-      const t = I18N[state.language] || I18N.en;
-      showModal({
-        title: t.consensusVote,
-        message: t.consensusConfirm,
-        confirmText: t.consensusPassConfirm,
-        cancelText: t.consensusObjectionCancel,
-        onConfirm: () => {
-          // Adopt by consensus
-          state.selectedCountries.forEach(c => {
-            if (c.powerStatus !== 'observer' && c.attendance !== 'absent') {
-              c.vote = 'favor';
-              c.hasRights = false;
-            }
-          });
-          saveToLocalStorage(true, true);
-          renderAll();
-          customAlert(t.consensusVote, t.consensusAdoptedAlert);
-        }
+    // Consensus vote with Custom Modal (if element exists)
+    const btnConsensusVote = document.getElementById('btn-consensus-vote');
+    if (btnConsensusVote) {
+      btnConsensusVote.addEventListener('click', () => {
+        const t = I18N[state.language] || I18N.en;
+        showModal({
+          title: t.consensusVote,
+          message: t.consensusConfirm,
+          confirmText: t.consensusPassConfirm,
+          cancelText: t.consensusObjectionCancel,
+          onConfirm: () => {
+            // Adopt by consensus
+            state.selectedCountries.forEach(c => {
+              if (c.powerStatus !== 'observer' && c.attendance !== 'absent') {
+                c.vote = 'favor';
+                c.hasRights = false;
+              }
+            });
+            saveToLocalStorage(true, true);
+            renderAll();
+            customAlert(t.consensusVote, t.consensusAdoptedAlert);
+          }
+        });
       });
-    });
+    }
 
     // Vote Target Switcher (Resolution vs Motion)
     const btnTargetRes = document.getElementById('btn-vote-target-resolution');

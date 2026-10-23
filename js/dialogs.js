@@ -15,7 +15,7 @@
         <h3 class="font-bold text-lg text-slate-100">${title}</h3>
         <button class="modal-close-icon p-1 text-slate-400 hover:text-slate-200"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      <div class="text-sm text-slate-300 leading-relaxed">${message}</div>
+      ${message ? `<div class="text-sm text-slate-300 leading-relaxed">${message}</div>` : ''}
       ${showInput ? `<input type="text" class="modal-input w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate-400 font-medium" value="${inputDefault}" placeholder="${inputPlaceholder}">` : ''}
       <div class="flex items-center justify-end space-x-2 pt-2">
         ${cancelText !== false ? `<button class="modal-btn-cancel px-4 py-2 border border-slate-700 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold">${noBtnText}</button>` : ''}
