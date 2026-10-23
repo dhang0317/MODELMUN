@@ -1241,7 +1241,6 @@
           </div>
           <div>
             <h3 class="font-bold text-lg text-white tracking-wide" data-i18n="settingsCenterTitle">會議與系統設定</h3>
-            <p class="text-xs text-zinc-400" data-i18n="settingsCenterSubtitle">統一管理會議資訊、顯示投影與雲端備份</p>
           </div>
         </div>
         <button id="btn-close-settings-modal" type="button" class="p-2 text-zinc-400 hover:text-white rounded-xl hover:bg-zinc-800 transition cursor-pointer">
@@ -1271,25 +1270,14 @@
         <!-- Panel 1: Conference -->
         <div id="cfg-panel-conference" class="cfg-panel space-y-5">
           <div>
-            <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">委員會名稱 (Committee Name)</label>
+            <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">委員會名稱</label>
             <div class="flex items-center space-x-2">
-              <input id="cfg-input-committee" type="text" class="flex-1 px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-medium text-white focus:outline-none focus:border-zinc-400">
-              <select id="cfg-select-ga" class="px-3 py-2.5 bg-zinc-800 border border-zinc-700 rounded-xl text-xs font-medium text-zinc-200 focus:outline-none">
-                <option value="" disabled selected>快速切換大會</option>
-                <option value="ga_plenary">UNGA 全體大會</option>
-                <option value="ga1">GA1 裁軍安全 (DISEC)</option>
-                <option value="ga2">GA2 經濟金融 (ECOFIN)</option>
-                <option value="ga3">GA3 社會人道 (SOCHUM)</option>
-                <option value="ga4">GA4 特別政治 (SPECPOL)</option>
-                <option value="ga5">GA5 行政預算</option>
-                <option value="ga6">GA6 法律委員會 (Legal)</option>
-                <option value="unsc">UNSC 安全理事會</option>
-              </select>
+              <input id="cfg-input-committee" type="text" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-medium text-white focus:outline-none focus:border-zinc-400">
             </div>
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">會議議題 (Agenda Topic)</label>
+            <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">會議議題</label>
             <input id="cfg-input-agenda" type="text" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-medium text-white focus:outline-none focus:border-zinc-400">
           </div>
 
@@ -1306,9 +1294,6 @@
             <div class="flex items-center space-x-2">
               <button id="cfg-btn-upload-logo" type="button" class="px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-xs font-semibold transition border border-zinc-700 cursor-pointer">
                 更換圖標
-              </button>
-              <button id="cfg-btn-reset-logo" type="button" class="px-3 py-2 text-zinc-400 hover:text-rose-400 rounded-xl text-xs font-medium transition cursor-pointer">
-                重設
               </button>
             </div>
           </div>
@@ -1431,8 +1416,7 @@
       </div>
 
       <!-- Modal Footer -->
-      <div class="px-6 py-4 border-t border-zinc-800 bg-zinc-950/60 flex items-center justify-between shrink-0">
-        <div id="settings-save-hint" class="text-xs text-zinc-500">所有變更將即時自動儲存並同步</div>
+      <div class="px-6 py-4 border-t border-zinc-800 bg-zinc-950/60 flex items-center justify-end shrink-0">
         <button id="btn-save-settings-done" type="button" class="px-6 py-2.5 bg-white text-zinc-900 hover:bg-zinc-200 font-bold text-xs rounded-xl transition shadow cursor-pointer">
           完成 (Done)
         </button>
