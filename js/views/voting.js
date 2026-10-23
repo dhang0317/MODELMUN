@@ -176,24 +176,13 @@
 
   function updateMotionVoteHeaderInfo() {
     const isMotionVote = state.activeVoteTarget === 'motion';
-    const titleElem = document.getElementById('vote-resolution-title');
-    const btnEditTitle = document.getElementById('btn-edit-resolution-title');
+    const titleInput = document.getElementById('vote-resolution-title-input');
     const motionDescEl = document.getElementById('motion-vote-desc');
     const motionDetailsText = document.getElementById('motion-vote-details-text');
     const motionProposerFlag = document.getElementById('motion-vote-proposer-flag');
-    const badgeMotionRule = document.getElementById('badge-motion-vote-rule');
-    const badgeType = document.getElementById('label-vote-type-badge');
-    const badgeThresh = document.getElementById('label-vote-threshold-badge');
     const threshElem = document.getElementById('select-vote-threshold');
     const t = I18N[state.language] || I18N.en;
 
-    if (badgeType) {
-      badgeType.textContent = (state.voteType === 'procedural') ? (t.proceduralVote || 'Procedural Vote') : (t.substantiveVote || 'Substantive Vote');
-    }
-    if (badgeThresh) {
-      const th = state.voteThreshold || 'simple';
-      badgeThresh.textContent = th === 'twothirds' ? (t.twoThirdsMajorityRule || '2/3 Majority') : (th === 'unsc9' ? (t.unsc9RequiredRule || 'UNSC 9 Required') : (th === 'consensus' ? (t.consensusMajorityRule || 'Consensus') : (t.simpleMajorityRule || 'Simple Majority')));
-    }
     if (threshElem) {
       threshElem.value = state.voteThreshold || 'simple';
     }
@@ -202,8 +191,11 @@
       const activeMotion = state.votingMotion || (state.motions && state.motions[0]) || null;
       if (activeMotion) {
         const motionTitle = `${formatMotionType(activeMotion.type)}`;
-        if (titleElem) titleElem.textContent = motionTitle;
-        if (btnEditTitle) btnEditTitle.classList.add('hidden');
+        if (titleInput) {
+          titleInput.value = motionTitle;
+          titleInput.readOnly = true;
+          titleInput.classList.remove('hover:border-slate-300', 'focus:border-primary');
+        }
         
         if (motionDescEl) {
           motionDescEl.classList.remove('hidden');
@@ -214,24 +206,20 @@
             motionDetailsText.textContent = `${activeMotion.proposer} • ${activeMotion.topic || t.generalDiscussion || 'General Discussion'}`;
           }
         }
-
-        const mRule = (typeof MOTION_RULES !== 'undefined' && MOTION_RULES[activeMotion.type]) ? MOTION_RULES[activeMotion.type] : { threshold: 'simple' };
-        if (badgeMotionRule) {
-          badgeMotionRule.classList.remove('hidden');
-          badgeMotionRule.className = 'text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300';
-          badgeMotionRule.textContent = mRule.threshold === 'twothirds' ? (t.twoThirdsMajorityRule || '2/3 多數') : (t.simpleMajorityRule || '簡單多數');
-        }
       } else {
-        if (titleElem) titleElem.textContent = t.noMotionsAvailableToVote || '無待表決之動議';
-        if (btnEditTitle) btnEditTitle.classList.add('hidden');
+        if (titleInput) {
+          titleInput.value = t.noMotionsAvailableToVote || '無待表決之動議';
+          titleInput.readOnly = true;
+        }
         if (motionDescEl) motionDescEl.classList.add('hidden');
-        if (badgeMotionRule) badgeMotionRule.classList.add('hidden');
       }
     } else {
-      if (titleElem) titleElem.textContent = state.voteResolutionTitle || 'Draft Resolution 1.1';
-      if (btnEditTitle) btnEditTitle.classList.remove('hidden');
+      if (titleInput) {
+        titleInput.value = state.voteResolutionTitle || 'Draft Resolution 1.1';
+        titleInput.readOnly = false;
+        titleInput.classList.add('hover:border-slate-300', 'focus:border-primary');
+      }
       if (motionDescEl) motionDescEl.classList.add('hidden');
-      if (badgeMotionRule) badgeMotionRule.classList.add('hidden');
     }
   }
 
@@ -1149,7 +1137,7 @@
     }
 
     // Resolution Vote
-    const resTitle = (state.resolutionTitle) || 'Draft Resolution';
+    const resTitle = (state.voteResolutionTitle || state.resolutionTitle) || 'Draft Resolution 1.1';
     showModal({
       title: state.language === 'zh' ? '宣布決議案通過' : 'Adopt Draft Resolution',
       message: state.language === 'zh' 

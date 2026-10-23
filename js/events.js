@@ -206,7 +206,9 @@
     if (headerCommInput) {
       headerCommInput.addEventListener('input', (e) => {
         state.committeeName = e.target.value;
-        saveToLocalStorage();
+        const commNameInput = document.getElementById('input-committee-name');
+        if (commNameInput) commNameInput.value = state.committeeName;
+        saveToLocalStorage(true, false);
       });
     }
 
@@ -214,7 +216,9 @@
     if (headerAgendaInput) {
       headerAgendaInput.addEventListener('input', (e) => {
         state.agenda = e.target.value;
-        saveToLocalStorage();
+        const agendaTitleInput = document.getElementById('input-agenda-title');
+        if (agendaTitleInput) agendaTitleInput.value = state.agenda;
+        saveToLocalStorage(true, false);
       });
     }
 
@@ -224,7 +228,7 @@
         state.committeeName = e.target.value;
         const hComm = document.getElementById('header-committee-input');
         if (hComm) hComm.value = state.committeeName;
-        saveToLocalStorage();
+        saveToLocalStorage(true, false);
       });
     }
 
@@ -234,7 +238,7 @@
         state.agenda = e.target.value;
         const hAg = document.getElementById('header-agenda-input');
         if (hAg) hAg.value = state.agenda;
-        saveToLocalStorage();
+        saveToLocalStorage(true, false);
       });
     }
 
@@ -755,17 +759,11 @@
       renderAll();
     });
 
-    const btnEditRes = document.getElementById('btn-edit-resolution-title');
-    if (btnEditRes) {
-      btnEditRes.addEventListener('click', () => {
-        const t = I18N[state.language] || I18N.en;
-        customPrompt(t.editResolutionTitle, t.enterResolutionPrompt, state.voteResolutionTitle || 'Draft Resolution 1.1', (val) => {
-          if (val) {
-            state.voteResolutionTitle = val;
-            saveToLocalStorage(true, true);
-            renderAll();
-          }
-        });
+    const titleInputRes = document.getElementById('vote-resolution-title-input');
+    if (titleInputRes) {
+      titleInputRes.addEventListener('input', (e) => {
+        state.voteResolutionTitle = e.target.value;
+        saveToLocalStorage(true, true);
       });
     }
 

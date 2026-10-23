@@ -85,6 +85,7 @@
             <input id="header-committee-input" type="text" value="Your Committee" class="bg-transparent border-b border-transparent hover:border-zinc-700 focus:border-zinc-400 text-base sm:text-lg tracking-wide px-1 py-0.5 rounded focus:outline-none transition max-w-[200px] sm:max-w-xs md:max-w-sm text-white pr-6">
             <select id="header-ga-select" class="absolute right-0 top-1/2 -translate-y-1/2 opacity-0 hover:opacity-100 group-hover:opacity-60 focus:opacity-100 cursor-pointer w-6 h-6 bg-transparent border-0 text-white outline-none" title="切換大會委員會">
               <option value="" disabled selected>▾</option>
+              <option value="unsc">UNSC 安全理事會</option>
               <option value="ga_plenary">UNGA 全體大會</option>
               <option value="ga1">GA1 裁軍安全 (DISEC)</option>
               <option value="ga2">GA2 經濟金融 (ECOFIN)</option>
@@ -92,6 +93,10 @@
               <option value="ga4">GA4 特別政治 (SPECPOL)</option>
               <option value="ga5">GA5 行政預算</option>
               <option value="ga6">GA6 法律委員會 (Legal)</option>
+              <option value="unicef">UNICEF 兒童基金會</option>
+              <option value="who">WHO 世界衛生組織</option>
+              <option value="unhrc">UNHRC 人權理事會</option>
+              <option value="ecosoc">ECOSOC 經社理事會</option>
             </select>
             
           </div>
@@ -759,17 +764,9 @@
         <!-- MUN Command Dashboard Card: Four Stats + Progress Bar + Verdict -->
         <div id="card-voting-details" class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3 transition-all duration-300">
           <div id="voting-header-row" class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-3 gap-3">
-            <div>
-              <div class="flex items-center space-x-2">
-                <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold" id="label-vote-type-badge">Substantive Vote</span>
-                <span class="text-slate-300">•</span>
-                <span class="text-xs text-slate-500 font-mono" id="label-vote-threshold-badge">Simple Majority</span>
-                <span id="badge-motion-vote-rule" class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300 hidden"></span>
-              </div>
+            <div class="flex-1 max-w-md">
               <div class="flex items-center space-x-2 mt-0.5">
-                <h3 id="vote-resolution-title" class="text-lg sm:text-xl font-bold text-slate-800">Draft Resolution 1.1</h3>
-                <button id="btn-edit-resolution-title" class="p-1 hover:bg-slate-100 rounded text-slate-400 hover:text-slate-600 transition" title="Edit Title">
-                </button>
+                <input id="vote-resolution-title-input" type="text" value="Draft Resolution 1.1" placeholder="輸入決議案名稱..." class="w-full text-lg sm:text-xl font-bold text-slate-800 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-primary focus:outline-none transition py-0.5 px-1 rounded">
               </div>
               <div id="motion-vote-desc" class="text-xs text-slate-500 mt-0.5 hidden">
                 <span id="motion-vote-proposer-flag"></span>
