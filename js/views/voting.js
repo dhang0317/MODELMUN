@@ -52,6 +52,65 @@
     }
   }
 
+  // Check if roll call voting for a substantive draft resolution has finished, determine pass/fail, and auto-conclude
+  let lastAutoConcludedRes = null;
+  function checkResolutionVotingAutoFinish(eligibleVoters, favorCount, againstCount, requiredMajority) {
+    if (state.activeVoteTarget === 'motion' || state.currentTab !== 'vote') return;
+    const resTitle = (state.voteResolutionTitle || state.resolutionTitle) || 'Draft Resolution 1.1';
+    const totalVotesKey = `${resTitle}_${favorCount}_${againstCount}_${eligibleVoters.length}`;
+    if (lastAutoConcludedRes === totalVotesKey) return;
+    lastAutoConcludedRes = totalVotesKey;
+
+    const t = I18N[state.language] || I18N.en;
+    let isPassed = false;
+
+    if (state.voteThreshold === 'consensus') {
+      isPassed = (againstCount === 0 && favorCount > 0);
+    } else if (state.voteThreshold === 'unsc9') {
+      isPassed = (favorCount >= 9);
+    } else if (state.voteThreshold === 'twothirds') {
+      isPassed = (favorCount > 0 && favorCount >= requiredMajority);
+    } else {
+      isPassed = (favorCount > againstCount);
+    }
+
+    state.resolutionPassed = isPassed;
+    const verdictElem = document.getElementById('vote-verdict');
+    if (verdictElem) {
+      if (isPassed) {
+        verdictElem.textContent = (t.passed || 'PASSED').toUpperCase();
+        verdictElem.className = 'text-xs sm:text-sm font-black tracking-wide text-emerald-600';
+      } else {
+        verdictElem.textContent = (t.failed || 'FAILED').toUpperCase();
+        verdictElem.className = 'text-xs sm:text-sm font-black tracking-wide text-rose-600';
+      }
+    }
+    saveToLocalStorage(true, true);
+
+    if (isPassed) {
+      if (typeof launchConfettiCannon === 'function') {
+        launchConfettiCannon();
+      }
+      if (typeof customAlert === 'function') {
+        customAlert(
+          state.language === 'zh' ? '表決結算：決議案通過！' : 'Vote Concluded: Resolution Passed!',
+          state.language === 'zh'
+            ? `所有代表已完成投票！【${resTitle}】已達通過門檻，正式表決通過！\n(贊成: ${favorCount}，反對: ${againstCount})`
+            : `All votes recorded! 【${resTitle}】 has met the required threshold and is officially PASSED!\n(In Favor: ${favorCount}, Against: ${againstCount})`
+        );
+      }
+    } else {
+      if (typeof customAlert === 'function') {
+        customAlert(
+          state.language === 'zh' ? '表決結算：決議案未獲通過' : 'Vote Concluded: Resolution Failed',
+          state.language === 'zh'
+            ? `所有代表已完成投票！【${resTitle}】未達通過門檻，表決未獲通過。\n(贊成: ${favorCount}，反對: ${againstCount})`
+            : `All votes recorded! 【${resTitle}】 did not meet the required threshold and is FAILED.\n(In Favor: ${favorCount}, Against: ${againstCount})`
+        );
+      }
+    }
+  }
+
   function renderVotingView() {
     // Always render roll call grid so it's ready when viewing rollcall
     renderRollCallGrid();
@@ -553,6 +612,9 @@
       // Check if all countries finished voting on a motion, auto-judge and auto-navigate
       if (isMotionVote && remainingToVote === 0 && eligibleVoters.length > 0) {
         checkMotionVotingAutoFinish(eligibleVoters, favorCount, againstCount, remainingToVote, requiredMajority);
+      } else if (!isMotionVote && remainingToVote === 0 && eligibleVoters.length > 0) {
+        // Auto-conclude substantive resolution vote when last country votes
+        checkResolutionVotingAutoFinish(eligibleVoters, favorCount, againstCount, requiredMajority);
       }
     }
 
