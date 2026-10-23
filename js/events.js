@@ -794,6 +794,25 @@
       });
     }
 
+    // Adopt / Pass Vote
+    const btnAdoptVote = document.getElementById('btn-adopt-vote');
+    if (btnAdoptVote) {
+      btnAdoptVote.addEventListener('click', () => {
+        if (typeof window.adoptCurrentVote === 'function') {
+          window.adoptCurrentVote();
+        }
+      });
+    }
+
+    const btnQuickPass = document.getElementById('btn-quick-pass');
+    if (btnQuickPass) {
+      btnQuickPass.addEventListener('click', () => {
+        if (typeof window.adoptCurrentVote === 'function') {
+          window.adoptCurrentVote();
+        }
+      });
+    }
+
     // Consensus vote with Custom Modal
     document.getElementById('btn-consensus-vote').addEventListener('click', () => {
       const t = I18N[state.language] || I18N.en;

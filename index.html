@@ -745,8 +745,12 @@
           </div>
 
           <div class="flex items-center space-x-2 text-xs">
-            <button id="btn-consensus-vote" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-300 transition" data-i18n="consensusVote">Consensus Vote</button>
-            <button id="btn-reset-votes" class="px-3 py-1.5 text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition flex items-center space-x-1" data-i18n="resetVotes">
+            <button id="btn-adopt-vote" type="button" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg shadow-sm transition flex items-center space-x-1.5 cursor-pointer" title="通過當前表決 (Pass Vote)">
+              <span class="text-sm">✓</span>
+              <span data-i18n="adoptVote">通過 (Pass)</span>
+            </button>
+            <button id="btn-consensus-vote" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg border border-slate-300 transition cursor-pointer" data-i18n="consensusVote">Consensus Vote</button>
+            <button id="btn-reset-votes" class="px-3 py-1.5 text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition flex items-center space-x-1 cursor-pointer" data-i18n="resetVotes">
               <span>Reset</span>
             </button>
           </div>
@@ -812,7 +816,12 @@
             <div class="space-y-1">
               <div class="flex items-center justify-between text-xs text-slate-500 px-1">
                 <span id="vote-progress-label-favor">Favor: 0%</span>
-                <span id="vote-verdict" class="text-xs sm:text-sm font-bold tracking-wide text-slate-600">PENDING</span>
+                <div class="flex items-center space-x-2">
+                  <span id="vote-verdict" class="text-xs sm:text-sm font-bold tracking-wide text-slate-600">PENDING</span>
+                  <button id="btn-quick-pass" type="button" class="px-2 py-0.5 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold rounded shadow-sm transition hidden cursor-pointer">
+                    通過 (Pass)
+                  </button>
+                </div>
                 <span id="vote-progress-label-against">Against: 0%</span>
               </div>
               <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden flex">

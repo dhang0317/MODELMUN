@@ -536,8 +536,17 @@
       }
 
       // If this is a motion vote and it passed, show the "Execute Motion" button
+      const isPassed = verdictElem.textContent.includes((t.passed || 'PASSED').toUpperCase());
+      const btnQuickPass = document.getElementById('btn-quick-pass');
+      if (btnQuickPass) {
+        if (isPassed) {
+          btnQuickPass.classList.remove('hidden');
+        } else {
+          btnQuickPass.classList.add('hidden');
+        }
+      }
+
       if (btnMotionExecute) {
-        const isPassed = verdictElem.textContent.includes((t.passed || 'PASSED').toUpperCase());
         if (isMotionVote && isPassed && (state.votingMotion || state.motions.length > 0)) {
           btnMotionExecute.classList.remove('hidden');
           const curMot = state.votingMotion || state.motions[0];
@@ -881,6 +890,10 @@
               <input type="text" class="session-name-input font-bold text-slate-800 text-sm bg-transparent border-b border-transparent hover:border-slate-300 focus:border-primary focus:outline-none transition px-1 py-0.5 rounded truncate" value="${sess.name || `Session ${sess.id}`}" placeholder="Session Name">
             </div>
             <div class="flex items-center space-x-1 shrink-0">
+              <button type="button" class="btn-adopt-session px-2 py-0.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] transition cursor-pointer shadow-sm flex items-center space-x-1" data-id="${sess.id}" title="通過此會期表決">
+                <span>✓</span>
+                <span>${t.pass || '通過'}</span>
+              </button>
               <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold">
                 ${t.totalVotesLabel || '總票'}: ${totalVotes}
               </span>
@@ -1054,6 +1067,15 @@
         });
       }
 
+      // Adopt Session
+      const btnAdoptSess = card.querySelector('.btn-adopt-session');
+      if (btnAdoptSess) {
+        btnAdoptSess.addEventListener('click', (e) => {
+          e.stopPropagation();
+          adoptVotingSession(sess);
+        });
+      }
+
       card.addEventListener('click', () => {
         if (state.activeSessionId !== sess.id) {
           state.activeSessionId = sess.id;
@@ -1065,3 +1087,94 @@
       grid.appendChild(card);
     });
   }
+
+  function adoptVotingSession(sess) {
+    const t = I18N[state.language] || I18N.en;
+    const sessName = sess.name || `Session ${sess.id}`;
+    const favor = sess.favor || 0;
+    const against = sess.against || 0;
+    const abstain = sess.abstain || 0;
+
+    showModal({
+      title: state.language === 'zh' ? '確認通過表決' : 'Confirm Adoption',
+      message: state.language === 'zh' 
+        ? `確定要通過【${sessName}】嗎？\n(贊成: ${favor}，反對: ${against}，棄權: ${abstain})`
+        : `Are you sure you want to adopt 【${sessName}】?\n(In Favor: ${favor}, Against: ${against}, Abstain: ${abstain})`,
+      confirmText: state.language === 'zh' ? '確認通過' : 'Pass & Adopt',
+      cancelText: t.cancel || '取消',
+      onConfirm: () => {
+        sess.status = 'passed';
+        saveToLocalStorage(true, true);
+        renderSessionVotesGrid();
+        customAlert(
+          state.language === 'zh' ? '表決已通過' : 'Vote Adopted',
+          state.language === 'zh' ? `【${sessName}】已正式通過！` : `【${sessName}】has been officially passed and adopted!`
+        );
+      }
+    });
+  }
+
+  function adoptCurrentVote() {
+    const t = I18N[state.language] || I18N.en;
+    const isMotion = state.activeVoteTarget === 'motion' || (state.motions && state.motions.length > 0 && state.votingMotion);
+
+    if (isMotion) {
+      const curMot = state.votingMotion || (state.motions && state.motions[0]);
+      if (curMot) {
+        const targetIdx = (typeof curMot.originalIndex === 'number') ? curMot.originalIndex : 0;
+        showModal({
+          title: state.language === 'zh' ? '確認通過動議' : 'Adopt Motion',
+          message: state.language === 'zh' 
+            ? `確定要宣布通過此動議嗎？\n【${curMot.topic || curMot.type || '動議'}】`
+            : `Confirm adoption of this motion?\n【${curMot.topic || curMot.type || 'Motion'}】`,
+          confirmText: state.language === 'zh' ? '通過並執行' : 'Adopt & Execute',
+          cancelText: t.cancel || '取消',
+          onConfirm: () => {
+            if (typeof executeMotion === 'function') {
+              executeMotion(curMot, targetIdx);
+            }
+          }
+        });
+        return;
+      }
+    }
+
+    // Substantive Resolution Vote or Session Vote
+    if (state.votingSubtab === 'session') {
+      const activeSess = state.sessionVotes.find(s => s.id === state.activeSessionId) || state.sessionVotes[0];
+      if (activeSess) {
+        adoptVotingSession(activeSess);
+        return;
+      }
+    }
+
+    // Resolution Vote
+    const resTitle = (state.resolutionTitle) || 'Draft Resolution';
+    showModal({
+      title: state.language === 'zh' ? '宣布決議案通過' : 'Adopt Draft Resolution',
+      message: state.language === 'zh' 
+        ? `確定主席正式宣布【${resTitle}】通過嗎？`
+        : `Confirm official adoption and passing of 【${resTitle}】?`,
+      confirmText: state.language === 'zh' ? '正式通過' : 'Formally Adopt',
+      cancelText: t.cancel || '取消',
+      onConfirm: () => {
+        state.resolutionPassed = true;
+        // Set all non-voted or current verdict to passed
+        const verdictElem = document.getElementById('vote-verdict');
+        if (verdictElem) {
+          verdictElem.textContent = (t.passed || 'PASSED').toUpperCase();
+          verdictElem.className = 'text-xs sm:text-sm font-black tracking-wide text-emerald-600';
+        }
+        saveToLocalStorage(true, true);
+        renderResolutionVoteGrid();
+        customAlert(
+          state.language === 'zh' ? '決議案通過' : 'Resolution Passed',
+          state.language === 'zh' ? `主席已宣布【${resTitle}】正式通過！` : `Chair has officially declared 【${resTitle}】 passed!`
+        );
+      }
+    });
+  }
+
+  // Expose to window for global event handlers
+  window.adoptCurrentVote = adoptCurrentVote;
+  window.adoptVotingSession = adoptVotingSession;
