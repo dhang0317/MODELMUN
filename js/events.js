@@ -496,6 +496,57 @@
       });
     }
 
+    // Direct Inline Typing on Pro / Con Big Timer Display
+    const proconTimerInput = document.getElementById('procon-timer-input');
+    if (proconTimerInput) {
+      proconTimerInput.addEventListener('focus', () => {
+        const m = Math.floor(state.proConSecsRemaining / 60);
+        const s = state.proConSecsRemaining % 60;
+        proconTimerInput.value = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+        proconTimerInput.select();
+      });
+      proconTimerInput.addEventListener('blur', () => {
+        applyProConTypedTime();
+      });
+      proconTimerInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          proconTimerInput.blur();
+        } else if (e.key === 'Escape') {
+          const m = Math.floor(state.proConSecsRemaining / 60);
+          const s = state.proConSecsRemaining % 60;
+          proconTimerInput.value = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+          proconTimerInput.blur();
+        }
+      });
+    }
+
+    function applyProConTypedTime() {
+      if (!proconTimerInput) return;
+      const val = proconTimerInput.value.trim();
+      let totalSecs = 0;
+      if (val.includes(':')) {
+        const parts = val.split(':');
+        const min = parseInt(parts[0], 10) || 0;
+        const sec = parseInt(parts[1], 10) || 0;
+        totalSecs = min * 60 + sec;
+      } else {
+        const num = parseInt(val, 10);
+        if (!isNaN(num)) {
+          totalSecs = num > 59 ? num : num * 60;
+        }
+      }
+      if (totalSecs > 0) {
+        state.proConSpeakerSecs = totalSecs;
+        state.proConSecsRemaining = totalSecs;
+        saveToLocalStorage(true, true);
+        renderAll();
+      } else {
+        const m = Math.floor(state.proConSecsRemaining / 60);
+        const s = state.proConSecsRemaining % 60;
+        proconTimerInput.value = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+      }
+    }
+
     const btnAddPro = document.getElementById('btn-procon-add-pro');
     if (btnAddPro) {
       btnAddPro.addEventListener('click', (e) => {
@@ -1277,7 +1328,10 @@
     // Modal Close Buttons (General & Settings)
     document.querySelectorAll('.btn-close-modal').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('#modal-add-speaker, #modal-define-time, #modal-mod-config, #modal-add-motion').forEach(m => m.classList.add('hidden'));
+        document.querySelectorAll('#modal-add-speaker, #modal-define-time, #modal-mod-config, #modal-add-motion').forEach(m => {
+          m.classList.add('hidden');
+          m.style.display = 'none';
+        });
       });
     });
 

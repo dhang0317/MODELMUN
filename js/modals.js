@@ -142,6 +142,7 @@
     searchInput.oninput = renderSelectable;
     renderSelectable();
     modal.classList.remove('hidden');
+    modal.style.display = 'flex';
     searchInput.focus();
   }
 

@@ -490,13 +490,13 @@
                 <div class="flex items-center justify-between border-b pb-4 mb-4">
                   <div class="grid grid-cols-2 gap-2 flex-1 max-w-xs">
                     <button id="btn-procon-side-pro" type="button" class="w-full text-center px-4 py-2 rounded-lg text-xs font-bold transition bg-emerald-600 text-white shadow-sm cursor-pointer" data-i18n="proSide">
-                      正方發言 (PRO)
+                      正方發言
                     </button>
                     <button id="btn-procon-side-con" type="button" class="w-full text-center px-4 py-2 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900 bg-slate-100 cursor-pointer" data-i18n="conSide">
-                      反方發言 (CON)
+                      反方發言
                     </button>
                   </div>
-                  <button id="btn-procon-set-time" type="button" class="text-xs text-primary hover:underline font-semibold flex items-center space-x-1.5 cursor-pointer ml-3">
+                  <button id="btn-procon-set-time" type="button" class="hidden text-xs text-primary hover:underline font-semibold flex items-center space-x-1.5 cursor-pointer ml-3">
                     <span id="label-procon-speaker-time">60s</span>
                   </button>
                 </div>
@@ -507,7 +507,7 @@
                     <img id="procon-current-flag" src="https://flagcdn.com/w80/un.png" alt="flag" class="w-20 h-14 sm:w-24 sm:h-16 object-cover rounded-xl shadow-md border border-slate-700/40">
                     <div class="text-left">
                       <div class="flex items-center space-x-2">
-                        <span id="procon-badge-side" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300">PRO (正方)</span>
+                        <span id="procon-badge-side" class="hidden text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300"></span>
                       </div>
                       <h2 id="procon-current-name" class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 leading-tight mt-1">None selected</h2>
                     </div>
@@ -516,7 +516,10 @@
 
                 <!-- Timer Display -->
                 <div class="py-2">
-                  <div id="procon-timer-display" class="text-7xl sm:text-8xl font-mono font-black text-primary tracking-tight">01:00</div>
+                  <div class="relative inline-flex items-center justify-center group cursor-pointer" title="點擊直接修改時間">
+                    <div id="procon-timer-display" class="text-7xl sm:text-8xl font-mono font-black text-primary tracking-tight transition group-hover:opacity-75">01:00</div>
+                    <input id="procon-timer-input" type="text" maxlength="5" class="absolute inset-0 opacity-0 cursor-pointer text-center font-mono font-black text-7xl sm:text-8xl bg-transparent border-0 outline-none text-transparent caret-white selection:bg-primary/40 focus:opacity-100 focus:text-primary focus:bg-zinc-900/90 rounded-2xl transition z-10" value="01:00" placeholder="01:00">
+                  </div>
                   <div class="w-full bg-slate-100 h-2.5 rounded-full mt-4 overflow-hidden">
                     <div id="procon-speaker-progress" class="bg-secondary h-full transition-all duration-300 w-full"></div>
                   </div>
@@ -590,10 +593,8 @@
         <!-- Main Caucus Timer Card (Consistent with Mod Caucus UI) -->
         <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 text-center space-y-6">
           <div class="flex items-center justify-between border-b pb-4 border-slate-100">
-            <div>
-              <span class="text-xs uppercase tracking-wider font-bold text-slate-400" data-i18n="unmod">Unmoderated Caucus</span>
-              <h2 class="text-2xl font-black text-slate-800 tracking-tight" data-i18n="tabUnmod">自由磋商 / 非主持核心磋商</h2>
-            </div>
+            <span class="text-xs uppercase tracking-wider font-bold text-slate-400" data-i18n="unmod">自由磋商</span>
+            <h2 class="text-2xl font-black text-slate-800 tracking-tight hidden" data-i18n="tabUnmod">自由磋商</h2>
           </div>
 
           <div class="space-y-4 py-2">
@@ -603,8 +604,7 @@
               <div id="unmod-total-progress" class="bg-primary h-full w-full transition-all duration-300"></div>
             </div>
             
-            <div class="flex items-center justify-between text-xs font-semibold text-slate-500 pt-1">
-              <span data-i18n="caucusTotalElapsed">剩餘時間 / 總時長</span>
+            <div class="flex items-center justify-end text-xs font-semibold text-slate-500 pt-1">
               <span id="unmod-total-timer-text">15:00</span>
             </div>
           </div>
@@ -1007,7 +1007,7 @@
   <!-- Modal: Delegate QR Code Join (Removed as requested) -->
 
   <!-- Modal: Add Speaker to Queue -->
-  <div id="modal-add-speaker" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+  <div id="modal-add-speaker" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[90] flex items-center justify-center p-4 hidden">
     <div class="bg-slate-800 text-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 max-h-[85vh] flex flex-col border border-slate-700">
       <div class="flex items-center justify-between border-b border-slate-700 pb-3">
         <h3 class="font-bold text-lg text-slate-100" data-i18n="addSpeaker">Add Speaker</h3>

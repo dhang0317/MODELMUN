@@ -248,6 +248,12 @@
     }
 
     formatTimerDisplay('procon-timer-display', state.proConSecsRemaining);
+    const proconInput = document.getElementById('procon-timer-input');
+    if (proconInput && document.activeElement !== proconInput) {
+      const m = Math.floor(state.proConSecsRemaining / 60);
+      const s = state.proConSecsRemaining % 60;
+      proconInput.value = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+    }
 
     const indPct = Math.max(0, (state.proConSecsRemaining / (state.proConSpeakerSecs || 60)) * 100);
     const pBar = document.getElementById('procon-speaker-progress');
@@ -358,6 +364,12 @@
         saveToLocalStorage(true, true);
         if (state.proConSecsRemaining === 10) playAlertChime();
         formatTimerDisplay('procon-timer-display', state.proConSecsRemaining);
+    const proconInput = document.getElementById('procon-timer-input');
+    if (proconInput && document.activeElement !== proconInput) {
+      const m = Math.floor(state.proConSecsRemaining / 60);
+      const s = state.proConSecsRemaining % 60;
+      proconInput.value = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+    }
         const pct = Math.max(0, (state.proConSecsRemaining / (state.proConSpeakerSecs || 60)) * 100);
         const pBar = document.getElementById('procon-speaker-progress');
         if (pBar) pBar.style.width = `${pct}%`;
