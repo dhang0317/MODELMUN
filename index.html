@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>NNKIEH MUN</title>
   <link rel="icon" type="image/png" href="logo.png">
   <!-- Google Identity Services -->
@@ -71,11 +71,11 @@
   </script>
   <link rel="stylesheet" href="css/style.css?v=2026100702">
 </head>
-<body class="h-screen w-screen flex flex-col overflow-hidden bg-black">
+<body class="h-screen w-screen flex flex-col overflow-hidden bg-black select-none">
 
   <!-- ================= TOP HEADER / STATS BAR ================= -->
-  <header id="main-header" class="border-b text-white shadow-sm z-20 flex-shrink-0 relative">
-    <div class="px-3 sm:px-4 py-2 flex items-center justify-between gap-4 sm:gap-6">
+  <header id="main-header" class="border-b text-white shadow-sm z-30 flex-shrink-0 sticky top-0">
+    <div id="header-top-bar" class="px-3 sm:px-4 py-2 flex items-center justify-between gap-4 sm:gap-6 shrink-0">
       <div class="flex items-center space-x-3 shrink-0 min-w-0">
         <button id="btn-logo-home" type="button" class="cursor-pointer hover:opacity-80 transition shrink-0 rounded-full focus:outline-none flex items-center justify-center p-0 border-0" title="返回選擇國家 (Setup)">
           <img src="logo.png" alt="MUN Logo" class="w-9 h-9 rounded-full shadow-sm object-cover bg-white ring-1 ring-zinc-800">

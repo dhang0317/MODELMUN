@@ -2,7 +2,15 @@
     state.currentTab = tabId;
     document.querySelectorAll('.view-panel').forEach(p => p.classList.add('hidden'));
     const target = document.getElementById(`view-${tabId}`);
-    if (target) target.classList.remove('hidden');
+    if (target) {
+      target.classList.remove('hidden');
+      target.scrollTop = 0;
+    }
+    // Prevent document / window from drifting or scrolling header out of view
+    window.scrollTo(0, 0);
+    if (document.body) document.body.scrollTop = 0;
+    if (document.documentElement) document.documentElement.scrollTop = 0;
+
     if (!state.isViewerMode) {
       saveToLocalStorage(true, true);
     }
