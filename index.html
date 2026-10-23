@@ -1219,7 +1219,7 @@
           </div>
           <div>
             <h3 class="font-bold text-lg text-white tracking-wide" data-i18n="settingsCenterTitle">會議與系統設定</h3>
-            <p class="text-xs text-zinc-400" data-i18n="settingsCenterSubtitle">統一管理會議資訊、議事計時、顯示投影與雲端備份</p>
+            <p class="text-xs text-zinc-400" data-i18n="settingsCenterSubtitle">統一管理會議資訊、顯示投影與雲端備份</p>
           </div>
         </div>
         <button id="btn-close-settings-modal" type="button" class="p-2 text-zinc-400 hover:text-white rounded-xl hover:bg-zinc-800 transition cursor-pointer">
@@ -1232,10 +1232,6 @@
         <button id="tab-btn-cfg-conference" type="button" class="cfg-nav-btn py-3 px-3 text-xs sm:text-sm font-semibold border-b-2 border-white text-white flex items-center space-x-2 transition cursor-pointer">
           
           <span data-i18n="settingsTabConference">會議資訊</span>
-        </button>
-        <button id="tab-btn-cfg-rules" type="button" class="cfg-nav-btn py-3 px-3 text-xs sm:text-sm font-medium border-b-2 border-transparent text-zinc-400 hover:text-zinc-200 flex items-center space-x-2 transition cursor-pointer">
-          
-          <span data-i18n="settingsTabRules">議事與計時</span>
         </button>
         <button id="tab-btn-cfg-display" type="button" class="cfg-nav-btn py-3 px-3 text-xs sm:text-sm font-medium border-b-2 border-transparent text-zinc-400 hover:text-zinc-200 flex items-center space-x-2 transition cursor-pointer">
           
@@ -1296,49 +1292,7 @@
           </div>
         </div>
 
-        <!-- Panel 2: Rules & Timing -->
-        <div id="cfg-panel-rules" class="cfg-panel space-y-5 hidden">
-          <div>
-            <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">GSL 常規發言每人時長 (秒)</label>
-            <div class="flex items-center space-x-3">
-              <input id="cfg-input-gsl-time" type="number" min="10" max="600" step="5" class="w-32 px-4 py-2 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-bold text-white text-center">
-              <div class="flex items-center space-x-2">
-                <button type="button" data-gsl-preset="60" class="btn-gsl-quick px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-xs font-semibold border border-zinc-700 cursor-pointer">60s</button>
-                <button type="button" data-gsl-preset="90" class="btn-gsl-quick px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-xs font-semibold border border-zinc-700 cursor-pointer">90s</button>
-                <button type="button" data-gsl-preset="120" class="btn-gsl-quick px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 rounded-lg text-xs font-semibold border border-zinc-700 cursor-pointer">120s</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">Mod 預設總磋商時長 (分鐘)</label>
-              <input id="cfg-input-mod-total" type="number" min="1" max="120" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-bold text-white">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">Mod 預設個人發言時間 (秒)</label>
-              <input id="cfg-input-mod-speaker" type="number" min="10" max="300" step="5" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-bold text-white">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">Unmod 自由磋商預設時長 (分鐘)</label>
-              <input id="cfg-input-unmod-mins" type="number" min="1" max="180" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-bold text-white">
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">決議文預設通過門檻</label>
-              <select id="cfg-select-vote-threshold" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-medium text-white">
-                <option value="simple">簡單多數決 (50% + 1)</option>
-                <option value="twothirds">絕對多數決 (2/3)</option>
-                <option value="unsc9">安理會常任決 (9/15)</option>
-                <option value="consensus">協商一致共識決 (Consensus)</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Panel 3: Display & Theme -->
+        <!-- Panel 2: Display & Theme -->
         <div id="cfg-panel-display" class="cfg-panel space-y-5 hidden">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>

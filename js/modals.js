@@ -216,13 +216,11 @@
   function switchSettingsTab(tabKey) {
     const panels = {
       conference: document.getElementById('cfg-panel-conference'),
-      rules: document.getElementById('cfg-panel-rules'),
       display: document.getElementById('cfg-panel-display'),
       sync: document.getElementById('cfg-panel-sync')
     };
     const buttons = {
       conference: document.getElementById('tab-btn-cfg-conference'),
-      rules: document.getElementById('tab-btn-cfg-rules'),
       display: document.getElementById('tab-btn-cfg-display'),
       sync: document.getElementById('tab-btn-cfg-sync')
     };
@@ -382,7 +380,6 @@
     // Tabs
     const tabBtns = [
       { id: 'tab-btn-cfg-conference', key: 'conference' },
-      { id: 'tab-btn-cfg-rules', key: 'rules' },
       { id: 'tab-btn-cfg-display', key: 'display' },
       { id: 'tab-btn-cfg-sync', key: 'sync' }
     ];
