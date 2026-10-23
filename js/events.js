@@ -486,7 +486,9 @@
 
     const btnAddPro = document.getElementById('btn-procon-add-pro');
     if (btnAddPro) {
-      btnAddPro.addEventListener('click', () => {
+      btnAddPro.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         openAddSpeakerModal((c) => {
           if (!state.proQueue) state.proQueue = [];
           state.proQueue.push(c);
@@ -498,7 +500,9 @@
 
     const btnAddCon = document.getElementById('btn-procon-add-con');
     if (btnAddCon) {
-      btnAddCon.addEventListener('click', () => {
+      btnAddCon.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         openAddSpeakerModal((c) => {
           if (!state.conQueue) state.conQueue = [];
           state.conQueue.push(c);

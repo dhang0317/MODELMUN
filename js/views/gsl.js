@@ -22,9 +22,9 @@
     // Update active button styling
     const updateBtn = (btn, isActive) => {
       if (!btn) return;
-      btn.className = isActive
-        ? 'w-full text-center px-3 py-2.5 rounded-lg text-xs font-bold transition bg-white shadow-sm text-slate-800 cursor-pointer'
-        : 'w-full text-center px-3 py-2.5 rounded-lg text-xs font-medium transition text-slate-600 hover:text-slate-900 cursor-pointer';
+      btn.className = `speaking-subtab-btn w-full text-center px-3 py-2.5 rounded-lg text-xs transition cursor-pointer ${
+        isActive ? 'subtab-active font-bold' : 'font-medium'
+      }`;
     };
 
     updateBtn(btnGsl, sub === 'gsl');

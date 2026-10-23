@@ -884,6 +884,7 @@ body:not(.light-mode) {
     body.light-mode #mod-speaker-timer-display,
     body.light-mode #single-timer-display,
     body.light-mode #unmod-timer-display,
+    body.light-mode #procon-timer-display,
     body.light-mode #recess-timer-display {
       color: #000000 !important;
     }
@@ -1522,17 +1523,20 @@ body:not(.light-mode) {
     #gsl-timer-display,
     #mod-speaker-timer-display,
     #unmod-timer-display,
+    #procon-timer-display,
     #single-timer-display {
       font-size: calc(4.5rem * var(--content-scale)) !important;
       line-height: 1.1 !important;
     }
     #gsl-current-name,
     #mod-current-country-name,
+    #procon-current-name,
     #single-country-name {
       font-size: calc(2.25rem * var(--content-scale)) !important;
     }
     #gsl-current-flag,
     #mod-current-flag,
+    #procon-current-flag,
     #single-flag {
       width: calc(5rem * var(--content-scale)) !important;
       height: calc(3.5rem * var(--content-scale)) !important;
@@ -1833,6 +1837,85 @@ body:not(.light-mode) {
       padding-top: clamp(0.2rem, 0.8vh, 0.8rem) !important;
       padding-bottom: clamp(0.2rem, 0.8vh, 0.8rem) !important;
     }
+
+    /* Speaking Subtabs & Pro/Con Cards Dark/Light Mode Fix */
+    body:not(.light-mode) .speaking-subtab-btn {
+      color: #a1a1aa !important;
+      background: transparent !important;
+      border: 1px solid transparent !important;
+    }
+    body:not(.light-mode) .speaking-subtab-btn:hover {
+      color: #ffffff !important;
+      background-color: rgba(255, 255, 255, 0.08) !important;
+    }
+    body:not(.light-mode) .speaking-subtab-btn.subtab-active {
+      background-color: #27272a !important;
+      color: #ffffff !important;
+      border: 1px solid #3f3f46 !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) !important;
+    }
+
+    body.light-mode .speaking-subtab-btn {
+      color: #475569 !important;
+      background: transparent !important;
+      border: 1px solid transparent !important;
+    }
+    body.light-mode .speaking-subtab-btn:hover {
+      color: #0f172a !important;
+      background-color: rgba(0, 0, 0, 0.05) !important;
+    }
+    body.light-mode .speaking-subtab-btn.subtab-active {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border: 1px solid #cbd5e1 !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06) !important;
+    }
+
+    /* Pro / Con Queue and Side Switcher buttons */
+    body:not(.light-mode) #btn-procon-add-pro {
+      background-color: rgba(16, 185, 129, 0.25) !important;
+      color: #34d399 !important;
+      border: 1px solid rgba(16, 185, 129, 0.6) !important;
+    }
+    body:not(.light-mode) #btn-procon-add-pro:hover {
+      background-color: rgba(16, 185, 129, 0.4) !important;
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) #btn-procon-add-con {
+      background-color: rgba(239, 68, 68, 0.25) !important;
+      color: #f87171 !important;
+      border: 1px solid rgba(239, 68, 68, 0.6) !important;
+    }
+    body:not(.light-mode) #btn-procon-add-con:hover {
+      background-color: rgba(239, 68, 68, 0.4) !important;
+      color: #ffffff !important;
+    }
+
+    body.light-mode #btn-procon-add-pro {
+      background-color: #059669 !important;
+      color: #ffffff !important;
+      border: 1px solid #047857 !important;
+    }
+    body.light-mode #btn-procon-add-con {
+      background-color: #e11d48 !important;
+      color: #ffffff !important;
+      border: 1px solid #be123c !important;
+    }
+
+    /* Voting subtabs active styles */
+    body:not(.light-mode) #btn-voting-subtab-rollcall.active,
+    body:not(.light-mode) #btn-voting-subtab-session.active {
+      background-color: #27272a !important;
+      color: #ffffff !important;
+      border: 1px solid #3f3f46 !important;
+    }
+    body.light-mode #btn-voting-subtab-rollcall.active,
+    body.light-mode #btn-voting-subtab-session.active {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+
 
 
 

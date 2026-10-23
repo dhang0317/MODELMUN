@@ -125,6 +125,7 @@
           </div>
         `;
         item.addEventListener('click', (e) => {
+          e.preventDefault();
           if (!keepOpen) {
             modal.classList.add('hidden');
             onSelectCallback(c);

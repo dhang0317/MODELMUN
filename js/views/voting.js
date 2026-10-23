@@ -246,6 +246,8 @@
     const detailsCard = document.getElementById('card-voting-details');
     const btnSubtabRollcall = document.getElementById('btn-voting-subtab-rollcall');
     const btnSubtabSession = document.getElementById('btn-voting-subtab-session');
+    const topSessionControls = document.getElementById('vote-session-top-controls');
+    const voteStagesGroup = document.getElementById('vote-stages-group');
 
     // Check if motion vote is active
     const isMotionVote = state.activeVoteTarget === 'motion';
@@ -258,24 +260,31 @@
       state.votingSubtab = isMotionVote ? 'session' : 'rollcall';
     }
 
+    const isRollcall = state.votingSubtab === 'rollcall';
+    const isSession = state.votingSubtab === 'session';
+
     // Update Subtab button styling
     if (btnSubtabRollcall) {
-      const isRollcall = state.votingSubtab === 'rollcall';
-      const isSession = state.votingSubtab === 'session';
+      btnSubtabRollcall.className = `px-3 py-1.5 rounded-lg text-xs transition cursor-pointer ${
+        isRollcall ? 'active font-bold' : ''
+      }`;
+    }
+    if (btnSubtabSession) {
+      btnSubtabSession.disabled = false;
+      btnSubtabSession.style.opacity = '1';
+      btnSubtabSession.style.cursor = 'pointer';
+      btnSubtabSession.title = '';
+      btnSubtabSession.className = `px-3 py-1.5 rounded-lg text-xs transition cursor-pointer ${
+        isSession ? 'active font-bold' : ''
+      }`;
+    }
 
-      btnSubtabRollcall.className = isRollcall
-        ? 'px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800 font-bold'
-        : 'px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900';
-
-      if (btnSubtabSession) {
-        btnSubtabSession.disabled = false;
-        btnSubtabSession.style.opacity = '1';
-        btnSubtabSession.style.cursor = 'pointer';
-        btnSubtabSession.title = '';
-        btnSubtabSession.className = isSession
-          ? 'px-3 py-1.5 rounded-lg text-xs transition bg-white shadow-sm text-slate-800 font-bold'
-          : 'px-3 py-1.5 rounded-lg text-xs transition text-slate-600 hover:text-slate-900 cursor-pointer';
-      }
+    // Toggle top controls based on subtab
+    if (topSessionControls) {
+      topSessionControls.classList.toggle('hidden', !isSession);
+    }
+    if (voteStagesGroup) {
+      voteStagesGroup.classList.toggle('hidden', isSession);
     }
 
     // If Session Subtab is active: handle details card and visibility
@@ -864,22 +873,27 @@
       }`;
 
       card.innerHTML = `
-        <div>
+        <div class="space-y-3">
           <!-- Header: Title & Total Badge -->
-          <div class="flex items-center justify-between pb-3 border-b border-slate-100 gap-2">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-zinc-800 gap-2">
             <div class="flex items-center space-x-2 min-w-0">
               <span class="w-2.5 h-2.5 rounded-full ${isSelected ? 'bg-primary' : 'bg-slate-300'} shrink-0"></span>
               <input type="text" class="session-name-input font-bold text-slate-800 text-sm bg-transparent border-b border-transparent hover:border-slate-300 focus:border-primary focus:outline-none transition px-1 py-0.5 rounded truncate" value="${sess.name || `Session ${sess.id}`}" placeholder="Session Name">
             </div>
-            <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold shrink-0">
-              ${t.totalVotesLabel || '總票數'}: ${totalVotes}
-            </span>
+            <div class="flex items-center space-x-1 shrink-0">
+              <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold">
+                ${t.totalVotesLabel || '總票'}: ${totalVotes}
+              </span>
+              <button type="button" class="btn-clear-session text-slate-400 hover:text-rose-500 p-1 text-xs transition cursor-pointer" data-id="${sess.id}" title="清空此會期票數">
+                ✕
+              </button>
+            </div>
           </div>
 
-          <!-- Quick Counters: Agree / Disagree / Abstain -->
-          <div class="space-y-3 pt-3">
+          <!-- Pure Counters: Agree / Disagree / Abstain -->
+          <div class="space-y-2 pt-1">
             <!-- Agree (Favor) -->
-            <div class="p-2.5 rounded-xl border border-emerald-500/20 bg-emerald-500/5 flex items-center justify-between gap-3">
+            <div class="p-2 rounded-xl border border-emerald-500/20 bg-emerald-500/5 flex items-center justify-between gap-3">
               <div class="flex items-center space-x-2">
                 <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                 <span class="text-xs font-bold text-emerald-600">${t.yes || '同意'}</span>
@@ -892,7 +906,7 @@
             </div>
 
             <!-- Disagree (Against) -->
-            <div class="p-2.5 rounded-xl border border-rose-500/20 bg-rose-500/5 flex items-center justify-between gap-3">
+            <div class="p-2 rounded-xl border border-rose-500/20 bg-rose-500/5 flex items-center justify-between gap-3">
               <div class="flex items-center space-x-2">
                 <span class="w-2 h-2 rounded-full bg-rose-500"></span>
                 <span class="text-xs font-bold text-rose-600">${t.no || '不同意'}</span>
@@ -905,7 +919,7 @@
             </div>
 
             <!-- Abstain -->
-            <div class="p-2.5 rounded-xl border border-amber-500/20 bg-amber-500/5 flex items-center justify-between gap-3">
+            <div class="p-2 rounded-xl border border-amber-500/20 bg-amber-500/5 flex items-center justify-between gap-3">
               <div class="flex items-center space-x-2">
                 <span class="w-2 h-2 rounded-full bg-amber-500"></span>
                 <span class="text-xs font-bold text-amber-600">${t.abs || '棄票'}</span>
@@ -917,30 +931,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Note / Topic line -->
-          <div class="pt-3">
-            <input type="text" class="session-note-input w-full text-xs text-slate-500 bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 focus:outline-none focus:bg-white focus:border-slate-400 transition" placeholder="點擊備註議程或表決事項..." value="${sess.note || ''}">
-          </div>
-        </div>
-
-        <!-- Footer / Card Actions -->
-        <div class="pt-3 mt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-          <div class="flex items-center space-x-1.5">
-            <button type="button" class="btn-select-session px-2.5 py-1 rounded font-medium transition cursor-pointer ${
-              isSelected ? 'text-primary font-bold bg-primary/10' : 'text-slate-500 hover:text-slate-800'
-            }" data-id="${sess.id}">
-              ${isSelected ? '● 當前會期' : '設為當前'}
-            </button>
-            ${
-              (state.activeVoteTarget === 'motion' && isSelected && ((sess.favor || 0) > (sess.against || 0)))
-                ? `<button type="button" class="btn-quick-adopt-motion px-2 py-0.5 rounded bg-emerald-600 text-white font-bold text-[10px] hover:bg-emerald-700 transition shadow-sm cursor-pointer" title="以此會期票數通過並執行動議">通過動議</button>`
-                : ''
-            }
-          </div>
-          <button type="button" class="btn-clear-session px-2.5 py-1 text-slate-400 hover:text-rose-600 transition cursor-pointer" data-id="${sess.id}" title="清空票數">
-            清空
-          </button>
         </div>
       `;
 
@@ -1048,29 +1038,6 @@
           sess.abstain = Math.max(0, parseInt(e.target.value) || 0);
           saveToLocalStorage(true, true);
           renderSessionVotesGrid();
-        });
-      }
-
-      // Select Session
-      const btnSelect = card.querySelector('.btn-select-session');
-      if (btnSelect) {
-        btnSelect.addEventListener('click', (e) => {
-          e.stopPropagation();
-          state.activeSessionId = sess.id;
-          saveToLocalStorage(true, true);
-          renderSessionVotesGrid();
-        });
-      }
-
-      // Quick Adopt Motion from Session Card
-      const btnQuickAdopt = card.querySelector('.btn-quick-adopt-motion');
-      if (btnQuickAdopt) {
-        btnQuickAdopt.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const curMot = state.votingMotion || (state.motions && state.motions[0]);
-          if (!curMot) return;
-          const targetIdx = (typeof curMot.originalIndex === 'number') ? curMot.originalIndex : 0;
-          executeMotion(curMot, targetIdx);
         });
       }
 
