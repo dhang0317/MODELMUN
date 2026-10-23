@@ -619,6 +619,9 @@
     const fieldDrSelect = document.getElementById('motion-field-dr-select');
     const selectMotionDr = document.getElementById('select-motion-dr');
     const inputMotionDrCustom = document.getElementById('input-motion-dr-custom');
+    const fieldAmendmentSelect = document.getElementById('motion-field-amendment-select');
+    const selectMotionAmendment = document.getElementById('select-motion-amendment');
+    const inputMotionAmendmentCustom = document.getElementById('input-motion-amendment-custom');
     const fieldTimeContainer = document.getElementById('motion-time-fields');
     const fieldTotalMins = document.getElementById('motion-field-total-mins');
     const inputTotalMins = document.getElementById('input-motion-total-mins');
@@ -638,6 +641,19 @@
       });
     }
 
+    if (selectMotionAmendment) {
+      selectMotionAmendment.addEventListener('change', () => {
+        if (selectMotionAmendment.value === 'custom') {
+          if (inputMotionAmendmentCustom) {
+            inputMotionAmendmentCustom.classList.remove('hidden');
+            inputMotionAmendmentCustom.focus();
+          }
+        } else {
+          if (inputMotionAmendmentCustom) inputMotionAmendmentCustom.classList.add('hidden');
+        }
+      });
+    }
+
     function updateMotionModalFields() {
       const type = selectMotionType ? selectMotionType.value : 'mod';
       const t = I18N[state.language] || I18N.en;
@@ -645,6 +661,7 @@
       if (type === 'mod') {
         if (fieldTopic) fieldTopic.classList.remove('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
+        if (fieldAmendmentSelect) fieldAmendmentSelect.classList.add('hidden');
         if (fieldTimeContainer) {
           fieldTimeContainer.classList.remove('hidden');
           fieldTimeContainer.className = 'grid grid-cols-2 gap-3';
@@ -656,6 +673,7 @@
       } else if (type === 'unmod') {
         if (fieldTopic) fieldTopic.classList.remove('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
+        if (fieldAmendmentSelect) fieldAmendmentSelect.classList.add('hidden');
         if (fieldTimeContainer) {
           fieldTimeContainer.classList.remove('hidden');
           fieldTimeContainer.className = 'grid grid-cols-1 gap-3';
@@ -667,6 +685,19 @@
       } else if (type === 'singlespeaker') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.remove('hidden');
+        if (fieldAmendmentSelect) fieldAmendmentSelect.classList.add('hidden');
+        if (fieldTimeContainer) {
+          fieldTimeContainer.classList.remove('hidden');
+          fieldTimeContainer.className = 'grid grid-cols-1 gap-3';
+        }
+        if (fieldTotalMins) fieldTotalMins.classList.remove('hidden');
+        if (labelTotalMins) labelTotalMins.textContent = state.language === 'zh' ? '發言時間 (分鐘)' : 'Speaking Time (mins)';
+        if (inputTotalMins) inputTotalMins.value = 1; // 預設 1 分鐘
+        if (fieldSpeakerSecs) fieldSpeakerSecs.classList.add('hidden');
+      } else if (type === 'amendment') {
+        if (fieldTopic) fieldTopic.classList.add('hidden');
+        if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
+        if (fieldAmendmentSelect) fieldAmendmentSelect.classList.remove('hidden');
         if (fieldTimeContainer) {
           fieldTimeContainer.classList.remove('hidden');
           fieldTimeContainer.className = 'grid grid-cols-1 gap-3';
@@ -678,6 +709,7 @@
       } else if (type === 'suspend') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
+        if (fieldAmendmentSelect) fieldAmendmentSelect.classList.add('hidden');
         if (fieldTimeContainer) {
           fieldTimeContainer.classList.remove('hidden');
           fieldTimeContainer.className = 'grid grid-cols-1 gap-3';
@@ -686,17 +718,10 @@
         if (labelTotalMins) labelTotalMins.textContent = state.language === 'zh' ? '暫停時間 (分鐘)' : 'Suspension Duration (mins)';
         if (inputTotalMins) inputTotalMins.value = 15;
         if (fieldSpeakerSecs) fieldSpeakerSecs.classList.add('hidden');
-      } else if (type === 'adjourn_day' || type === 'adjourn') {
+      } else if (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' || type === 'close') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
-        if (fieldTimeContainer) fieldTimeContainer.classList.add('hidden');
-      } else if (type === 'adjourn_session') {
-        if (fieldTopic) fieldTopic.classList.add('hidden');
-        if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
-        if (fieldTimeContainer) fieldTimeContainer.classList.add('hidden');
-      } else if (type === 'close') {
-        if (fieldTopic) fieldTopic.classList.add('hidden');
-        if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
+        if (fieldAmendmentSelect) fieldAmendmentSelect.classList.add('hidden');
         if (fieldTimeContainer) fieldTimeContainer.classList.add('hidden');
       }
     }
@@ -731,8 +756,16 @@
         } else if (selectDr) {
           topic = selectDr.value;
         }
+      } else if (type === 'amendment') {
+        const selectAm = document.getElementById('select-motion-amendment');
+        const customAm = document.getElementById('input-motion-amendment-custom');
+        if (selectAm && selectAm.value === 'custom' && customAm && customAm.value.trim()) {
+          topic = customAm.value.trim();
+        } else if (selectAm) {
+          topic = selectAm.value;
+        }
       }
-      const defaultMins = (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' ? 0 : (type === 'suspend' ? 15 : (type === 'singlespeaker' ? 1 : 10)));
+      const defaultMins = (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' ? 0 : (type === 'suspend' ? 15 : ((type === 'singlespeaker' || type === 'amendment') ? 1 : 10)));
       const totalMins = (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' || type === 'close') ? 0 : (parseInt(document.getElementById('input-motion-total-mins').value) || defaultMins);
       const speakerSecs = parseInt(document.getElementById('input-motion-speaker-secs').value) || 60;
 

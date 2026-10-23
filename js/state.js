@@ -9,10 +9,19 @@
     close: 90,
     unmod: 80,
     mod: 60,
-    singlespeaker: 40
+    singlespeaker: 40,
+    amendment: 38
   };
 
   const MOTION_RULES = {
+    // 介紹修正案
+    amendment: {
+      requiresVote: false,
+      allowQuickSession: true,
+      threshold: 'simple',
+      voteType: 'procedural',
+      canSecond: true
+    },
     // 結束辯論 / 提請表決：2/3 絕對多數程序表決，支援附議通過或表決
     previous_question: {
       requiresVote: false,

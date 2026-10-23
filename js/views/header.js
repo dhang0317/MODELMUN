@@ -66,32 +66,42 @@
 
     // Translate Motion Type Select Options
     const motionTypeSelect = document.getElementById('select-motion-type');
-    if (motionTypeSelect && motionTypeSelect.options && motionTypeSelect.options.length >= 7) {
-      if (state.language === 'zh') {
-        motionTypeSelect.options[0].text = '全會結束';
-        motionTypeSelect.options[1].text = '休會動議 - 本日結束 (Adjournment for the Day)';
-        motionTypeSelect.options[2].text = '暫停會議動議 (Suspension)';
-        motionTypeSelect.options[3].text = '非主持核心磋商 (Unmoderated Caucus)';
-        motionTypeSelect.options[4].text = '主持核心磋商 (Moderated Caucus)';
-        motionTypeSelect.options[5].text = '介紹決議案草案及修正案 (Introduce DR & Amendments)';
-        motionTypeSelect.options[6].text = '結束辯論動議 (Closure of Debate)';
-      } else if (state.language === 'fr') {
-        motionTypeSelect.options[0].text = 'Ajournement de la session (Clôture)';
-        motionTypeSelect.options[1].text = 'Ajournement de la séance (Fin de journée)';
-        motionTypeSelect.options[2].text = 'Suspension de la séance';
-        motionTypeSelect.options[3].text = 'Caucus Non-Modéré';
-        motionTypeSelect.options[4].text = 'Caucus Modéré';
-        motionTypeSelect.options[5].text = 'Présentation du Projet de Résolution et Amendements';
-        motionTypeSelect.options[6].text = 'Clôture du Débat';
-      } else {
-        motionTypeSelect.options[0].text = 'Adjournment of the Meeting (Session Close)';
-        motionTypeSelect.options[1].text = 'Adjournment for the Day';
-        motionTypeSelect.options[2].text = 'Suspension of the Meeting (Recess)';
-        motionTypeSelect.options[3].text = 'Unmoderated Caucus';
-        motionTypeSelect.options[4].text = 'Moderated Caucus';
-        motionTypeSelect.options[5].text = 'Introduce Draft Resolution & Amendments';
-        motionTypeSelect.options[6].text = 'Closure of Debate';
-      }
+    if (motionTypeSelect && motionTypeSelect.options) {
+      const typeTextMap = {
+        zh: {
+          mod: '主持核心磋商',
+          unmod: '非主持核心磋商',
+          singlespeaker: '介紹決議案草案',
+          amendment: '介紹修正案',
+          suspend: '暫停會議動議 / 休會',
+          close: '結束辯論',
+          adjourn: '全會結束'
+        },
+        fr: {
+          mod: 'Caucus Modéré',
+          unmod: 'Caucus Non-Modéré',
+          singlespeaker: 'Présentation du Projet de Résolution',
+          amendment: 'Présentation des Amendements',
+          suspend: 'Suspension de la séance (Recess)',
+          close: 'Clôture du Débat',
+          adjourn: 'Ajournement de la session'
+        },
+        en: {
+          mod: 'Moderated Caucus',
+          unmod: 'Unmoderated Caucus',
+          singlespeaker: 'Introduce Draft Resolution',
+          amendment: 'Introduce Amendment',
+          suspend: 'Suspension / Recess',
+          close: 'Closure of Debate',
+          adjourn: 'Adjournment of Meeting'
+        }
+      };
+      const curLang = state.language === 'zh' ? 'zh' : (state.language === 'fr' ? 'fr' : 'en');
+      Array.from(motionTypeSelect.options).forEach(opt => {
+        if (typeTextMap[curLang] && typeTextMap[curLang][opt.value]) {
+          opt.text = typeTextMap[curLang][opt.value];
+        }
+      });
     }
 
     // Sync tab button texts dynamically

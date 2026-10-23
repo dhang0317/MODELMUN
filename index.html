@@ -1083,12 +1083,13 @@
       <div>
         <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="motionType">Type</label>
         <select id="select-motion-type" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm font-medium">
-          <option value="mod" selected>主持核心磋商 (Moderated Caucus)</option>
-          <option value="unmod">非主持核心磋商 (Unmoderated Caucus)</option>
-          <option value="singlespeaker">介紹決議案草案及修正案 (Introduce DR & Amendments)</option>
-          <option value="suspend">暫停會議動議 / 休會 (Recess / Suspension)</option>
-          <option value="close">結束辯論動議 (Closure of Debate)</option>
-          <option value="adjourn">全會結束閉會 (Adjournment of Meeting)</option>
+          <option value="mod" selected>主持核心磋商</option>
+          <option value="unmod">非主持核心磋商</option>
+          <option value="singlespeaker">介紹決議案草案</option>
+          <option value="amendment">介紹修正案</option>
+          <option value="suspend">暫停會議動議 / 休會</option>
+          <option value="close">結束辯論</option>
+          <option value="adjourn">全會結束</option>
         </select>
       </div>
       <div id="motion-field-topic">
@@ -1096,7 +1097,7 @@
         <input id="input-motion-topic" type="text" data-i18n-placeholder="topicPlaceholder" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm" placeholder="請輸入議題名稱...">
       </div>
       <div id="motion-field-dr-select" class="hidden">
-        <label class="block text-xs font-semibold text-slate-300 mb-1">決議案草案 (Draft Resolution)</label>
+        <label id="label-motion-dr-select" class="block text-xs font-semibold text-slate-300 mb-1">決議案草案 (Draft Resolution)</label>
         <div class="flex gap-2">
           <select id="select-motion-dr" class="flex-1 px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm font-medium">
             <option value="DR 1.1" selected>DR 1.1</option>
@@ -1104,11 +1105,21 @@
             <option value="DR 1.3">DR 1.3</option>
             <option value="DR 2.1">DR 2.1</option>
             <option value="DR 2.2">DR 2.2</option>
-            <option value="Amendment A">Amendment A (修正案 A)</option>
-            <option value="Amendment B">Amendment B (修正案 B)</option>
             <option value="custom">自訂草案名稱...</option>
           </select>
           <input id="input-motion-dr-custom" type="text" class="hidden flex-1 px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm" placeholder="輸入自訂草案名稱...">
+        </div>
+      </div>
+      <div id="motion-field-amendment-select" class="hidden">
+        <label class="block text-xs font-semibold text-slate-300 mb-1">修正案 (Amendment)</label>
+        <div class="flex gap-2">
+          <select id="select-motion-amendment" class="flex-1 px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm font-medium">
+            <option value="Amendment A" selected>Amendment A (修正案 A)</option>
+            <option value="Amendment B">Amendment B (修正案 B)</option>
+            <option value="Amendment C">Amendment C (修正案 C)</option>
+            <option value="custom">自訂修正案名稱...</option>
+          </select>
+          <input id="input-motion-amendment-custom" type="text" class="hidden flex-1 px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm" placeholder="輸入自訂修正案名稱...">
         </div>
       </div>
       <div class="grid grid-cols-2 gap-3" id="motion-time-fields">

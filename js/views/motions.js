@@ -22,7 +22,7 @@
           return t.durationAndSpeakingTime.replace('{total}', m.totalMins).replace('{speaker}', m.speakerSecs);
         }
         return `Duration: ${m.totalMins} mins • Individual: ${m.speakerSecs}s`;
-      } else if (m.type === 'singlespeaker') {
+      } else if (m.type === 'singlespeaker' || m.type === 'amendment') {
         if (state.language === 'zh') return `發言時間：${m.totalMins} 分鐘`;
         if (state.language === 'fr') return `Temps de parole : ${m.totalMins} mins`;
         return `Speaking Time: ${m.totalMins} mins`;
@@ -195,11 +195,12 @@
         case 'close': return '結束辯論動議 (Closure of Debate)';
         case 'unmod': return '非主持核心磋商 (Unmod)';
         case 'mod': return '主持核心磋商 (Mod)';
-        case 'singlespeaker': return '介紹決議案草案及修正案';
-        case 'suspend': return '暫停會議動議 (Suspension)';
+        case 'singlespeaker': return '介紹決議案草案';
+        case 'amendment': return '介紹修正案';
+        case 'suspend': return '暫停會議動議 / 休會';
         case 'adjourn_session': return t.motionAdjournSession;
         case 'adjourn_day': return '休會動議 - 本日結束 (Adjournment for the Day)';
-        case 'adjourn': return '休會動議 (Adjournment)';
+        case 'adjourn': return '全會結束';
         default: return type;
       }
     }
@@ -209,7 +210,8 @@
         case 'close': return 'Clôture du Débat (Closure of Debate)';
         case 'unmod': return 'Caucus Non-Modéré';
         case 'mod': return 'Caucus Modéré';
-        case 'singlespeaker': return 'Présentation du Projet de Résolution et Amendements';
+        case 'singlespeaker': return 'Présentation du Projet de Résolution';
+        case 'amendment': return 'Présentation des Amendements';
         case 'suspend': return 'Suspension de la séance';
         case 'adjourn_session': return t.motionAdjournSession;
         case 'adjourn_day': return 'Ajournement pour la journée';
@@ -222,7 +224,8 @@
       case 'close': return 'Closure of Debate';
       case 'unmod': return 'Unmoderated Caucus';
       case 'mod': return 'Moderated Caucus';
-      case 'singlespeaker': return 'Introduce Draft Resolution & Amendments';
+      case 'singlespeaker': return 'Introduce Draft Resolution';
+      case 'amendment': return 'Introduce Amendment';
       case 'suspend': return 'Suspension of Meeting';
       case 'adjourn_session': return t.motionAdjournSession;
       case 'adjourn_day': return 'Adjournment for the Day';
@@ -258,7 +261,7 @@
       const totalMins = parseInt(motion.totalMins, 10) || 10;
       state.unmodSecsRemaining = totalMins * 60;
       switchTab('unmod');
-    } else if (motion.type === 'singlespeaker') {
+    } else if (motion.type === 'singlespeaker' || motion.type === 'amendment') {
       pauseSingleTimer();
       const durationSecs = (parseInt(motion.totalMins, 10) || 1) * 60;
       state.singleTimeRemaining = durationSecs;
