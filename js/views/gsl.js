@@ -344,14 +344,24 @@
   function startProConTimer() {
     if (!ensureRollCallDone()) return;
     if (!state.currentProConSpeaker) {
-      const isPro = state.currentProConSide !== 'con';
-      const targetQueue = isPro ? state.proQueue : state.conQueue;
+      // Pick starting speaker: prefer pro, fallback to con
+      let targetSide = state.currentProConSide || 'pro';
+      let targetQueue = targetSide === 'con' ? state.conQueue : state.proQueue;
+      if (!targetQueue || targetQueue.length === 0) {
+        // Fallback to opposite side
+        const otherSide = targetSide === 'con' ? 'pro' : 'con';
+        const otherQueue = otherSide === 'con' ? state.conQueue : state.proQueue;
+        if (otherQueue && otherQueue.length > 0) {
+          targetSide = otherSide;
+          targetQueue = otherQueue;
+        }
+      }
       if (targetQueue && targetQueue.length > 0) {
+        state.currentProConSide = targetSide;
         state.currentProConSpeaker = targetQueue.shift();
         state.proConSecsRemaining = state.proConSpeakerSecs || 60;
       } else {
-        const t = I18N[state.language] || I18N.en;
-        customAlert('Pro / Con Debate', '請先從名單點選或加入發言代表！');
+        customAlert('Pro / Con Debate', '請先從正方或反方名單加入發言代表！');
         return;
       }
     }
@@ -397,13 +407,28 @@
 
   function nextProConSpeaker() {
     pauseProConTimer();
-    const isPro = state.currentProConSide !== 'con';
-    const targetQueue = isPro ? state.proQueue : state.conQueue;
+    // Alternating between Pro and Con
+    const nextSide = state.currentProConSide === 'pro' ? 'con' : 'pro';
+    let targetQueue = nextSide === 'con' ? state.conQueue : state.proQueue;
+    let actualSide = nextSide;
+
+    if (!targetQueue || targetQueue.length === 0) {
+      // If alternate queue is empty, fallback to the other queue if it has speakers
+      const otherSide = nextSide === 'con' ? 'pro' : 'con';
+      const otherQueue = otherSide === 'con' ? state.conQueue : state.proQueue;
+      if (otherQueue && otherQueue.length > 0) {
+        targetQueue = otherQueue;
+        actualSide = otherSide;
+      }
+    }
+
     if (targetQueue && targetQueue.length > 0) {
+      state.currentProConSide = actualSide;
       state.currentProConSpeaker = targetQueue.shift();
       state.proConSecsRemaining = state.proConSpeakerSecs || 60;
     } else {
       state.currentProConSpeaker = null;
+      state.proConSecsRemaining = state.proConSpeakerSecs || 60;
     }
     saveToLocalStorage(true);
     renderAll();
