@@ -41,6 +41,44 @@
     WSM: '薩摩亞', YEM: '葉門', ZAF: '南非', ZMB: '尚比亞', ZWE: '辛巴威'
   };
 
+  // Comprehensive English Full Names & Common Aliases mapping dictionary
+  const EN_FULL_NAMES = {
+    USA: ['United States of America', 'United States', 'USA', 'America', 'US'],
+    GBR: ['United Kingdom of Great Britain and Northern Ireland', 'United Kingdom', 'Great Britain', 'Britain', 'UK'],
+    RUS: ['Russian Federation', 'Russia'],
+    CHN: ["People's Republic of China", 'China', 'PRC'],
+    FRA: ['French Republic', 'France'],
+    DEU: ['Federal Republic of Germany', 'Germany'],
+    JPN: ['Japan'],
+    KOR: ['Republic of Korea', 'South Korea', 'Korea'],
+    PRK: ["Democratic People's Republic of Korea", 'North Korea', 'DPR Korea'],
+    IRN: ['Islamic Republic of Iran', 'Iran'],
+    SYR: ['Syrian Arab Republic', 'Syria'],
+    LAO: ["Lao People's Democratic Republic", 'Laos', 'Lao PDR'],
+    VNM: ['Socialist Republic of Viet Nam', 'Viet Nam', 'Vietnam'],
+    VEN: ['Bolivarian Republic of Venezuela', 'Venezuela'],
+    BOL: ['Plurinational State of Bolivia', 'Bolivia'],
+    FSM: ['Federated States of Micronesia', 'Micronesia'],
+    MDA: ['Republic of Moldova', 'Moldova'],
+    MKD: ['Republic of North Macedonia', 'North Macedonia', 'Macedonia'],
+    PSE: ['State of Palestine', 'Palestine'],
+    VAT: ['Holy See', 'Vatican City', 'Vatican'],
+    ARE: ['United Arab Emirates', 'UAE', 'Emirates'],
+    COD: ['Democratic Republic of the Congo', 'DR Congo', 'Congo DRC'],
+    COG: ['Republic of the Congo', 'Congo Republic', 'Congo'],
+    CAF: ['Central African Republic', 'CAR'],
+    CIV: ["Republic of Côte d'Ivoire", "Côte d'Ivoire", 'Ivory Coast'],
+    CZE: ['Czech Republic', 'Czechia'],
+    SWZ: ['Kingdom of Eswatini', 'Eswatini', 'Swaziland'],
+    TLS: ['Democratic Republic of Timor-Leste', 'Timor-Leste', 'East Timor'],
+    TZA: ['United Republic of Tanzania', 'Tanzania'],
+    BRN: ['Brunei Darussalam', 'Brunei'],
+    CPV: ['Republic of Cabo Verde', 'Cabo Verde', 'Cape Verde'],
+    TUR: ['Republic of Türkiye', 'Türkiye', 'Turkey'],
+    NLD: ['Kingdom of the Netherlands', 'Netherlands', 'Holland'],
+    MMR: ['Republic of the Union of Myanmar', 'Myanmar', 'Burma']
+  };
+
   function getCountryDisplayName(c) {
     if (!c) return '';
     if (c.id && c.id.startsWith('CC')) return c.countryName;
@@ -63,16 +101,22 @@
 
     // 2. Check English name (with non-breaking spaces replaced)
     if (c.name_en && c.name_en.replace(/[\u00a0\s]+/g, ' ').toLowerCase().includes(q)) return true;
-    if (c.countryName && c.countryName.toLowerCase().includes(q)) return true;
+    if (c.countryName && c.countryName.replace(/[\u00a0\s]+/g, ' ').toLowerCase().includes(q)) return true;
 
-    // 3. Check Current display name
+    // 3. Check English Full Names and Aliases (e.g. "United States of America", "United Kingdom", "Russia", "South Korea")
+    if (c.id && EN_FULL_NAMES[c.id]) {
+      const matchAlias = EN_FULL_NAMES[c.id].some(alias => alias.toLowerCase().includes(q));
+      if (matchAlias) return true;
+    }
+
+    // 4. Check Current display name
     const currentDisplay = getCountryDisplayName(c).toLowerCase();
     if (currentDisplay.includes(q)) return true;
 
-    // 4. Check Traditional Chinese name from dictionary
+    // 5. Check Traditional Chinese name from dictionary
     if (c.id && ZH_TW_COUNTRIES[c.id] && ZH_TW_COUNTRIES[c.id].toLowerCase().includes(q)) return true;
 
-    // 5. Check other language fields in dataset if available
+    // 6. Check other language fields in dataset if available
     if (c.name_zh && c.name_zh.toLowerCase().includes(q)) return true;
     if (c.name_fr && c.name_fr.toLowerCase().includes(q)) return true;
 

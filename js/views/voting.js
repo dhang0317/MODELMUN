@@ -598,12 +598,13 @@
     if (typeof state.activeVoterIndex !== 'number' || state.activeVoterIndex < 0) {
       state.activeVoterIndex = 0;
     }
-    if (pool.length > 0 && state.activeVoterIndex >= pool.length) {
-      state.activeVoterIndex = pool.length - 1;
+    if (pool.length > 0 && state.activeVoterIndex > pool.length) {
+      state.activeVoterIndex = pool.length;
     }
 
     // Render MUN Command Active Voter Card
-    const currentVoter = pool[state.activeVoterIndex] || null;
+    const isCompleted = pool.length > 0 && state.activeVoterIndex >= pool.length;
+    const currentVoter = (!isCompleted && pool.length > 0) ? (pool[state.activeVoterIndex] || null) : null;
     const flagEl = document.getElementById('active-voter-flag');
     const nameEl = document.getElementById('active-voter-name');
     const statusEl = document.getElementById('active-voter-status');
@@ -615,7 +616,10 @@
     }
 
     if (currentVoter) {
-      if (flagEl) flagEl.src = getFlagUrl(currentVoter);
+      if (flagEl) {
+        flagEl.src = getFlagUrl(currentVoter);
+        flagEl.style.display = '';
+      }
       if (nameEl) nameEl.textContent = getCountryDisplayName(currentVoter);
       if (statusEl) {
         let voteDisplayName = '';
@@ -631,10 +635,13 @@
       }
       if (queueEl) queueEl.textContent = `${state.activeVoterIndex + 1} / ${pool.length}`;
     } else {
-      if (flagEl) flagEl.src = '';
+      if (flagEl) {
+        flagEl.src = 'assets/img/general/all_countries.svg';
+        flagEl.style.display = 'none';
+      }
       if (nameEl) nameEl.textContent = pool.length === 0 && state.voteStage === 'r2' ? (t.noPassInRound1Short || 'No delegates passed in Round 1') : (t.allVotesRecorded || 'All votes recorded');
       if (statusEl) statusEl.textContent = pool.length === 0 ? '' : (t.votingComplete || 'Voting complete');
-      if (queueEl) queueEl.textContent = `0 / 0`;
+      if (queueEl) queueEl.textContent = `${pool.length} / ${pool.length}`;
     }
 
     // Pass and Abstain availability on Active Card

@@ -1074,9 +1074,7 @@
         // Set to Favor / Against with Rights, then advance to next country
         voter.vote = action;
         voter.hasRights = true;
-        if (idx < pool.length - 1) {
-          state.activeVoterIndex = idx + 1;
-        }
+        state.activeVoterIndex = idx + 1;
         saveToLocalStorage(true, true);
         renderResolutionVoteGrid();
         return;
@@ -1099,9 +1097,7 @@
           // Single Click: vote normally and advance to next country
           voter.vote = action;
           voter.hasRights = false;
-          if (idx < pool.length - 1) {
-            state.activeVoterIndex = idx + 1;
-          }
+          state.activeVoterIndex = idx + 1;
           saveToLocalStorage(true, true);
           renderResolutionVoteGrid();
         }, 280);
@@ -1110,9 +1106,7 @@
         lastActiveAction = null;
         voter.vote = action;
         voter.hasRights = false;
-        if (idx < pool.length - 1) {
-          state.activeVoterIndex = idx + 1;
-        }
+        state.activeVoterIndex = idx + 1;
         saveToLocalStorage(true, true);
         renderResolutionVoteGrid();
       }
@@ -1153,7 +1147,7 @@
           return c.powerStatus !== 'observer' && (c.attendance === 'present' || c.attendance === 'pv');
         });
         const pool = state.voteStage === 'r2' ? eligible.filter(c => c.vote === 'pass') : eligible;
-        if (typeof state.activeVoterIndex === 'number' && state.activeVoterIndex < pool.length - 1) {
+        if (typeof state.activeVoterIndex === 'number' && state.activeVoterIndex < pool.length) {
           state.activeVoterIndex++;
           renderResolutionVoteGrid();
         }
