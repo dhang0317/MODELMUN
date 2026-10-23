@@ -317,25 +317,21 @@
     }
 
     // Stage button styles
-    [btnR1, btnR2, btnRights].forEach(b => {
+    [btnR1, btnR2].forEach(b => {
       if (b) b.className = 'px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg text-xs hover:bg-slate-200 transition';
     });
     
-    if (state.voteStage === 'r1') {
-      if (btnR1) btnR1.className = 'px-3 py-1.5 bg-primary text-white rounded-lg text-xs transition shadow-sm';
-      if (pRights) pRights.classList.add('hidden');
-      if (pBallots) pBallots.classList.add('hidden');
-      if (pActiveCard) pActiveCard.classList.remove('hidden');
-    } else if (state.voteStage === 'r2') {
+    if (state.voteStage === 'r2') {
       if (btnR2) btnR2.className = 'px-3 py-1.5 bg-primary text-white rounded-lg text-xs transition shadow-sm';
       if (pRights) pRights.classList.add('hidden');
       if (pBallots) pBallots.classList.add('hidden');
       if (pActiveCard) pActiveCard.classList.remove('hidden');
     } else {
-      if (btnRights) btnRights.className = 'px-3 py-1.5 bg-primary text-white rounded-lg text-xs transition shadow-sm';
-      if (pRights) pRights.classList.remove('hidden');
+      state.voteStage = 'r1';
+      if (btnR1) btnR1.className = 'px-3 py-1.5 bg-primary text-white rounded-lg text-xs transition shadow-sm';
+      if (pRights) pRights.classList.add('hidden');
       if (pBallots) pBallots.classList.add('hidden');
-      if (pActiveCard) pActiveCard.classList.add('hidden');
+      if (pActiveCard) pActiveCard.classList.remove('hidden');
     }
 
     // Stages Group & Target Buttons
@@ -361,17 +357,13 @@
 
     // In procedural motion vote, rights speeches don't apply; hide stage buttons or lock to R1
     if (stagesGroup) {
+      const btnR2 = document.getElementById('vote-stage-r2');
+      const btnRightsStage = document.getElementById('vote-stage-rights');
+      if (btnRightsStage) btnRightsStage.classList.add('hidden');
       if (isMotionVote) {
-        // Only allow R1 in procedural vote
-        const btnR2 = document.getElementById('vote-stage-r2');
-        const btnRightsStage = document.getElementById('vote-stage-rights');
         if (btnR2) btnR2.classList.add('hidden');
-        if (btnRightsStage) btnRightsStage.classList.add('hidden');
       } else {
-        const btnR2 = document.getElementById('vote-stage-r2');
-        const btnRightsStage = document.getElementById('vote-stage-rights');
         if (btnR2) btnR2.classList.remove('hidden');
-        if (btnRightsStage) btnRightsStage.classList.remove('hidden');
       }
     }
 
