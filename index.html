@@ -69,7 +69,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/style.css?v=2026102401">
+  <link rel="stylesheet" href="css/style.css?v=2026102402">
 </head>
 <body class="h-screen w-screen flex flex-col overflow-hidden bg-black select-none">
 
@@ -505,9 +505,6 @@
                   <div class="flex items-center justify-center space-x-5">
                     <img id="procon-current-flag" src="https://flagcdn.com/w80/un.png" alt="flag" class="w-20 h-14 sm:w-24 sm:h-16 object-cover rounded-xl shadow-md border border-slate-700/40">
                     <div class="text-left">
-                      <div class="flex items-center space-x-2">
-                        <span id="procon-badge-side" class="hidden text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300"></span>
-                      </div>
                       <h2 id="procon-current-name" class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 leading-tight mt-1">None selected</h2>
                     </div>
                   </div>
@@ -525,17 +522,17 @@
                 </div>
 
                 <!-- Timer Controls -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-4 max-w-lg mx-auto w-full">
-                  <button id="btn-procon-start" class="w-full justify-center px-4 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2 cursor-pointer">
+                <div class="flex items-center justify-center space-x-3 pt-4 max-w-lg mx-auto w-full">
+                  <button id="btn-procon-start" class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2 cursor-pointer">
                     <span data-i18n="start">Start</span>
                   </button>
-                  <button id="btn-procon-pause" class="w-full justify-center px-4 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden cursor-pointer">
+                  <button id="btn-procon-pause" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden cursor-pointer">
                     <span data-i18n="pause">Pause</span>
                   </button>
-                  <button id="btn-procon-reset" class="w-full justify-center px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition cursor-pointer" title="Reset">
+                  <button id="btn-procon-reset" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition cursor-pointer" title="Reset">
                     <span data-i18n="reset">Reset</span>
                   </button>
-                  <button id="btn-procon-next" class="col-span-2 sm:col-span-2 w-full justify-center px-4 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 cursor-pointer">
+                  <button id="btn-procon-next" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 cursor-pointer">
                     <span data-i18n="nextSpeaker">Next Speaker</span>
                   </button>
                 </div>
@@ -699,7 +696,6 @@
         <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200">
           <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-200">
             <div class="flex items-center space-x-2">
-              <span class="text-xs font-bold text-slate-500" data-i18n="quickSetAttendance">快速批次設定全場出席狀態：</span>
               <button id="btn-set-all-uncalled" type="button" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition border border-slate-300 cursor-pointer" data-i18n="setAllUncalled">全設為未點名</button>
               <button id="btn-set-all-present" type="button" class="px-3 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-700 font-bold rounded-lg text-xs transition border border-emerald-500/50 cursor-pointer" data-i18n="setAllPresent">全設為出席</button>
               <button id="btn-set-all-absent" type="button" class="px-3 py-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-700 font-bold rounded-lg text-xs transition border border-rose-500/50 cursor-pointer" data-i18n="setAllAbsent">全設為缺席</button>

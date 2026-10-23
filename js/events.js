@@ -627,6 +627,7 @@
     const inputTotalMins = document.getElementById('input-motion-total-mins');
     const labelTotalMins = document.getElementById('label-motion-total-mins');
     const fieldSpeakerSecs = document.getElementById('motion-field-speaker-secs');
+    const inputSpeakerSecs = document.getElementById('input-motion-speaker-secs');
 
     if (selectMotionDr) {
       selectMotionDr.addEventListener('change', () => {
@@ -702,10 +703,9 @@
           fieldTimeContainer.classList.remove('hidden');
           fieldTimeContainer.className = 'grid grid-cols-1 gap-3';
         }
-        if (fieldTotalMins) fieldTotalMins.classList.remove('hidden');
-        if (labelTotalMins) labelTotalMins.textContent = state.language === 'zh' ? '發言時間 (分鐘)' : 'Speaking Time (mins)';
-        if (inputTotalMins) inputTotalMins.value = 1; // 預設 1 分鐘
-        if (fieldSpeakerSecs) fieldSpeakerSecs.classList.add('hidden');
+        if (fieldTotalMins) fieldTotalMins.classList.add('hidden');
+        if (fieldSpeakerSecs) fieldSpeakerSecs.classList.remove('hidden');
+        if (inputSpeakerSecs) inputSpeakerSecs.value = 60;
       } else if (type === 'suspend') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
@@ -766,8 +766,8 @@
         }
       }
       const defaultMins = (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' ? 0 : (type === 'suspend' ? 15 : ((type === 'singlespeaker' || type === 'amendment') ? 1 : 10)));
-      const totalMins = (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' || type === 'close') ? 0 : (parseInt(document.getElementById('input-motion-total-mins').value) || defaultMins);
       const speakerSecs = parseInt(document.getElementById('input-motion-speaker-secs').value) || 60;
+      const totalMins = (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' || type === 'close') ? 0 : (type === 'amendment' ? Math.max(1, Math.ceil(speakerSecs / 60)) : (parseInt(document.getElementById('input-motion-total-mins').value) || defaultMins));
 
       const motion = {
         id: 'M_' + Date.now(),

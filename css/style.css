@@ -379,13 +379,13 @@ body:not(.light-mode) {
     }
 
     /* Dark Mode Buttons */
-    body:not(.light-mode) button:not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent):not(.btn-rollcall-present):not(.btn-rollcall-absent):not(#vote-stage-r1):not(#vote-stage-r2):not(#vote-stage-rights) {
+    body:not(.light-mode) button:not(.speaking-subtab-btn):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent):not(.btn-rollcall-present):not(.btn-rollcall-absent):not(#vote-stage-r1):not(#vote-stage-r2):not(#vote-stage-rights) {
       background-color: transparent !important;
       background: transparent !important;
       color: #ffffff !important;
       box-shadow: none !important;
     }
-    body:not(.light-mode) button:hover {
+    body:not(.light-mode) button:not(.speaking-subtab-btn):hover {
       background-color: rgba(255, 255, 255, 0.1) !important;
       background: rgba(255, 255, 255, 0.1) !important;
       color: #ffffff !important;
@@ -500,7 +500,7 @@ body:not(.light-mode) {
     button i, button span, button svg {
       color: inherit;
     }
-    body:not(.light-mode) button:not(.tab-btn):not(#btn-open-drawer):not(#btn-close-drawer):not(.btn-close-modal):not(.modal-close-icon):not(#btn-user-avatar):not(#btn-logo-home):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item):not(.btn-extend-unmod):not(:has(i[data-lucide="plus"])):not(:has(i[data-lucide="x"])):not(:has(i[class*="fa-plus"])):not(:has(i[class*="fa-xmark"])) {
+    body:not(.light-mode) button:not(.speaking-subtab-btn):not(.tab-btn):not(#btn-open-drawer):not(#btn-close-drawer):not(.btn-close-modal):not(.modal-close-icon):not(#btn-user-avatar):not(#btn-logo-home):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item):not(.btn-extend-unmod):not(:has(i[data-lucide="plus"])):not(:has(i[data-lucide="x"])):not(:has(i[class*="fa-plus"])):not(:has(i[class*="fa-xmark"])) {
       border: 1px solid #3f3f46 !important;
     }
     #btn-open-drawer,

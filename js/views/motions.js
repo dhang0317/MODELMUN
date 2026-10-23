@@ -263,7 +263,7 @@
       switchTab('unmod');
     } else if (motion.type === 'singlespeaker' || motion.type === 'amendment') {
       pauseSingleTimer();
-      const durationSecs = (parseInt(motion.totalMins, 10) || 1) * 60;
+      const durationSecs = motion.type === 'amendment' ? (parseInt(motion.speakerSecs, 10) || 60) : ((parseInt(motion.totalMins, 10) || 1) * 60);
       state.singleTimeRemaining = durationSecs;
       
       // Match the proposer country to state.singleSpeaker
