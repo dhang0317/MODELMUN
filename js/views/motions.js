@@ -202,7 +202,7 @@
         case 'singlespeaker': return '介紹決議案草案';
         case 'amendment': return '介紹修正案';
         case 'gsl': return '常設發言名單';
-        case 'suspend': return '暫停會議動議 / 休會';
+        case 'suspend': return '休會';
         case 'adjourn_session': return t.motionAdjournSession;
         case 'adjourn_day': return '休會動議 - 本日結束 (Adjournment for the Day)';
         case 'adjourn': return '全會結束';

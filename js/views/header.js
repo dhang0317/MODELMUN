@@ -74,7 +74,7 @@
           gsl: '常設發言名單',
           singlespeaker: '介紹決議案草案',
           amendment: '介紹修正案',
-          suspend: '暫停會議動議 / 休會',
+          suspend: '休會',
           close: '結束辯論',
           adjourn: '全會結束'
         },

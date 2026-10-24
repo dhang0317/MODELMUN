@@ -1359,7 +1359,7 @@
         } catch (e) {}
       }
 
-      const savedVal = localStorage.getItem('MUN_GLOBAL_CONTENT_SCALE') || '1';
+      const savedVal = localStorage.getItem('MUN_GLOBAL_CONTENT_SCALE') || '0.95';
       slider.value = savedVal;
       applyGlobalScale(savedVal);
 

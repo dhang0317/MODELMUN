@@ -294,7 +294,7 @@
     const isLight = document.body.classList.contains('light-mode');
     updateThemeModeButtons(isLight);
 
-    const savedScale = parseFloat(localStorage.getItem('MUN_GLOBAL_CONTENT_SCALE')) || 1.0;
+    const savedScale = parseFloat(localStorage.getItem('MUN_GLOBAL_CONTENT_SCALE')) || 0.95;
     if (sliderScale) sliderScale.value = savedScale;
     if (labelScale) labelScale.textContent = `${Math.round(savedScale * 100)}%`;
 
@@ -560,7 +560,7 @@
     const mainEl = document.querySelector('main');
 
     function applyScale(val) {
-      const num = parseFloat(val) || 1.0;
+      const num = parseFloat(val) || 0.95;
       if (labelScale) labelScale.textContent = `${Math.round(num * 100)}%`;
       if (mainEl) mainEl.style.setProperty('--content-scale', num);
       localStorage.setItem('MUN_GLOBAL_CONTENT_SCALE', num);
@@ -575,8 +575,8 @@
     }
     if (btnResetScale) {
       btnResetScale.onclick = () => {
-        if (sliderScale) sliderScale.value = 1.0;
-        applyScale(1.0);
+        if (sliderScale) sliderScale.value = 0.95;
+        applyScale(0.95);
       };
     }
 
