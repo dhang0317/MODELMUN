@@ -19,6 +19,17 @@
 
   // --- EVENT LISTENERS ---
   function setupEventListeners() {
+    // Universal visual & tactile button press feedback (ensures even fast taps visibly flash & scale)
+    document.addEventListener('pointerdown', (e) => {
+      const btn = e.target.closest('button:not(:disabled), [role="button"]:not(:disabled)');
+      if (!btn) return;
+      btn.classList.add('btn-pressed-flash');
+      clearTimeout(btn._pressFlashTimer);
+      btn._pressFlashTimer = setTimeout(() => {
+        btn.classList.remove('btn-pressed-flash');
+      }, 170);
+    }, { passive: true });
+
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const tab = btn.getAttribute('data-tab');
