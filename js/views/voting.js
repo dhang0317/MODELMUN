@@ -25,7 +25,7 @@
     state.votingMotion = null;
 
     if (isPassed) {
-      if (typeof showToast === 'function') {
+      if (typeof showToast === 'function' && curMot && curMot.type !== 'close' && curMot.type !== 'previous_question') {
         const passMsg = state.language === 'zh'
           ? `動議【${motName}】(${motProposer}) 表決通過！`
           : `Motion "${motName}" passed!`;

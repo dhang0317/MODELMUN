@@ -328,7 +328,6 @@
       renderAll();
     } else if (motion.type === 'close' || motion.type === 'previous_question') {
       const t = I18N[state.language] || I18N.en;
-      showToast(t.enterSubstantiveVotePrompt || t.debateClosedToast, 'success', 4000);
       state.activeVoteTarget = 'resolution';
       state.votingMotion = null;
       state.voteType = 'substantive';
@@ -341,6 +340,13 @@
       state.voteStage = 'r1';
       state.activeVoterIndex = 0;
       switchTab('vote');
+      setTimeout(() => {
+        const titleInput = document.getElementById('vote-resolution-title-input');
+        if (titleInput) {
+          titleInput.focus();
+          titleInput.select();
+        }
+      }, 150);
     }
     saveToLocalStorage(true, true);
     renderAll();
