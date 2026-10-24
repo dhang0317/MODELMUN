@@ -69,7 +69,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/style.css?v=2026102402">
+  <link rel="stylesheet" href="css/style.css?v=2026102403">
 </head>
 <body class="h-screen w-screen flex flex-col overflow-hidden bg-black select-none">
 
@@ -279,56 +279,58 @@
         <div id="panel-speaking-gsl" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           <!-- Left: Current Speaker & Big Timer (7 cols on lg) -->
           <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-center relative overflow-hidden flex-1 flex flex-col justify-between">
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-center relative overflow-hidden flex-1 flex flex-col justify-between space-y-6">
               <div>
-                <div class="flex items-center justify-end border-b pb-3 mb-6">
+                <div class="hidden items-center justify-end border-b pb-3 mb-6">
                   <button id="btn-gsl-set-time" class="text-xs text-primary hover:underline font-semibold flex items-center space-x-1.5">
                     <span id="label-gsl-default-time">90s</span>
                   </button>
                 </div>
 
                 <!-- Country Banner (Selected Speaker or Empty State) -->
-                <div id="gsl-current-empty" class="py-6 text-slate-400">
+                <div id="gsl-current-empty" class="hidden py-6 text-slate-400">
                   <p class="text-base font-bold text-slate-600 dark:text-slate-300" data-i18n="noSpeakerFloor">No speaker on the floor</p>
                 </div>
 
-                <div id="gsl-current-active" class="hidden py-4">
+                <div id="gsl-current-active" class="py-4">
                   <div class="flex items-center justify-center space-x-5">
                     <img id="gsl-current-flag" src="https://flagcdn.com/w80/un.png" alt="flag" class="w-20 h-14 sm:w-24 sm:h-16 object-cover rounded-xl shadow-md border border-slate-700/40">
                     <div class="text-left">
-                      <h2 id="gsl-current-name" class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 leading-tight">United States</h2>
-                      <span id="gsl-current-status" class="text-xs sm:text-sm bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-medium inline-block mt-1">Delegate</span>
+                      <h2 id="gsl-current-name" class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 leading-tight mt-1">None selected</h2>
+                      <span id="gsl-current-status" class="hidden text-xs sm:text-sm bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-medium mt-1">Delegate</span>
                     </div>
                   </div>
                 </div>
 
                 <!-- Main Big Timer Display (Always visible) -->
-                <div class="py-4">
-                  <div id="gsl-timer-display" class="text-7xl sm:text-8xl font-mono font-black text-primary tracking-tight">01:30</div>
+                <div class="py-2">
+                  <div class="relative inline-flex items-center justify-center group cursor-pointer" title="點擊設定發言時間" onclick="document.getElementById('btn-gsl-set-time')?.click()">
+                    <div id="gsl-timer-display" class="text-7xl sm:text-8xl font-mono font-black text-primary tracking-tight transition group-hover:opacity-75">01:30</div>
+                  </div>
                   <div id="gsl-progress-bar-bg" class="w-full bg-slate-100 h-2.5 rounded-full mt-4 overflow-hidden">
                     <div id="gsl-progress-bar" class="bg-secondary h-full transition-all duration-300 w-full"></div>
                   </div>
                 </div>
 
-                <!-- Timer Controls (Always visible with FontAwesome icons) -->
-                <div class="flex items-center justify-center space-x-3 pt-2">
-                  <button id="btn-gsl-start" class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
+                <!-- Timer Controls -->
+                <div class="flex items-center justify-center space-x-3 pt-4 max-w-lg mx-auto w-full">
+                  <button id="btn-gsl-start" class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2 cursor-pointer">
                     <span data-i18n="start">Start</span>
                   </button>
-                  <button id="btn-gsl-pause" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden">
+                  <button id="btn-gsl-pause" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden cursor-pointer">
                     <span data-i18n="pause">Pause</span>
                   </button>
-                  <button id="btn-gsl-reset" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition flex items-center space-x-1.5" data-i18n="reset" title="Reset">
+                  <button id="btn-gsl-reset" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition flex items-center space-x-1.5 cursor-pointer" data-i18n="reset" title="Reset">
                     <span data-i18n="reset">Reset</span>
                   </button>
-                  <button id="btn-gsl-next" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
+                  <button id="btn-gsl-next" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 cursor-pointer">
                     <span data-i18n="nextSpeaker">Next Speaker</span>
                   </button>
                 </div>
               </div>
 
               <!-- Yield Options -->
-              <div id="gsl-yield-options" class="border-t border-slate-100 pt-5 mt-6">
+              <div id="gsl-yield-options" class="hidden border-t border-slate-100 pt-5 mt-6">
                 <div class="text-xs font-semibold text-slate-400 mb-2" data-i18n="yieldRemaining">YIELD TIME REMAINING</div>
                 <div class="flex flex-wrap items-center justify-center gap-2">
                   <button id="btn-yield-chair" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center space-x-1.5">
@@ -346,18 +348,18 @@
             </div>
           </div>
 
-          <!-- Right: Speakers Queue (5 cols on lg, height stretch, min-h-[640px]) -->
-          <div class="lg:col-span-5 bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col min-h-[640px] h-full">
+          <!-- Right: Speakers Queue (5 cols on lg) -->
+          <div class="lg:col-span-5 bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col h-full">
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
               <div>
                 <h3 class="font-bold text-slate-800 text-base" data-i18n="upcomingSpeakers">Upcoming Speakers</h3>
                 <span id="badge-queue-count" class="text-xs text-slate-400">0 queued</span>
               </div>
-              <button id="btn-open-add-speaker" class="px-3.5 py-1.5 bg-primary text-white rounded-lg text-xs font-semibold hover:bg-primary-dark flex items-center space-x-1.5">
+              <button id="btn-open-add-speaker" class="px-3.5 py-1.5 bg-primary text-white rounded-lg text-xs font-semibold hover:bg-primary-dark flex items-center space-x-1.5 cursor-pointer">
                 <span data-i18n="addSpeaker">Add Speaker</span>
               </button>
             </div>
-            <div id="list-gsl-queue" class="flex-1 overflow-y-auto mt-3 divide-y divide-slate-100 custom-scroll pr-1">
+            <div id="list-gsl-queue" class="flex-1 overflow-y-auto mt-3 divide-y divide-slate-100 custom-scroll pr-1 max-h-96">
               <!-- Injected via JS -->
             </div>
           </div>
@@ -365,43 +367,49 @@
 
         <!-- 2.2 SUBTAB PANEL: MOD (有主持磋商) -->
         <div id="panel-speaking-mod" class="hidden">
-          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
-            <!-- Individual Speaker Timer -->
-            <div class="lg:col-span-2 bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-center space-y-6 flex flex-col justify-between">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            <!-- Individual Speaker Timer (7 cols on lg) -->
+            <div class="lg:col-span-7 bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-center space-y-6 flex flex-col justify-between">
               <div>
-                <div id="mod-speaker-display" class="space-y-4 my-4">
-                  <div class="flex items-center justify-center space-x-4">
-                    <img id="mod-current-flag" src="https://flagcdn.com/w80/un.png" class="w-16 h-11 sm:w-20 sm:h-14 object-cover rounded-xl shadow-md border border-slate-700/40">
-                    <h3 id="mod-current-country-name" class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 leading-tight">None selected</h3>
+                <div id="mod-speaker-display">
+                  <div class="py-4">
+                    <div class="flex items-center justify-center space-x-5">
+                      <img id="mod-current-flag" src="https://flagcdn.com/w80/un.png" class="w-20 h-14 sm:w-24 sm:h-16 object-cover rounded-xl shadow-md border border-slate-700/40">
+                      <div class="text-left">
+                        <h3 id="mod-current-country-name" class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-800 leading-tight mt-1">None selected</h3>
+                      </div>
+                    </div>
                   </div>
-                  <div id="mod-speaker-timer-display" class="text-7xl sm:text-8xl font-mono font-black text-primary">01:00</div>
-                  <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                    <div id="mod-speaker-progress" class="bg-secondary h-full w-full"></div>
+                  <div class="py-2">
+                    <div id="mod-speaker-timer-display" class="text-7xl sm:text-8xl font-mono font-black text-primary tracking-tight">01:00</div>
+                    <div class="w-full bg-slate-100 h-2.5 rounded-full mt-4 overflow-hidden">
+                      <div id="mod-speaker-progress" class="bg-secondary h-full transition-all duration-300 w-full"></div>
+                    </div>
                   </div>
                 </div>
 
                 <!-- Controls -->
-                <div class="flex items-center justify-center space-x-3 pt-2">
-                  <button id="btn-mod-start" class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
-                    <span data-i18n="startSpeaker">Start Speaker</span>
+                <div class="flex items-center justify-center space-x-3 pt-4 max-w-lg mx-auto w-full">
+                  <button id="btn-mod-start" class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2 cursor-pointer">
+                    <span data-i18n="start">Start</span>
                   </button>
-                  <button id="btn-mod-pause" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden">
+                  <button id="btn-mod-pause" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden cursor-pointer">
                     <span data-i18n="pause">Pause</span>
                   </button>
-                  <button id="btn-mod-reset" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl" title="Reset">
+                  <button id="btn-mod-reset" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition cursor-pointer" title="Reset">
                     <span data-i18n="reset">Reset</span>
                   </button>
-                  <button id="btn-mod-next" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center space-x-2">
-                    <span data-i18n="nextSpeaker">Next</span>
+                  <button id="btn-mod-next" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 cursor-pointer">
+                    <span data-i18n="nextSpeaker">Next Speaker</span>
                   </button>
                 </div>
               </div>
 
-              <!-- Total Caucus Progress -->
-              <div class="border-t pt-4 text-left mt-6">
+              <!-- Total Caucus Progress (Hidden inside left card to match unified layout; total timer is shown in right queue header) -->
+              <div class="hidden border-t pt-4 text-left mt-6">
                 <div class="flex justify-between text-xs font-semibold text-slate-500 mb-1">
                   <span data-i18n="caucusTotalElapsed">Caucus Total Elapsed</span>
-                  <span id="mod-total-timer-text">00:00 / 10:00</span>
+                  <span id="mod-total-timer-text-left">00:00 / 10:00</span>
                 </div>
                 <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
                   <div id="mod-total-progress" class="bg-primary h-full w-0"></div>
@@ -409,8 +417,8 @@
               </div>
             </div>
 
-            <!-- Mod Speakers Queue -->
-            <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col min-h-[640px] h-full">
+            <!-- Mod Speakers Queue (5 cols on lg) -->
+            <div class="lg:col-span-5 bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col h-full">
               <div class="flex items-center justify-between pb-3 border-b border-slate-100">
                 <div>
                   <h3 class="font-bold text-slate-800 text-base" data-i18n="upcomingSpeakers">Upcoming Speakers</h3>
@@ -419,7 +427,7 @@
                   </div>
                 </div>
                 <div class="flex items-center gap-1.5">
-                  <button id="btn-mod-add-speaker" class="px-3 py-1.5 bg-primary text-white rounded-lg text-xs font-semibold hover:bg-primary-dark flex items-center space-x-1">
+                  <button id="btn-mod-add-speaker" class="px-3.5 py-1.5 bg-primary text-white rounded-lg text-xs font-semibold hover:bg-primary-dark flex items-center space-x-1.5 cursor-pointer">
                     <span data-i18n="addSpeaker">新增代表</span>
                   </button>
                 </div>
@@ -427,7 +435,7 @@
               <span id="mod-current-topic" class="hidden"></span>
               <span id="mod-label-total-time" class="hidden"></span>
               <span id="mod-label-speaker-time" class="hidden"></span>
-              <div id="list-mod-queue" class="flex-1 overflow-y-auto mt-2 divide-y divide-slate-100 custom-scroll pr-1">
+              <div id="list-mod-queue" class="flex-1 overflow-y-auto mt-3 divide-y divide-slate-100 custom-scroll pr-1 max-h-96">
                 <!-- Injected via JS -->
               </div>
             </div>
@@ -1479,31 +1487,31 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script src="js/firebase-config.js?v=2026102402"></script>
+  <script src="js/firebase-config.js?v=2026102403"></script>
   <!-- Application Data & Translations -->
-  <script src="data.js?v=2026102402"></script>
-  <script src="js/i18n.js?v=2026102402"></script>
-  <script src="js/countries.js?v=2026102402"></script>
-  <script src="js/state.js?v=2026102402"></script>
+  <script src="data.js?v=2026102403"></script>
+  <script src="js/i18n.js?v=2026102403"></script>
+  <script src="js/countries.js?v=2026102403"></script>
+  <script src="js/state.js?v=2026102403"></script>
     <!-- Utilities, Dialogs & Visual Effects -->
-    <script src="js/dialogs.js?v=2026102402"></script>
-    <script src="js/confetti.js?v=2026102402"></script>
-    <script src="js/theme.js?v=2026102402"></script>
-    <script src="js/modals.js?v=2026102402"></script>
-    <script src="js/p2p.js?v=2026102402"></script>
+    <script src="js/dialogs.js?v=2026102403"></script>
+    <script src="js/confetti.js?v=2026102403"></script>
+    <script src="js/theme.js?v=2026102403"></script>
+    <script src="js/modals.js?v=2026102403"></script>
+    <script src="js/p2p.js?v=2026102403"></script>
     <!-- View Renderers -->
-    <script src="js/views/header.js?v=2026102402"></script>
-    <script src="js/views/setup.js?v=2026102402"></script>
-    <script src="js/views/gsl.js?v=2026102402"></script>
-    <script src="js/views/mod.js?v=2026102402"></script>
-    <script src="js/views/unmod.js?v=2026102402"></script>
-    <script src="js/views/single.js?v=2026102402"></script>
-    <script src="js/views/motions.js?v=2026102402"></script>
-    <script src="js/views/voting.js?v=2026102402"></script>
+    <script src="js/views/header.js?v=2026102403"></script>
+    <script src="js/views/setup.js?v=2026102403"></script>
+    <script src="js/views/gsl.js?v=2026102403"></script>
+    <script src="js/views/mod.js?v=2026102403"></script>
+    <script src="js/views/unmod.js?v=2026102403"></script>
+    <script src="js/views/single.js?v=2026102403"></script>
+    <script src="js/views/motions.js?v=2026102403"></script>
+    <script src="js/views/voting.js?v=2026102403"></script>
     <!-- Events, Auth & Entry Point -->
-    <script src="js/events.js?v=2026102402"></script>
-    <script src="js/auth.js?v=2026102402"></script>
-    <script src="app.js?v=2026102402"></script>
+    <script src="js/events.js?v=2026102403"></script>
+    <script src="js/auth.js?v=2026102403"></script>
+    <script src="app.js?v=2026102403"></script>
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();

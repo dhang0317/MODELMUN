@@ -73,8 +73,10 @@
     }
 
     if (!state.currentGslSpeaker) {
-      emptyDiv.classList.remove('hidden');
-      activeDiv.classList.add('hidden');
+      emptyDiv.classList.add('hidden');
+      activeDiv.classList.remove('hidden');
+      document.getElementById('gsl-current-flag').src = 'https://flagcdn.com/w80/un.png';
+      document.getElementById('gsl-current-name').textContent = t.noneSelected || 'None selected';
     } else {
       emptyDiv.classList.add('hidden');
       activeDiv.classList.remove('hidden');
