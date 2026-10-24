@@ -42,6 +42,9 @@
         showToast(failMsg, 'error', 3500);
       }
       setTimeout(() => {
+        state.selectedCountries.forEach(c => { c.vote = 'none'; c.hasRights = false; });
+        state.voteStage = 'r1';
+        state.activeVoterIndex = 0;
         if (typeof removeMotion === 'function') {
           removeMotion(originalIdx);
         } else if (typeof originalIdx === 'number' && originalIdx >= 0 && state.motions) {
@@ -324,7 +327,7 @@
       topSessionControls.classList.toggle('hidden', !isSession);
     }
     if (voteStagesGroup) {
-      voteStagesGroup.classList.toggle('hidden', isSession);
+      voteStagesGroup.classList.add('hidden');
     }
 
     // If Session Subtab is active: handle details card and visibility

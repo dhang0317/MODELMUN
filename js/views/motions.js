@@ -250,6 +250,17 @@
       saveToLocalStorage();
     }
 
+    // Auto-clear vote tallies once a motion is decided
+    state.selectedCountries.forEach(c => {
+      c.vote = 'none';
+      c.hasRights = false;
+    });
+    state.voteStage = 'r1';
+    state.activeVoterIndex = 0;
+    const proposerCountry = motion.proposer
+      ? state.selectedCountries.find(c => getCountryDisplayName(c) === motion.proposer)
+      : null;
+
     if (motion.type === 'mod') {
       pauseModTimer();
       const totalMins = parseInt(motion.totalMins, 10) || 10;
@@ -260,13 +271,17 @@
       state.modSpeakerSecs = speakerSecs;
       state.modSpeakerSecsRemaining = speakerSecs;
       state.modQueue = [];
-      state.currentModSpeaker = null;
+      state.currentModSpeaker = proposerCountry || null;
       state.speakingSubtab = 'mod';
       switchTab('gsl');
     } else if (motion.type === 'gsl') {
       const secs = parseInt(motion.speakerSecs, 10) || 90;
       state.gslDefaultTime = secs;
       state.gslRemainingTime = secs;
+      if (proposerCountry) {
+        state.gslQueue = (state.gslQueue || []).filter(c => c !== proposerCountry && c.code !== proposerCountry.code);
+        state.currentGslSpeaker = proposerCountry;
+      }
       state.speakingSubtab = 'gsl';
       switchTab('gsl');
     } else if (motion.type === 'unmod') {
