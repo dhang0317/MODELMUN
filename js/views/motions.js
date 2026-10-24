@@ -16,6 +16,10 @@
     }
 
     function formatMotionDetails(m) {
+      if (m.type === 'gsl') {
+        if (state.language === 'zh') return `發言時間：${m.speakerSecs} 秒`;
+        return `Speaking Time: ${m.speakerSecs}s`;
+      }
       if (!m.totalMins) return t.proceduralAction || 'Procedural Action';
       if (m.type === 'mod') {
         if (t.durationAndSpeakingTime) {
@@ -56,7 +60,7 @@
 
     // Rule tag on Hero Card
     const ruleTag = document.getElementById('hero-motion-rule-tag');
-    if (ruleTag) {
+    if (ruleTag && false) {
       if (topRule.requiresVote) {
         ruleTag.className = 'text-[11px] font-semibold px-2.5 py-0.5 rounded-full border border-rose-500/40 bg-rose-500/10 text-rose-500';
         ruleTag.textContent = t.ruleTwoThirdsMandatory || 'Mandatory 2/3 Procedural Vote';
@@ -136,7 +140,7 @@
         listContainer.appendChild(row);
       }
     } else {
-      listContainer.innerHTML = `<div class="p-6 text-center text-xs text-zinc-500 font-medium">${t.noMotionsPending}</div>`;
+      listContainer.innerHTML = '';
     }
   }
 
@@ -197,6 +201,7 @@
         case 'mod': return '主持核心磋商 (Mod)';
         case 'singlespeaker': return '介紹決議案草案';
         case 'amendment': return '介紹修正案';
+        case 'gsl': return '常設發言名單';
         case 'suspend': return '暫停會議動議 / 休會';
         case 'adjourn_session': return t.motionAdjournSession;
         case 'adjourn_day': return '休會動議 - 本日結束 (Adjournment for the Day)';
@@ -212,6 +217,7 @@
         case 'mod': return 'Caucus Modéré';
         case 'singlespeaker': return 'Présentation du Projet de Résolution';
         case 'amendment': return 'Présentation des Amendements';
+        case 'gsl': return "Liste Générale des Orateurs";
         case 'suspend': return 'Suspension de la séance';
         case 'adjourn_session': return t.motionAdjournSession;
         case 'adjourn_day': return 'Ajournement pour la journée';
@@ -226,6 +232,7 @@
       case 'mod': return 'Moderated Caucus';
       case 'singlespeaker': return 'Introduce Draft Resolution';
       case 'amendment': return 'Introduce Amendment';
+      case 'gsl': return "General Speakers' List";
       case 'suspend': return 'Suspension of Meeting';
       case 'adjourn_session': return t.motionAdjournSession;
       case 'adjourn_day': return 'Adjournment for the Day';
@@ -255,6 +262,12 @@
       state.modQueue = [];
       state.currentModSpeaker = null;
       state.speakingSubtab = 'mod';
+      switchTab('gsl');
+    } else if (motion.type === 'gsl') {
+      const secs = parseInt(motion.speakerSecs, 10) || 90;
+      state.gslDefaultTime = secs;
+      state.gslRemainingTime = secs;
+      state.speakingSubtab = 'gsl';
       switchTab('gsl');
     } else if (motion.type === 'unmod') {
       pauseUnmodTimer();

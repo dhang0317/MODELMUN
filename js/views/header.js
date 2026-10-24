@@ -71,6 +71,7 @@
         zh: {
           mod: '主持核心磋商',
           unmod: '非主持核心磋商',
+          gsl: '常設發言名單',
           singlespeaker: '介紹決議案草案',
           amendment: '介紹修正案',
           suspend: '暫停會議動議 / 休會',
@@ -80,6 +81,7 @@
         fr: {
           mod: 'Caucus Modéré',
           unmod: 'Caucus Non-Modéré',
+          gsl: 'Liste Générale des Orateurs',
           singlespeaker: 'Présentation du Projet de Résolution',
           amendment: 'Présentation des Amendements',
           suspend: 'Suspension de la séance (Recess)',
@@ -89,6 +91,7 @@
         en: {
           mod: 'Moderated Caucus',
           unmod: 'Unmoderated Caucus',
+          gsl: "General Speakers' List",
           singlespeaker: 'Introduce Draft Resolution',
           amendment: 'Introduce Amendment',
           suspend: 'Suspension / Recess',

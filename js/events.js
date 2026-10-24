@@ -718,6 +718,17 @@
         if (labelTotalMins) labelTotalMins.textContent = state.language === 'zh' ? '暫停時間 (分鐘)' : 'Suspension Duration (mins)';
         if (inputTotalMins) inputTotalMins.value = 15;
         if (fieldSpeakerSecs) fieldSpeakerSecs.classList.add('hidden');
+      } else if (type === 'gsl') {
+        if (fieldTopic) fieldTopic.classList.add('hidden');
+        if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
+        if (fieldAmendmentSelect) fieldAmendmentSelect.classList.add('hidden');
+        if (fieldTimeContainer) {
+          fieldTimeContainer.classList.remove('hidden');
+          fieldTimeContainer.className = 'grid grid-cols-1 gap-3';
+        }
+        if (fieldTotalMins) fieldTotalMins.classList.add('hidden');
+        if (fieldSpeakerSecs) fieldSpeakerSecs.classList.remove('hidden');
+        if (inputSpeakerSecs) inputSpeakerSecs.value = 90;
       } else if (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' || type === 'close') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
@@ -736,8 +747,7 @@
       state.selectedCountries.forEach(c => {
         const opt = document.createElement('option');
         opt.value = getCountryDisplayName(c);
-        const enPart = (c.name_en && state.language !== 'en') ? ` (${c.name_en})` : '';
-        opt.textContent = `${getCountryDisplayName(c)}${enPart}`;
+        opt.textContent = getCountryDisplayName(c);
         select.appendChild(opt);
       });
       updateMotionModalFields();

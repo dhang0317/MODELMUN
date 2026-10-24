@@ -10,10 +10,19 @@
     unmod: 80,
     mod: 60,
     singlespeaker: 40,
-    amendment: 38
+    amendment: 38,
+    gsl: 30
   };
 
   const MOTION_RULES = {
+    // 常設發言名單
+    gsl: {
+      requiresVote: false,
+      allowQuickSession: true,
+      threshold: 'simple',
+      voteType: 'procedural',
+      canSecond: true
+    },
     // 介紹修正案
     amendment: {
       requiresVote: false,
