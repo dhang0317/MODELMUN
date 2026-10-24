@@ -312,7 +312,7 @@
     } else if (motion.type === 'suspend') {
       const totalMins = parseInt(motion.totalMins, 10) || 15;
       const t = I18N[state.language] || I18N.en;
-      openRecessScreen(totalMins, motion.topic || t.motionSuspendMeeting, 'suspend');
+      openRecessScreen(totalMins, motion.topic || '暫停會議', 'suspend');
       renderAll();
     } else if (motion.type === 'adjourn_day') {
       const t = I18N[state.language] || I18N.en;
@@ -380,34 +380,31 @@
     const badgeEl = document.getElementById('recess-badge');
     const reconveneBtn = document.getElementById('btn-recess-reconvene');
 
+    if (badgeEl) badgeEl.classList.add('hidden');
+    if (subtitleEl) subtitleEl.classList.add('hidden');
+    if (reconveneEl) reconveneEl.classList.add('hidden');
+
     if (mode === 'adjourn_session') {
-      if (badgeEl) badgeEl.classList.add('hidden');
-      if (subtitleEl) subtitleEl.classList.add('hidden');
       if (toggleBtn) toggleBtn.classList.add('hidden');
       if (timerBox) timerBox.classList.add('hidden');
       if (reconveneBtn) {
-        reconveneBtn.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5 text-emerald-400"></i><span>${t.confirm || '確定'}</span>`;
+        reconveneBtn.innerHTML = `<span>${t.confirm || '確定'}</span>`;
       }
       // Gentle celebratory confetti ribbons for session close
       setTimeout(() => {
         launchConfettiCannon();
       }, 300);
     } else if (mode === 'adjourn_day' || mode === 'adjourn') {
-      if (badgeEl) badgeEl.classList.remove('hidden');
-      if (subtitleEl) subtitleEl.classList.remove('hidden');
       if (toggleBtn) toggleBtn.classList.add('hidden');
       if (timerBox) timerBox.classList.add('hidden');
-      if (reconveneEl) reconveneEl.textContent = t.recessAdjournDayNotice;
       if (reconveneBtn) {
-        reconveneBtn.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5 text-emerald-400"></i><span>${t.recessFormalReconvene}</span>`;
+        reconveneBtn.innerHTML = `<span>${t.recessFormalReconvene}</span>`;
       }
     } else {
-      if (badgeEl) badgeEl.classList.remove('hidden');
-      if (subtitleEl) subtitleEl.classList.remove('hidden');
       if (toggleBtn) toggleBtn.classList.remove('hidden');
       if (timerBox) timerBox.classList.remove('hidden');
       if (reconveneBtn) {
-        reconveneBtn.innerHTML = `<i data-lucide="check-circle" class="w-5 h-5 text-emerald-400"></i><span>${t.recessFormalReconvene}</span>`;
+        reconveneBtn.innerHTML = `<span>${t.recessFormalReconvene}</span>`;
       }
       const toggleBtnLabel = document.getElementById('recess-toggle-label');
       if (toggleBtnLabel) toggleBtnLabel.textContent = t.recessStartTimer;
