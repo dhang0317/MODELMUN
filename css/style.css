@@ -831,13 +831,13 @@ body:not(.light-mode) {
     }
 
     /* Light Mode Normal Buttons (按鈕不要有背景色) */
-    body.light-mode button:not(#main-header button):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent) {
+    body.light-mode button:not(.speaking-subtab-btn):not(#main-header button):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent) {
       background-color: transparent !important;
       background: transparent !important;
       color: #000000 !important;
       border: 1px solid #cbd5e1 !important;
     }
-    body.light-mode button:not(#main-header button):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent):hover {
+    body.light-mode button:not(.speaking-subtab-btn):not(#main-header button):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent):hover {
       background-color: rgba(0, 0, 0, 0.05) !important;
       background: rgba(0, 0, 0, 0.05) !important;
       color: #000000 !important;
@@ -1867,36 +1867,68 @@ body:not(.light-mode) {
     }
 
     /* Speaking Subtabs & Pro/Con Cards Dark/Light Mode Fix */
-    body:not(.light-mode) .speaking-subtab-btn {
+    body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active) {
       color: #a1a1aa !important;
+      background-color: transparent !important;
       background: transparent !important;
-      border: 1px solid transparent !important;
+      border: 1px solid #27272a !important;
     }
-    body:not(.light-mode) .speaking-subtab-btn:hover {
+    body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover {
       color: #ffffff !important;
       background-color: rgba(255, 255, 255, 0.08) !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid #3f3f46 !important;
     }
-    body:not(.light-mode) .speaking-subtab-btn.subtab-active {
+    body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active,
+    body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active:hover,
+    body:not(.light-mode) #btn-speaking-subtab-gsl.subtab-active,
+    body:not(.light-mode) #btn-speaking-subtab-mod.subtab-active,
+    body:not(.light-mode) #btn-speaking-subtab-intro.subtab-active,
+    body:not(.light-mode) #btn-speaking-subtab-procon.subtab-active {
       background-color: #ffffff !important;
+      background: #ffffff !important;
       color: #09090b !important;
       border: 1px solid #ffffff !important;
       box-shadow: 0 1px 4px rgba(255, 255, 255, 0.2) !important;
     }
-
-    body.light-mode .speaking-subtab-btn {
-      color: #475569 !important;
-      background: transparent !important;
-      border: 1px solid transparent !important;
+    body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-gsl.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-mod.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-intro.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-procon.subtab-active * {
+      color: #09090b !important;
     }
-    body.light-mode .speaking-subtab-btn:hover {
+
+    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) {
+      color: #475569 !important;
+      background-color: transparent !important;
+      background: transparent !important;
+      border: 1px solid #e2e8f0 !important;
+    }
+    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover {
       color: #0f172a !important;
       background-color: rgba(0, 0, 0, 0.05) !important;
+      background: rgba(0, 0, 0, 0.05) !important;
+      border: 1px solid #cbd5e1 !important;
     }
-    body.light-mode .speaking-subtab-btn.subtab-active {
+    body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active,
+    body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active:hover,
+    body.light-mode #btn-speaking-subtab-gsl.subtab-active,
+    body.light-mode #btn-speaking-subtab-mod.subtab-active,
+    body.light-mode #btn-speaking-subtab-intro.subtab-active,
+    body.light-mode #btn-speaking-subtab-procon.subtab-active {
       background-color: #0f172a !important;
+      background: #0f172a !important;
       color: #ffffff !important;
       border: 1px solid #0f172a !important;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
+    }
+    body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active *,
+    body.light-mode #btn-speaking-subtab-gsl.subtab-active *,
+    body.light-mode #btn-speaking-subtab-mod.subtab-active *,
+    body.light-mode #btn-speaking-subtab-intro.subtab-active *,
+    body.light-mode #btn-speaking-subtab-procon.subtab-active * {
+      color: #ffffff !important;
     }
 
     /* Pro / Con Queue and Side Switcher buttons */

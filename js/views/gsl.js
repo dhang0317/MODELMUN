@@ -1,5 +1,8 @@
   function renderSpeakingSubtabs() {
-    if (!state.speakingSubtab) state.speakingSubtab = 'gsl';
+    const validSubtabs = ['gsl', 'mod', 'intro', 'procon'];
+    if (!state.speakingSubtab || !validSubtabs.includes(state.speakingSubtab)) {
+      state.speakingSubtab = 'gsl';
+    }
 
     const pGsl = document.getElementById('panel-speaking-gsl');
     const pMod = document.getElementById('panel-speaking-mod');
