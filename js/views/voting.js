@@ -298,6 +298,11 @@
     const motionType = curMotion ? curMotion.type : null;
     const isSessionAllowed = true;
 
+    // Auto-populate Vote Topic from current motion if in motion vote mode and topic is empty
+    if (isMotionVote && curMotion && !state.voteTopic && typeof getMotionAutoTopicText === 'function') {
+      state.voteTopic = getMotionAutoTopicText(curMotion);
+    }
+
     // Sync Vote Topic input
     const inputVoteTopic = document.getElementById('input-vote-topic');
     if (inputVoteTopic && document.activeElement !== inputVoteTopic) {

@@ -182,13 +182,41 @@
       state.activeSessionId = 1;
     }
     const currentSess = state.sessionVotes.find(s => s.id === state.activeSessionId) || state.sessionVotes[0];
+    const motionName = formatMotionType(motion.type);
     if (currentSess) {
-      const motionName = formatMotionType(motion.type);
       currentSess.note = `${motionName} (${motion.proposer})`;
+    }
+
+    // Auto-populate current vote topic from the motion
+    if (typeof getMotionAutoTopicText === 'function') {
+      state.voteTopic = getMotionAutoTopicText(motion);
+    } else {
+      state.voteTopic = motion.topic ? `${motionName}：${motion.topic}` : `${motionName} (${motion.proposer})`;
     }
 
     saveToLocalStorage(true, true);
     switchTab('vote');
+  }
+
+  function getMotionAutoTopicText(m) {
+    if (!m) return '';
+    const mName = formatMotionType(m.type);
+    let details = '';
+    if (m.type === 'mod') {
+      details = `${m.totalMins || 10}m / ${m.speakerSecs || 60}s`;
+    } else if (m.type === 'unmod' || m.type === 'suspend') {
+      details = `${m.totalMins || 10}m`;
+    } else if (m.type === 'gsl') {
+      details = `${m.speakerSecs || 60}s`;
+    }
+
+    const topicPart = m.topic ? m.topic.trim() : '';
+    const proposerPart = m.proposer ? `(${m.proposer})` : '';
+
+    if (topicPart) {
+      return details ? `${mName}：${topicPart} [${details}] ${proposerPart}`.trim() : `${mName}：${topicPart} ${proposerPart}`.trim();
+    }
+    return details ? `${mName} [${details}] ${proposerPart}`.trim() : `${mName} ${proposerPart}`.trim();
   }
 
   function formatMotionType(type) {
@@ -332,6 +360,13 @@
       state.votingMotion = null;
       state.voteType = 'substantive';
       state.voteThreshold = state.settings?.rules?.defaultVoteThreshold || 'simple';
+      // Auto-populate current vote topic with DR topic if motion specified one, or default
+      if (motion.topic && motion.topic.trim()) {
+        state.voteTopic = motion.topic.trim();
+        state.voteResolutionTitle = motion.topic.trim();
+      } else {
+        state.voteTopic = state.language === 'zh' ? '決議案實質表決' : 'Substantive Vote on Draft Resolution';
+      }
       // Clear votes for a fresh substantive resolution ballot
       state.selectedCountries.forEach(c => {
         c.vote = 'none';

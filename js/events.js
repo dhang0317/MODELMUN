@@ -1020,6 +1020,9 @@
         if (state.votingMotion) {
           const rule = (typeof MOTION_RULES !== 'undefined' && MOTION_RULES[state.votingMotion.type]) ? MOTION_RULES[state.votingMotion.type] : { threshold: 'simple' };
           state.voteThreshold = rule.threshold || 'simple';
+          if (typeof getMotionAutoTopicText === 'function') {
+            state.voteTopic = getMotionAutoTopicText(state.votingMotion);
+          }
         }
         saveToLocalStorage(true, true);
         renderResolutionVoteGrid();
