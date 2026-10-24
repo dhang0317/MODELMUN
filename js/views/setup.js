@@ -76,8 +76,6 @@
         let powerBadge = '';
         if (c.powerStatus === 'observer') {
           powerBadge = `<span class="cursor-pointer text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-700 text-slate-200 hover:bg-slate-600 border border-slate-600" title="Click to cycle status">${t.observer}</span>`;
-        } else {
-          powerBadge = `<span class="cursor-pointer text-xs font-bold px-2.5 py-1 rounded-lg bg-emerald-500/25 text-white hover:bg-emerald-500/35 border border-emerald-500/50" title="Click to cycle status">${t.delegate}</span>`;
         }
 
         row.innerHTML = `
@@ -86,17 +84,20 @@
             <span class="text-base sm:text-lg font-bold text-slate-100 truncate">${getCountryDisplayName(c)}</span>
           </div>
           <div class="flex items-center space-x-2.5 shrink-0 ml-2">
-            <div class="status-toggle-btn">${powerBadge}</div>
+            ${powerBadge ? `<div class="status-toggle-btn">${powerBadge}</div>` : ''}
             <button class="btn-remove-country px-2.5 py-1 text-xs font-semibold text-rose-400 hover:bg-rose-500/10 rounded-lg border border-rose-500/30">✕</button>
           </div>
         `;
 
-        row.querySelector('.status-toggle-btn').addEventListener('click', () => {
-          if (c.powerStatus === 'observer') c.powerStatus = 'normal';
-          else c.powerStatus = 'observer';
-          saveToLocalStorage();
-          renderAll();
-        });
+        const statusToggle = row.querySelector('.status-toggle-btn');
+        if (statusToggle) {
+          statusToggle.addEventListener('click', () => {
+            if (c.powerStatus === 'observer') c.powerStatus = 'normal';
+            else c.powerStatus = 'observer';
+            saveToLocalStorage();
+            renderAll();
+          });
+        }
 
         row.querySelector('.btn-remove-country').addEventListener('click', (e) => {
           e.stopPropagation();
