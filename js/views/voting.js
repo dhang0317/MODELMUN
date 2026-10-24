@@ -298,6 +298,12 @@
     const motionType = curMotion ? curMotion.type : null;
     const isSessionAllowed = true;
 
+    // Sync Vote Topic input
+    const inputVoteTopic = document.getElementById('input-vote-topic');
+    if (inputVoteTopic && document.activeElement !== inputVoteTopic) {
+      inputVoteTopic.value = state.voteTopic || '';
+    }
+
     // Default votingSubtab is session if voting for motion, otherwise rollcall
     if (!state.votingSubtab || state.votingSubtab === 'ballots') {
       state.votingSubtab = isMotionVote ? 'session' : 'rollcall';

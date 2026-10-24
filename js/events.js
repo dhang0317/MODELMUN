@@ -906,6 +906,14 @@
       });
     }
 
+    const inputVoteTopic = document.getElementById('input-vote-topic');
+    if (inputVoteTopic) {
+      inputVoteTopic.addEventListener('input', (e) => {
+        state.voteTopic = e.target.value;
+        saveToLocalStorage(true, true);
+      });
+    }
+
     const btnStageR1 = document.getElementById('vote-stage-r1');
     if (btnStageR1) {
       btnStageR1.addEventListener('click', () => {

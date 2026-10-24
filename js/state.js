@@ -206,6 +206,7 @@
     votingSubtab: 'rollcall', // 'rollcall' (calling card) or 'session' (非投票點名/會期表決)
     voteStage: 'r1',
     voteResolutionTitle: 'Draft Resolution 1.1',
+    voteTopic: '',
     voteThreshold: 'simple',
     voteType: 'substantive', // 'substantive' or 'procedural'
     activeVoteTarget: 'resolution', // 'resolution' or 'motion'
@@ -298,6 +299,7 @@
       voteStage: state.voteStage,
       voteThreshold: state.voteThreshold,
       voteResolutionTitle: state.voteResolutionTitle,
+      voteTopic: state.voteTopic || '',
       showResults: state.showResults,
       rightsSpeeches: state.rightsSpeeches,
       votingSubtab: state.votingSubtab,
@@ -465,6 +467,7 @@
     state.voteMode = 'rollcall';
     state.voteStage = 'r1';
     state.voteResolutionTitle = 'Draft Resolution 1.1';
+    state.voteTopic = '';
     state.voteThreshold = 'simple';
     state.showResults = true;
     state.rightsSpeeches = [];
@@ -678,6 +681,7 @@
     if (parsed.activeVoteTarget) state.activeVoteTarget = parsed.activeVoteTarget;
     if (typeof parsed.votingMotion !== 'undefined') state.votingMotion = parsed.votingMotion;
     if (parsed.voteResolutionTitle) state.voteResolutionTitle = parsed.voteResolutionTitle;
+    if (typeof parsed.voteTopic !== 'undefined') state.voteTopic = parsed.voteTopic;
     if (typeof parsed.showResults !== 'undefined') state.showResults = parsed.showResults;
     if (Array.isArray(parsed.rightsSpeeches)) state.rightsSpeeches = parsed.rightsSpeeches;
     if (parsed.votingSubtab) state.votingSubtab = parsed.votingSubtab;

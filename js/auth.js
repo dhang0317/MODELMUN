@@ -163,6 +163,7 @@
             motions: state.motions,
             voteThreshold: state.voteThreshold,
             voteResolutionTitle: state.voteResolutionTitle,
+            voteTopic: state.voteTopic || '',
             language: state.language
           };
           saveToCloudKV(payload, true);
