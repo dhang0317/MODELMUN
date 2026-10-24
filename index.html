@@ -69,7 +69,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/style.css?v=2026102403">
+  <link rel="stylesheet" href="css/style.css?v=2026102404">
 </head>
 <body class="h-screen w-screen flex flex-col overflow-hidden bg-black select-none">
 
@@ -77,6 +77,14 @@
   <header id="main-header" class="border-b text-white shadow-sm z-30 flex-shrink-0 sticky top-0">
     <div id="header-top-bar" class="px-3 sm:px-4 py-2 flex items-center justify-between gap-4 sm:gap-6 shrink-0">
       <div class="flex items-center space-x-3 shrink-0 min-w-0">
+        <!-- Unified Settings Hamburger Button (Left of Logo) -->
+        <button id="btn-open-settings" type="button" class="p-1.5 rounded-lg hover:opacity-80 transition flex items-center justify-center cursor-pointer shrink-0 focus:outline-none border-0" title="全域會議與系統設定">
+          <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="4" y1="6" x2="20" y2="6"></line>
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="18" x2="20" y2="18"></line>
+          </svg>
+        </button>
         <button id="btn-logo-home" type="button" class="cursor-pointer hover:opacity-80 transition shrink-0 rounded-full focus:outline-none flex items-center justify-center p-0 border-0" title="返回選擇國家 (Setup)">
           <img src="logo.png" alt="MUN Logo" class="w-9 h-9 rounded-full shadow-sm object-cover bg-white ring-1 ring-zinc-800">
         </button>
@@ -135,12 +143,7 @@
       </div>
 
       <!-- Header Right Toolbar: Quick Controls -->
-      <div class="flex items-center space-x-2 shrink-0 ml-auto">
-        <!-- Unified Settings Gear Button -->
-        <button id="btn-open-settings" type="button" class="px-3.5 py-1.5 rounded-xl transition flex items-center space-x-2 text-xs font-semibold cursor-pointer shadow-sm border" title="全域會議與系統設定">
-          
-          <span class="hidden sm:inline" data-i18n="settings">設定</span>
-        </button>
+      <div class="hidden items-center space-x-2 shrink-0 ml-auto">
       </div>
     </div>
 
@@ -1487,31 +1490,31 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script src="js/firebase-config.js?v=2026102403"></script>
+  <script src="js/firebase-config.js?v=2026102404"></script>
   <!-- Application Data & Translations -->
-  <script src="data.js?v=2026102403"></script>
-  <script src="js/i18n.js?v=2026102403"></script>
-  <script src="js/countries.js?v=2026102403"></script>
-  <script src="js/state.js?v=2026102403"></script>
+  <script src="data.js?v=2026102404"></script>
+  <script src="js/i18n.js?v=2026102404"></script>
+  <script src="js/countries.js?v=2026102404"></script>
+  <script src="js/state.js?v=2026102404"></script>
     <!-- Utilities, Dialogs & Visual Effects -->
-    <script src="js/dialogs.js?v=2026102403"></script>
-    <script src="js/confetti.js?v=2026102403"></script>
-    <script src="js/theme.js?v=2026102403"></script>
-    <script src="js/modals.js?v=2026102403"></script>
-    <script src="js/p2p.js?v=2026102403"></script>
+    <script src="js/dialogs.js?v=2026102404"></script>
+    <script src="js/confetti.js?v=2026102404"></script>
+    <script src="js/theme.js?v=2026102404"></script>
+    <script src="js/modals.js?v=2026102404"></script>
+    <script src="js/p2p.js?v=2026102404"></script>
     <!-- View Renderers -->
-    <script src="js/views/header.js?v=2026102403"></script>
-    <script src="js/views/setup.js?v=2026102403"></script>
-    <script src="js/views/gsl.js?v=2026102403"></script>
-    <script src="js/views/mod.js?v=2026102403"></script>
-    <script src="js/views/unmod.js?v=2026102403"></script>
-    <script src="js/views/single.js?v=2026102403"></script>
-    <script src="js/views/motions.js?v=2026102403"></script>
-    <script src="js/views/voting.js?v=2026102403"></script>
+    <script src="js/views/header.js?v=2026102404"></script>
+    <script src="js/views/setup.js?v=2026102404"></script>
+    <script src="js/views/gsl.js?v=2026102404"></script>
+    <script src="js/views/mod.js?v=2026102404"></script>
+    <script src="js/views/unmod.js?v=2026102404"></script>
+    <script src="js/views/single.js?v=2026102404"></script>
+    <script src="js/views/motions.js?v=2026102404"></script>
+    <script src="js/views/voting.js?v=2026102404"></script>
     <!-- Events, Auth & Entry Point -->
-    <script src="js/events.js?v=2026102403"></script>
-    <script src="js/auth.js?v=2026102403"></script>
-    <script src="app.js?v=2026102403"></script>
+    <script src="js/events.js?v=2026102404"></script>
+    <script src="js/auth.js?v=2026102404"></script>
+    <script src="app.js?v=2026102404"></script>
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
