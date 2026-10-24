@@ -265,6 +265,8 @@
       pauseSingleTimer();
       const durationSecs = motion.type === 'amendment' ? (parseInt(motion.speakerSecs, 10) || 60) : ((parseInt(motion.totalMins, 10) || 1) * 60);
       state.singleTimeRemaining = durationSecs;
+      state.singleMotionType = motion.type;
+      state.singleMotionTitle = formatMotionType(motion.type);
       
       // Match the proposer country to state.singleSpeaker
       if (motion.proposer) {

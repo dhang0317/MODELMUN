@@ -1,5 +1,13 @@
   function renderSingleSpeakerView() {
     const t = I18N[state.language] || I18N.en;
+    const titleEl = document.getElementById('single-motion-title');
+    if (titleEl) {
+      if (state.singleMotionType) {
+        titleEl.textContent = formatMotionType(state.singleMotionType);
+      } else {
+        titleEl.textContent = t.draftIntro;
+      }
+    }
     if (state.singleSpeaker) {
       document.getElementById('single-flag').src = getFlagUrl(state.singleSpeaker);
       document.getElementById('single-country-name').textContent = getCountryDisplayName(state.singleSpeaker);
