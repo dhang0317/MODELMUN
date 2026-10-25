@@ -231,10 +231,13 @@
 
   function updateMotionVoteHeaderInfo() {
     const isMotionVote = state.activeVoteTarget === 'motion';
+    const titleContainer = document.getElementById('resolution-title-container');
     const titleInput = document.getElementById('vote-resolution-title-input');
     const motionDescEl = document.getElementById('motion-vote-desc');
     const motionDetailsText = document.getElementById('motion-vote-details-text');
     const motionProposerFlag = document.getElementById('motion-vote-proposer-flag');
+    const motionSubtitleEl = document.getElementById('motion-vote-type-subtitle');
+    const motionTypeText = document.getElementById('motion-vote-type-text');
     const threshElem = document.getElementById('select-vote-threshold');
     const t = I18N[state.language] || I18N.en;
 
@@ -245,36 +248,48 @@
     if (isMotionVote) {
       const activeMotion = state.votingMotion || (state.motions && state.motions[0]) || null;
       if (activeMotion) {
-        const motionTitle = `${formatMotionType(activeMotion.type)}`;
-        if (titleInput) {
-          titleInput.value = motionTitle;
-          titleInput.readOnly = true;
-          titleInput.classList.remove('hover:border-slate-300', 'focus:border-primary');
-        }
+        const motionTypeName = `${formatMotionType(activeMotion.type)}`;
         
+        // Hide editable resolution title input; show large motion details title & subtitle
+        if (titleContainer) titleContainer.classList.add('hidden');
+        if (titleInput) {
+          titleInput.value = motionTypeName;
+        }
+
         if (motionDescEl) {
           motionDescEl.classList.remove('hidden');
           const mCountry = state.selectedCountries.find(c => getCountryDisplayName(c) === activeMotion.proposer);
-          const flagHtml = mCountry ? `<img src="${getFlagUrl(mCountry)}" class="w-4 h-3 inline-block rounded object-cover mr-1.5 align-middle border border-slate-300">` : '';
+          const flagHtml = mCountry ? `<img src="${getFlagUrl(mCountry)}" class="w-5 h-3.5 inline-block rounded object-cover mr-1.5 align-middle border border-slate-300">` : '';
           if (motionProposerFlag) motionProposerFlag.innerHTML = flagHtml;
           if (motionDetailsText) {
             motionDetailsText.textContent = `${activeMotion.proposer} • ${activeMotion.topic || t.generalDiscussion || 'General Discussion'}`;
           }
         }
+
+        if (motionSubtitleEl) {
+          motionSubtitleEl.classList.remove('hidden');
+          if (motionTypeText) {
+            motionTypeText.textContent = motionTypeName;
+          }
+        }
       } else {
+        if (titleContainer) titleContainer.classList.remove('hidden');
         if (titleInput) {
           titleInput.value = t.noMotionsAvailableToVote || '無待表決之動議';
           titleInput.readOnly = true;
         }
         if (motionDescEl) motionDescEl.classList.add('hidden');
+        if (motionSubtitleEl) motionSubtitleEl.classList.add('hidden');
       }
     } else {
+      if (titleContainer) titleContainer.classList.remove('hidden');
       if (titleInput) {
         titleInput.value = state.voteResolutionTitle || 'Draft Resolution 1.1';
         titleInput.readOnly = false;
         titleInput.classList.add('hover:border-slate-300', 'focus:border-primary');
       }
       if (motionDescEl) motionDescEl.classList.add('hidden');
+      if (motionSubtitleEl) motionSubtitleEl.classList.add('hidden');
     }
   }
 
