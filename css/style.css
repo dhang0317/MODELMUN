@@ -2044,55 +2044,91 @@ body:not(.light-mode) {
     }
 
     /* =====================================================
-       UNIVERSAL TACTILE & VISUAL BUTTON PRESS FEEDBACK
-       讓每個按鈕按下去都有明顯的縮放回彈與高光回饋
+       UNIVERSAL TACTILE & RHYTHMIC BUTTON ANIMATION (律動彈簧回饋)
+       讓每個按鈕按下去都有真實的物理彈簧下壓與微彈果凍感 (Bouncy Spring)
        ===================================================== */
     button:not(:disabled),
     [role="button"]:not(:disabled) {
-      transition: transform 0.1s cubic-bezier(0.34, 1.56, 0.64, 1),
-                  background-color 0.12s ease,
-                  border-color 0.12s ease,
-                  box-shadow 0.12s ease,
-                  filter 0.12s ease,
-                  opacity 0.12s ease !important;
-      will-change: transform;
+      position: relative;
+      transition: transform 0.28s cubic-bezier(0.34, 1.8, 0.64, 1),
+                  background-color 0.15s ease,
+                  border-color 0.15s ease,
+                  box-shadow 0.2s cubic-bezier(0.34, 1.5, 0.64, 1),
+                  filter 0.15s ease,
+                  opacity 0.15s ease !important;
+      will-change: transform, box-shadow;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
-    /* Physical scale-down on press (:active or JS .btn-pressed-flash) */
+    /* Subtle hover buoyancy (輕微浮起律動感) */
+    @media (hover: hover) and (pointer: fine) {
+      button:not(:disabled):not(.tab-btn):not(#main-header button):hover {
+        transform: translateY(-1.5px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12) !important;
+      }
+      body:not(.light-mode) button:not(:disabled):not(.tab-btn):not(#main-header button):hover {
+        box-shadow: 0 4px 14px rgba(255, 255, 255, 0.08) !important;
+      }
+    }
+
+    /* Physical deep bounce on press (:active or JS .btn-pressed-flash) */
     button:not(:disabled):not(.tab-btn):active,
     button:not(:disabled):not(.tab-btn).btn-pressed-flash {
-      transform: scale(0.93) !important;
+      transform: scale(0.91) translateY(1.5px) !important;
+      transition-duration: 0.07s !important; /* 按下瞬間極速下沈，鬆開時彈跳釋放 */
+    }
+
+    /* Keyframe spring pop effect when button triggers */
+    @keyframes btn-spring-pulse {
+      0% {
+        transform: scale(0.91) translateY(1px);
+      }
+      50% {
+        transform: scale(1.04) translateY(-1px);
+      }
+      75% {
+        transform: scale(0.98);
+      }
+      100% {
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .btn-spring-release {
+      animation: btn-spring-pulse 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards !important;
     }
 
     /* Main navigation tab buttons press feedback */
     nav#tabs-nav .tab-btn:active,
     nav#tabs-nav .tab-btn.btn-pressed-flash {
-      transform: scale(0.94) !important;
+      transform: scale(0.93) translateY(1px) !important;
       background-color: rgba(255, 255, 255, 0.14) !important;
       border-radius: 0.375rem !important;
+      transition-duration: 0.07s !important;
     }
     body.light-mode nav#tabs-nav .tab-btn:active,
     body.light-mode nav#tabs-nav .tab-btn.btn-pressed-flash {
       background-color: rgba(15, 23, 42, 0.1) !important;
     }
 
-    /* Dark Mode normal button press flash */
+    /* Dark Mode normal button press flash & tactile ring */
     body:not(.light-mode) button:not(:disabled):not(.tab-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):active,
     body:not(.light-mode) button:not(:disabled):not(.tab-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session).btn-pressed-flash {
-      background-color: rgba(255, 255, 255, 0.28) !important;
-      background: rgba(255, 255, 255, 0.28) !important;
+      background-color: rgba(255, 255, 255, 0.3) !important;
+      background: rgba(255, 255, 255, 0.3) !important;
       border-color: #ffffff !important;
-      box-shadow: 0 0 14px rgba(255, 255, 255, 0.3), inset 0 0 8px rgba(255, 255, 255, 0.2) !important;
+      box-shadow: 0 0 18px rgba(255, 255, 255, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.25) !important;
       color: #ffffff !important;
     }
 
-    /* Light Mode normal button press flash */
+    /* Light Mode normal button press flash & tactile ring */
     body.light-mode button:not(:disabled):not(.tab-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#main-header button):active,
     body.light-mode button:not(:disabled):not(.tab-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#main-header button).btn-pressed-flash {
-      background-color: rgba(15, 23, 42, 0.18) !important;
-      background: rgba(15, 23, 42, 0.18) !important;
+      background-color: rgba(15, 23, 42, 0.22) !important;
+      background: rgba(15, 23, 42, 0.22) !important;
       border-color: #0f172a !important;
-      box-shadow: 0 0 10px rgba(15, 23, 42, 0.18), inset 0 1px 4px rgba(15, 23, 42, 0.15) !important;
+      box-shadow: 0 0 14px rgba(15, 23, 42, 0.22), inset 0 1px 4px rgba(15, 23, 42, 0.2) !important;
     }
 
     /* Semantic / Colored Buttons Press Glow (Favor / Present / Pass = Emerald) */
@@ -2108,10 +2144,10 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-procon-add-pro.btn-pressed-flash,
     body:not(.light-mode) .btn-rollcall-present:active,
     body:not(.light-mode) .btn-rollcall-present.btn-pressed-flash {
-      background-color: rgba(16, 185, 129, 0.55) !important;
-      background: rgba(16, 185, 129, 0.55) !important;
+      background-color: rgba(16, 185, 129, 0.6) !important;
+      background: rgba(16, 185, 129, 0.6) !important;
       border-color: #34d399 !important;
-      box-shadow: 0 0 16px rgba(16, 185, 129, 0.55) !important;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.65), inset 0 0 10px rgba(16, 185, 129, 0.3) !important;
       color: #ffffff !important;
     }
 
@@ -2132,10 +2168,10 @@ body:not(.light-mode) {
     body:not(.light-mode) .btn-del-mod-queue.btn-pressed-flash,
     body:not(.light-mode) .btn-del-queue:active,
     body:not(.light-mode) .btn-del-queue.btn-pressed-flash {
-      background-color: rgba(239, 68, 68, 0.55) !important;
-      background: rgba(239, 68, 68, 0.55) !important;
+      background-color: rgba(239, 68, 68, 0.6) !important;
+      background: rgba(239, 68, 68, 0.6) !important;
       border-color: #f87171 !important;
-      box-shadow: 0 0 16px rgba(239, 68, 68, 0.55) !important;
+      box-shadow: 0 0 20px rgba(239, 68, 68, 0.65), inset 0 0 10px rgba(239, 68, 68, 0.3) !important;
       color: #ffffff !important;
     }
 
@@ -2146,10 +2182,10 @@ body:not(.light-mode) {
     body:not(.light-mode) .btn-inc-abstain.btn-pressed-flash,
     body:not(.light-mode) #btn-cast-pass:active,
     body:not(.light-mode) #btn-cast-pass.btn-pressed-flash {
-      background-color: rgba(245, 158, 11, 0.55) !important;
-      background: rgba(245, 158, 11, 0.55) !important;
+      background-color: rgba(245, 158, 11, 0.6) !important;
+      background: rgba(245, 158, 11, 0.6) !important;
       border-color: #fbbf24 !important;
-      box-shadow: 0 0 16px rgba(245, 158, 11, 0.55) !important;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.65), inset 0 0 10px rgba(245, 158, 11, 0.3) !important;
       color: #ffffff !important;
     }
 
@@ -2158,10 +2194,10 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-rollcall-mark-pv.btn-pressed-flash,
     body:not(.light-mode) .btn-add-country-item:active,
     body:not(.light-mode) .btn-add-country-item.btn-pressed-flash {
-      background-color: rgba(56, 189, 248, 0.45) !important;
-      background: rgba(56, 189, 248, 0.45) !important;
+      background-color: rgba(56, 189, 248, 0.5) !important;
+      background: rgba(56, 189, 248, 0.5) !important;
       border-color: #38bdf8 !important;
-      box-shadow: 0 0 14px rgba(56, 189, 248, 0.45) !important;
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.55), inset 0 0 10px rgba(56, 189, 248, 0.3) !important;
       color: #ffffff !important;
     }
 

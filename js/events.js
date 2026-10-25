@@ -19,16 +19,29 @@
 
   // --- EVENT LISTENERS ---
   function setupEventListeners() {
-    // Universal visual & tactile button press feedback (ensures even fast taps visibly flash & scale)
+    // Universal visual & tactile button press feedback with spring bounce
     document.addEventListener('pointerdown', (e) => {
       const btn = e.target.closest('button:not(:disabled), [role="button"]:not(:disabled)');
       if (!btn) return;
+      btn.classList.remove('btn-spring-release');
       btn.classList.add('btn-pressed-flash');
       clearTimeout(btn._pressFlashTimer);
-      btn._pressFlashTimer = setTimeout(() => {
-        btn.classList.remove('btn-pressed-flash');
-      }, 170);
+      clearTimeout(btn._springReleaseTimer);
     }, { passive: true });
+
+    const triggerSpringRelease = (e) => {
+      const btn = e.target.closest('button:not(:disabled), [role="button"]:not(:disabled)');
+      if (!btn || !btn.classList.contains('btn-pressed-flash')) return;
+      btn.classList.remove('btn-pressed-flash');
+      btn.classList.add('btn-spring-release');
+      clearTimeout(btn._springReleaseTimer);
+      btn._springReleaseTimer = setTimeout(() => {
+        btn.classList.remove('btn-spring-release');
+      }, 350);
+    };
+
+    document.addEventListener('pointerup', triggerSpringRelease, { passive: true });
+    document.addEventListener('pointercancel', triggerSpringRelease, { passive: true });
 
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
