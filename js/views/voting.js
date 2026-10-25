@@ -293,6 +293,229 @@
     }
   }
 
+  function updateScoreboardAndVerdict() {
+    const scoreboard = document.getElementById('voting-scoreboard');
+    const isMotionVote = state.activeVoteTarget === 'motion';
+    const isSessionMode = state.votingSubtab === 'session';
+    const t = I18N[state.language] || I18N.en;
+
+    if (state.showResults) {
+      if (scoreboard) {
+        scoreboard.style.display = '';
+        scoreboard.classList.remove('opacity-0', 'pointer-events-none');
+      }
+      const btnToggle = document.getElementById('btn-toggle-results');
+      if (btnToggle) btnToggle.textContent = t.hideResults || 'Hide Results';
+    } else {
+      if (scoreboard) {
+        scoreboard.style.display = 'none';
+        scoreboard.classList.add('opacity-0', 'pointer-events-none');
+      }
+      const btnToggle = document.getElementById('btn-toggle-results');
+      if (btnToggle) btnToggle.textContent = t.showResults || 'Show Results';
+    }
+
+    // Counts
+    let favorCount = 0;
+    let againstCount = 0;
+    let abstainCount = 0;
+
+    if (isSessionMode && Array.isArray(state.sessionVotes) && state.sessionVotes.length > 0) {
+      const activeSess = state.sessionVotes.find(s => s.id === state.activeSessionId) || state.sessionVotes[0];
+      if (activeSess) {
+        favorCount = activeSess.favor || 0;
+        againstCount = activeSess.against || 0;
+        abstainCount = activeSess.abstain || 0;
+      }
+    } else {
+      favorCount = state.selectedCountries.filter(c => c.vote === 'favor').length;
+      againstCount = state.selectedCountries.filter(c => c.vote === 'against').length;
+      abstainCount = state.selectedCountries.filter(c => c.vote === 'abstain').length;
+    }
+
+    const elFavor = document.getElementById('vote-count-favor');
+    const elAgainst = document.getElementById('vote-count-against');
+    const elAbstain = document.getElementById('vote-count-abstain');
+    const elMajority = document.getElementById('vote-count-majority');
+    if (elFavor) elFavor.textContent = favorCount;
+    if (elAgainst) elAgainst.textContent = againstCount;
+    if (elAbstain) elAbstain.textContent = abstainCount;
+
+    const threshElem = document.getElementById('select-vote-threshold');
+    if (threshElem) {
+      threshElem.value = state.voteThreshold || 'simple';
+    }
+
+    // Badge labels
+    const badgeType = document.getElementById('label-vote-type-badge');
+    if (badgeType) {
+      badgeType.textContent = (state.voteType === 'procedural') ? (t.proceduralVote || 'Procedural Vote') : (t.substantiveVote || 'Substantive Vote');
+    }
+    const badgeThresh = document.getElementById('label-vote-threshold-badge');
+    if (badgeThresh) {
+      const th = state.voteThreshold || 'simple';
+      badgeThresh.textContent = th === 'twothirds' ? (t.twoThirdsMajorityRule || '2/3 Majority') : (th === 'unsc9' ? (t.unsc9RequiredRule || 'UNSC 9 Required') : (th === 'consensus' ? (t.consensusMajorityRule || 'Consensus') : (t.simpleMajorityRule || 'Simple Majority')));
+    }
+
+    const eligibleVoters = state.selectedCountries.filter(c => {
+      if (state.voteType === 'procedural') {
+        return c.attendance === 'present' || c.attendance === 'pv';
+      }
+      return c.powerStatus !== 'observer' && (c.attendance === 'present' || c.attendance === 'pv');
+    });
+
+    const votedCount = eligibleVoters.filter(c => c.vote === 'favor' || c.vote === 'against' || c.vote === 'abstain').length;
+    const remainingToVote = eligibleVoters.length - votedCount;
+
+    // Calculate Required Majority
+    let requiredMajority = 0;
+    const substantiveVoters = favorCount + againstCount;
+    const totalPresent = eligibleVoters.length;
+
+    if (state.voteThreshold === 'unsc9') {
+      requiredMajority = 9;
+    } else if (state.voteThreshold === 'twothirds') {
+      const base = (state.voteType === 'procedural' || isSessionMode) ? totalPresent : (substantiveVoters > 0 ? substantiveVoters : totalPresent);
+      requiredMajority = Math.ceil((base * 2) / 3);
+    } else if (state.voteThreshold === 'consensus') {
+      requiredMajority = totalPresent;
+    } else {
+      // Simple majority
+      const base = (state.voteType === 'procedural' || isSessionMode) ? totalPresent : (substantiveVoters > 0 ? substantiveVoters : totalPresent);
+      requiredMajority = Math.floor(base / 2) + 1;
+    }
+
+    if (elMajority) elMajority.textContent = requiredMajority;
+
+    // Progress Bar calculations
+    const totalForBar = (favorCount + againstCount + abstainCount) || 1;
+    const favorPct = Math.round((favorCount / totalForBar) * 100);
+    const againstPct = Math.round((againstCount / totalForBar) * 100);
+    const abstainPct = Math.round((abstainCount / totalForBar) * 100);
+
+    const barFavor = document.getElementById('bar-vote-favor');
+    const barAgainst = document.getElementById('bar-vote-against');
+    const barAbstain = document.getElementById('bar-vote-abstain');
+    if (barFavor) barFavor.style.width = `${favorPct}%`;
+    if (barAgainst) barAgainst.style.width = `${againstPct}%`;
+    if (barAbstain) barAbstain.style.width = `${abstainPct}%`;
+
+    const lblFavor = document.getElementById('vote-progress-label-favor');
+    const lblAgainst = document.getElementById('vote-progress-label-against');
+    const favorWord = t.inFavor || t.yes || 'Favor';
+    const againstWord = t.against || t.no || 'Against';
+    if (lblFavor) lblFavor.textContent = `${favorWord}: ${favorPct}% (${favorCount})`;
+    if (lblAgainst) lblAgainst.textContent = `${againstWord}: ${againstPct}% (${againstCount})`;
+
+    // Veto Detection (hidden / disabled per user request)
+    const vetoBanner = document.getElementById('veto-alert-banner');
+    if (vetoBanner) {
+      vetoBanner.classList.add('hidden');
+    }
+
+    // Verdict calculation
+    const verdictElem = document.getElementById('vote-verdict');
+    const totalVotesCast = favorCount + againstCount + abstainCount;
+    const btnMotionExecute = document.getElementById('btn-motion-vote-execute');
+    const btnMotionExecuteText = document.getElementById('btn-motion-vote-execute-text');
+
+    if (verdictElem) {
+      if (totalVotesCast === 0) {
+        verdictElem.textContent = t.pending || 'PENDING';
+      } else if (isSessionMode) {
+        // In session mode, calculate verdict dynamically
+        if (state.voteThreshold === 'twothirds') {
+          verdictElem.textContent = (favorCount > 0 && favorCount >= requiredMajority) ? (t.passed || 'PASSED').toUpperCase() : (t.failed || 'FAILED').toUpperCase();
+        } else if (state.voteThreshold === 'unsc9') {
+          verdictElem.textContent = (favorCount >= 9) ? (t.passed || 'PASSED').toUpperCase() : (t.failed || 'FAILED').toUpperCase();
+        } else if (state.voteThreshold === 'consensus') {
+          verdictElem.textContent = (againstCount === 0 && favorCount > 0) ? (t.passed || 'PASSED').toUpperCase() : (t.failed || 'FAILED').toUpperCase();
+        } else {
+          verdictElem.textContent = (favorCount > againstCount) ? (t.passed || 'PASSED').toUpperCase() : (t.failed || 'FAILED').toUpperCase();
+        }
+      } else if (state.voteThreshold === 'consensus') {
+        if (againstCount > 0) {
+          verdictElem.textContent = (t.failed || 'OBJECTION RAISED - FAILED').toUpperCase();
+        } else if (remainingToVote === 0 && favorCount > 0) {
+          verdictElem.textContent = (t.passed || 'ADOPTED BY CONSENSUS').toUpperCase();
+        } else {
+          verdictElem.textContent = (t.inProgress || 'VOTING IN PROGRESS').toUpperCase();
+        }
+      } else if (state.voteThreshold === 'unsc9') {
+        if (favorCount >= 9) {
+          verdictElem.textContent = (t.passed || 'PASSED').toUpperCase();
+        } else if (favorCount + remainingToVote < 9) {
+          verdictElem.textContent = (t.failed || 'FAILED').toUpperCase();
+        } else {
+          verdictElem.textContent = (t.inProgress || 'VOTING IN PROGRESS').toUpperCase();
+        }
+      } else if (state.voteThreshold === 'twothirds') {
+        if (remainingToVote > 0) {
+          verdictElem.textContent = (t.inProgress || 'VOTING IN PROGRESS').toUpperCase();
+        } else {
+          if (favorCount > 0 && favorCount >= requiredMajority) {
+            verdictElem.textContent = (t.passed || 'PASSED').toUpperCase();
+          } else {
+            verdictElem.textContent = (t.failed || 'FAILED').toUpperCase();
+          }
+        }
+      } else {
+        // Simple majority
+        if (remainingToVote > 0) {
+          if (favorCount > againstCount + remainingToVote) {
+            verdictElem.textContent = (t.passed || 'PASSED').toUpperCase();
+          } else if (favorCount + remainingToVote <= againstCount) {
+            verdictElem.textContent = (t.failed || 'FAILED').toUpperCase();
+          } else {
+            verdictElem.textContent = (t.inProgress || 'VOTING IN PROGRESS').toUpperCase();
+          }
+        } else {
+          if (favorCount > againstCount) {
+            verdictElem.textContent = (t.passed || 'PASSED').toUpperCase();
+          } else {
+            verdictElem.textContent = (t.failed || 'FAILED').toUpperCase();
+          }
+        }
+      }
+
+      // If this is a motion vote and it passed, show the "Execute Motion" button
+      const isPassed = verdictElem.textContent.includes((t.passed || 'PASSED').toUpperCase());
+      const btnQuickPass = document.getElementById('btn-quick-pass');
+      if (btnQuickPass) {
+        if (isPassed) {
+          btnQuickPass.classList.remove('hidden');
+        } else {
+          btnQuickPass.classList.add('hidden');
+        }
+      }
+
+      if (btnMotionExecute) {
+        if (isMotionVote && isPassed && (state.votingMotion || state.motions.length > 0)) {
+          btnMotionExecute.classList.remove('hidden');
+          const curMot = state.votingMotion || state.motions[0];
+          if (btnMotionExecuteText) {
+            if (curMot && (curMot.type === 'previous_question' || curMot.type === 'close')) {
+              btnMotionExecuteText.textContent = state.language === 'zh' ? '結束辯論，進入決議案實質表決' : (t.enterSubstantiveVotePrompt || 'Close Debate & Enter Resolution Vote');
+            } else {
+              btnMotionExecuteText.textContent = t.executeMotionBtn || '執行動議';
+            }
+          }
+        } else {
+          btnMotionExecute.classList.add('hidden');
+        }
+      }
+
+      // Check if all countries finished voting on a motion, auto-judge and auto-navigate (rollcall only)
+      if (!isSessionMode) {
+        if (isMotionVote && remainingToVote === 0 && eligibleVoters.length > 0) {
+          checkMotionVotingAutoFinish(eligibleVoters, favorCount, againstCount, remainingToVote, requiredMajority);
+        } else if (!isMotionVote && remainingToVote === 0 && eligibleVoters.length > 0) {
+          checkResolutionVotingAutoFinish(eligibleVoters, favorCount, againstCount, requiredMajority);
+        }
+      }
+    }
+  }
+
   function renderResolutionVoteGrid() {
     const btnR1 = document.getElementById('vote-stage-r1');
     const btnR2 = document.getElementById('vote-stage-r2');
@@ -366,26 +589,30 @@
       if (pRights) pRights.classList.add('hidden');
       if (pSession) pSession.classList.remove('hidden');
 
-      if (isMotionVote) {
-        // Keep header and execute button accessible, but hide rollcall-only scoreboard
-        if (detailsCard) detailsCard.classList.remove('hidden');
-        if (scoreboard) scoreboard.classList.add('hidden');
-        if (hintBanner) {
+      // Keep detailsCard visible in Session mode so users can view statistics
+      if (detailsCard) detailsCard.classList.remove('hidden');
+      if (scoreboard && state.showResults) {
+        scoreboard.style.display = '';
+        scoreboard.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+      }
+      if (hintBanner) {
+        if (isMotionVote) {
           hintBanner.classList.remove('hidden');
           const hintText = document.getElementById('motion-session-hint-text');
           if (hintText) {
             const m = state.votingMotion || (state.motions && state.motions[0]);
             hintText.textContent = m ? `正在進行動議會期快速表決：${formatMotionType(m.type)} (${m.proposer})` : '正在進行動議會期快速表決';
           }
+        } else {
+          hintBanner.classList.add('hidden');
         }
-      } else {
-        if (detailsCard) detailsCard.classList.add('hidden');
-        if (hintBanner) hintBanner.classList.add('hidden');
       }
 
       // Populate titles and motion badges even in session mode
       updateMotionVoteHeaderInfo();
       renderSessionVotesGrid();
+      // Update scoreboard counters, required majority and progress for session mode
+      updateScoreboardAndVerdict();
       return;
     } else {
       if (detailsCard) detailsCard.classList.remove('hidden');
@@ -448,197 +675,7 @@
     // Update motion vote header info and badge labels
     updateMotionVoteHeaderInfo();
 
-    const headerRow = document.getElementById('voting-header-row');
-    const t = I18N[state.language] || I18N.en;
-
-    if (state.showResults) {
-      if (scoreboard) {
-        scoreboard.style.display = '';
-        scoreboard.classList.remove('opacity-0', 'pointer-events-none');
-      }
-      const btnToggle = document.getElementById('btn-toggle-results');
-      if (btnToggle) btnToggle.textContent = t.hideResults || 'Hide Results';
-    } else {
-      if (scoreboard) {
-        scoreboard.style.display = 'none';
-        scoreboard.classList.add('opacity-0', 'pointer-events-none');
-      }
-      const btnToggle = document.getElementById('btn-toggle-results');
-      if (btnToggle) btnToggle.textContent = t.showResults || 'Show Results';
-    }
-
-    // Counts
-    const favorCount = state.selectedCountries.filter(c => c.vote === 'favor').length;
-    const againstCount = state.selectedCountries.filter(c => c.vote === 'against').length;
-    const abstainCount = state.selectedCountries.filter(c => c.vote === 'abstain').length;
-
-    const elFavor = document.getElementById('vote-count-favor');
-    const elAgainst = document.getElementById('vote-count-against');
-    const elAbstain = document.getElementById('vote-count-abstain');
-    const elMajority = document.getElementById('vote-count-majority');
-    if (elFavor) elFavor.textContent = favorCount;
-    if (elAgainst) elAgainst.textContent = againstCount;
-    if (elAbstain) elAbstain.textContent = abstainCount;
-
-    const threshElem = document.getElementById('select-vote-threshold');
-    if (threshElem) {
-      threshElem.value = state.voteThreshold || 'simple';
-    }
-
-    // Badge labels
-    const badgeType = document.getElementById('label-vote-type-badge');
-    if (badgeType) {
-      badgeType.textContent = (state.voteType === 'procedural') ? (t.proceduralVote || 'Procedural Vote') : (t.substantiveVote || 'Substantive Vote');
-    }
-    const badgeThresh = document.getElementById('label-vote-threshold-badge');
-    if (badgeThresh) {
-      const th = state.voteThreshold || 'simple';
-      badgeThresh.textContent = th === 'twothirds' ? (t.twoThirdsMajorityRule || '2/3 Majority') : (th === 'unsc9' ? (t.unsc9RequiredRule || 'UNSC 9 Required') : (th === 'consensus' ? (t.consensusMajorityRule || 'Consensus') : (t.simpleMajorityRule || 'Simple Majority')));
-    }
-
-    const eligibleVoters = state.selectedCountries.filter(c => {
-      if (state.voteType === 'procedural') {
-        return c.attendance === 'present' || c.attendance === 'pv';
-      }
-      return c.powerStatus !== 'observer' && (c.attendance === 'present' || c.attendance === 'pv');
-    });
-
-    const votedCount = eligibleVoters.filter(c => c.vote === 'favor' || c.vote === 'against' || c.vote === 'abstain').length;
-    const remainingToVote = eligibleVoters.length - votedCount;
-
-    // Calculate Required Majority
-    let requiredMajority = 0;
-    const substantiveVoters = favorCount + againstCount;
-    const totalPresent = eligibleVoters.length;
-
-    if (state.voteThreshold === 'unsc9') {
-      requiredMajority = 9;
-    } else if (state.voteThreshold === 'twothirds') {
-      const base = state.voteType === 'procedural' ? totalPresent : (substantiveVoters > 0 ? substantiveVoters : totalPresent);
-      requiredMajority = Math.ceil((base * 2) / 3);
-    } else if (state.voteThreshold === 'consensus') {
-      requiredMajority = totalPresent;
-    } else {
-      // Simple majority
-      const base = state.voteType === 'procedural' ? totalPresent : (substantiveVoters > 0 ? substantiveVoters : totalPresent);
-      requiredMajority = Math.floor(base / 2) + 1;
-    }
-
-    if (elMajority) elMajority.textContent = requiredMajority;
-
-    // Progress Bar calculations
-    const totalForBar = (favorCount + againstCount + abstainCount) || 1;
-    const favorPct = Math.round((favorCount / totalForBar) * 100);
-    const againstPct = Math.round((againstCount / totalForBar) * 100);
-    const abstainPct = Math.round((abstainCount / totalForBar) * 100);
-
-    const barFavor = document.getElementById('bar-vote-favor');
-    const barAgainst = document.getElementById('bar-vote-against');
-    const barAbstain = document.getElementById('bar-vote-abstain');
-    if (barFavor) barFavor.style.width = `${favorPct}%`;
-    if (barAgainst) barAgainst.style.width = `${againstPct}%`;
-    if (barAbstain) barAbstain.style.width = `${abstainPct}%`;
-
-    const lblFavor = document.getElementById('vote-progress-label-favor');
-    const lblAgainst = document.getElementById('vote-progress-label-against');
-    const favorWord = t.inFavor || t.yes || 'Favor';
-    const againstWord = t.against || t.no || 'Against';
-    if (lblFavor) lblFavor.textContent = `${favorWord}: ${favorPct}% (${favorCount})`;
-    if (lblAgainst) lblAgainst.textContent = `${againstWord}: ${againstPct}% (${againstCount})`;
-
-    // Veto Detection (hidden / disabled per user request)
-    const vetoBanner = document.getElementById('veto-alert-banner');
-    if (vetoBanner) {
-      vetoBanner.classList.add('hidden');
-    }
-
-    // Verdict calculation
-    const verdictElem = document.getElementById('vote-verdict');
-    const totalVotesCast = favorCount + againstCount + abstainCount;
-
-    if (verdictElem) {
-      if (totalVotesCast === 0) {
-        verdictElem.textContent = t.pending || 'PENDING';
-      } else if (state.voteThreshold === 'consensus') {
-        if (againstCount > 0) {
-          verdictElem.textContent = (t.failed || 'OBJECTION RAISED - FAILED').toUpperCase();
-        } else if (remainingToVote === 0 && favorCount > 0) {
-          verdictElem.textContent = (t.passed || 'ADOPTED BY CONSENSUS').toUpperCase();
-        } else {
-          verdictElem.textContent = (t.inProgress || 'VOTING IN PROGRESS').toUpperCase();
-        }
-      } else if (state.voteThreshold === 'unsc9') {
-        if (favorCount >= 9) {
-          verdictElem.textContent = (t.passed || 'PASSED').toUpperCase();
-        } else if (favorCount + remainingToVote < 9) {
-          verdictElem.textContent = (t.failed || 'FAILED').toUpperCase();
-        } else {
-          verdictElem.textContent = (t.inProgress || 'VOTING IN PROGRESS').toUpperCase();
-        }
-      } else if (state.voteThreshold === 'twothirds') {
-        if (remainingToVote > 0) {
-          verdictElem.textContent = (t.inProgress || 'VOTING IN PROGRESS').toUpperCase();
-        } else {
-          if (favorCount > 0 && favorCount >= requiredMajority) {
-            verdictElem.textContent = (t.passed || 'PASSED').toUpperCase();
-          } else {
-            verdictElem.textContent = (t.failed || 'FAILED').toUpperCase();
-          }
-        }
-      } else {
-        // Simple majority
-        if (remainingToVote > 0) {
-          if (favorCount > againstCount + remainingToVote) {
-            verdictElem.textContent = (t.passed || 'PASSED').toUpperCase();
-          } else if (favorCount + remainingToVote <= againstCount) {
-            verdictElem.textContent = (t.failed || 'FAILED').toUpperCase();
-          } else {
-            verdictElem.textContent = (t.inProgress || 'VOTING IN PROGRESS').toUpperCase();
-          }
-        } else {
-          if (favorCount > againstCount) {
-            verdictElem.textContent = (t.passed || 'PASSED').toUpperCase();
-          } else {
-            verdictElem.textContent = (t.failed || 'FAILED').toUpperCase();
-          }
-        }
-      }
-
-      // If this is a motion vote and it passed, show the "Execute Motion" button
-      const isPassed = verdictElem.textContent.includes((t.passed || 'PASSED').toUpperCase());
-      const btnQuickPass = document.getElementById('btn-quick-pass');
-      if (btnQuickPass) {
-        if (isPassed) {
-          btnQuickPass.classList.remove('hidden');
-        } else {
-          btnQuickPass.classList.add('hidden');
-        }
-      }
-
-      if (btnMotionExecute) {
-        if (isMotionVote && isPassed && (state.votingMotion || state.motions.length > 0)) {
-          btnMotionExecute.classList.remove('hidden');
-          const curMot = state.votingMotion || state.motions[0];
-          if (btnMotionExecuteText) {
-            if (curMot && (curMot.type === 'previous_question' || curMot.type === 'close')) {
-              btnMotionExecuteText.textContent = state.language === 'zh' ? '結束辯論，進入決議案實質表決' : (t.enterSubstantiveVotePrompt || 'Close Debate & Enter Resolution Vote');
-            } else {
-              btnMotionExecuteText.textContent = t.executeMotionBtn || '執行動議';
-            }
-          }
-        } else {
-          btnMotionExecute.classList.add('hidden');
-        }
-      }
-
-      // Check if all countries finished voting on a motion, auto-judge and auto-navigate
-      if (isMotionVote && remainingToVote === 0 && eligibleVoters.length > 0) {
-        checkMotionVotingAutoFinish(eligibleVoters, favorCount, againstCount, remainingToVote, requiredMajority);
-      } else if (!isMotionVote && remainingToVote === 0 && eligibleVoters.length > 0) {
-        // Auto-conclude substantive resolution vote when last country votes
-        checkResolutionVotingAutoFinish(eligibleVoters, favorCount, againstCount, requiredMajority);
-      }
-    }
+    updateScoreboardAndVerdict();
 
     // Rights Speeches list rendering
     const rightsContainer = document.getElementById('list-rights-speeches');
@@ -1049,6 +1086,7 @@
           sess.favor = (sess.favor || 0) + 1;
           saveToLocalStorage(true, true);
           renderSessionVotesGrid();
+          updateScoreboardAndVerdict();
         });
       }
       if (btnDecFavor) {
@@ -1058,6 +1096,7 @@
             sess.favor--;
             saveToLocalStorage(true, true);
             renderSessionVotesGrid();
+            updateScoreboardAndVerdict();
           }
         });
       }
@@ -1066,6 +1105,7 @@
           sess.favor = Math.max(0, parseInt(e.target.value) || 0);
           saveToLocalStorage(true, true);
           renderSessionVotesGrid();
+          updateScoreboardAndVerdict();
         });
       }
 
@@ -1079,6 +1119,7 @@
           sess.against = (sess.against || 0) + 1;
           saveToLocalStorage(true, true);
           renderSessionVotesGrid();
+          updateScoreboardAndVerdict();
         });
       }
       if (btnDecAgainst) {
@@ -1088,6 +1129,7 @@
             sess.against--;
             saveToLocalStorage(true, true);
             renderSessionVotesGrid();
+            updateScoreboardAndVerdict();
           }
         });
       }
@@ -1096,6 +1138,7 @@
           sess.against = Math.max(0, parseInt(e.target.value) || 0);
           saveToLocalStorage(true, true);
           renderSessionVotesGrid();
+          updateScoreboardAndVerdict();
         });
       }
 
@@ -1109,6 +1152,7 @@
           sess.abstain = (sess.abstain || 0) + 1;
           saveToLocalStorage(true, true);
           renderSessionVotesGrid();
+          updateScoreboardAndVerdict();
         });
       }
       if (btnDecAbstain) {
@@ -1118,6 +1162,7 @@
             sess.abstain--;
             saveToLocalStorage(true, true);
             renderSessionVotesGrid();
+            updateScoreboardAndVerdict();
           }
         });
       }
@@ -1126,6 +1171,7 @@
           sess.abstain = Math.max(0, parseInt(e.target.value) || 0);
           saveToLocalStorage(true, true);
           renderSessionVotesGrid();
+          updateScoreboardAndVerdict();
         });
       }
 
@@ -1139,6 +1185,7 @@
           sess.abstain = 0;
           saveToLocalStorage(true, true);
           renderSessionVotesGrid();
+          updateScoreboardAndVerdict();
         });
       }
 
@@ -1156,6 +1203,7 @@
           state.activeSessionId = sess.id;
           saveToLocalStorage(true, true);
           renderSessionVotesGrid();
+          updateScoreboardAndVerdict();
         }
       });
 
