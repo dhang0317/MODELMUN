@@ -146,8 +146,8 @@ body:not(.light-mode) {
 
 /* 全頁面文字顏色規範：深色模式純白、淺色模式純黑 */
 body:not(.light-mode) {
-  user-select: none;
-  -webkit-user-select: none;
+  user-select: text;
+  -webkit-user-select: text;
   background-color: #121212 !important;
   color: #e3e3e3 !important;
 }
@@ -158,8 +158,8 @@ body:not(.light-mode) {
       stroke: currentColor;
     }
     body.light-mode {
-      user-select: none;
-      -webkit-user-select: none;
+      user-select: text;
+      -webkit-user-select: text;
       background-color: #f8fafc !important;
       color: #000000 !important;
     }
@@ -221,8 +221,8 @@ body:not(.light-mode) {
        DARK MODE — Pure Black (#000000) & Crisp White (#ffffff)
        ===================================================== */
     body:not(.light-mode) {
-      user-select: none;
-      -webkit-user-select: none;
+      user-select: text;
+      -webkit-user-select: text;
       background-color: #121212 !important;
       color: #e3e3e3 !important;
     }
@@ -348,11 +348,20 @@ body:not(.light-mode) {
     body:not(.light-mode) #card-voting-details,
     body:not(.light-mode) #panel-active-voter-card,
     body:not(.light-mode) #hero-motion-card,
-    body:not(.light-mode) #view-motions > div > div {
+    body:not(.light-mode) #view-motions > div > div,
+    body:not(.light-mode) #panel-speaking-gsl > div > div,
+    body:not(.light-mode) #panel-speaking-mod > div > div,
+    body:not(.light-mode) #panel-speaking-intro > div > div,
+    body:not(.light-mode) #panel-speaking-procon > div > div,
+    body:not(.light-mode) #view-unmod > div > div,
+    body:not(.light-mode) #view-setup .max-w-6xl > div > div,
+    body:not(.light-mode) #view-rollcall .max-w-6xl > div,
+    body:not(.light-mode) #view-voting .max-w-7xl > div {
       background-color: #1e1e1e !important;
       color: #e3e3e3 !important;
-      border-color: #2d2d2d !important;
+      border: 1px solid #2d2d2d !important;
       border-radius: 1.25rem !important;
+      box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.45), 0 2px 4px -2px rgba(0, 0, 0, 0.3) !important;
     }
     body:not(.light-mode) .bg-white *,
     body:not(.light-mode) .bg-slate-50 *,
@@ -596,7 +605,35 @@ body:not(.light-mode) {
 
 
 
-    /* Dark Mode Buttons border rules */
+    /* Ensure text selectable across all views while buttons and controls stay non-selectable */
+    main,
+    .view-panel,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    span,
+    td,
+    th,
+    li,
+    label,
+    div {
+      user-select: text;
+      -webkit-user-select: text;
+    }
+    button,
+    button *,
+    .btn,
+    .tab-btn,
+    nav,
+    #main-header,
+    .badge {
+      user-select: none;
+      -webkit-user-select: none;
+    }
     button i, button span, button svg {
       color: inherit;
     }
