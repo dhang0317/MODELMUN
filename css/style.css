@@ -251,25 +251,26 @@ body:not(.light-mode) {
       flex-shrink: 0 !important;
       min-height: 48px !important;
     }
+    /* Dark Mode Top Header: Cream White (#F7F4EE) Bar with Dark Chocolate Text (#3E2723) */
     body:not(.light-mode) #main-header {
-      background-color: #121212 !important;
-      border-color: #282828 !important;
+      background-color: #F7F4EE !important;
+      border-color: #D7CCC8 !important;
     }
     body:not(.light-mode) #main-header,
     body:not(.light-mode) #main-header * {
-      color: #e3e3e3 !important;
+      color: #3E2723 !important;
     }
     body:not(.light-mode) #main-header input {
       background-color: transparent !important;
       border-color: transparent !important;
-      color: #e3e3e3 !important;
+      color: #3E2723 !important;
     }
     body:not(.light-mode) #main-header input:hover {
-      border-color: #444444 !important;
+      border-color: #8D6E63 !important;
     }
     body:not(.light-mode) #main-header input:focus {
-      border-color: #e3e3e3 !important;
-      color: #ffffff !important;
+      border-color: #3E2723 !important;
+      color: #3E2723 !important;
     }
     body:not(.light-mode) #header-attendance-stats {
       background-color: transparent !important;
@@ -277,43 +278,51 @@ body:not(.light-mode) {
       box-shadow: none !important;
     }
     body:not(.light-mode) #header-attendance-stats * {
-      color: #e3e3e3 !important;
+      color: #3E2723 !important;
     }
     body:not(.light-mode) .header-stat-divider {
-      background-color: rgba(255, 255, 255, 0.15) !important;
+      background-color: rgba(62, 39, 35, 0.2) !important;
     }
     body:not(.light-mode) #btn-toggle-theme,
     body:not(.light-mode) #btn-google-login,
     body:not(.light-mode) #btn-open-qrcode {
-      border: 1px solid #333333 !important;
-      background-color: #1e1e1e !important;
-      color: #e3e3e3 !important;
+      border: 1px solid #D7CCC8 !important;
+      background-color: #EFEBE9 !important;
+      color: #3E2723 !important;
     }
     body:not(.light-mode) #btn-open-settings {
       border: none !important;
       background-color: transparent !important;
       background: transparent !important;
-      color: #e3e3e3 !important;
+      color: #3E2723 !important;
       box-shadow: none !important;
     }
     body:not(.light-mode) #btn-open-settings:hover {
-      background-color: rgba(255, 255, 255, 0.08) !important;
-      background: rgba(255, 255, 255, 0.08) !important;
+      background-color: rgba(62, 39, 35, 0.08) !important;
+      background: rgba(62, 39, 35, 0.08) !important;
       border: none !important;
+      color: #3E2723 !important;
     }
     body:not(.light-mode) #btn-open-qrcode:hover {
-      background-color: #282828 !important;
-      border-color: #444444 !important;
+      background-color: #D7CCC8 !important;
+      border-color: #8D6E63 !important;
+      color: #3E2723 !important;
     }
     body:not(.light-mode) #btn-open-qrcode * {
-      color: #e3e3e3 !important;
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) #btn-toggle-theme:hover,
+    body:not(.light-mode) #btn-google-login:hover {
+      background-color: #D7CCC8 !important;
+      border-color: #8D6E63 !important;
+      color: #3E2723 !important;
     }
     body:not(.light-mode) #user-dropdown-popover {
-      background-color: #1e1e1e !important;
-      border-color: #333333 !important;
+      background-color: #F7F4EE !important;
+      border-color: #D7CCC8 !important;
     }
     body:not(.light-mode) #user-dropdown-popover * {
-      color: #e3e3e3 !important;
+      color: #3E2723 !important;
     }
 
     /* Dark Mode Tabs: Cream White (#F7F4EE) Bar */
@@ -331,14 +340,14 @@ body:not(.light-mode) {
     }
     body:not(.light-mode) .tab-btn:hover,
     body:not(.light-mode) .tab-btn:hover span {
-      color: #2D1B18 !important;
+      color: #3E2723 !important;
       background-color: rgba(62, 39, 35, 0.08) !important;
     }
     body:not(.light-mode) .tab-active,
     body:not(.light-mode) .tab-active span {
-      color: #2D1B18 !important;
+      color: #3E2723 !important;
       font-weight: bold !important;
-      border-bottom: 3px solid #2D1B18 !important;
+      border-bottom: 3px solid #3E2723 !important;
       background-color: transparent !important;
     }
 
@@ -493,8 +502,8 @@ body:not(.light-mode) {
       box-shadow: none !important;
     }
     body:not(.light-mode) #main-header button {
-      color: #e3e3e3 !important;
-      border-color: #282828 !important;
+      color: #3E2723 !important;
+      border-color: #D7CCC8 !important;
     }
     body:not(.light-mode) nav#tabs-nav button {
       color: #6D4C41 !important;
@@ -510,8 +519,8 @@ body:not(.light-mode) {
       color: #ffffff !important;
     }
     body:not(.light-mode) #main-header button:hover {
-      background-color: rgba(255, 255, 255, 0.12) !important;
-      color: #ffffff !important;
+      background-color: rgba(62, 39, 35, 0.08) !important;
+      color: #2D1B18 !important;
     }
     body:not(.light-mode) nav#tabs-nav button:hover {
       background-color: rgba(62, 39, 35, 0.08) !important;
