@@ -468,8 +468,12 @@ body:not(.light-mode) {
     body:not(.light-mode) main label,
     body:not(.light-mode) main td,
     body:not(.light-mode) main th,
-    body:not(.light-mode) main li {
-      color: #3E2723;
+    body:not(.light-mode) main li,
+    body:not(.light-mode) main input,
+    body:not(.light-mode) main select,
+    body:not(.light-mode) main textarea,
+    body:not(.light-mode) #vote-resolution-title-input {
+      color: #3E2723 !important;
     }
     body:not(.light-mode) main .text-slate-800,
     body:not(.light-mode) main .text-slate-700,
@@ -556,34 +560,22 @@ body:not(.light-mode) {
     }
 
     /* Subtab Buttons in Speaking & Voting (/tabs/gsl, /tabs/vote) */
-    body:not(.light-mode) .speaking-subtab-btn {
+    body:not(.light-mode) .speaking-subtab-btn,
+    body:not(.light-mode) #btn-voting-subtab-rollcall,
+    body:not(.light-mode) #btn-voting-subtab-session {
       color: #6D4C41 !important;
       border: 1px solid #D7CCC8 !important;
       background-color: transparent !important;
     }
-    body:not(.light-mode) .speaking-subtab-btn:hover {
+    body:not(.light-mode) .speaking-subtab-btn:hover,
+    body:not(.light-mode) #btn-voting-subtab-rollcall:hover,
+    body:not(.light-mode) #btn-voting-subtab-session:hover {
       background-color: #EFEBE9 !important;
       color: #3E2723 !important;
     }
     body:not(.light-mode) .speaking-subtab-btn.active,
     body:not(.light-mode) .speaking-subtab-btn.subtab-active,
-    body:not(.light-mode) .speaking-subtab-btn.bg-white {
-      background-color: #3E2723 !important;
-      color: #F7F4EE !important;
-      border-color: #3E2723 !important;
-      font-weight: bold !important;
-    }
-    body:not(.light-mode) .speaking-subtab-btn.active *,
-    body:not(.light-mode) .speaking-subtab-btn.subtab-active *,
-    body:not(.light-mode) .speaking-subtab-btn.bg-white * {
-      color: #F7F4EE !important;
-    }
-    body:not(.light-mode) #btn-voting-subtab-rollcall,
-    body:not(.light-mode) #btn-voting-subtab-session {
-      color: #6D4C41 !important;
-      background-color: transparent !important;
-      border: 1px solid transparent !important;
-    }
+    body:not(.light-mode) .speaking-subtab-btn.bg-white,
     body:not(.light-mode) #btn-voting-subtab-rollcall.active,
     body:not(.light-mode) #btn-voting-subtab-rollcall.bg-white,
     body:not(.light-mode) #btn-voting-subtab-session.active,
@@ -593,11 +585,24 @@ body:not(.light-mode) {
       border-color: #3E2723 !important;
       font-weight: bold !important;
     }
+    body:not(.light-mode) .speaking-subtab-btn.active *,
+    body:not(.light-mode) .speaking-subtab-btn.subtab-active *,
+    body:not(.light-mode) .speaking-subtab-btn.bg-white *,
     body:not(.light-mode) #btn-voting-subtab-rollcall.active *,
     body:not(.light-mode) #btn-voting-subtab-rollcall.bg-white *,
     body:not(.light-mode) #btn-voting-subtab-session.active *,
     body:not(.light-mode) #btn-voting-subtab-session.bg-white * {
       color: #F7F4EE !important;
+    }
+    body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active),
+    body:not(.light-mode) #btn-voting-subtab-session:not(.active) {
+      color: #6D4C41 !important;
+      background-color: transparent !important;
+      border-color: transparent !important;
+    }
+    body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active) *,
+    body:not(.light-mode) #btn-voting-subtab-session:not(.active) * {
+      color: #6D4C41 !important;
     }
 
     /* Timer Bars / Progress Tracks */
