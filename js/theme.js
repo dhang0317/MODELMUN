@@ -17,6 +17,8 @@
       document.body.classList.remove('has-custom-accent');
       document.documentElement.style.removeProperty('--theme-accent');
       document.documentElement.style.removeProperty('--theme-text');
+      document.documentElement.style.removeProperty('--theme-selection-bg');
+      document.documentElement.style.removeProperty('--theme-selection-color');
       localStorage.removeItem('mun-custom-accent');
       const preview = document.getElementById('theme-color-preview');
       if (preview) {
@@ -42,7 +44,31 @@
     // Choose whichever gives higher contrast ratio
     const textColor = contrastWithBlack >= contrastWithWhite ? '#000000' : '#ffffff';
 
+    const THEME_DARKEST_COLORS = {
+      '#3e2723': '#3E2723',
+      '#b5c99a': '#3E2723',
+      '#f3efea': '#3E2723',
+      '#d8a47f': '#3E2723',
+      '#f5ebe6': '#3E2723',
+      '#7d9d9c': '#3E2723',
+      '#e4e8e8': '#3E2723',
+      '#f7f4ee': '#3E2723',
+      '#e7b596': '#9CAAA2',
+      '#9caaa2': '#9CAAA2',
+      '#913d48': '#913D48',
+      '#c48b68': '#913D48',
+      '#9e5362': '#9E5362',
+      '#8898a6': '#9E5362',
+      '#eae6e3': '#9E5362',
+      '#873e49': '#873E49',
+      '#e8c8be': '#873E49',
+      '#d6b575': '#873E49'
+    };
+
+    const targetDarkest = THEME_DARKEST_COLORS[hex.toLowerCase()] || (bgLum > 0.25 ? '#3E2723' : hex);
     document.documentElement.style.setProperty('--theme-accent', hex);
+    document.documentElement.style.setProperty('--theme-selection-bg', targetDarkest);
+    document.documentElement.style.setProperty('--theme-selection-color', '#F7F4EE');
     document.documentElement.style.setProperty('--theme-text', textColor);
     document.body.classList.add('has-custom-accent');
     localStorage.setItem('mun-custom-accent', hex);

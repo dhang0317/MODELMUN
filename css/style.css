@@ -1,3 +1,18 @@
+:root {
+  --theme-selection-bg: #3E2723;
+  --theme-selection-color: #F7F4EE;
+}
+
+/* 全域反白選取文字顏色（不使用瀏覽器預設藍色，使用深巧克力/主題深色） */
+::selection {
+  background-color: var(--theme-selection-bg, #3E2723) !important;
+  color: var(--theme-selection-color, #F7F4EE) !important;
+}
+::-moz-selection {
+  background-color: var(--theme-selection-bg, #3E2723) !important;
+  color: var(--theme-selection-color, #F7F4EE) !important;
+}
+
 @font-face {
   font-family: 'Iansui';
   src: url('../Iansui-Regular.ttf') format('truetype'),
