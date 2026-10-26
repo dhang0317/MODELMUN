@@ -736,6 +736,22 @@ body:not(.light-mode) {
     body:not(.light-mode) #modal-unified-settings .border-zinc-800\/80 {
       border-color: #D7CCC8 !important;
     }
+    /* All Dialogs & Modals Inputs and Selects (淺色底深色字) */
+    .custom-dialog-box input,
+    .custom-dialog-box select,
+    #modal-unified-settings input:not([type="range"]),
+    #modal-unified-settings select,
+    #modal-add-motion input,
+    #modal-add-motion select,
+    #modal-add-speaker input,
+    #modal-add-speaker select,
+    #modal-define-time input,
+    #modal-mod-config input,
+    #modal-mod-config select,
+    #modal-configure-voting input,
+    #modal-configure-voting select,
+    body:not(.light-mode) .custom-dialog-box input,
+    body:not(.light-mode) .custom-dialog-box select,
     body:not(.light-mode) #modal-unified-settings input:not([type="range"]),
     body:not(.light-mode) #modal-unified-settings select,
     body:not(.light-mode) #modal-add-motion input,
@@ -747,10 +763,23 @@ body:not(.light-mode) {
     body:not(.light-mode) #modal-mod-config select,
     body:not(.light-mode) #modal-configure-voting input,
     body:not(.light-mode) #modal-configure-voting select {
-      background-color: #ffffff !important;
-      background: #ffffff !important;
+      background-color: #FFFFFF !important;
+      background: #FFFFFF !important;
       border: 1px solid #D7CCC8 !important;
       color: #3E2723 !important;
+      border-radius: 0.75rem !important;
+    }
+    .custom-dialog-box input::placeholder,
+    #modal-unified-settings input::placeholder,
+    #modal-add-motion input::placeholder,
+    #modal-add-speaker input::placeholder,
+    #modal-mod-config input::placeholder,
+    body:not(.light-mode) .custom-dialog-box input::placeholder,
+    body:not(.light-mode) #modal-unified-settings input::placeholder,
+    body:not(.light-mode) #modal-add-motion input::placeholder,
+    body:not(.light-mode) #modal-add-speaker input::placeholder,
+    body:not(.light-mode) #modal-mod-config input::placeholder {
+      color: #A1887F !important;
     }
     body:not(.light-mode) #modal-add-motion label,
     body:not(.light-mode) #modal-add-speaker label,
@@ -759,30 +788,39 @@ body:not(.light-mode) {
     body:not(.light-mode) #modal-configure-voting label {
       color: #6D4C41 !important;
     }
-    body:not(.light-mode) #btn-submit-motion {
+    body:not(.light-mode) #btn-submit-motion,
+    body:not(.light-mode) #btn-done-add-speaker,
+    body:not(.light-mode) #btn-save-speaking-time {
       background-color: #3E2723 !important;
       color: #F7F4EE !important;
       border: 1px solid #3E2723 !important;
     }
-    body:not(.light-mode) #btn-submit-motion:hover {
+    body:not(.light-mode) #btn-submit-motion:hover,
+    body:not(.light-mode) #btn-done-add-speaker:hover,
+    body:not(.light-mode) #btn-save-speaking-time:hover {
       background-color: #4E342E !important;
       color: #FFFFFF !important;
     }
-    body:not(.light-mode) #btn-submit-motion * {
+    body:not(.light-mode) #btn-submit-motion *,
+    body:not(.light-mode) #btn-done-add-speaker *,
+    body:not(.light-mode) #btn-save-speaking-time * {
       color: #F7F4EE !important;
     }
     body:not(.light-mode) #modal-add-motion .btn-close-modal,
-    body:not(.light-mode) #modal-configure-voting .btn-close-modal {
+    body:not(.light-mode) #modal-configure-voting .btn-close-modal,
+    body:not(.light-mode) #modal-add-speaker .btn-close-modal,
+    body:not(.light-mode) #modal-define-time .btn-close-modal,
+    body:not(.light-mode) #modal-mod-config .btn-close-modal {
       background-color: #EFEBE9 !important;
       border: 1px solid #D7CCC8 !important;
       color: #3E2723 !important;
     }
     body:not(.light-mode) #modal-add-motion .btn-close-modal:hover,
-    body:not(.light-mode) #modal-configure-voting .btn-close-modal:hover {
+    body:not(.light-mode) #modal-configure-voting .btn-close-modal:hover,
+    body:not(.light-mode) #modal-add-speaker .btn-close-modal:hover,
+    body:not(.light-mode) #modal-define-time .btn-close-modal:hover,
+    body:not(.light-mode) #modal-mod-config .btn-close-modal:hover {
       background-color: #D7CCC8 !important;
-    }
-    body:not(.light-mode) #modal-add-motion input::placeholder {
-      color: #A1887F !important;
     }
     body:not(.light-mode) #modal-unified-settings .text-zinc-400,
     body:not(.light-mode) #modal-unified-settings .text-zinc-500,
@@ -842,7 +880,7 @@ body:not(.light-mode) {
       color: #FFFFFF !important;
     }
 
-    /* Soft Green Tone for Next / Adopt / Enter ProCon / Action Buttons */
+    /* Next / Adopt / Action Buttons (取消綠色，統一套用淺摩卡立體質感) */
     body:not(.light-mode) #btn-gsl-next,
     body:not(.light-mode) #btn-mod-next,
     body:not(.light-mode) #btn-procon-next,
@@ -851,9 +889,9 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-quick-pass,
     body:not(.light-mode) #btn-motion-vote-execute,
     body:not(.light-mode) #btn-procon-add-pro {
-      background-color: rgba(16, 185, 129, 0.22) !important;
-      border: 1px solid rgba(16, 185, 129, 0.5) !important;
-      color: #065F46 !important;
+      background-color: #EFEBE9 !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
       box-shadow: none !important;
     }
     body:not(.light-mode) #btn-gsl-next *,
@@ -864,7 +902,7 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-quick-pass *,
     body:not(.light-mode) #btn-motion-vote-execute *,
     body:not(.light-mode) #btn-procon-add-pro * {
-      color: #065F46 !important;
+      color: #3E2723 !important;
     }
     body:not(.light-mode) #btn-gsl-next:hover,
     body:not(.light-mode) #btn-mod-next:hover,
@@ -874,8 +912,18 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-quick-pass:hover,
     body:not(.light-mode) #btn-motion-vote-execute:hover,
     body:not(.light-mode) #btn-procon-add-pro:hover {
-      background-color: rgba(16, 185, 129, 0.35) !important;
-      color: #064E3B !important;
+      background-color: #D7CCC8 !important;
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) #btn-gsl-next:hover *,
+    body:not(.light-mode) #btn-mod-next:hover *,
+    body:not(.light-mode) #btn-procon-next:hover *,
+    body:not(.light-mode) #btn-intro-to-procon:hover *,
+    body:not(.light-mode) #btn-adopt-vote:hover *,
+    body:not(.light-mode) #btn-quick-pass:hover *,
+    body:not(.light-mode) #btn-motion-vote-execute:hover *,
+    body:not(.light-mode) #btn-procon-add-pro:hover * {
+      color: #3E2723 !important;
     }
 
     /* Inputs and Selects inside Main */
