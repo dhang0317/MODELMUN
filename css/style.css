@@ -13,6 +13,17 @@
     *:not(.fa):not(.fas):not(.far):not(.fal):not(.fad):not(.fab):not([class*="fa-"])::after {
       font-weight: 400 !important;
     }
+    /* 全域隱藏數字輸入框的上下增減箭頭 (Spin Buttons) */
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none !important; 
+      margin: 0 !important; 
+    }
+    input[type=number] {
+      -moz-appearance: textfield !important;
+      appearance: textfield !important;
+    }
+
     body, button, input, select, textarea, span, p, h1, h2, h3, h4, h5, h6, div, a, label {
       font-family: 'Iansui', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang TC", "Microsoft JhengHei", sans-serif;
       font-weight: 400;
