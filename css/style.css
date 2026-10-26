@@ -563,9 +563,14 @@ body:not(.light-mode) {
     body:not(.light-mode) .speaking-subtab-btn,
     body:not(.light-mode) #btn-voting-subtab-rollcall,
     body:not(.light-mode) #btn-voting-subtab-session {
-      color: #6D4C41 !important;
+      color: #3E2723 !important;
       border: 1px solid #D7CCC8 !important;
       background-color: transparent !important;
+    }
+    body:not(.light-mode) .speaking-subtab-btn *,
+    body:not(.light-mode) #btn-voting-subtab-rollcall *,
+    body:not(.light-mode) #btn-voting-subtab-session * {
+      color: #3E2723 !important;
     }
     body:not(.light-mode) .speaking-subtab-btn:hover,
     body:not(.light-mode) #btn-voting-subtab-rollcall:hover,
@@ -596,13 +601,13 @@ body:not(.light-mode) {
     }
     body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active),
     body:not(.light-mode) #btn-voting-subtab-session:not(.active) {
-      color: #6D4C41 !important;
+      color: #3E2723 !important;
       background-color: transparent !important;
       border-color: transparent !important;
     }
     body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active) *,
     body:not(.light-mode) #btn-voting-subtab-session:not(.active) * {
-      color: #6D4C41 !important;
+      color: #3E2723 !important;
     }
 
     /* Timer Bars / Progress Tracks */
