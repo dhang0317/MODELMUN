@@ -280,8 +280,9 @@ body:not(.light-mode) {
     body:not(.light-mode) #header-attendance-stats * {
       color: #F7F4EE !important;
     }
-    body:not(.light-mode) .header-stat-divider {
-      background-color: rgba(247, 244, 238, 0.2) !important;
+    body:not(.light-mode) .header-stat-divider,
+    .header-stat-divider {
+      display: none !important;
     }
     body:not(.light-mode) #btn-toggle-theme,
     body:not(.light-mode) #btn-google-login,
