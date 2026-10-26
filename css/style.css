@@ -637,6 +637,75 @@ body:not(.light-mode) {
     button i, button span, button svg {
       color: inherit;
     }
+    /* Roll Call Delegate Items & Action Buttons in Dark Mode */
+    body:not(.light-mode) #grid-rollcall-delegates > div {
+      background-color: #252525 !important;
+      border: 1px solid #333333 !important;
+      color: #e3e3e3 !important;
+      box-shadow: none !important;
+    }
+    body:not(.light-mode) #grid-rollcall-delegates .country-name-text {
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) #btn-set-all-uncalled {
+      background-color: #252525 !important;
+      border: 1px solid #383838 !important;
+      color: #c4c4c4 !important;
+    }
+    body:not(.light-mode) #btn-set-all-uncalled:hover {
+      background-color: #2e2e2e !important;
+      color: #ffffff !important;
+      border-color: #555555 !important;
+    }
+    body:not(.light-mode) #btn-set-all-present {
+      background-color: rgba(16, 185, 129, 0.15) !important;
+      border: 1px solid rgba(16, 185, 129, 0.4) !important;
+      color: #34d399 !important;
+    }
+    body:not(.light-mode) #btn-set-all-present:hover {
+      background-color: rgba(16, 185, 129, 0.25) !important;
+      color: #6ee7b7 !important;
+    }
+    body:not(.light-mode) #btn-set-all-absent {
+      background-color: rgba(239, 68, 68, 0.15) !important;
+      border: 1px solid rgba(239, 68, 68, 0.4) !important;
+      color: #f87171 !important;
+    }
+    body:not(.light-mode) #btn-set-all-absent:hover {
+      background-color: rgba(239, 68, 68, 0.25) !important;
+      color: #fca5a5 !important;
+    }
+    /* Disable white glow on rollcall buttons */
+    body:not(.light-mode) .btn-rollcall-present,
+    body:not(.light-mode) .btn-rollcall-absent,
+    body:not(.light-mode) .btn-rollcall-expanded,
+    body:not(.light-mode) #btn-set-all-uncalled,
+    body:not(.light-mode) #btn-set-all-present,
+    body:not(.light-mode) #btn-set-all-absent {
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+    body:not(.light-mode) .btn-rollcall-present:hover,
+    body:not(.light-mode) .btn-rollcall-absent:hover,
+    body:not(.light-mode) .btn-rollcall-expanded:hover {
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+    body:not(.light-mode) .btn-rollcall-present:active,
+    body:not(.light-mode) .btn-rollcall-present.btn-pressed-flash,
+    body:not(.light-mode) .btn-rollcall-absent:active,
+    body:not(.light-mode) .btn-rollcall-absent.btn-pressed-flash,
+    body:not(.light-mode) .btn-rollcall-expanded:active,
+    body:not(.light-mode) .btn-rollcall-expanded.btn-pressed-flash,
+    body:not(.light-mode) #btn-set-all-uncalled:active,
+    body:not(.light-mode) #btn-set-all-uncalled.btn-pressed-flash,
+    body:not(.light-mode) #btn-set-all-present:active,
+    body:not(.light-mode) #btn-set-all-present.btn-pressed-flash,
+    body:not(.light-mode) #btn-set-all-absent:active,
+    body:not(.light-mode) #btn-set-all-absent.btn-pressed-flash {
+      box-shadow: none !important;
+      filter: brightness(1.15) !important;
+    }
     body:not(.light-mode) button:not(.speaking-subtab-btn):not(.tab-btn):not(#btn-open-drawer):not(#btn-open-settings):not(#btn-close-drawer):not(.btn-close-modal):not(.modal-close-icon):not(#btn-user-avatar):not(#btn-logo-home):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item):not(.btn-extend-unmod):not(:has(i[data-lucide="plus"])):not(:has(i[data-lucide="x"])):not(:has(i[class*="fa-plus"])):not(:has(i[class*="fa-xmark"])) {
       border: 1px solid #333333 !important;
     }
