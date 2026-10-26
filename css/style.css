@@ -520,6 +520,61 @@ body:not(.light-mode) {
       color: #3E2723 !important;
     }
 
+    /* Speaking Sub-tabs Nav Outer Container: Seamless single border */
+    #view-gsl > div > div.bg-white:first-child,
+    body:not(.light-mode) #view-gsl > div > div.bg-white:first-child {
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+    }
+    #view-gsl > div > div.bg-white:first-child > div,
+    body:not(.light-mode) #view-gsl > div > div.bg-white:first-child > div {
+      background-color: #EFEBE9 !important;
+      border: 1px solid #D7CCC8 !important;
+      border-radius: 1rem !important;
+      box-shadow: 0 2px 8px -2px rgba(62, 39, 35, 0.08) !important;
+      padding: 0.25rem !important;
+    }
+
+    /* Speaking Views: Clean Flat Speaker Queue (移除候選名單內的巢狀子方塊) */
+    #list-gsl-queue,
+    #list-mod-queue,
+    #list-pro-queue,
+    #list-con-queue,
+    body:not(.light-mode) #list-gsl-queue,
+    body:not(.light-mode) #list-mod-queue,
+    body:not(.light-mode) #list-pro-queue,
+    body:not(.light-mode) #list-con-queue {
+      background-color: transparent !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    #list-gsl-queue > div,
+    #list-mod-queue > div,
+    #list-pro-queue > div,
+    #list-con-queue > div,
+    body:not(.light-mode) #list-gsl-queue > div,
+    body:not(.light-mode) #list-mod-queue > div,
+    body:not(.light-mode) #list-pro-queue > div,
+    body:not(.light-mode) #list-con-queue > div {
+      box-shadow: none !important;
+      border-radius: 0.75rem !important;
+      background-color: transparent !important;
+      border-color: #EFEBE9 !important;
+    }
+    #list-gsl-queue > div:hover,
+    #list-mod-queue > div:hover,
+    #list-pro-queue > div:hover,
+    #list-con-queue > div:hover,
+    body:not(.light-mode) #list-gsl-queue > div:hover,
+    body:not(.light-mode) #list-mod-queue > div:hover,
+    body:not(.light-mode) #list-pro-queue > div:hover,
+    body:not(.light-mode) #list-con-queue > div:hover {
+      background-color: #EFEBE9 !important;
+    }
+
     /* Speaking Intro Single Card: Remove nested layers/borders & fit single viewport without scroll */
     #panel-speaking-intro .max-w-4xl,
     body:not(.light-mode) #panel-speaking-intro .max-w-4xl {
