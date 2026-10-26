@@ -478,7 +478,63 @@
     } else {
       state.selectedCountries = [];
     }
+
+    // 重置全域設定物件為預設值
+    if (typeof defaultSettings !== 'undefined') {
+      state.settings = JSON.parse(JSON.stringify(defaultSettings));
+    }
   }
+
+  // 還原所有設定至初始狀態（登出或手動重置時調用）
+  function resetAllSettingsToDefaults() {
+    // 1. 清除所有與自訂設定相關的本地儲存
+    localStorage.removeItem('mun-custom-accent');
+    localStorage.removeItem('mun-custom-logo');
+    localStorage.removeItem('mun-theme');
+    localStorage.removeItem('MUN_GLOBAL_CONTENT_SCALE');
+    localStorage.removeItem('MUN_COMMAND_STATE');
+
+    // 2. 還原主題色至預設值
+    if (typeof applyCustomThemeColor === 'function') {
+      applyCustomThemeColor(null);
+    }
+    state.customAccent = null;
+
+    // 3. 還原 Logo 為預設圖示
+    const logoImgs = document.querySelectorAll('#btn-logo-home img, #cfg-preview-logo');
+    logoImgs.forEach(img => { img.src = 'logo.png'; });
+
+    // 4. 還原深色/淺色主題為預設深色 (dark)
+    document.body.classList.remove('light-mode');
+    const themeIcons = document.querySelectorAll('#theme-icon, #header-theme-icon');
+    themeIcons.forEach(icon => {
+      icon.classList.remove('fa-moon');
+      icon.classList.add('fa-sun');
+    });
+
+    // 5. 還原縮放比例 (scale) 為預設 0.95 (95%)
+    const defaultScale = 0.95;
+    const mainEl = document.querySelector('main');
+    if (mainEl) mainEl.style.setProperty('--content-scale', defaultScale);
+    const sliderScale = document.getElementById('cfg-slider-scale');
+    const labelScale = document.getElementById('cfg-label-scale');
+    const drawerSlider = document.getElementById('slider-global-scale');
+    const drawerLabel = document.getElementById('label-global-scale');
+    if (sliderScale) sliderScale.value = defaultScale;
+    if (labelScale) labelScale.textContent = '95%';
+    if (drawerSlider) drawerSlider.value = defaultScale;
+    if (drawerLabel) drawerLabel.textContent = '95%';
+
+    // 6. 還原會議進度、發言名單與預設代表
+    resetStateToDefaults();
+
+    // 7. 更新可用代表清單池
+    if (typeof updateAvailableCountriesPool === 'function') {
+      updateAvailableCountriesPool();
+    }
+  }
+
+  window.resetAllSettingsToDefaults = resetAllSettingsToDefaults;
 
   async function loadFromCloudKV() {
     const userId = state.currentUser ? (state.currentUser.uid || state.currentUser.sub || state.currentUser.email) : null;

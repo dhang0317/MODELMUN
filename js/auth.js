@@ -191,13 +191,19 @@
         state.currentUser = null;
         localStorage.removeItem('MUN_USER_PROFILE');
         sessionStorage.removeItem('MUN_PORTAL_GUEST');
-        localStorage.removeItem('MUN_COMMAND_STATE'); // 清除本地前一帳號殘留的會議資料
 
-        // 重置為初始空白狀態
-        if (typeof resetStateToDefaults === 'function') {
-          resetStateToDefaults();
+        // 登出時還原所有設定（主題、自訂顏色、Logo、縮放比、會議進度與代表）至初始預設狀態
+        if (typeof resetAllSettingsToDefaults === 'function') {
+          resetAllSettingsToDefaults();
+        } else {
+          localStorage.removeItem('MUN_COMMAND_STATE');
+          if (typeof resetStateToDefaults === 'function') {
+            resetStateToDefaults();
+          }
+          if (typeof updateAvailableCountriesPool === 'function') {
+            updateAvailableCountriesPool();
+          }
         }
-        updateAvailableCountriesPool();
         renderAll();
 
         if (window.google && window.google.accounts && window.google.accounts.id) {
