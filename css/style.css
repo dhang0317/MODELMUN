@@ -316,29 +316,29 @@ body:not(.light-mode) {
       color: #e3e3e3 !important;
     }
 
-    /* Dark Mode Tabs */
+    /* Dark Mode Tabs: Cream White (#F7F4EE) Bar */
     body:not(.light-mode) nav#tabs-nav {
-      background-color: #121212 !important;
-      border-color: #282828 !important;
+      background-color: #F7F4EE !important;
+      border-color: #D7CCC8 !important;
     }
     body:not(.light-mode) .tab-btn {
       background-color: transparent !important;
-      color: #9e9e9e !important;
+      color: #6D4C41 !important;
       border-color: transparent !important;
     }
     body:not(.light-mode) .tab-btn span {
-      color: #9e9e9e !important;
+      color: #6D4C41 !important;
     }
     body:not(.light-mode) .tab-btn:hover,
     body:not(.light-mode) .tab-btn:hover span {
-      color: #ffffff !important;
-      background-color: rgba(255, 255, 255, 0.08) !important;
+      color: #2D1B18 !important;
+      background-color: rgba(62, 39, 35, 0.08) !important;
     }
     body:not(.light-mode) .tab-active,
     body:not(.light-mode) .tab-active span {
-      color: #ffffff !important;
+      color: #2D1B18 !important;
       font-weight: bold !important;
-      border-bottom: 3px solid #ffffff !important;
+      border-bottom: 3px solid #2D1B18 !important;
       background-color: transparent !important;
     }
 
@@ -492,8 +492,14 @@ body:not(.light-mode) {
       border: 1px solid #333333 !important;
       box-shadow: none !important;
     }
-    body:not(.light-mode) #main-header button,
-    body:not(.light-mode) nav#tabs-nav button,
+    body:not(.light-mode) #main-header button {
+      color: #e3e3e3 !important;
+      border-color: #282828 !important;
+    }
+    body:not(.light-mode) nav#tabs-nav button {
+      color: #6D4C41 !important;
+      border-color: transparent !important;
+    }
     body:not(.light-mode) #main-drawer button {
       color: #e3e3e3 !important;
       border-color: #282828 !important;
@@ -503,12 +509,17 @@ body:not(.light-mode) {
       background: rgba(255, 255, 255, 0.08) !important;
       color: #ffffff !important;
     }
-    body:not(.light-mode) #main-header button:hover,
-    body:not(.light-mode) nav#tabs-nav button:hover,
+    body:not(.light-mode) #main-header button:hover {
+      background-color: rgba(255, 255, 255, 0.12) !important;
+      color: #ffffff !important;
+    }
+    body:not(.light-mode) nav#tabs-nav button:hover {
+      background-color: rgba(62, 39, 35, 0.08) !important;
+      color: #2D1B18 !important;
+    }
     body:not(.light-mode) #main-drawer button:hover {
-      background-color: rgba(247, 244, 238, 0.12) !important;
-      background: rgba(247, 244, 238, 0.12) !important;
-      color: #F7F4EE !important;
+      background-color: rgba(255, 255, 255, 0.12) !important;
+      color: #ffffff !important;
     }
 
     /* Dark Mode Badges & Voting */
