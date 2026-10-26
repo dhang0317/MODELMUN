@@ -105,81 +105,74 @@
       return rgbToHex(newR, newG, newB);
     }
 
-    // User provided color tokens grouped by hue
+    // User curated palette groups
     const paletteGroups = [
       {
-        name: state.language === 'zh' ? '奶油淺白 (主題)' : (state.language === 'fr' ? 'Blanc Crème' : 'Cream White'),
+        name: '1. 深巧與開心果綠',
         shades: [
-          { shade: '50', hex: '#FFFFFF' },
-          { shade: '100', hex: '#FAF8F5' },
-          { shade: '200', hex: '#F7F4EE' },
-          { shade: '300', hex: '#EDE8DF' },
-          { shade: '700', hex: '#3E2723' }
+          { shade: '深巧克力色', hex: '#3E2723' },
+          { shade: '開心果綠', hex: '#B5C99A' },
+          { shade: '象牙米白', hex: '#F3EFEA' }
         ]
       },
       {
-        name: state.language === 'zh' ? '粉紅' : (state.language === 'fr' ? 'Rose' : 'Pink'),
+        name: '2. 深巧與柔霧玫瑰粉',
         shades: [
-          { shade: '50', hex: '#fedaee' },
-          { shade: '100', hex: '#fec1e3' },
-          { shade: '200', hex: '#fea9d7' },
-          { shade: '300', hex: '#fe7fc5' },
-          { shade: '700', hex: '#a83675' }
+          { shade: '深巧克力色', hex: '#3E2723' },
+          { shade: '柔霧玫瑰粉', hex: '#D8A47F' },
+          { shade: '淺杏粉', hex: '#F5EBE6' }
         ]
       },
       {
-        name: state.language === 'zh' ? '紅色' : (state.language === 'fr' ? 'Rouge' : 'Red'),
+        name: '3. 深巧與灰湖藍',
         shades: [
-          { shade: '50', hex: '#fedcde' },
-          { shade: '100', hex: '#fec0c4' },
-          { shade: '200', hex: '#fea5aa' },
-          { shade: '300', hex: '#fe7a82' },
-          { shade: '700', hex: '#a93737' }
+          { shade: '深巧克力色', hex: '#3E2723' },
+          { shade: '灰湖藍', hex: '#7D9D9C' },
+          { shade: '晨霧淺灰', hex: '#E4E8E8' }
         ]
       },
       {
-        name: state.language === 'zh' ? '黃色' : (state.language === 'fr' ? 'Jaune' : 'Yellow'),
+        name: '4. 奶油白與柔杏桃',
         shades: [
-          { shade: '50', hex: '#fefbd8' },
-          { shade: '100', hex: '#fef7b5' },
-          { shade: '200', hex: '#fef392' },
-          { shade: '300', hex: '#feee59' },
-          { shade: '700', hex: '#b87a1d' }
+          { shade: '奶油白', hex: '#F7F4EE' },
+          { shade: '柔杏桃', hex: '#E7B596' },
+          { shade: '鼠尾草灰', hex: '#9CAAA2' }
         ]
       },
       {
-        name: state.language === 'zh' ? '綠色' : (state.language === 'fr' ? 'Vert' : 'Green'),
+        name: '5. 經典雙色',
         shades: [
-          { shade: '50', hex: '#dcfbe6' },
-          { shade: '100', hex: '#bef8d1' },
-          { shade: '200', hex: '#a3f5bc' },
-          { shade: '300', hex: '#74ef9a' },
-          { shade: '700', hex: '#36a858' }
+          { shade: '深巧克力色', hex: '#3E2723' },
+          { shade: '奶油白', hex: '#F7F4EE' }
         ]
       },
       {
-        name: state.language === 'zh' ? '藍色' : (state.language === 'fr' ? 'Bleu' : 'Blue'),
+        name: '6. 覆盆子酒紅 × 焦糖杏',
         shades: [
-          { shade: '50', hex: '#ddf2fe' },
-          { shade: '100', hex: '#c0e6fe' },
-          { shade: '200', hex: '#a4dafd' },
-          { shade: '300', hex: '#76c6fd' },
-          { shade: '700', hex: '#3683a8' }
+          { shade: '淺酒紅 (覆盆子)', hex: '#913D48' },
+          { shade: '奶油白', hex: '#F7F4EE' },
+          { shade: '焦糖杏', hex: '#C48B68' }
         ]
       },
       {
-        name: state.language === 'zh' ? '紫色' : (state.language === 'fr' ? 'Violet' : 'Purple'),
+        name: '7. 乾燥玫瑰酒紅 × 霧霾灰藍',
         shades: [
-          { shade: '50', hex: '#eedbfe' },
-          { shade: '100', hex: '#e2befd' },
-          { shade: '200', hex: '#d6a2fd' },
-          { shade: '300', hex: '#c274fd' },
-          { shade: '700', hex: '#8036a8' }
+          { shade: '乾燥玫瑰酒紅', hex: '#9E5362' },
+          { shade: '霧霾灰藍', hex: '#8898A6' },
+          { shade: '晨霧灰', hex: '#EAE6E3' }
+        ]
+      },
+      {
+        name: '8. 木質淡酒紅 × 柔杏粉',
+        shades: [
+          { shade: '淺波爾多紅', hex: '#873E49' },
+          { shade: '柔杏粉', hex: '#E8C8BE' },
+          { shade: '香檳淡金', hex: '#D6B575' }
         ]
       }
     ];
 
-    let baseColor = currentCustom.startsWith('#') ? currentCustom : '#3683a8';
+    let baseColor = currentCustom.startsWith('#') ? currentCustom : '#3E2723';
     let currentSliderVal = 0;
 
     const backdrop = document.createElement('div');
@@ -189,13 +182,14 @@
     box.className = 'bg-slate-900 text-white rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-5 border border-slate-700 max-h-[90vh] overflow-y-auto';
 
     let paletteHtml = paletteGroups.map(group => `
-      <div class="space-y-1">
-        <div class="text-[11px] font-semibold text-slate-400 uppercase tracking-wider">${group.name}</div>
-        <div class="grid grid-cols-5 gap-1.5">
+      <div class="space-y-1.5 p-2 rounded-lg bg-slate-800/60 border border-slate-700/50">
+        <div class="text-[12px] font-bold text-slate-300 tracking-wide">${group.name}</div>
+        <div class="grid grid-cols-3 gap-2">
           ${group.shades.map(s => `
-            <button data-hex="${s.hex}" class="btn-theme-swatch group relative p-1 rounded-lg border border-slate-700 hover:border-white transition flex flex-col items-center space-y-1 ${baseColor.toLowerCase() === s.hex.toLowerCase() ? 'ring-2 ring-white border-transparent' : ''}" title="${group.name} ${s.shade} (${s.hex})">
-              <span class="w-7 h-7 rounded-md shadow-inner border border-white/20 transition group-hover:scale-105" style="background-color: ${s.hex}"></span>
-              <span class="text-[10px] font-mono text-slate-300 w-full text-center">${s.shade}</span>
+            <button data-hex="${s.hex}" class="btn-theme-swatch group relative p-1.5 rounded-lg border border-slate-700 hover:border-white transition flex flex-col items-center space-y-1 bg-slate-900/50 ${baseColor.toLowerCase() === s.hex.toLowerCase() ? 'ring-2 ring-white border-transparent' : ''}" title="${group.name} - ${s.shade} (${s.hex})">
+              <span class="w-full h-7 rounded-md shadow-inner border border-white/20 transition group-hover:scale-105" style="background-color: ${s.hex}"></span>
+              <span class="text-[11px] font-medium text-slate-300 w-full text-center truncate">${s.shade}</span>
+              <span class="text-[9px] font-mono text-slate-400">${s.hex}</span>
             </button>
           `).join('')}
         </div>
