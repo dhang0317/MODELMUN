@@ -329,14 +329,18 @@ body:not(.light-mode) {
     body:not(.light-mode) nav#tabs-nav {
       background-color: #3E2723 !important;
       border-color: #5D4037 !important;
+      border-bottom: 1px solid #5D4037 !important;
     }
     body:not(.light-mode) .tab-btn {
       background-color: transparent !important;
       color: #D7CCC8 !important;
-      border-color: transparent !important;
+      border: none !important;
+      border-bottom: 2px solid transparent !important;
+      outline: none !important;
     }
     body:not(.light-mode) .tab-btn span {
       color: #D7CCC8 !important;
+      border: none !important;
     }
     body:not(.light-mode) .tab-btn:hover,
     body:not(.light-mode) .tab-btn:hover span {
@@ -347,8 +351,11 @@ body:not(.light-mode) {
     body:not(.light-mode) .tab-active span {
       color: #FFFFFF !important;
       font-weight: bold !important;
-      border-bottom: 3px solid #F7F4EE !important;
+      border-bottom: none !important;
       background-color: transparent !important;
+    }
+    body:not(.light-mode) .tab-active {
+      border-bottom: 2.5px solid #F7F4EE !important;
     }
 
     /* Dark Mode Surfaces & Cards: Swapped to Cream White (#F7F4EE) elevated cards on Dark background */
@@ -509,7 +516,7 @@ body:not(.light-mode) {
       color: #3E2723 !important;
     }
 
-    /* Speaking Intro Single Card: Remove nested layers/borders */
+    /* Speaking Intro Single Card: Remove nested layers/borders & fit single viewport without scroll */
     #panel-speaking-intro .max-w-4xl,
     body:not(.light-mode) #panel-speaking-intro .max-w-4xl {
       background-color: #F7F4EE !important;
@@ -517,6 +524,18 @@ body:not(.light-mode) {
       border: 1px solid #D7CCC8 !important;
       border-radius: 1.25rem !important;
       box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.15), 0 2px 4px -2px rgba(0, 0, 0, 0.1) !important;
+      padding: 1.25rem 2rem !important;
+    }
+    #panel-speaking-intro .space-y-6 > :not([hidden]) ~ :not([hidden]) {
+      --tw-space-y-reverse: 0;
+      margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse))) !important;
+      margin-bottom: calc(0.75rem * var(--tw-space-y-reverse)) !important;
+    }
+    #panel-speaking-intro #single-timer-display {
+      padding-top: 0.25rem !important;
+      padding-bottom: 0.25rem !important;
+      font-size: clamp(3.5rem, 8vw, 6.5rem) !important;
+      line-height: 1 !important;
     }
     #panel-speaking-intro .max-w-4xl > div,
     body:not(.light-mode) #panel-speaking-intro .max-w-4xl > div {
