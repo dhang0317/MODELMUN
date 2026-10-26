@@ -737,10 +737,52 @@ body:not(.light-mode) {
       border-color: #D7CCC8 !important;
     }
     body:not(.light-mode) #modal-unified-settings input:not([type="range"]),
-    body:not(.light-mode) #modal-unified-settings select {
+    body:not(.light-mode) #modal-unified-settings select,
+    body:not(.light-mode) #modal-add-motion input,
+    body:not(.light-mode) #modal-add-motion select,
+    body:not(.light-mode) #modal-add-speaker input,
+    body:not(.light-mode) #modal-add-speaker select,
+    body:not(.light-mode) #modal-define-time input,
+    body:not(.light-mode) #modal-mod-config input,
+    body:not(.light-mode) #modal-mod-config select,
+    body:not(.light-mode) #modal-configure-voting input,
+    body:not(.light-mode) #modal-configure-voting select {
       background-color: #ffffff !important;
+      background: #ffffff !important;
       border: 1px solid #D7CCC8 !important;
       color: #3E2723 !important;
+    }
+    body:not(.light-mode) #modal-add-motion label,
+    body:not(.light-mode) #modal-add-speaker label,
+    body:not(.light-mode) #modal-define-time label,
+    body:not(.light-mode) #modal-mod-config label,
+    body:not(.light-mode) #modal-configure-voting label {
+      color: #6D4C41 !important;
+    }
+    body:not(.light-mode) #btn-submit-motion {
+      background-color: #3E2723 !important;
+      color: #F7F4EE !important;
+      border: 1px solid #3E2723 !important;
+    }
+    body:not(.light-mode) #btn-submit-motion:hover {
+      background-color: #4E342E !important;
+      color: #FFFFFF !important;
+    }
+    body:not(.light-mode) #btn-submit-motion * {
+      color: #F7F4EE !important;
+    }
+    body:not(.light-mode) #modal-add-motion .btn-close-modal,
+    body:not(.light-mode) #modal-configure-voting .btn-close-modal {
+      background-color: #EFEBE9 !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) #modal-add-motion .btn-close-modal:hover,
+    body:not(.light-mode) #modal-configure-voting .btn-close-modal:hover {
+      background-color: #D7CCC8 !important;
+    }
+    body:not(.light-mode) #modal-add-motion input::placeholder {
+      color: #A1887F !important;
     }
     body:not(.light-mode) #modal-unified-settings .text-zinc-400,
     body:not(.light-mode) #modal-unified-settings .text-zinc-500,
