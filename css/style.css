@@ -538,7 +538,7 @@ body:not(.light-mode) {
       padding: 0.25rem !important;
     }
 
-    /* Speaking Views: Clean Flat Speaker Queue (移除候選名單內的巢狀子方塊) */
+    /* Speaking Views: Clean Flat Speaker Queue (移除候選名單內的巢狀子方塊與邊框) */
     #list-gsl-queue,
     #list-mod-queue,
     #list-pro-queue,
@@ -546,11 +546,34 @@ body:not(.light-mode) {
     body:not(.light-mode) #list-gsl-queue,
     body:not(.light-mode) #list-mod-queue,
     body:not(.light-mode) #list-pro-queue,
-    body:not(.light-mode) #list-con-queue {
+    body:not(.light-mode) #list-con-queue,
+    body.light-mode #list-gsl-queue,
+    body.light-mode #list-mod-queue,
+    body.light-mode #list-pro-queue,
+    body.light-mode #list-con-queue {
       background-color: transparent !important;
       background: transparent !important;
       border: none !important;
+      border-color: transparent !important;
       box-shadow: none !important;
+    }
+    #list-gsl-queue,
+    #list-mod-queue,
+    body:not(.light-mode) #list-gsl-queue,
+    body:not(.light-mode) #list-mod-queue,
+    body.light-mode #list-gsl-queue,
+    body.light-mode #list-mod-queue {
+      border: none !important;
+    }
+    #list-gsl-queue.divide-y > :not([hidden]) ~ :not([hidden]),
+    #list-mod-queue.divide-y > :not([hidden]) ~ :not([hidden]),
+    body:not(.light-mode) #list-gsl-queue.divide-y > :not([hidden]) ~ :not([hidden]),
+    body:not(.light-mode) #list-mod-queue.divide-y > :not([hidden]) ~ :not([hidden]),
+    body.light-mode #list-gsl-queue.divide-y > :not([hidden]) ~ :not([hidden]),
+    body.light-mode #list-mod-queue.divide-y > :not([hidden]) ~ :not([hidden]) {
+      border-top-width: 0px !important;
+      border-bottom-width: 0px !important;
+      border-color: transparent !important;
     }
     #list-gsl-queue > div,
     #list-mod-queue > div,
@@ -559,11 +582,16 @@ body:not(.light-mode) {
     body:not(.light-mode) #list-gsl-queue > div,
     body:not(.light-mode) #list-mod-queue > div,
     body:not(.light-mode) #list-pro-queue > div,
-    body:not(.light-mode) #list-con-queue > div {
+    body:not(.light-mode) #list-con-queue > div,
+    body.light-mode #list-gsl-queue > div,
+    body.light-mode #list-mod-queue > div,
+    body.light-mode #list-pro-queue > div,
+    body.light-mode #list-con-queue > div {
       box-shadow: none !important;
       border-radius: 0.75rem !important;
       background-color: transparent !important;
-      border-color: #EFEBE9 !important;
+      border: none !important;
+      border-color: transparent !important;
     }
     #list-gsl-queue > div:hover,
     #list-mod-queue > div:hover,
@@ -573,6 +601,12 @@ body:not(.light-mode) {
     body:not(.light-mode) #list-mod-queue > div:hover,
     body:not(.light-mode) #list-pro-queue > div:hover,
     body:not(.light-mode) #list-con-queue > div:hover {
+      background-color: #EFEBE9 !important;
+    }
+    body.light-mode #list-gsl-queue > div:hover,
+    body.light-mode #list-mod-queue > div:hover,
+    body.light-mode #list-pro-queue > div:hover,
+    body.light-mode #list-con-queue > div:hover {
       background-color: #EFEBE9 !important;
     }
 
@@ -615,49 +649,138 @@ body:not(.light-mode) {
       box-shadow: none !important;
     }
 
-    /* Subtab Buttons in Speaking & Voting (/tabs/gsl, /tabs/vote) */
+    /* Subtab Buttons in Speaking & Voting (/tabs/gsl, /tabs/vote) - 深色底白字，點擊選中後轉為淺色底深色字 */
     body:not(.light-mode) .speaking-subtab-btn,
     body:not(.light-mode) #btn-voting-subtab-rollcall,
-    body:not(.light-mode) #btn-voting-subtab-session {
-      color: #3E2723 !important;
-      border: 1px solid #D7CCC8 !important;
-      background-color: transparent !important;
+    body:not(.light-mode) #btn-voting-subtab-session,
+    body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active),
+    body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active),
+    body:not(.light-mode) #btn-voting-subtab-session:not(.active) {
+      color: #F7F4EE !important;
+      background-color: #3E2723 !important;
+      background: #3E2723 !important;
+      border: 1px solid #5D4037 !important;
+      font-weight: 500 !important;
     }
     body:not(.light-mode) .speaking-subtab-btn *,
     body:not(.light-mode) #btn-voting-subtab-rollcall *,
-    body:not(.light-mode) #btn-voting-subtab-session * {
-      color: #3E2723 !important;
+    body:not(.light-mode) #btn-voting-subtab-session *,
+    body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active) *,
+    body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active) *,
+    body:not(.light-mode) #btn-voting-subtab-session:not(.active) * {
+      color: #F7F4EE !important;
     }
     body:not(.light-mode) .speaking-subtab-btn:hover,
     body:not(.light-mode) #btn-voting-subtab-rollcall:hover,
-    body:not(.light-mode) #btn-voting-subtab-session:hover {
-      background-color: #EFEBE9 !important;
-      color: #3E2723 !important;
+    body:not(.light-mode) #btn-voting-subtab-session:hover,
+    body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover,
+    body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active):hover,
+    body:not(.light-mode) #btn-voting-subtab-session:not(.active):hover {
+      background-color: #4E342E !important;
+      background: #4E342E !important;
+      color: #FFFFFF !important;
+      border-color: #6D4C41 !important;
     }
     body:not(.light-mode) .speaking-subtab-btn.active,
     body:not(.light-mode) .speaking-subtab-btn.subtab-active,
     body:not(.light-mode) .speaking-subtab-btn.bg-white,
+    body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active,
+    body:not(.light-mode) #btn-speaking-subtab-gsl.subtab-active,
+    body:not(.light-mode) #btn-speaking-subtab-mod.subtab-active,
+    body:not(.light-mode) #btn-speaking-subtab-intro.subtab-active,
+    body:not(.light-mode) #btn-speaking-subtab-procon.subtab-active,
     body:not(.light-mode) #btn-voting-subtab-rollcall.active,
     body:not(.light-mode) #btn-voting-subtab-rollcall.bg-white,
     body:not(.light-mode) #btn-voting-subtab-session.active,
     body:not(.light-mode) #btn-voting-subtab-session.bg-white {
-      background-color: #3E2723 !important;
-      color: #F7F4EE !important;
-      border-color: #3E2723 !important;
+      background-color: #F7F4EE !important;
+      background: #F7F4EE !important;
+      color: #3E2723 !important;
+      border: 1px solid #D7CCC8 !important;
+      border-color: #D7CCC8 !important;
+      box-shadow: 0 1px 4px rgba(62, 39, 35, 0.12) !important;
       font-weight: bold !important;
     }
     body:not(.light-mode) .speaking-subtab-btn.active *,
     body:not(.light-mode) .speaking-subtab-btn.subtab-active *,
     body:not(.light-mode) .speaking-subtab-btn.bg-white *,
+    body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-gsl.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-mod.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-intro.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-procon.subtab-active *,
     body:not(.light-mode) #btn-voting-subtab-rollcall.active *,
     body:not(.light-mode) #btn-voting-subtab-rollcall.bg-white *,
     body:not(.light-mode) #btn-voting-subtab-session.active *,
     body:not(.light-mode) #btn-voting-subtab-session.bg-white * {
+      color: #3E2723 !important;
+    }
+
+    body.light-mode .speaking-subtab-btn,
+    body.light-mode #btn-voting-subtab-rollcall,
+    body.light-mode #btn-voting-subtab-session,
+    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active),
+    body.light-mode #btn-voting-subtab-rollcall:not(.active),
+    body.light-mode #btn-voting-subtab-session:not(.active) {
+      color: #F7F4EE !important;
+      background-color: #3E2723 !important;
+      background: #3E2723 !important;
+      border: 1px solid #5D4037 !important;
+      font-weight: 500 !important;
+    }
+    body.light-mode .speaking-subtab-btn *,
+    body.light-mode #btn-voting-subtab-rollcall *,
+    body.light-mode #btn-voting-subtab-session *,
+    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) *,
+    body.light-mode #btn-voting-subtab-rollcall:not(.active) *,
+    body.light-mode #btn-voting-subtab-session:not(.active) * {
       color: #F7F4EE !important;
     }
-    body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active),
-    body:not(.light-mode) #btn-voting-subtab-session:not(.active) {
+    body.light-mode .speaking-subtab-btn:hover,
+    body.light-mode #btn-voting-subtab-rollcall:hover,
+    body.light-mode #btn-voting-subtab-session:hover,
+    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover,
+    body.light-mode #btn-voting-subtab-rollcall:not(.active):hover,
+    body.light-mode #btn-voting-subtab-session:not(.active):hover {
+      background-color: #4E342E !important;
+      background: #4E342E !important;
+      color: #FFFFFF !important;
+      border-color: #6D4C41 !important;
+    }
+    body.light-mode .speaking-subtab-btn.active,
+    body.light-mode .speaking-subtab-btn.subtab-active,
+    body.light-mode .speaking-subtab-btn.bg-white,
+    body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active,
+    body.light-mode #btn-speaking-subtab-gsl.subtab-active,
+    body.light-mode #btn-speaking-subtab-mod.subtab-active,
+    body.light-mode #btn-speaking-subtab-intro.subtab-active,
+    body.light-mode #btn-speaking-subtab-procon.subtab-active,
+    body.light-mode #btn-voting-subtab-rollcall.active,
+    body.light-mode #btn-voting-subtab-rollcall.bg-white,
+    body.light-mode #btn-voting-subtab-session.active,
+    body.light-mode #btn-voting-subtab-session.bg-white {
+      background-color: #F7F4EE !important;
+      background: #F7F4EE !important;
       color: #3E2723 !important;
+      border: 1px solid #D7CCC8 !important;
+      border-color: #D7CCC8 !important;
+      box-shadow: 0 1px 4px rgba(62, 39, 35, 0.12) !important;
+      font-weight: bold !important;
+    }
+    body.light-mode .speaking-subtab-btn.active *,
+    body.light-mode .speaking-subtab-btn.subtab-active *,
+    body.light-mode .speaking-subtab-btn.bg-white *,
+    body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active *,
+    body.light-mode #btn-speaking-subtab-gsl.subtab-active *,
+    body.light-mode #btn-speaking-subtab-mod.subtab-active *,
+    body.light-mode #btn-speaking-subtab-intro.subtab-active *,
+    body.light-mode #btn-speaking-subtab-procon.subtab-active *,
+    body.light-mode #btn-voting-subtab-rollcall.active *,
+    body.light-mode #btn-voting-subtab-rollcall.bg-white *,
+    body.light-mode #btn-voting-subtab-session.active *,
+    body.light-mode #btn-voting-subtab-session.bg-white * {
+      color: #3E2723 !important;
+    }
       background-color: transparent !important;
       border-color: transparent !important;
     }
@@ -2748,69 +2871,50 @@ body:not(.light-mode) {
       padding-bottom: clamp(0.2rem, 0.8vh, 0.8rem) !important;
     }
 
-    /* Speaking Subtabs & Pro/Con Cards Dark/Light Mode Fix */
-    body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active) {
-      color: #a1a1aa !important;
-      background-color: transparent !important;
-      background: transparent !important;
-      border: 1px solid #27272a !important;
+    /* Speaking Subtabs & Pro/Con Cards Dark/Light Mode Fix (統一深色底白字，點擊後淺色底深色字) */
+    body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active),
+    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) {
+      color: #F7F4EE !important;
+      background-color: #3E2723 !important;
+      background: #3E2723 !important;
+      border: 1px solid #5D4037 !important;
     }
-    body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover {
+    body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover,
+    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover {
       color: #ffffff !important;
-      background-color: rgba(255, 255, 255, 0.08) !important;
-      background: rgba(255, 255, 255, 0.08) !important;
-      border: 1px solid #3f3f46 !important;
+      background-color: #4E342E !important;
+      background: #4E342E !important;
+      border: 1px solid #6D4C41 !important;
     }
     body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active,
     body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active:hover,
     body:not(.light-mode) #btn-speaking-subtab-gsl.subtab-active,
     body:not(.light-mode) #btn-speaking-subtab-mod.subtab-active,
     body:not(.light-mode) #btn-speaking-subtab-intro.subtab-active,
-    body:not(.light-mode) #btn-speaking-subtab-procon.subtab-active {
-      background-color: #ffffff !important;
-      background: #ffffff !important;
-      color: #09090b !important;
-      border: 1px solid #ffffff !important;
-      box-shadow: 0 1px 4px rgba(255, 255, 255, 0.2) !important;
-    }
-    body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active *,
-    body:not(.light-mode) #btn-speaking-subtab-gsl.subtab-active *,
-    body:not(.light-mode) #btn-speaking-subtab-mod.subtab-active *,
-    body:not(.light-mode) #btn-speaking-subtab-intro.subtab-active *,
-    body:not(.light-mode) #btn-speaking-subtab-procon.subtab-active * {
-      color: #09090b !important;
-    }
-
-    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) {
-      color: #475569 !important;
-      background-color: transparent !important;
-      background: transparent !important;
-      border: 1px solid #e2e8f0 !important;
-    }
-    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover {
-      color: #0f172a !important;
-      background-color: rgba(0, 0, 0, 0.05) !important;
-      background: rgba(0, 0, 0, 0.05) !important;
-      border: 1px solid #cbd5e1 !important;
-    }
+    body:not(.light-mode) #btn-speaking-subtab-procon.subtab-active,
     body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active,
     body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active:hover,
     body.light-mode #btn-speaking-subtab-gsl.subtab-active,
     body.light-mode #btn-speaking-subtab-mod.subtab-active,
     body.light-mode #btn-speaking-subtab-intro.subtab-active,
     body.light-mode #btn-speaking-subtab-procon.subtab-active {
-      background-color: #0f172a !important;
-      background: #0f172a !important;
-      color: #ffffff !important;
-      border: 1px solid #0f172a !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
+      background-color: #F7F4EE !important;
+      background: #F7F4EE !important;
+      color: #3E2723 !important;
+      border: 1px solid #D7CCC8 !important;
+      box-shadow: 0 1px 4px rgba(62, 39, 35, 0.12) !important;
     }
+    body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-gsl.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-mod.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-intro.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-procon.subtab-active *,
     body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active *,
     body.light-mode #btn-speaking-subtab-gsl.subtab-active *,
     body.light-mode #btn-speaking-subtab-mod.subtab-active *,
     body.light-mode #btn-speaking-subtab-intro.subtab-active *,
     body.light-mode #btn-speaking-subtab-procon.subtab-active * {
-      color: #ffffff !important;
+      color: #3E2723 !important;
     }
 
     /* Pro / Con Queue and Side Switcher buttons */
