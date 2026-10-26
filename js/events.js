@@ -1,4 +1,25 @@
   function switchTab(tabId) {
+    // 進入投票分頁時，自動清空票數（無需手動點擊清空按鈕）
+    if (tabId === 'vote') {
+      if (Array.isArray(state.selectedCountries)) {
+        state.selectedCountries.forEach(c => {
+          c.vote = 'none';
+          c.hasRights = false;
+        });
+      }
+      state.voteStage = 'r1';
+      state.activeVoterIndex = 0;
+      if (Array.isArray(state.sessionVotes) && state.activeSessionId) {
+        const curSess = state.sessionVotes.find(s => s.id === state.activeSessionId);
+        if (curSess) {
+          curSess.favor = 0;
+          curSess.against = 0;
+          curSess.abstain = 0;
+          curSess.status = '';
+        }
+      }
+    }
+
     state.currentTab = tabId;
     document.querySelectorAll('.view-panel').forEach(p => p.classList.add('hidden'));
     const target = document.getElementById(`view-${tabId}`);

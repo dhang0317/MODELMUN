@@ -185,6 +185,11 @@
     const motionName = formatMotionType(motion.type);
     if (currentSess) {
       currentSess.note = `${motionName} (${motion.proposer})`;
+      // 自動清空當前會期票數，開啟新投票無需手動按清空
+      currentSess.favor = 0;
+      currentSess.against = 0;
+      currentSess.abstain = 0;
+      currentSess.status = '';
     }
 
     // Auto-populate current vote topic from the motion
@@ -374,6 +379,15 @@
       });
       state.voteStage = 'r1';
       state.activeVoterIndex = 0;
+      if (Array.isArray(state.sessionVotes)) {
+        const curSess = state.sessionVotes.find(s => s.id === state.activeSessionId) || state.sessionVotes[0];
+        if (curSess) {
+          curSess.favor = 0;
+          curSess.against = 0;
+          curSess.abstain = 0;
+          curSess.status = '';
+        }
+      }
       switchTab('vote');
       setTimeout(() => {
         const titleInput = document.getElementById('vote-resolution-title-input');
