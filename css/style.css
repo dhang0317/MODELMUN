@@ -3110,7 +3110,7 @@ body:not(.light-mode) {
       box-shadow: 0 0 14px rgba(15, 23, 42, 0.22), inset 0 1px 4px rgba(15, 23, 42, 0.2) !important;
     }
 
-    /* Semantic / Colored Buttons Press Glow (Favor / Present / Pass = Emerald) */
+    /* Semantic / Colored Buttons Press Glow (Favor / Present / Pass = Pistachio Green #B5C99A) */
     body:not(.light-mode) #btn-cast-favor:active,
     body:not(.light-mode) #btn-cast-favor.btn-pressed-flash,
     body:not(.light-mode) .btn-inc-favor:active,
@@ -3123,14 +3123,14 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-procon-add-pro.btn-pressed-flash,
     body:not(.light-mode) .btn-rollcall-present:active,
     body:not(.light-mode) .btn-rollcall-present.btn-pressed-flash {
-      background-color: rgba(16, 185, 129, 0.6) !important;
-      background: rgba(16, 185, 129, 0.6) !important;
-      border-color: #34d399 !important;
-      box-shadow: 0 0 20px rgba(16, 185, 129, 0.65), inset 0 0 10px rgba(16, 185, 129, 0.3) !important;
+      background-color: #8EAA6E !important;
+      background: #8EAA6E !important;
+      border-color: #B5C99A !important;
+      box-shadow: 0 0 20px rgba(181, 201, 154, 0.65), inset 0 0 10px rgba(181, 201, 154, 0.3) !important;
       color: #ffffff !important;
     }
 
-    /* Semantic / Colored Buttons Press Glow (Against / Absent / Fail / Reset = Rose/Red) */
+    /* Semantic / Colored Buttons Press Glow (Against / Absent / Fail / Reset = Raspberry Wine Red #913D48) */
     body:not(.light-mode) #btn-cast-against:active,
     body:not(.light-mode) #btn-cast-against.btn-pressed-flash,
     body:not(.light-mode) .btn-inc-against:active,
@@ -3147,10 +3147,10 @@ body:not(.light-mode) {
     body:not(.light-mode) .btn-del-mod-queue.btn-pressed-flash,
     body:not(.light-mode) .btn-del-queue:active,
     body:not(.light-mode) .btn-del-queue.btn-pressed-flash {
-      background-color: rgba(239, 68, 68, 0.6) !important;
-      background: rgba(239, 68, 68, 0.6) !important;
-      border-color: #f87171 !important;
-      box-shadow: 0 0 20px rgba(239, 68, 68, 0.65), inset 0 0 10px rgba(239, 68, 68, 0.3) !important;
+      background-color: #913D48 !important;
+      background: #913D48 !important;
+      border-color: #D47481 !important;
+      box-shadow: 0 0 20px rgba(145, 61, 72, 0.65), inset 0 0 10px rgba(145, 61, 72, 0.3) !important;
       color: #ffffff !important;
     }
 
