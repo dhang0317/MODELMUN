@@ -450,56 +450,244 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-hero-motion-second:hover {
       background-color: #4E342E !important;
     }
-    body:not(.light-mode) p,
-    body:not(.light-mode) span:not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled),
-    body:not(.light-mode) h1,
-    body:not(.light-mode) h2,
-    body:not(.light-mode) h3,
-    body:not(.light-mode) h4,
-    body:not(.light-mode) h5,
-    body:not(.light-mode) h6,
-    body:not(.light-mode) label,
-    body:not(.light-mode) td,
-    body:not(.light-mode) th,
-    body:not(.light-mode) li {
-      color: inherit;
+    /* Text & Headings inside main view cards and panels */
+    body:not(.light-mode) main p,
+    body:not(.light-mode) main span:not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.badge):not(#label-voter-queue-status),
+    body:not(.light-mode) main h1,
+    body:not(.light-mode) main h2,
+    body:not(.light-mode) main h3,
+    body:not(.light-mode) main h4,
+    body:not(.light-mode) main h5,
+    body:not(.light-mode) main h6,
+    body:not(.light-mode) main label,
+    body:not(.light-mode) main td,
+    body:not(.light-mode) main th,
+    body:not(.light-mode) main li {
+      color: #3E2723;
     }
-    body:not(.light-mode) .text-slate-800,
-    body:not(.light-mode) .text-slate-700,
-    body:not(.light-mode) .text-slate-900 {
-      color: #ffffff !important;
+    body:not(.light-mode) main .text-slate-800,
+    body:not(.light-mode) main .text-slate-700,
+    body:not(.light-mode) main .text-slate-900 {
+      color: #3E2723 !important;
     }
-    body:not(.light-mode) .text-slate-600,
-    body:not(.light-mode) .text-slate-500,
-    body:not(.light-mode) .text-slate-400 {
-      color: #9e9e9e !important;
+    body:not(.light-mode) main .text-slate-600,
+    body:not(.light-mode) main .text-slate-500 {
+      color: #5D4037 !important;
     }
-    body:not(.light-mode) .text-slate-300,
-    body:not(.light-mode) .text-slate-200,
-    body:not(.light-mode) .text-slate-100 {
-      color: #c4c4c4 !important;
+    body:not(.light-mode) main .text-slate-400 {
+      color: #8D6E63 !important;
     }
-    body:not(.light-mode) .border-slate-100,
-    body:not(.light-mode) .border-slate-200,
-    body:not(.light-mode) .border-slate-300,
-    body:not(.light-mode) .border-slate-700,
-    body:not(.light-mode) .border-zinc-800,
-    body:not(.light-mode) .border-zinc-900 {
-      border-color: #2d2d2d !important;
+    body:not(.light-mode) main .text-slate-300,
+    body:not(.light-mode) main .text-slate-200,
+    body:not(.light-mode) main .text-slate-100 {
+      color: #6D4C41 !important;
     }
-    body:not(.light-mode) .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
-    body:not(.light-mode) .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
-    body:not(.light-mode) .divide-slate-700 > :not([hidden]) ~ :not([hidden]) {
-      border-color: #2d2d2d !important;
+    body:not(.light-mode) main .border-slate-100,
+    body:not(.light-mode) main .border-slate-200,
+    body:not(.light-mode) main .border-slate-300,
+    body:not(.light-mode) main .border-slate-700,
+    body:not(.light-mode) main .border-zinc-800,
+    body:not(.light-mode) main .border-zinc-900 {
+      border-color: #D7CCC8 !important;
+    }
+    body:not(.light-mode) main .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
+    body:not(.light-mode) main .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
+    body:not(.light-mode) main .divide-slate-700 > :not([hidden]) ~ :not([hidden]) {
+      border-color: #D7CCC8 !important;
     }
 
-    /* Dark Mode Buttons */
-    body:not(.light-mode) button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent):not(.btn-rollcall-present):not(.btn-rollcall-absent):not(#vote-stage-r1):not(#vote-stage-r2):not(#vote-stage-rights) {
+    /* Big Timers Display: Dark Chocolate (#3E2723) */
+    body:not(.light-mode) #gsl-timer-display,
+    body:not(.light-mode) #mod-speaker-timer-display,
+    body:not(.light-mode) #single-timer-display,
+    body:not(.light-mode) #unmod-timer-display,
+    body:not(.light-mode) #procon-timer-display,
+    body:not(.light-mode) #recess-timer-display,
+    body:not(.light-mode) #procon-timer-input {
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) .text-primary {
+      color: #3E2723 !important;
+    }
+
+    /* Subtab Buttons in Speaking & Voting (/tabs/gsl, /tabs/vote) */
+    body:not(.light-mode) .speaking-subtab-btn {
+      color: #6D4C41 !important;
+      border: 1px solid #D7CCC8 !important;
       background-color: transparent !important;
-      background: transparent !important;
-      color: #e3e3e3 !important;
-      border: 1px solid #333333 !important;
+    }
+    body:not(.light-mode) .speaking-subtab-btn:hover {
+      background-color: #EFEBE9 !important;
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) .speaking-subtab-btn.active,
+    body:not(.light-mode) .speaking-subtab-btn.bg-white {
+      background-color: #3E2723 !important;
+      color: #F7F4EE !important;
+      border-color: #3E2723 !important;
+      font-weight: bold !important;
+    }
+    body:not(.light-mode) #btn-voting-subtab-rollcall,
+    body:not(.light-mode) #btn-voting-subtab-session {
+      color: #6D4C41 !important;
+      background-color: transparent !important;
+    }
+    body:not(.light-mode) #btn-voting-subtab-rollcall.active,
+    body:not(.light-mode) #btn-voting-subtab-rollcall.bg-white,
+    body:not(.light-mode) #btn-voting-subtab-session.active,
+    body:not(.light-mode) #btn-voting-subtab-session.bg-white {
+      background-color: #3E2723 !important;
+      color: #F7F4EE !important;
+      font-weight: bold !important;
+    }
+
+    /* Timer Bars / Progress Tracks */
+    body:not(.light-mode) .w-full.bg-slate-100,
+    body:not(.light-mode) #gsl-progress-bar-bg {
+      background-color: #EFEBE9 !important;
+    }
+    body:not(.light-mode) #gsl-progress-bar,
+    body:not(.light-mode) #mod-speaker-progress,
+    body:not(.light-mode) #mod-total-progress,
+    body:not(.light-mode) #procon-speaker-progress,
+    body:not(.light-mode) #unmod-total-progress {
+      background-color: #3E2723 !important;
+    }
+
+    /* Timer Controls & General Buttons inside Main */
+    body:not(.light-mode) main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-rollcall-present):not(.btn-rollcall-absent):not(.btn-rollcall-expanded):not(.btn-vote-choice):not(#btn-hero-motion-vote):not(#btn-hero-motion-second):not(#btn-gsl-start):not(#btn-mod-start):not(#btn-single-start):not(#btn-procon-start):not(#btn-unmod-start):not(#btn-gsl-pause):not(#btn-mod-pause):not(#btn-single-pause):not(#btn-procon-pause):not(#btn-unmod-pause):not(#btn-gsl-next):not(#btn-mod-next):not(#btn-procon-next):not(#btn-intro-to-procon):not(#btn-adopt-vote):not(#btn-quick-pass):not(#btn-motion-vote-execute):not(.btn-inc-favor):not(.btn-inc-against):not(.btn-inc-abstain) {
+      background-color: #EFEBE9 !important;
+      background: #EFEBE9 !important;
+      color: #3E2723 !important;
+      border: 1px solid #D7CCC8 !important;
       box-shadow: none !important;
+    }
+    body:not(.light-mode) main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-rollcall-present):not(.btn-rollcall-absent):not(.btn-rollcall-expanded):not(.btn-vote-choice):not(#btn-hero-motion-vote):not(#btn-hero-motion-second):not(#btn-gsl-start):not(#btn-mod-start):not(#btn-single-start):not(#btn-procon-start):not(#btn-unmod-start):not(#btn-gsl-pause):not(#btn-mod-pause):not(#btn-single-pause):not(#btn-procon-pause):not(#btn-unmod-pause):not(#btn-gsl-next):not(#btn-mod-next):not(#btn-procon-next):not(#btn-intro-to-procon):not(#btn-adopt-vote):not(#btn-quick-pass):not(#btn-motion-vote-execute):hover {
+      background-color: #D7CCC8 !important;
+      background: #D7CCC8 !important;
+      color: #3E2723 !important;
+    }
+
+    /* Start Buttons: Dark Chocolate Button */
+    body:not(.light-mode) #btn-gsl-start,
+    body:not(.light-mode) #btn-mod-start,
+    body:not(.light-mode) #btn-single-start,
+    body:not(.light-mode) #btn-procon-start,
+    body:not(.light-mode) #btn-unmod-start {
+      background-color: #3E2723 !important;
+      color: #F7F4EE !important;
+      border: 1px solid #3E2723 !important;
+    }
+    body:not(.light-mode) #btn-gsl-start:hover,
+    body:not(.light-mode) #btn-mod-start:hover,
+    body:not(.light-mode) #btn-single-start:hover,
+    body:not(.light-mode) #btn-procon-start:hover,
+    body:not(.light-mode) #btn-unmod-start:hover {
+      background-color: #4E342E !important;
+    }
+
+    /* Inputs and Selects inside Main */
+    body:not(.light-mode) main input:not(#main-header input),
+    body:not(.light-mode) main select,
+    body:not(.light-mode) main textarea {
+      background-color: #FFFFFF !important;
+      color: #3E2723 !important;
+      border: 1px solid #D7CCC8 !important;
+    }
+    body:not(.light-mode) main input:not(#main-header input)::placeholder,
+    body:not(.light-mode) main select::placeholder,
+    body:not(.light-mode) main textarea::placeholder {
+      color: #8D6E63 !important;
+    }
+    body:not(.light-mode) main input:not(#main-header input):focus,
+    body:not(.light-mode) main select:focus,
+    body:not(.light-mode) main textarea:focus {
+      border-color: #3E2723 !important;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(62, 39, 35, 0.2) !important;
+    }
+
+    /* Roll Call Delegate Cards in Dark Mode: Cream White Card */
+    body:not(.light-mode) #grid-rollcall-delegates > div {
+      background-color: #F7F4EE !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
+      box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.08) !important;
+    }
+    body:not(.light-mode) #grid-rollcall-delegates .country-name-text {
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) #grid-rollcall-delegates .rollcall-power-text {
+      color: #8D6E63 !important;
+    }
+    body:not(.light-mode) #btn-set-all-uncalled {
+      background-color: #EFEBE9 !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) #btn-set-all-uncalled:hover {
+      background-color: #D7CCC8 !important;
+      color: #3E2723 !important;
+    }
+
+    /* Voting View: Voting Details, Scoreboard, Active Caller & Session Cards */
+    body:not(.light-mode) #card-voting-details {
+      background-color: #F7F4EE !important;
+      border: 1px solid #D7CCC8 !important;
+    }
+    body:not(.light-mode) #voting-scoreboard .bg-slate-50,
+    body:not(.light-mode) #voting-scoreboard .bg-slate-100 {
+      background-color: #EFEBE9 !important;
+      border: 1px solid #D7CCC8 !important;
+    }
+    body:not(.light-mode) #voting-scoreboard .text-slate-500 {
+      color: #6D4C41 !important;
+    }
+    body:not(.light-mode) #vote-count-favor,
+    body:not(.light-mode) #vote-count-against,
+    body:not(.light-mode) #vote-count-abstain,
+    body:not(.light-mode) #vote-count-majority {
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) #vote-verdict {
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) #panel-active-voter-card {
+      background-color: #F7F4EE !important;
+      border: 1px solid #D7CCC8 !important;
+    }
+    body:not(.light-mode) #active-voter-name {
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) #active-voter-status,
+    body:not(.light-mode) #label-active-voter-stage {
+      color: #8D6E63 !important;
+    }
+    body:not(.light-mode) #active-voter-actions button {
+      background-color: #EFEBE9 !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) #active-voter-actions button:hover {
+      background-color: #D7CCC8 !important;
+    }
+    body:not(.light-mode) #label-voter-queue-status {
+      background-color: #EFEBE9 !important;
+      color: #3E2723 !important;
+      border: 1px solid #D7CCC8 !important;
+    }
+    body:not(.light-mode) #grid-session-cards > div {
+      background-color: #F7F4EE !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) #grid-session-cards .session-name-input {
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) #grid-session-cards input[type="number"] {
+      background-color: #FFFFFF !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
     }
     body:not(.light-mode) #main-header button {
       color: #F7F4EE !important;
@@ -668,25 +856,28 @@ body:not(.light-mode) {
     button i, button span, button svg {
       color: inherit;
     }
-    /* Roll Call Delegate Items & Action Buttons in Dark Mode */
+    /* Roll Call Delegate Items & Action Buttons in Dark Mode (Cream White Card) */
     body:not(.light-mode) #grid-rollcall-delegates > div {
-      background-color: #252525 !important;
-      border: 1px solid #333333 !important;
-      color: #e3e3e3 !important;
-      box-shadow: none !important;
+      background-color: #F7F4EE !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
+      box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.08) !important;
     }
     body:not(.light-mode) #grid-rollcall-delegates .country-name-text {
-      color: #ffffff !important;
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) #grid-rollcall-delegates .rollcall-power-text {
+      color: #8D6E63 !important;
     }
     body:not(.light-mode) #btn-set-all-uncalled {
-      background-color: #252525 !important;
-      border: 1px solid #383838 !important;
-      color: #c4c4c4 !important;
+      background-color: #EFEBE9 !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
     }
     body:not(.light-mode) #btn-set-all-uncalled:hover {
-      background-color: #2e2e2e !important;
-      color: #ffffff !important;
-      border-color: #555555 !important;
+      background-color: #D7CCC8 !important;
+      color: #3E2723 !important;
+      border-color: #BCAAA4 !important;
     }
     body:not(.light-mode) #btn-set-all-present {
       background-color: rgba(16, 185, 129, 0.15) !important;
@@ -837,21 +1028,21 @@ body:not(.light-mode) {
       color: #3E2723 !important;
     }
     /* Dark Mode Form Inputs (except header) */
-    body:not(.light-mode) input:not(#main-header input), 
-    body:not(.light-mode) select, 
-    body:not(.light-mode) textarea {
+    body:not(.light-mode) input:not(#main-header input):not(main input), 
+    body:not(.light-mode) select:not(main select), 
+    body:not(.light-mode) textarea:not(main textarea) {
       background-color: #161616 !important;
       color: #e3e3e3 !important;
       border-color: #2d2d2d !important;
     }
-    body:not(.light-mode) input:not(#main-header input)::placeholder, 
-    body:not(.light-mode) select::placeholder, 
-    body:not(.light-mode) textarea::placeholder {
+    body:not(.light-mode) input:not(#main-header input):not(main input)::placeholder, 
+    body:not(.light-mode) select:not(main select)::placeholder, 
+    body:not(.light-mode) textarea:not(main textarea)::placeholder {
       color: #757575 !important;
     }
-    body:not(.light-mode) input:not(#main-header input):focus, 
-    body:not(.light-mode) select:focus, 
-    body:not(.light-mode) textarea:focus {
+    body:not(.light-mode) input:not(#main-header input):not(main input):focus, 
+    body:not(.light-mode) select:not(main select):focus, 
+    body:not(.light-mode) textarea:not(main textarea):focus {
       color: #ffffff !important;
       border-color: #ffffff !important;
       outline: none;
@@ -859,21 +1050,47 @@ body:not(.light-mode) {
     }
     body:not(.light-mode) .hover\:bg-slate-50:hover, 
     body:not(.light-mode) .hover\:bg-slate-100:hover {
-      background-color: #252525 !important;
+      background-color: #EFEBE9 !important;
     }
     body:not(.light-mode) .modal-box, 
     body:not(.light-mode) #modal-add-speaker > div, 
     body:not(.light-mode) #modal-define-time > div, 
     body:not(.light-mode) #modal-mod-config > div, 
-    body:not(.light-mode) #modal-add-motion > div {
-      background-color: #1e1e1e !important;
-      border-color: #2d2d2d !important;
-      color: #e3e3e3 !important;
+    body:not(.light-mode) #modal-add-motion > div,
+    body:not(.light-mode) #modal-configure-voting > div,
+    body:not(.light-mode) #modal-unified-settings > div {
+      background-color: #F7F4EE !important;
+      border-color: #D7CCC8 !important;
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) .modal-box *, 
+    body:not(.light-mode) #modal-add-speaker > div *, 
+    body:not(.light-mode) #modal-define-time > div *, 
+    body:not(.light-mode) #modal-mod-config > div *, 
+    body:not(.light-mode) #modal-add-motion > div *,
+    body:not(.light-mode) #modal-configure-voting > div *,
+    body:not(.light-mode) #modal-unified-settings > div * {
+      color: #3E2723;
+    }
+    body:not(.light-mode) .modal-box input, 
+    body:not(.light-mode) .modal-box select,
+    body:not(.light-mode) #modal-add-speaker > div input, 
+    body:not(.light-mode) #modal-define-time > div input, 
+    body:not(.light-mode) #modal-mod-config > div input, 
+    body:not(.light-mode) #modal-add-motion > div input,
+    body:not(.light-mode) #modal-add-motion > div select,
+    body:not(.light-mode) #modal-configure-voting > div input,
+    body:not(.light-mode) #modal-configure-voting > div select,
+    body:not(.light-mode) #modal-unified-settings > div input,
+    body:not(.light-mode) #modal-unified-settings > div select {
+      background-color: #FFFFFF !important;
+      color: #3E2723 !important;
+      border: 1px solid #D7CCC8 !important;
     }
     body:not(.light-mode) .bg-emerald-50, 
     body:not(.light-mode) .bg-rose-50, 
     body:not(.light-mode) .bg-amber-50 {
-      background-color: #252525 !important;
+      background-color: #EFEBE9 !important;
     }
     body:not(.light-mode) #main-drawer {
       background-color: #121212 !important;
