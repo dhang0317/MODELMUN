@@ -521,11 +521,17 @@ body:not(.light-mode) {
       color: #3E2723 !important;
     }
     body:not(.light-mode) .speaking-subtab-btn.active,
+    body:not(.light-mode) .speaking-subtab-btn.subtab-active,
     body:not(.light-mode) .speaking-subtab-btn.bg-white {
       background-color: #3E2723 !important;
       color: #F7F4EE !important;
       border-color: #3E2723 !important;
       font-weight: bold !important;
+    }
+    body:not(.light-mode) .speaking-subtab-btn.active *,
+    body:not(.light-mode) .speaking-subtab-btn.subtab-active *,
+    body:not(.light-mode) .speaking-subtab-btn.bg-white * {
+      color: #F7F4EE !important;
     }
     body:not(.light-mode) #btn-voting-subtab-rollcall,
     body:not(.light-mode) #btn-voting-subtab-session {
@@ -539,6 +545,12 @@ body:not(.light-mode) {
       background-color: #3E2723 !important;
       color: #F7F4EE !important;
       font-weight: bold !important;
+    }
+    body:not(.light-mode) #btn-voting-subtab-rollcall.active *,
+    body:not(.light-mode) #btn-voting-subtab-rollcall.bg-white *,
+    body:not(.light-mode) #btn-voting-subtab-session.active *,
+    body:not(.light-mode) #btn-voting-subtab-session.bg-white * {
+      color: #F7F4EE !important;
     }
 
     /* Timer Bars / Progress Tracks */
@@ -568,7 +580,7 @@ body:not(.light-mode) {
       color: #3E2723 !important;
     }
 
-    /* Start Buttons: Dark Chocolate Button */
+    /* Start Buttons: Dark Chocolate Button with Cream White text */
     body:not(.light-mode) #btn-gsl-start,
     body:not(.light-mode) #btn-mod-start,
     body:not(.light-mode) #btn-single-start,
@@ -578,12 +590,56 @@ body:not(.light-mode) {
       color: #F7F4EE !important;
       border: 1px solid #3E2723 !important;
     }
+    body:not(.light-mode) #btn-gsl-start *,
+    body:not(.light-mode) #btn-mod-start *,
+    body:not(.light-mode) #btn-single-start *,
+    body:not(.light-mode) #btn-procon-start *,
+    body:not(.light-mode) #btn-unmod-start * {
+      color: #F7F4EE !important;
+    }
     body:not(.light-mode) #btn-gsl-start:hover,
     body:not(.light-mode) #btn-mod-start:hover,
     body:not(.light-mode) #btn-single-start:hover,
     body:not(.light-mode) #btn-procon-start:hover,
     body:not(.light-mode) #btn-unmod-start:hover {
       background-color: #4E342E !important;
+      color: #FFFFFF !important;
+    }
+
+    /* Soft Green Tone for Next / Adopt / Enter ProCon / Action Buttons */
+    body:not(.light-mode) #btn-gsl-next,
+    body:not(.light-mode) #btn-mod-next,
+    body:not(.light-mode) #btn-procon-next,
+    body:not(.light-mode) #btn-intro-to-procon,
+    body:not(.light-mode) #btn-adopt-vote,
+    body:not(.light-mode) #btn-quick-pass,
+    body:not(.light-mode) #btn-motion-vote-execute,
+    body:not(.light-mode) #btn-procon-add-pro {
+      background-color: rgba(16, 185, 129, 0.22) !important;
+      border: 1px solid rgba(16, 185, 129, 0.5) !important;
+      color: #065F46 !important;
+      box-shadow: none !important;
+    }
+    body:not(.light-mode) #btn-gsl-next *,
+    body:not(.light-mode) #btn-mod-next *,
+    body:not(.light-mode) #btn-procon-next *,
+    body:not(.light-mode) #btn-intro-to-procon *,
+    body:not(.light-mode) #btn-adopt-vote *,
+    body:not(.light-mode) #btn-quick-pass *,
+    body:not(.light-mode) #btn-motion-vote-execute *,
+    body:not(.light-mode) #btn-procon-add-pro * {
+      color: #065F46 !important;
+    }
+    body:not(.light-mode) #btn-gsl-next:hover,
+    body:not(.light-mode) #btn-mod-next:hover,
+    body:not(.light-mode) #btn-procon-next:hover,
+    body:not(.light-mode) #btn-intro-to-procon:hover,
+    body:not(.light-mode) #btn-adopt-vote:hover,
+    body:not(.light-mode) #btn-quick-pass:hover,
+    body:not(.light-mode) #btn-motion-vote-execute:hover,
+    body:not(.light-mode) #btn-procon-add-pro:hover {
+      background-color: rgba(16, 185, 129, 0.35) !important;
+      color: #064E3B !important;
     }
 
     /* Inputs and Selects inside Main */
