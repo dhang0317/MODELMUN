@@ -69,29 +69,29 @@
    DESIGN TOKENS (CSS VARIABLES) - SYSTEM STANDARDIZATION
    ========================================================== */
 :root {
-  /* Surfaces & Backgrounds (Light Mode) */
-  --surface-canvas: #f8fafc;
-  --surface-primary: #ffffff;
-  --surface-secondary: #f1f5f9;
-  --surface-tertiary: #e2e8f0;
-  --surface-overlay: rgba(15, 23, 42, 0.6);
+  /* Surfaces & Backgrounds (Light Mode: Cream White base #F7F4EE, Dark Chocolate blocks #3E2723) */
+  --surface-canvas: #F7F4EE;
+  --surface-primary: #3E2723;
+  --surface-secondary: #4E342E;
+  --surface-tertiary: #5D4037;
+  --surface-overlay: rgba(62, 39, 35, 0.6);
 
-  /* Content & Typography (Light Mode) - WCAG AA Standards */
-  --content-primary: #0f172a;
-  --content-secondary: #475569;
-  --content-muted: #64748b;
-  --content-inverse: #ffffff;
+  /* Content & Typography (Light Mode) */
+  --content-primary: #3E2723;
+  --content-secondary: #5D4037;
+  --content-muted: #8D6E63;
+  --content-inverse: #F7F4EE;
 
   /* Borders & Outlines (Light Mode) */
-  --border-subtle: #e2e8f0;
-  --border-strong: #cbd5e1;
-  --border-focus: #3b82f6;
+  --border-subtle: #D7CCC8;
+  --border-strong: #BCAAA4;
+  --border-focus: #3E2723;
 
   /* Brand Accents */
-  --brand-primary: #2563eb;
-  --brand-hover: #1d4ed8;
-  --brand-active: #1e40af;
-  --brand-surface: #eff6ff;
+  --brand-primary: #3E2723;
+  --brand-hover: #4E342E;
+  --brand-active: #2D1B18;
+  --brand-surface: #EFEBE9;
 
   /* Feedback Colors */
   --color-success: #16a34a;
@@ -102,9 +102,9 @@
   --color-warning-bg: #fef3c7;
 
   /* Shadows (Light Mode Elevation) */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --shadow-sm: 0 1px 2px 0 rgba(62, 39, 35, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(62, 39, 35, 0.1), 0 2px 4px -2px rgba(62, 39, 35, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(62, 39, 35, 0.15), 0 4px 6px -4px rgba(62, 39, 35, 0.05);
 
   /* Fixed Metrics (Ensures Zero Layout Shift) */
   --radius-sm: 8px;
@@ -114,29 +114,29 @@
 }
 
 body:not(.light-mode) {
-  /* Surfaces & Backgrounds (Dark Mode - Stepped Luminance) */
-  --surface-canvas: #000000;
-  --surface-primary: #0d0d11;
-  --surface-secondary: #17171d;
-  --surface-tertiary: #23232b;
-  --surface-overlay: rgba(0, 0, 0, 0.85);
+  /* Surfaces & Backgrounds (Dark Mode: Dark Chocolate canvas #3E2723, Cream White blocks #F7F4EE) */
+  --surface-canvas: #3E2723;
+  --surface-primary: #F7F4EE;
+  --surface-secondary: #EFEBE9;
+  --surface-tertiary: #D7CCC8;
+  --surface-overlay: rgba(30, 18, 16, 0.85);
 
-  /* Content & Typography (Dark Mode) - WCAG AA Standards */
-  --content-primary: #ffffff;
-  --content-secondary: #a1a1aa;
-  --content-muted: #71717a;
-  --content-inverse: #000000;
+  /* Content & Typography (Dark Mode) */
+  --content-primary: #F7F4EE;
+  --content-secondary: #D7CCC8;
+  --content-muted: #BCAAA4;
+  --content-inverse: #3E2723;
 
-  /* Borders (Dark Mode - Micro-translucent Alpha Borders) */
-  --border-subtle: rgba(255, 255, 255, 0.1);
-  --border-strong: rgba(255, 255, 255, 0.2);
-  --border-focus: #60a5fa;
+  /* Borders (Dark Mode) */
+  --border-subtle: #5D4037;
+  --border-strong: #6D4C41;
+  --border-focus: #F7F4EE;
 
   /* Brand Accents */
-  --brand-primary: #3b82f6;
-  --brand-hover: #60a5fa;
-  --brand-active: #2563eb;
-  --brand-surface: rgba(59, 130, 246, 0.15);
+  --brand-primary: #F7F4EE;
+  --brand-hover: #FFFFFF;
+  --brand-active: #EFEBE9;
+  --brand-surface: rgba(247, 244, 238, 0.15);
 
   /* Shadows (Dark Mode - Ambient Depth) */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.7);
@@ -244,24 +244,24 @@ body:not(.light-mode) {
       min-height: 48px !important;
     }
     body:not(.light-mode) #main-header {
-      background-color: #000000 !important;
-      border-color: #27272a !important;
+      background-color: #3E2723 !important;
+      border-color: #5D4037 !important;
     }
     body:not(.light-mode) #main-header,
     body:not(.light-mode) #main-header * {
-      color: #ffffff !important;
+      color: #F7F4EE !important;
     }
     body:not(.light-mode) #main-header input {
       background-color: transparent !important;
       border-color: transparent !important;
-      color: #ffffff !important;
+      color: #F7F4EE !important;
     }
     body:not(.light-mode) #main-header input:hover {
-      border-color: #52525b !important;
+      border-color: #8D6E63 !important;
     }
     body:not(.light-mode) #main-header input:focus {
-      border-color: #ffffff !important;
-      color: #ffffff !important;
+      border-color: #F7F4EE !important;
+      color: #F7F4EE !important;
     }
     body:not(.light-mode) #header-attendance-stats {
       background-color: transparent !important;
@@ -269,83 +269,97 @@ body:not(.light-mode) {
       box-shadow: none !important;
     }
     body:not(.light-mode) #header-attendance-stats * {
-      color: #ffffff !important;
+      color: #F7F4EE !important;
     }
     body:not(.light-mode) .header-stat-divider {
-      background-color: rgba(255, 255, 255, 0.2) !important;
+      background-color: rgba(247, 244, 238, 0.25) !important;
     }
     body:not(.light-mode) #btn-toggle-theme,
     body:not(.light-mode) #btn-google-login,
     body:not(.light-mode) #btn-open-qrcode {
-      border: 1px solid #3f3f46 !important;
-      background-color: #18181b !important;
-      color: #ffffff !important;
+      border: 1px solid #6D4C41 !important;
+      background-color: #4E342E !important;
+      color: #F7F4EE !important;
     }
     body:not(.light-mode) #btn-open-settings {
       border: none !important;
       background-color: transparent !important;
       background: transparent !important;
-      color: #ffffff !important;
+      color: #F7F4EE !important;
       box-shadow: none !important;
     }
     body:not(.light-mode) #btn-open-settings:hover {
-      background-color: rgba(255, 255, 255, 0.1) !important;
-      background: rgba(255, 255, 255, 0.1) !important;
+      background-color: rgba(247, 244, 238, 0.12) !important;
+      background: rgba(247, 244, 238, 0.12) !important;
       border: none !important;
     }
     body:not(.light-mode) #btn-open-qrcode:hover {
-      background-color: #27272a !important;
-      border-color: #52525b !important;
+      background-color: #5D4037 !important;
+      border-color: #8D6E63 !important;
     }
     body:not(.light-mode) #btn-open-qrcode * {
-      color: #ffffff !important;
+      color: #F7F4EE !important;
     }
     body:not(.light-mode) #user-dropdown-popover {
-      background-color: #000000 !important;
-      border-color: #27272a !important;
+      background-color: #3E2723 !important;
+      border-color: #5D4037 !important;
     }
     body:not(.light-mode) #user-dropdown-popover * {
-      color: #ffffff !important;
+      color: #F7F4EE !important;
     }
 
     /* Dark Mode Tabs */
     body:not(.light-mode) nav#tabs-nav {
-      background-color: #000000 !important;
-      border-color: #27272a !important;
+      background-color: #3E2723 !important;
+      border-color: #5D4037 !important;
     }
     body:not(.light-mode) .tab-btn {
       background-color: transparent !important;
-      color: #a1a1aa !important;
+      color: #D7CCC8 !important;
       border-color: transparent !important;
     }
     body:not(.light-mode) .tab-btn span {
-      color: #a1a1aa !important;
+      color: #D7CCC8 !important;
     }
     body:not(.light-mode) .tab-btn:hover,
     body:not(.light-mode) .tab-btn:hover span {
-      color: #ffffff !important;
-      background-color: rgba(255, 255, 255, 0.1) !important;
+      color: #F7F4EE !important;
+      background-color: rgba(247, 244, 238, 0.12) !important;
     }
     body:not(.light-mode) .tab-active,
     body:not(.light-mode) .tab-active span {
-      color: #ffffff !important;
+      color: #F7F4EE !important;
       font-weight: bold !important;
-      border-bottom: 3px solid #ffffff !important;
+      border-bottom: 3px solid #F7F4EE !important;
       background-color: transparent !important;
     }
 
-    /* Dark Mode Surfaces & Text */
+    /* Dark Mode Surfaces & Text: Canvas = #3E2723, Cards/Boxes = #F7F4EE */
     body:not(.light-mode) .view-panel,
-    body:not(.light-mode) main,
+    body:not(.light-mode) main {
+      background-color: #3E2723 !important;
+      color: #F7F4EE !important;
+      border-color: #5D4037 !important;
+    }
     body:not(.light-mode) .bg-white,
     body:not(.light-mode) .bg-slate-50,
     body:not(.light-mode) .bg-slate-100,
     body:not(.light-mode) .bg-slate-800,
     body:not(.light-mode) .bg-slate-900,
-    body:not(.light-mode) [class*="bg-zinc"] {
-      background-color: #000000 !important;
-      color: #ffffff !important;
-      border-color: #27272a !important;
+    body:not(.light-mode) [class*="bg-zinc"],
+    body:not(.light-mode) #card-voting-details,
+    body:not(.light-mode) #panel-active-voter-card {
+      background-color: #F7F4EE !important;
+      color: #3E2723 !important;
+      border-color: #D7CCC8 !important;
+    }
+    body:not(.light-mode) .bg-white *,
+    body:not(.light-mode) .bg-slate-50 *,
+    body:not(.light-mode) .bg-slate-100 *,
+    body:not(.light-mode) [class*="bg-zinc"] *,
+    body:not(.light-mode) #card-voting-details *,
+    body:not(.light-mode) #panel-active-voter-card * {
+      color: #3E2723;
     }
     body:not(.light-mode) p,
     body:not(.light-mode) span:not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled),
@@ -355,21 +369,26 @@ body:not(.light-mode) {
     body:not(.light-mode) h4,
     body:not(.light-mode) h5,
     body:not(.light-mode) h6,
-    body:not(.light-mode) div:not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled),
     body:not(.light-mode) label,
     body:not(.light-mode) td,
     body:not(.light-mode) th,
-    body:not(.light-mode) li,
+    body:not(.light-mode) li {
+      color: inherit;
+    }
     body:not(.light-mode) .text-slate-800,
     body:not(.light-mode) .text-slate-700,
-    body:not(.light-mode) .text-slate-900,
+    body:not(.light-mode) .text-slate-900 {
+      color: #3E2723 !important;
+    }
     body:not(.light-mode) .text-slate-600,
     body:not(.light-mode) .text-slate-500,
-    body:not(.light-mode) .text-slate-400,
+    body:not(.light-mode) .text-slate-400 {
+      color: #5D4037 !important;
+    }
     body:not(.light-mode) .text-slate-300,
     body:not(.light-mode) .text-slate-200,
     body:not(.light-mode) .text-slate-100 {
-      color: #ffffff !important;
+      color: #8D6E63 !important;
     }
     body:not(.light-mode) .border-slate-100,
     body:not(.light-mode) .border-slate-200,
@@ -377,25 +396,39 @@ body:not(.light-mode) {
     body:not(.light-mode) .border-slate-700,
     body:not(.light-mode) .border-zinc-800,
     body:not(.light-mode) .border-zinc-900 {
-      border-color: #27272a !important;
+      border-color: #D7CCC8 !important;
     }
     body:not(.light-mode) .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
     body:not(.light-mode) .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
     body:not(.light-mode) .divide-slate-700 > :not([hidden]) ~ :not([hidden]) {
-      border-color: #27272a !important;
+      border-color: #D7CCC8 !important;
     }
 
     /* Dark Mode Buttons */
     body:not(.light-mode) button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent):not(.btn-rollcall-present):not(.btn-rollcall-absent):not(#vote-stage-r1):not(#vote-stage-r2):not(#vote-stage-rights) {
       background-color: transparent !important;
       background: transparent !important;
-      color: #ffffff !important;
+      color: #3E2723 !important;
+      border: 1px solid #BCAAA4 !important;
       box-shadow: none !important;
     }
+    body:not(.light-mode) #main-header button,
+    body:not(.light-mode) nav#tabs-nav button,
+    body:not(.light-mode) #main-drawer button {
+      color: #F7F4EE !important;
+      border-color: #5D4037 !important;
+    }
     body:not(.light-mode) button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):hover {
-      background-color: rgba(255, 255, 255, 0.1) !important;
-      background: rgba(255, 255, 255, 0.1) !important;
-      color: #ffffff !important;
+      background-color: rgba(62, 39, 35, 0.08) !important;
+      background: rgba(62, 39, 35, 0.08) !important;
+      color: #3E2723 !important;
+    }
+    body:not(.light-mode) #main-header button:hover,
+    body:not(.light-mode) nav#tabs-nav button:hover,
+    body:not(.light-mode) #main-drawer button:hover {
+      background-color: rgba(247, 244, 238, 0.12) !important;
+      background: rgba(247, 244, 238, 0.12) !important;
+      color: #F7F4EE !important;
     }
 
     /* Dark Mode Badges & Voting */
@@ -508,7 +541,7 @@ body:not(.light-mode) {
       color: inherit;
     }
     body:not(.light-mode) button:not(.speaking-subtab-btn):not(.tab-btn):not(#btn-open-drawer):not(#btn-open-settings):not(#btn-close-drawer):not(.btn-close-modal):not(.modal-close-icon):not(#btn-user-avatar):not(#btn-logo-home):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item):not(.btn-extend-unmod):not(:has(i[data-lucide="plus"])):not(:has(i[data-lucide="x"])):not(:has(i[class*="fa-plus"])):not(:has(i[class*="fa-xmark"])) {
-      border: 1px solid #3f3f46 !important;
+      border: 1px solid #BCAAA4 !important;
     }
     #btn-open-drawer,
     #btn-open-drawer i,
@@ -581,14 +614,15 @@ body:not(.light-mode) {
     }
     body:not(.light-mode) .preset-btn,
     body:not(.light-mode) .preset-select {
-      border: 1px solid #27272a !important;
-      color: #ffffff !important;
-      background-color: #09090b !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
+      background-color: #EFEBE9 !important;
     }
     body:not(.light-mode) .preset-btn:hover,
     body:not(.light-mode) .preset-select:hover {
-      border-color: #ffffff !important;
-      color: #ffffff !important;
+      border-color: #3E2723 !important;
+      background-color: #D7CCC8 !important;
+      color: #3E2723 !important;
     }
     #header-ga-select {
       background-color: transparent !important;
@@ -597,66 +631,69 @@ body:not(.light-mode) {
       box-shadow: none !important;
     }
     #header-ga-select option {
-      background-color: #09090b !important;
-      color: #ffffff !important;
+      background-color: #3E2723 !important;
+      color: #F7F4EE !important;
       padding: 6px 12px;
     }
     body.light-mode #header-ga-select option {
-      background-color: #ffffff !important;
-      color: #000000 !important;
+      background-color: #F7F4EE !important;
+      color: #3E2723 !important;
     }
     /* Dark Mode Form Inputs (except header) */
     body:not(.light-mode) input:not(#main-header input), 
     body:not(.light-mode) select, 
     body:not(.light-mode) textarea {
-      background-color: #09090b !important;
-      color: #e4e4e7 !important;
-      border-color: #27272a !important;
+      background-color: #FFFFFF !important;
+      color: #3E2723 !important;
+      border-color: #D7CCC8 !important;
     }
     body:not(.light-mode) input:not(#main-header input)::placeholder, 
     body:not(.light-mode) select::placeholder, 
     body:not(.light-mode) textarea::placeholder {
-      color: #71717a !important;
+      color: #8D6E63 !important;
     }
     body:not(.light-mode) input:not(#main-header input):focus, 
     body:not(.light-mode) select:focus, 
     body:not(.light-mode) textarea:focus {
-      color: #ffffff !important;
-      border-color: #ffffff !important;
+      color: #3E2723 !important;
+      border-color: #3E2723 !important;
       outline: none;
-      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3) !important;
+      box-shadow: 0 0 0 2px rgba(62, 39, 35, 0.25) !important;
     }
     body:not(.light-mode) .hover\:bg-slate-50:hover, 
     body:not(.light-mode) .hover\:bg-slate-100:hover {
-      background-color: #18181b !important;
+      background-color: #EFEBE9 !important;
     }
     body:not(.light-mode) .modal-box, 
     body:not(.light-mode) #modal-add-speaker > div, 
     body:not(.light-mode) #modal-define-time > div, 
     body:not(.light-mode) #modal-mod-config > div, 
     body:not(.light-mode) #modal-add-motion > div {
-      background-color: #000000 !important;
-      border-color: #27272a !important;
-      color: #ffffff !important;
+      background-color: #F7F4EE !important;
+      border-color: #D7CCC8 !important;
+      color: #3E2723 !important;
     }
     body:not(.light-mode) .bg-emerald-50, 
     body:not(.light-mode) .bg-rose-50, 
     body:not(.light-mode) .bg-amber-50 {
-      background-color: #09090b !important;
+      background-color: #EFEBE9 !important;
     }
     body:not(.light-mode) #main-drawer {
-      background-color: #000000 !important;
-      border-right: 1px solid #27272a !important;
-      color: #ffffff !important;
+      background-color: #3E2723 !important;
+      border-right: 1px solid #5D4037 !important;
+      color: #F7F4EE !important;
     }
     body:not(.light-mode) #main-drawer * {
-      color: #ffffff !important;
+      color: #F7F4EE !important;
     }
     #btn-open-drawer {
       display: flex !important;
       visibility: visible !important;
       opacity: 1 !important;
       color: #ffffff !important;
+    }
+    body:not(.light-mode) #btn-open-drawer {
+      color: #F7F4EE !important;
     }
     #btn-open-drawer svg {
       display: block !important;
@@ -668,33 +705,33 @@ body:not(.light-mode) {
     }
 
     /* =====================================================
-       LIGHT MODE — Pure White (#ffffff) & Pure Black/Dark Slate Text (#000000 / #0f172a)
+       LIGHT MODE — Cream White (#F7F4EE) Canvas & Dark Chocolate (#3E2723) Contrast Blocks
        ===================================================== */
     body.light-mode {
-      background-color: #ffffff !important;
-      color: #000000 !important;
+      background-color: #F7F4EE !important;
+      color: #3E2723 !important;
     }
 
-    /* Light Mode Header: Clean Pure White (#ffffff) with Crisp Black/Dark Slate text */
+    /* Light Mode Header: Cream White (#F7F4EE) with Dark Chocolate (#3E2723) text */
     body.light-mode #main-header {
-      background-color: #ffffff !important;
-      border-color: #e2e8f0 !important;
+      background-color: #F7F4EE !important;
+      border-color: #D7CCC8 !important;
     }
     body.light-mode #main-header,
     body.light-mode #main-header * {
-      color: #0f172a !important;
+      color: #3E2723 !important;
     }
     body.light-mode #main-header input {
       background-color: transparent !important;
       border-color: transparent !important;
-      color: #0f172a !important;
+      color: #3E2723 !important;
     }
     body.light-mode #main-header input:hover {
-      border-color: #cbd5e1 !important;
+      border-color: #8D6E63 !important;
     }
     body.light-mode #main-header input:focus {
-      border-color: #000000 !important;
-      color: #000000 !important;
+      border-color: #3E2723 !important;
+      color: #3E2723 !important;
     }
     body.light-mode #header-attendance-stats {
       background-color: transparent !important;
@@ -702,106 +739,116 @@ body:not(.light-mode) {
       box-shadow: none !important;
     }
     body.light-mode #header-attendance-stats * {
-      color: #0f172a !important;
+      color: #3E2723 !important;
     }
     body.light-mode .header-stat-divider {
-      background-color: rgba(0, 0, 0, 0.15) !important;
+      background-color: rgba(62, 39, 35, 0.2) !important;
     }
     body.light-mode #btn-toggle-theme,
     body.light-mode #btn-google-login,
     body.light-mode #btn-open-qrcode {
-      border: 1px solid #cbd5e1 !important;
-      background-color: #ffffff !important;
-      color: #0f172a !important;
+      border: 1px solid #D7CCC8 !important;
+      background-color: #EFEBE9 !important;
+      color: #3E2723 !important;
     }
     body.light-mode #btn-open-settings {
       border: none !important;
       background-color: transparent !important;
       background: transparent !important;
-      color: #0f172a !important;
+      color: #3E2723 !important;
       box-shadow: none !important;
     }
     body.light-mode #btn-toggle-theme:hover,
     body.light-mode #btn-google-login:hover,
     body.light-mode #btn-open-qrcode:hover {
-      background-color: #f1f5f9 !important;
-      border-color: #94a3b8 !important;
-      color: #000000 !important;
+      background-color: #D7CCC8 !important;
+      border-color: #8D6E63 !important;
+      color: #3E2723 !important;
     }
     body.light-mode #btn-open-settings:hover {
-      background-color: rgba(0, 0, 0, 0.05) !important;
-      background: rgba(0, 0, 0, 0.05) !important;
+      background-color: rgba(62, 39, 35, 0.08) !important;
+      background: rgba(62, 39, 35, 0.08) !important;
       border: none !important;
-      color: #000000 !important;
+      color: #3E2723 !important;
     }
     body.light-mode #btn-open-settings * {
-      color: #0f172a !important;
+      color: #3E2723 !important;
     }
     body.light-mode #btn-open-qrcode * {
-      color: #0f172a !important;
+      color: #3E2723 !important;
     }
     body.light-mode #user-dropdown-popover {
-      background-color: #ffffff !important;
-      border-color: #cbd5e1 !important;
+      background-color: #F7F4EE !important;
+      border-color: #D7CCC8 !important;
     }
     body.light-mode #user-dropdown-popover * {
-      color: #0f172a !important;
+      color: #3E2723 !important;
     }
 
     /* Light Mode Tabs Bar */
     body.light-mode nav#tabs-nav {
-      background-color: #ffffff !important;
-      border-color: #e2e8f0 !important;
+      background-color: #F7F4EE !important;
+      border-color: #D7CCC8 !important;
     }
     body.light-mode .tab-btn {
       background-color: transparent !important;
-      color: #64748b !important;
+      color: #8D6E63 !important;
       border-color: transparent !important;
     }
     body.light-mode .tab-btn span {
-      color: #64748b !important;
+      color: #8D6E63 !important;
     }
     body.light-mode .tab-btn:hover {
-      background-color: #f8fafc !important;
+      background-color: rgba(62, 39, 35, 0.08) !important;
     }
     body.light-mode .tab-btn:hover span {
-      color: #000000 !important;
+      color: #3E2723 !important;
     }
     body.light-mode .tab-active {
       background-color: transparent !important;
-      border-bottom: 3px solid #000000 !important;
+      border-bottom: 3px solid #3E2723 !important;
     }
     body.light-mode .tab-active span {
-      color: #000000 !important;
+      color: #3E2723 !important;
       font-weight: bold !important;
     }
 
-    /* Light Mode Main & Panels */
+    /* Light Mode Main & Panels: Canvas = Cream White (#F7F4EE), Cards/Blocks = Dark Chocolate (#3E2723) */
     body.light-mode main {
-      background-color: #ffffff !important;
+      background-color: #F7F4EE !important;
     }
     body.light-mode .view-panel {
-      background-color: #ffffff !important;
+      background-color: #F7F4EE !important;
     }
     body.light-mode main .bg-white,
-    body.light-mode main [class*="bg-white"] {
-      background-color: #ffffff !important;
-    }
+    body.light-mode main [class*="bg-white"],
     body.light-mode main .bg-slate-50,
-    body.light-mode main [class*="bg-slate-50"] {
-      background-color: #ffffff !important;
-    }
+    body.light-mode main [class*="bg-slate-50"],
     body.light-mode main .bg-slate-100,
-    body.light-mode main [class*="bg-slate-100"] {
-      background-color: #f8fafc !important;
-    }
-    body.light-mode main [class*="bg-black"] {
-      background-color: #ffffff !important;
-    }
+    body.light-mode main [class*="bg-slate-100"],
+    body.light-mode main [class*="bg-black"],
     body.light-mode main [class*="bg-zinc-950"],
     body.light-mode main [class*="bg-zinc-900"],
-    body.light-mode main [class*="bg-zinc-800"] {
-      background-color: #ffffff !important;
+    body.light-mode main [class*="bg-zinc-800"],
+    body.light-mode #card-voting-details,
+    body.light-mode #panel-active-voter-card {
+      background-color: #3E2723 !important;
+      color: #F7F4EE !important;
+      border-color: #5D4037 !important;
+    }
+    body.light-mode main .bg-white *,
+    body.light-mode main [class*="bg-white"] *,
+    body.light-mode main .bg-slate-50 *,
+    body.light-mode main [class*="bg-slate-50"] *,
+    body.light-mode main .bg-slate-100 *,
+    body.light-mode main [class*="bg-slate-100"] *,
+    body.light-mode main [class*="bg-black"] *,
+    body.light-mode main [class*="bg-zinc-950"] *,
+    body.light-mode main [class*="bg-zinc-900"] *,
+    body.light-mode main [class*="bg-zinc-800"] *,
+    body.light-mode #card-voting-details *,
+    body.light-mode #panel-active-voter-card * {
+      color: #F7F4EE;
     }
 
     /* Light Mode Text in Main View Panels */
@@ -816,7 +863,7 @@ body:not(.light-mode) {
     body.light-mode main td,
     body.light-mode main th,
     body.light-mode main li {
-      color: #000000 !important;
+      color: inherit;
     }
 
     /* Direct text classes inside main views */
@@ -828,40 +875,40 @@ body:not(.light-mode) {
     body.light-mode main .text-zinc-100,
     body.light-mode main .text-zinc-200,
     body.light-mode main .text-white:not(.btn-vote-choice *):not(.attendance-present *):not(.attendance-absent *):not(.attendance-pv *):not(.attendance-uncalled *):not(#btn-gsl-start *):not(#btn-gsl-next *):not(#btn-mod-start *):not(#btn-mod-next *) {
-      color: #000000 !important;
+      color: #F7F4EE !important;
     }
     body.light-mode main .text-slate-500,
     body.light-mode main .text-slate-600 {
-      color: #334155 !important;
+      color: #D7CCC8 !important;
     }
     body.light-mode main .text-slate-400,
     body.light-mode main .text-zinc-400 {
-      color: #475569 !important;
+      color: #BCAAA4 !important;
     }
 
     /* Light Mode Borders */
     body.light-mode main [class*="border-slate"],
     body.light-mode main [class*="border-zinc"],
     body.light-mode main [class*="border-white"] {
-      border-color: #e2e8f0 !important;
+      border-color: #5D4037 !important;
     }
     body.light-mode .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
     body.light-mode .divide-slate-200 > :not([hidden]) ~ :not([hidden]),
     body.light-mode .divide-slate-700 > :not([hidden]) ~ :not([hidden]) {
-      border-color: #e2e8f0 !important;
+      border-color: #5D4037 !important;
     }
 
-    /* Light Mode Normal Buttons (按鈕不要有背景色) */
+    /* Light Mode Normal Buttons inside Chocolate cards */
     body.light-mode button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#main-header button):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent) {
       background-color: transparent !important;
       background: transparent !important;
-      color: #000000 !important;
-      border: 1px solid #cbd5e1 !important;
+      color: #F7F4EE !important;
+      border: 1px solid #6D4C41 !important;
     }
     body.light-mode button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#main-header button):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent):hover {
-      background-color: rgba(0, 0, 0, 0.05) !important;
-      background: rgba(0, 0, 0, 0.05) !important;
-      color: #000000 !important;
+      background-color: rgba(247, 244, 238, 0.12) !important;
+      background: rgba(247, 244, 238, 0.12) !important;
+      color: #F7F4EE !important;
     }
 
     /* Light Mode Icon/Borderless Buttons */
@@ -881,209 +928,207 @@ body:not(.light-mode) {
     body.light-mode button:has(svg.lucide-x) {
       border: none !important;
       background: transparent !important;
-      color: #475569 !important;
+      color: #D7CCC8 !important;
     }
     body.light-mode .btn-add-country-item,
     body.light-mode button:has(i[data-lucide="plus"]) {
-      color: #0284c7 !important;
+      color: #93c5fd !important;
     }
     body.light-mode .btn-remove-country,
     body.light-mode .btn-del-mod-queue,
     body.light-mode .btn-del-queue,
     body.light-mode button:has(i[data-lucide="x"]) {
-      color: #dc2626 !important;
+      color: #fca5a5 !important;
     }
 
     /* Light Mode Input Elements (outside header) */
     body.light-mode input:not(#main-header input),
     body.light-mode select,
     body.light-mode textarea {
-      background-color: #ffffff !important;
-      color: #000000 !important;
-      border: 1px solid #cbd5e1 !important;
+      background-color: #2D1B18 !important;
+      color: #F7F4EE !important;
+      border: 1px solid #5D4037 !important;
     }
     body.light-mode input:not(#main-header input)::placeholder,
     body.light-mode textarea::placeholder {
-      color: #94a3b8 !important;
+      color: #8D6E63 !important;
     }
     body.light-mode input:not(#main-header input):focus,
     body.light-mode select:focus,
     body.light-mode textarea:focus {
-      border-color: #000000 !important;
+      border-color: #F7F4EE !important;
       outline: none;
-      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.15) !important;
+      box-shadow: 0 0 0 2px rgba(247, 244, 238, 0.25) !important;
     }
 
     /* Light Mode Setup Preset Buttons */
     body.light-mode .preset-btn,
     body.light-mode .preset-select {
-      background-color: #f8fafc !important;
-      border: 1px solid #cbd5e1 !important;
-      color: #0f172a !important;
+      background-color: #4E342E !important;
+      border: 1px solid #5D4037 !important;
+      color: #F7F4EE !important;
     }
     body.light-mode .preset-btn:hover,
     body.light-mode .preset-select:hover {
-      background-color: #e2e8f0 !important;
-      border-color: #000000 !important;
-      color: #000000 !important;
+      background-color: #5D4037 !important;
+      border-color: #F7F4EE !important;
+      color: #F7F4EE !important;
     }
 
-    /* Light Mode Timers & Displays (All timers strictly unified) */
+    /* Light Mode Timers & Displays */
     body.light-mode #gsl-timer-display,
     body.light-mode #mod-speaker-timer-display,
     body.light-mode #single-timer-display,
     body.light-mode #unmod-timer-display,
     body.light-mode #procon-timer-display,
     body.light-mode #recess-timer-display {
-      color: #000000 !important;
+      color: #F7F4EE !important;
     }
     body.light-mode #mod-total-timer-text,
     body.light-mode #badge-queue-count {
-      color: #334155 !important;
+      color: #D7CCC8 !important;
     }
     body.light-mode #gsl-progress-bar,
     body.light-mode #mod-speaker-progress,
     body.light-mode #mod-total-progress {
-      background-color: #000000 !important;
+      background-color: #F7F4EE !important;
     }
     body.light-mode .w-full.bg-slate-100,
     body.light-mode #gsl-progress-bar-bg {
-      background-color: #e2e8f0 !important;
+      background-color: #5D4037 !important;
     }
 
-    /* Roll Call Attendance Badges in Light Mode: Crisp Black Text (白色模式的出缺席要配黑字) */
+    /* Roll Call Attendance Badges in Light Mode */
     body.light-mode .attendance-present,
     body.light-mode .attendance-present * {
-      background-color: #d1fae5 !important;
-      color: #000000 !important;
+      background-color: rgba(16, 185, 129, 0.25) !important;
+      color: #ffffff !important;
       border: 1px solid #10b981 !important;
     }
     body.light-mode .attendance-present.active-expanded {
-      background-color: #a7f3d0 !important;
+      background-color: rgba(16, 185, 129, 0.4) !important;
       border: 2px solid #059669 !important;
       transform: scale(1.05);
     }
     body.light-mode .attendance-absent,
     body.light-mode .attendance-absent * {
-      background-color: #fee2e2 !important;
-      color: #000000 !important;
+      background-color: rgba(239, 68, 68, 0.25) !important;
+      color: #ffffff !important;
       border: 1px solid #ef4444 !important;
     }
     body.light-mode .attendance-absent.active-expanded {
-      background-color: #fecaca !important;
+      background-color: rgba(239, 68, 68, 0.4) !important;
       border: 2px solid #dc2626 !important;
       transform: scale(1.05);
     }
     body.light-mode .attendance-pv,
     body.light-mode .attendance-pv * {
-      background-color: #fef3c7 !important;
-      color: #000000 !important;
+      background-color: rgba(245, 158, 11, 0.25) !important;
+      color: #ffffff !important;
       border: 1px solid #f59e0b !important;
     }
     body.light-mode .attendance-pv.active-expanded {
-      background-color: #fde68a !important;
+      background-color: rgba(245, 158, 11, 0.4) !important;
       border: 2px solid #d97706 !important;
       transform: scale(1.05);
     }
     body.light-mode .attendance-uncalled,
     body.light-mode .attendance-uncalled * {
-      background-color: #f1f5f9 !important;
-      color: #334155 !important;
-      border: 1px solid #cbd5e1 !important;
+      background-color: rgba(100, 116, 139, 0.25) !important;
+      color: #D7CCC8 !important;
+      border: 1px solid #5D4037 !important;
     }
     body.light-mode .btn-rollcall-present,
     body.light-mode .btn-rollcall-absent {
-      border: 1px solid #cbd5e1 !important;
-      color: #64748b !important;
-      background: #ffffff !important;
+      border: 1px solid #5D4037 !important;
+      color: #D7CCC8 !important;
+      background: #4E342E !important;
     }
     body.light-mode .btn-rollcall-present:hover {
       border-color: #10b981 !important;
-      color: #059669 !important;
-      background-color: #f0fdf4 !important;
+      color: #ffffff !important;
+      background-color: rgba(16, 185, 129, 0.3) !important;
     }
     body.light-mode .btn-rollcall-absent:hover {
       border-color: #ef4444 !important;
-      color: #dc2626 !important;
-      background-color: #fef2f2 !important;
+      color: #ffffff !important;
+      background-color: rgba(239, 68, 68, 0.3) !important;
     }
     body.light-mode .btn-toggle-attendance {
-
-
-      color: #000000 !important;
+      color: #F7F4EE !important;
     }
 
     /* Voting Choice Badges in Light Mode */
     body.light-mode .btn-vote-choice {
-      border: 1px solid #cbd5e1 !important;
-      color: #334155 !important;
+      border: 1px solid #5D4037 !important;
+      color: #F7F4EE !important;
     }
     body.light-mode .btn-vote-choice.vote-favor,
     body.light-mode .btn-vote-choice.vote-favor * {
-      background-color: #d1fae5 !important;
-      color: #000000 !important;
+      background-color: rgba(16, 185, 129, 0.25) !important;
+      color: #ffffff !important;
       border: 1.5px solid #10b981 !important;
     }
     body.light-mode .btn-vote-choice.vote-against,
     body.light-mode .btn-vote-choice.vote-against * {
-      background-color: #fee2e2 !important;
-      color: #000000 !important;
+      background-color: rgba(239, 68, 68, 0.25) !important;
+      color: #ffffff !important;
       border: 1.5px solid #ef4444 !important;
     }
     body.light-mode .btn-vote-choice.vote-abstain,
     body.light-mode .btn-vote-choice.vote-abstain * {
-      background-color: #fef3c7 !important;
-      color: #000000 !important;
+      background-color: rgba(245, 158, 11, 0.25) !important;
+      color: #ffffff !important;
       border: 1.5px solid #f59e0b !important;
     }
     body.light-mode .btn-vote-choice.vote-pass,
     body.light-mode .btn-vote-choice.vote-pass * {
-      background-color: #f1f5f9 !important;
-      color: #000000 !important;
+      background-color: rgba(148, 163, 184, 0.25) !important;
+      color: #ffffff !important;
       border: 1.5px solid #94a3b8 !important;
     }
 
     /* Scoreboard Cards in Light Mode */
     body.light-mode .bg-emerald-50 {
-      background-color: #ecfdf5 !important;
-      border: 1px solid #a7f3d0 !important;
+      background-color: #4E342E !important;
+      border: 1px solid #10b981 !important;
     }
     body.light-mode .bg-emerald-50 * {
-      color: #000000 !important;
+      color: #34d399 !important;
     }
     body.light-mode .bg-rose-50 {
-      background-color: #fff1f2 !important;
-      border: 1px solid #fecdd3 !important;
+      background-color: #4E342E !important;
+      border: 1px solid #ef4444 !important;
     }
     body.light-mode .bg-rose-50 * {
-      color: #991b1b !important;
+      color: #f87171 !important;
     }
     body.light-mode .bg-amber-50 {
-      background-color: #fffbeb !important;
-      border: 1px solid #fde68a !important;
+      background-color: #4E342E !important;
+      border: 1px solid #f59e0b !important;
     }
     body.light-mode .bg-amber-50 * {
-      color: #92400e !important;
+      color: #fbbf24 !important;
     }
     body.light-mode #voting-scoreboard .bg-slate-100 {
-      background-color: #f8fafc !important;
-      border: 1px solid #cbd5e1 !important;
+      background-color: #4E342E !important;
+      border: 1px solid #5D4037 !important;
     }
     body.light-mode #voting-scoreboard .bg-slate-100 * {
-      color: #0f172a !important;
+      color: #F7F4EE !important;
     }
 
-    /* Hero Motion Card in Light Mode - Pure White card with Crisp Black text */
+    /* Hero Motion Card in Light Mode - Dark Chocolate Card with Cream White text */
     body.light-mode #hero-motion-card {
-      background-color: #ffffff !important;
-      border: 1.5px solid #000000 !important;
+      background-color: #3E2723 !important;
+      border: 1.5px solid #5D4037 !important;
     }
     body.light-mode #hero-motion-card,
     body.light-mode #hero-motion-card p,
     body.light-mode #hero-motion-card span,
     body.light-mode #hero-motion-card h3,
     body.light-mode #hero-motion-card div {
-      color: #000000 !important;
+      color: #F7F4EE !important;
     }
     body.light-mode #btn-hero-motion-pass {
       background-color: #16a34a !important;
@@ -1094,61 +1139,61 @@ body:not(.light-mode) {
       color: #ffffff !important;
     }
     body.light-mode #btn-hero-motion-fail {
-      background-color: #ffffff !important;
-      color: #000000 !important;
+      background-color: #3E2723 !important;
+      color: #F7F4EE !important;
       border: 1px solid #f87171 !important;
     }
     body.light-mode #btn-hero-motion-fail * {
-      color: #000000 !important;
+      color: #F7F4EE !important;
     }
 
     /* Motions List Cards in Light Mode */
     body.light-mode #view-motions .bg-black {
-      background-color: #ffffff !important;
-      border: 1px solid #cbd5e1 !important;
+      background-color: #3E2723 !important;
+      border: 1px solid #5D4037 !important;
     }
     body.light-mode #view-motions .bg-black * {
-      color: #0f172a !important;
+      color: #F7F4EE !important;
     }
     body.light-mode #list-motions > div {
-      background-color: #ffffff !important;
-      border: 1px solid #e2e8f0 !important;
+      background-color: #3E2723 !important;
+      border: 1px solid #5D4037 !important;
     }
     body.light-mode #list-motions > div * {
-      color: #0f172a !important;
+      color: #F7F4EE !important;
     }
     body.light-mode .btn-vote-motion-pass {
-      color: #000000 !important;
+      color: #ffffff !important;
       border: 1px solid #16a34a !important;
-      background-color: #dcfce7 !important;
+      background-color: rgba(16, 185, 129, 0.25) !important;
     }
     body.light-mode .btn-vote-motion-pass:hover {
-      background-color: #bbf7d0 !important;
-      color: #000000 !important;
+      background-color: rgba(16, 185, 129, 0.4) !important;
+      color: #ffffff !important;
     }
     body.light-mode .btn-vote-motion-fail {
-      color: #000000 !important;
+      color: #ffffff !important;
       border: 1px solid #f87171 !important;
-      background-color: #fee2e2 !important;
+      background-color: rgba(239, 68, 68, 0.25) !important;
     }
     body.light-mode .btn-vote-motion-fail:hover {
-      background-color: #fecdd3 !important;
-      color: #000000 !important;
+      background-color: rgba(239, 68, 68, 0.4) !important;
+      color: #ffffff !important;
     }
 
     /* Drawer Sidebar in Light Mode */
     body.light-mode #main-drawer {
-      background-color: #ffffff !important;
-      border-right: 1px solid #e2e8f0 !important;
+      background-color: #F7F4EE !important;
+      border-right: 1px solid #D7CCC8 !important;
     }
     body.light-mode #main-drawer * {
-      color: #0f172a !important;
+      color: #3E2723 !important;
     }
     body.light-mode #main-drawer button:hover {
-      background-color: #f1f5f9 !important;
+      background-color: rgba(62, 39, 35, 0.08) !important;
     }
     body.light-mode #main-drawer hr {
-      border-color: #e2e8f0 !important;
+      border-color: #D7CCC8 !important;
     }
 
     /* Modals in Light Mode */
@@ -1158,9 +1203,9 @@ body:not(.light-mode) {
     body.light-mode #modal-add-motion > div,
     body.light-mode #modal-configure-voting > div,
     body.light-mode #modal-unified-settings > div {
-      background-color: #ffffff !important;
-      border: 1px solid #cbd5e1 !important;
-      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+      background-color: #F7F4EE !important;
+      border: 1px solid #D7CCC8 !important;
+      box-shadow: 0 20px 25px -5px rgba(62, 39, 35, 0.15), 0 8px 10px -6px rgba(62, 39, 35, 0.1) !important;
     }
     body.light-mode #modal-add-speaker > div *,
     body.light-mode #modal-define-time > div *,
@@ -1168,7 +1213,7 @@ body:not(.light-mode) {
     body.light-mode #modal-add-motion > div *,
     body.light-mode #modal-configure-voting > div *,
     body.light-mode #modal-unified-settings > div * {
-      color: #0f172a !important;
+      color: #3E2723 !important;
     }
     body.light-mode #modal-unified-settings .bg-zinc-900,
     body.light-mode #modal-unified-settings .bg-zinc-900\/90,
@@ -1176,21 +1221,21 @@ body:not(.light-mode) {
     body.light-mode #modal-unified-settings .bg-zinc-950,
     body.light-mode #modal-unified-settings .bg-zinc-950\/50,
     body.light-mode #modal-unified-settings .bg-zinc-950\/60 {
-      background-color: #ffffff !important;
+      background-color: #EFEBE9 !important;
     }
     body.light-mode #modal-unified-settings .border-zinc-800,
     body.light-mode #modal-unified-settings .border-zinc-700 {
-      border-color: #e2e8f0 !important;
+      border-color: #D7CCC8 !important;
     }
     body.light-mode #modal-unified-settings input,
     body.light-mode #modal-unified-settings select {
       background-color: #ffffff !important;
-      border: 1px solid #cbd5e1 !important;
-      color: #0f172a !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
     }
     body.light-mode #modal-unified-settings .text-zinc-400,
     body.light-mode #modal-unified-settings .text-zinc-500 {
-      color: #64748b !important;
+      color: #8D6E63 !important;
     }
     body.light-mode #modal-add-speaker > div input,
     body.light-mode #modal-define-time > div input,
@@ -1200,25 +1245,25 @@ body:not(.light-mode) {
     body.light-mode #modal-configure-voting > div input,
     body.light-mode #modal-configure-voting > div select {
       background-color: #ffffff !important;
-      border: 1px solid #cbd5e1 !important;
-      color: #0f172a !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
     }
 
-    /* Unmoderated Caucus & Recess screens in Light Mode: Pure White with Pure Black text (only when not in custom theme mode) */
+    /* Unmoderated Caucus & Recess screens in Light Mode */
     body.light-mode:not(.has-custom-accent) #view-unmod {
-      background-color: #ffffff !important;
+      background-color: #F7F4EE !important;
     }
     body.light-mode #view-unmod * {
-      color: #000000 !important;
+      color: #3E2723 !important;
     }
     body.light-mode #unmod-timer-display {
-      color: #000000 !important;
+      color: #3E2723 !important;
     }
     body.light-mode #modal-recess {
-      background-color: rgba(255, 255, 255, 0.98) !important;
+      background-color: rgba(247, 244, 238, 0.98) !important;
     }
     body.light-mode #modal-recess * {
-      color: #000000 !important;
+      color: #3E2723 !important;
     }
 
     /* Scrollbars & Hover Row Highlights in Light Mode */
