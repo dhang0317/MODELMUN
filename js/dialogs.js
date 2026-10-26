@@ -1,25 +1,25 @@
   // --- CUSTOM UI MODAL HELPER (NO BROWSER ALERT / PROMPT) ---
   function showModal({ title, message, showInput = false, inputDefault = '', inputPlaceholder = '', confirmText = null, cancelText = null, onConfirm = null }) {
     const backdrop = document.createElement('div');
-    backdrop.className = 'fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 animate-fade-in';
+    backdrop.className = 'fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 animate-fade-in custom-dialog-backdrop';
     
     const box = document.createElement('div');
-    box.className = 'bg-slate-800 text-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 transform transition-all scale-100 border border-slate-700';
+    box.className = 'custom-dialog-box bg-[#F7F4EE] text-[#3E2723] rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 transform transition-all scale-100 border border-[#D7CCC8]';
 
     const lang = state.language;
     const okBtnText = confirmText || I18N[lang].confirm;
     const noBtnText = cancelText || I18N[lang].cancel;
 
     box.innerHTML = `
-      <div class="flex items-center justify-between border-b border-slate-700 pb-3">
-        <h3 class="font-bold text-lg text-slate-100">${title}</h3>
-        <button class="modal-close-icon p-1 text-slate-400 hover:text-slate-200"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <div class="flex items-center justify-between border-b border-[#D7CCC8] pb-3">
+        <h3 class="font-bold text-lg text-[#3E2723]">${title || ''}</h3>
+        <button class="modal-close-icon p-1 text-[#8D6E63] hover:text-[#3E2723] transition cursor-pointer"><i data-lucide="x" class="w-5 h-5"></i></button>
       </div>
-      ${message ? `<div class="text-sm text-slate-300 leading-relaxed">${message}</div>` : ''}
-      ${showInput ? `<input type="text" class="modal-input w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate-400 font-medium" value="${inputDefault}" placeholder="${inputPlaceholder}">` : ''}
+      ${message ? `<div class="text-sm text-[#5D4037] leading-relaxed font-medium">${message}</div>` : ''}
+      ${showInput ? `<input type="text" class="modal-input w-full px-3 py-2 bg-white border border-[#D7CCC8] text-[#3E2723] rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#3E2723] font-medium" value="${inputDefault}" placeholder="${inputPlaceholder}">` : ''}
       <div class="flex items-center justify-end space-x-2 pt-2">
-        ${cancelText !== false ? `<button class="modal-btn-cancel px-4 py-2 border border-slate-700 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-semibold">${noBtnText}</button>` : ''}
-        <button class="modal-btn-confirm px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow border border-blue-500">${okBtnText}</button>
+        ${cancelText !== false ? `<button class="modal-btn-cancel px-4 py-2 border border-[#D7CCC8] bg-[#EFEBE9] hover:bg-[#D7CCC8] text-[#3E2723] rounded-xl text-xs font-semibold cursor-pointer">${noBtnText}</button>` : ''}
+        <button class="modal-btn-confirm px-5 py-2 bg-[#3E2723] hover:bg-[#4E342E] text-[#F7F4EE] rounded-xl text-xs font-bold shadow border border-[#3E2723] cursor-pointer">${okBtnText}</button>
       </div>
     `;
 
