@@ -108,6 +108,16 @@
     // User provided color tokens grouped by hue
     const paletteGroups = [
       {
+        name: state.language === 'zh' ? '奶油淺白 (主題)' : (state.language === 'fr' ? 'Blanc Crème' : 'Cream White'),
+        shades: [
+          { shade: '50', hex: '#FFFFFF' },
+          { shade: '100', hex: '#FAF8F5' },
+          { shade: '200', hex: '#F7F4EE' },
+          { shade: '300', hex: '#EDE8DF' },
+          { shade: '700', hex: '#3E2723' }
+        ]
+      },
+      {
         name: state.language === 'zh' ? '粉紅' : (state.language === 'fr' ? 'Rose' : 'Pink'),
         shades: [
           { shade: '50', hex: '#fedaee' },
