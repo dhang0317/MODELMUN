@@ -458,7 +458,7 @@ body:not(.light-mode) {
     }
     /* Text & Headings inside main view cards and panels */
     body:not(.light-mode) main p,
-    body:not(.light-mode) main span:not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.badge):not(#label-voter-queue-status),
+    body:not(.light-mode) main span:not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.badge):not(#label-voter-queue-status):not(#btn-gsl-start *):not(#btn-mod-start *):not(#btn-single-start *):not(#btn-procon-start *):not(#btn-unmod-start *):not(#btn-hero-motion-second *):not(#btn-save-settings-done *):not(#cfg-btn-auth-action *),
     body:not(.light-mode) main h1,
     body:not(.light-mode) main h2,
     body:not(.light-mode) main h3,
@@ -646,7 +646,12 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-mod-start *,
     body:not(.light-mode) #btn-single-start *,
     body:not(.light-mode) #btn-procon-start *,
-    body:not(.light-mode) #btn-unmod-start * {
+    body:not(.light-mode) #btn-unmod-start *,
+    body:not(.light-mode) #btn-gsl-start span,
+    body:not(.light-mode) #btn-mod-start span,
+    body:not(.light-mode) #btn-single-start span,
+    body:not(.light-mode) #btn-procon-start span,
+    body:not(.light-mode) #btn-unmod-start span {
       color: #F7F4EE !important;
     }
     body:not(.light-mode) #btn-gsl-start:hover,
@@ -655,6 +660,13 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-procon-start:hover,
     body:not(.light-mode) #btn-unmod-start:hover {
       background-color: #4E342E !important;
+      color: #FFFFFF !important;
+    }
+    body:not(.light-mode) #btn-gsl-start:hover *,
+    body:not(.light-mode) #btn-mod-start:hover *,
+    body:not(.light-mode) #btn-single-start:hover *,
+    body:not(.light-mode) #btn-procon-start:hover *,
+    body:not(.light-mode) #btn-unmod-start:hover * {
       color: #FFFFFF !important;
     }
 
