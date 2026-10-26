@@ -133,10 +133,10 @@
       let rightContent = '';
 
       if (isUncalled) {
-        // 出席缺席大小要一樣，不用英文，透亮半透明色彩 (開心果綠 #B5C99A / 覆盆子紅 #913D48)
+        // 出席缺席大小要一樣，不用英文，透亮半透明色彩 (橄欖抹茶綠 #7D9462 / 覆盆子紅 #913D48)
         rightContent = `
           <div class="rollcall-btn-container flex items-center space-x-2 shrink-0">
-            <button type="button" class="btn-rollcall-present flex-1 rounded-xl font-black text-center transition cursor-pointer" style="border: 1.5px solid #B5C99A !important; color: #8EAA6E !important; background-color: rgba(181, 201, 154, 0.2) !important;">
+            <button type="button" class="btn-rollcall-present flex-1 rounded-xl font-black text-center transition cursor-pointer" style="border: 1.5px solid #7D9462 !important; color: #7D9462 !important; background-color: rgba(125, 148, 98, 0.2) !important;">
               出席
             </button>
             <button type="button" class="btn-rollcall-absent flex-1 rounded-xl font-black text-center transition cursor-pointer" style="border: 1.5px solid #913D48 !important; color: #913D48 !important; background-color: rgba(145, 61, 72, 0.15) !important;">
@@ -145,10 +145,10 @@
           </div>
         `;
       } else if (isPresent) {
-        // 出席（開心果綠）：透亮半透明綠底 (rgba(181, 201, 154, 0.3))，搭配開心果綠邊框
+        // 出席（橄欖抹茶綠）：透亮半透明綠底 (rgba(125, 148, 98, 0.32))，搭配橄欖抹茶綠邊框 (#7D9462)
         rightContent = `
           <div class="rollcall-btn-container shrink-0 flex justify-end">
-            <button type="button" class="btn-rollcall-expanded btn-rollcall-status-present w-full rounded-xl font-black text-center transition cursor-pointer" style="background-color: rgba(181, 201, 154, 0.3) !important; background: rgba(181, 201, 154, 0.3) !important; color: #6C864E !important; border: 2px solid #B5C99A !important;">
+            <button type="button" class="btn-rollcall-expanded btn-rollcall-status-present w-full rounded-xl font-black text-center transition cursor-pointer" style="background-color: rgba(125, 148, 98, 0.32) !important; background: rgba(125, 148, 98, 0.32) !important; color: #5B6D46 !important; border: 2px solid #7D9462 !important;">
               出席
             </button>
           </div>

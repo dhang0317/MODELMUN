@@ -2602,31 +2602,31 @@ body:not(.light-mode) {
     /* =========================================================
        ROLL CALL BUTTON COLORS - THEMED PISTACHIO & RASPBERRY
        ========================================================= */
-     /* 未點名 - 出席按鈕：開心果綠邊框 (#B5C99A) 與半透明背景，文字為白/黑 */
+     /* 未點名 - 出席按鈕：橄欖抹茶綠 (#7D9462) 與半透明背景，文字為白/黑 */
      body:not(.light-mode) .btn-rollcall-present,
      .btn-rollcall-present {
-       border: 1.5px solid #B5C99A !important;
+       border: 1.5px solid #7D9462 !important;
        color: #ffffff !important;
-       background-color: rgba(181, 201, 154, 0.2) !important;
-       background: rgba(181, 201, 154, 0.2) !important;
+       background-color: rgba(125, 148, 98, 0.2) !important;
+       background: rgba(125, 148, 98, 0.2) !important;
      }
      body.light-mode .btn-rollcall-present {
-       border: 1.5px solid #8EAA6E !important;
-       color: #4D6236 !important;
-       background-color: rgba(181, 201, 154, 0.25) !important;
-       background: rgba(181, 201, 154, 0.25) !important;
+       border: 1.5px solid #7D9462 !important;
+       color: #4B5A38 !important;
+       background-color: rgba(125, 148, 98, 0.2) !important;
+       background: rgba(125, 148, 98, 0.2) !important;
      }
      body:not(.light-mode) .btn-rollcall-present:hover {
-       background-color: rgba(181, 201, 154, 0.35) !important;
-       background: rgba(181, 201, 154, 0.35) !important;
+       background-color: rgba(125, 148, 98, 0.35) !important;
+       background: rgba(125, 148, 98, 0.35) !important;
        color: #ffffff !important;
-       border-color: #B5C99A !important;
+       border-color: #92AA74 !important;
      }
      body.light-mode .btn-rollcall-present:hover {
-       background-color: rgba(181, 201, 154, 0.35) !important;
-       background: rgba(181, 201, 154, 0.35) !important;
+       background-color: rgba(125, 148, 98, 0.35) !important;
+       background: rgba(125, 148, 98, 0.35) !important;
        color: #314022 !important;
-       border-color: #8EAA6E !important;
+       border-color: #7D9462 !important;
      }
 
      /* 未點名 - 缺席按鈕：覆盆子酒紅邊框 (#913D48) 與半透明背景，文字為白/黑 */
@@ -2670,31 +2670,31 @@ body:not(.light-mode) {
        transition: all 0.2s ease !important;
      }
 
-     /* 1. 按下去變成半透明綠色 (出席)：透亮半透明開心果綠底 + 開心果綠邊框 (#B5C99A) */
+     /* 1. 按下去變成半透明綠色 (出席)：透亮半透明橄欖抹茶綠底 + 橄欖抹茶綠邊框 (#7D9462) */
      body:not(.light-mode) .btn-rollcall-status-present,
      .btn-rollcall-status-present {
-       background-color: rgba(181, 201, 154, 0.32) !important;
-       background: rgba(181, 201, 154, 0.32) !important;
+       background-color: rgba(125, 148, 98, 0.32) !important;
+       background: rgba(125, 148, 98, 0.32) !important;
        color: #ffffff !important;
-       border: 2px solid #B5C99A !important;
+       border: 2px solid #7D9462 !important;
      }
      body.light-mode .btn-rollcall-status-present {
-       background-color: rgba(181, 201, 154, 0.35) !important;
-       background: rgba(181, 201, 154, 0.35) !important;
+       background-color: rgba(125, 148, 98, 0.3) !important;
+       background: rgba(125, 148, 98, 0.3) !important;
        color: #314022 !important;
-       border: 2px solid #8EAA6E !important;
+       border: 2px solid #7D9462 !important;
      }
      body:not(.light-mode) .btn-rollcall-status-present:hover {
-       background-color: rgba(181, 201, 154, 0.45) !important;
-       background: rgba(181, 201, 154, 0.45) !important;
-       border-color: #B5C99A !important;
+       background-color: rgba(125, 148, 98, 0.45) !important;
+       background: rgba(125, 148, 98, 0.45) !important;
+       border-color: #92AA74 !important;
        color: #ffffff !important;
        transform: scale(1.02);
      }
      body.light-mode .btn-rollcall-status-present:hover {
-       background-color: rgba(181, 201, 154, 0.45) !important;
-       background: rgba(181, 201, 154, 0.45) !important;
-       border-color: #6C864E !important;
+       background-color: rgba(125, 148, 98, 0.45) !important;
+       background: rgba(125, 148, 98, 0.45) !important;
+       border-color: #5B6D46 !important;
        color: #314022 !important;
        transform: scale(1.02);
      }
@@ -3110,7 +3110,7 @@ body:not(.light-mode) {
       box-shadow: 0 0 14px rgba(15, 23, 42, 0.22), inset 0 1px 4px rgba(15, 23, 42, 0.2) !important;
     }
 
-    /* Semantic / Colored Buttons Press Glow (Favor / Present / Pass = Pistachio Green #B5C99A) */
+    /* Semantic / Colored Buttons Press Glow (Favor / Present / Pass = Matcha Olive #7D9462) */
     body:not(.light-mode) #btn-cast-favor:active,
     body:not(.light-mode) #btn-cast-favor.btn-pressed-flash,
     body:not(.light-mode) .btn-inc-favor:active,
@@ -3123,10 +3123,10 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-procon-add-pro.btn-pressed-flash,
     body:not(.light-mode) .btn-rollcall-present:active,
     body:not(.light-mode) .btn-rollcall-present.btn-pressed-flash {
-      background-color: #8EAA6E !important;
-      background: #8EAA6E !important;
-      border-color: #B5C99A !important;
-      box-shadow: 0 0 20px rgba(181, 201, 154, 0.65), inset 0 0 10px rgba(181, 201, 154, 0.3) !important;
+      background-color: #7D9462 !important;
+      background: #7D9462 !important;
+      border-color: #92AA74 !important;
+      box-shadow: 0 0 20px rgba(125, 148, 98, 0.65), inset 0 0 10px rgba(125, 148, 98, 0.3) !important;
       color: #ffffff !important;
     }
 
