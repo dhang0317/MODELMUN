@@ -198,6 +198,7 @@
           e.stopPropagation();
           if (state.isViewerMode) return;
           c.attendance = 'present'; // 點擊變成大小為 2 的出席按鈕
+          if (window.logAction) window.logAction(state.language === 'zh' ? `點名：${getCountryDisplayName(c)} → 出席` : `Roll call: ${getCountryDisplayName(c)} → Present`);
           saveToLocalStorage(true);
           renderAll();
         });
@@ -208,6 +209,7 @@
           e.stopPropagation();
           if (state.isViewerMode) return;
           c.attendance = 'absent'; // 點擊變成大小為 2 的缺席按鈕
+          if (window.logAction) window.logAction(state.language === 'zh' ? `點名：${getCountryDisplayName(c)} → 缺席` : `Roll call: ${getCountryDisplayName(c)} → Absent`);
           saveToLocalStorage(true);
           renderAll();
         });
@@ -224,6 +226,7 @@
           } else if (c.attendance === 'absent') {
             c.attendance = 'uncalled'; // 缺席再點一下重設回未點名（變回 1:1 兩按鈕）
           }
+          if (window.logAction) { const st = { present: 'Present', pv: 'Present & Voting', absent: 'Absent', uncalled: 'Uncalled' }; const stZh = { present: '出席', pv: '出席且投票', absent: '缺席', uncalled: '未點名' }; window.logAction(state.language === 'zh' ? `點名：${getCountryDisplayName(c)} → ${stZh[c.attendance]}` : `Roll call: ${getCountryDisplayName(c)} → ${st[c.attendance]}`); }
           saveToLocalStorage(true);
           renderAll();
         });
@@ -1290,6 +1293,7 @@
       cancelText: t.cancel || '取消',
       onConfirm: () => {
         state.resolutionPassed = true;
+        if (window.logAction) window.logAction(state.language === 'zh' ? `決議案結算通過：${resTitle}` : `Resolution passed: ${resTitle}`);
         // Set all non-voted or current verdict to passed
         const verdictElem = document.getElementById('vote-verdict');
         if (verdictElem) {

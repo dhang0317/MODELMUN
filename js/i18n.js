@@ -337,7 +337,8 @@ const I18N = {
       cfgDangerZoneTitle: "Reset Conference Progress (Danger Zone)",
       cfgDangerZoneDesc: "Reset conference to blank defaults and clear all attendance & voting records",
       cfgResetConferenceBtn: "Reset Conference",
-      resolutionTitlePlaceholder: "Enter resolution title..."
+      resolutionTitlePlaceholder: "Enter resolution title...",
+      activityLog: "Activity Log"
     },
     zh: {
       sessionActive: "會議進行中",
@@ -676,7 +677,8 @@ const I18N = {
       cfgDangerZoneTitle: "重置會議進度 (Danger Zone)",
       cfgDangerZoneDesc: "將會議重置為預設空白範本，清除所有點名與投票紀錄",
       cfgResetConferenceBtn: "重置會議",
-      resolutionTitlePlaceholder: "輸入決議案名稱..."
+      resolutionTitlePlaceholder: "輸入決議案名稱...",
+      activityLog: "操作紀錄"
     },
     fr: {
       sessionActive: "Session Active",
@@ -999,7 +1001,8 @@ const I18N = {
       cfgDangerZoneTitle: "Réinitialiser la Session (Zone de Danger)",
       cfgDangerZoneDesc: "Réinitialiser la conférence par défaut et effacer les appels et votes",
       cfgResetConferenceBtn: "Réinitialiser",
-      resolutionTitlePlaceholder: "Entrez le titre de la résolution..."
+      resolutionTitlePlaceholder: "Entrez le titre de la résolution...",
+      activityLog: "Journal d'activité"
     }
   };
   if (typeof window !== 'undefined') {

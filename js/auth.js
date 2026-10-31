@@ -106,6 +106,7 @@
         saveToLocalStorage(true);
         renderAll();
       }
+      if (window.logAction) window.logAction(state.language === 'zh' ? `登入：${state.currentUser.name}` : `Signed in: ${state.currentUser.name}`);
       showToast(state.language === 'zh' ? `歡迎回來，${state.currentUser.name}！` : `Welcome back, ${state.currentUser.name}!`, 'success');
     }
 

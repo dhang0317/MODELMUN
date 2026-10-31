@@ -306,6 +306,7 @@
       sessionCount: state.sessionCount,
       activeSessionId: state.activeSessionId,
       sessionVotes: state.sessionVotes,
+      activityLog: state.activityLog || [],
       language: state.language,
       themeMode: document.body.classList.contains('light-mode') ? 'light' : 'dark',
       customAccent: localStorage.getItem('mun-custom-accent') || null,
@@ -471,6 +472,7 @@
     state.voteThreshold = 'simple';
     state.showResults = true;
     state.rightsSpeeches = [];
+    state.activityLog = [];
 
     // 預設自動載入安理會 15 國代表
     if (typeof applyPreset === 'function') {
@@ -744,6 +746,7 @@
     if (typeof parsed.sessionCount === 'number') state.sessionCount = parsed.sessionCount;
     if (typeof parsed.activeSessionId === 'number') state.activeSessionId = parsed.activeSessionId;
     if (Array.isArray(parsed.sessionVotes)) state.sessionVotes = parsed.sessionVotes;
+    if (Array.isArray(parsed.activityLog)) state.activityLog = parsed.activityLog;
     if (parsed.language) state.language = parsed.language;
 
     // Synchronize dark/light theme and background color with Chair
