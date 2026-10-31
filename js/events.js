@@ -1244,6 +1244,22 @@
       });
     }
 
+    const btnResetAllSessions = document.getElementById('btn-reset-all-sessions');
+    if (btnResetAllSessions) {
+      btnResetAllSessions.addEventListener('click', () => {
+        if (state.isViewerMode) return;
+        if (Array.isArray(state.sessionVotes)) {
+          state.sessionVotes.forEach(s => {
+            s.favor = 0;
+            s.against = 0;
+            s.abstain = 0;
+          });
+          saveToLocalStorage(true, true);
+          renderResolutionVoteGrid();
+        }
+      });
+    }
+
     // Timer for detecting single click vs double click on Active Voter Card buttons
     let activeVoterClickTimer = null;
     let lastActiveAction = null;
