@@ -302,7 +302,6 @@
     if (swatchPreview) swatchPreview.style.backgroundColor = customAccent;
 
     // Auth & Sync status
-    const t = I18N[state.language] || I18N.en || {};
     if (state.currentUser) {
       if (authAvatar) {
         authAvatar.innerHTML = `<img src="${state.currentUser.picture || 'https://lh3.googleusercontent.com/a/default-user'}" class="w-full h-full object-cover">`;
