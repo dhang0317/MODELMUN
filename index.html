@@ -1285,16 +1285,12 @@
     <div class="bg-zinc-900 text-white rounded-3xl max-w-3xl w-full shadow-2xl border border-zinc-800 flex flex-col max-h-[90vh] overflow-hidden">
       <!-- Modal Header -->
       <div class="px-6 py-4 border-b border-zinc-800 flex items-center justify-between shrink-0 bg-zinc-900/90">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-2xl bg-zinc-800 flex items-center justify-center text-primary border border-zinc-700/80 shadow-inner">
-            
-          </div>
-          <div>
-            <h3 class="font-bold text-lg text-white tracking-wide" data-i18n="settingsCenterTitle">會議與系統設定</h3>
-          </div>
-        </div>
-        <button id="btn-close-settings-modal" type="button" class="p-2 text-zinc-400 hover:text-white rounded-xl hover:bg-zinc-800 transition cursor-pointer">
-          
+        <div></div>
+        <button id="btn-close-settings-modal" type="button" class="p-2 text-zinc-400 hover:text-white rounded-xl hover:bg-zinc-800 transition cursor-pointer" aria-label="Close">
+          <svg class="w-5 h-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
         </button>
       </div>
 
@@ -1329,23 +1325,6 @@
           <div>
             <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2" data-i18n="agendaTopic">會議議題</label>
             <input id="cfg-input-agenda" type="text" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-medium text-white focus:outline-none focus:border-zinc-400">
-          </div>
-
-          <div class="p-4 rounded-2xl bg-zinc-950/60 border border-zinc-800 flex items-center justify-between">
-            <div class="flex items-center space-x-4">
-              <div class="w-12 h-12 rounded-full border border-zinc-700 bg-white flex items-center justify-center overflow-hidden shrink-0 shadow">
-                <img id="cfg-preview-logo" src="logo.png" alt="Logo Preview" class="w-full h-full object-cover">
-              </div>
-              <div>
-                <div class="text-sm font-bold text-white" data-i18n="cfgCommitteeLogo">會議專屬 Logo 圖標</div>
-                <div class="text-xs text-zinc-400" data-i18n="cfgLogoSupportDesc">支援 PNG, JPG, SVG 格式</div>
-              </div>
-            </div>
-            <div class="flex items-center space-x-2">
-              <button id="cfg-btn-upload-logo" type="button" class="px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-xs font-semibold transition border border-zinc-700 cursor-pointer" data-i18n="cfgChangeLogo">
-                更換圖標
-              </button>
-            </div>
           </div>
         </div>
 
@@ -1390,11 +1369,11 @@
 
           <div class="p-4 rounded-2xl bg-zinc-950/60 border border-zinc-800 flex items-center justify-between">
             <div>
-              <div class="text-sm font-bold text-white" data-i18n="cfgCustomBrandColor">自訂主題品牌色</div>
+              <div class="text-sm font-bold text-white" data-i18n="cfgCustomBrandColor">自訂色</div>
             </div>
             <button id="cfg-btn-open-palette" type="button" class="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-xs font-semibold transition border border-zinc-700 flex items-center space-x-2 cursor-pointer">
               <span id="cfg-swatch-preview" class="w-4 h-4 rounded-full border border-white/40 inline-block bg-sky-500"></span>
-              <span data-i18n="cfgOpenPalette">開啟色票調色盤</span>
+              <span data-i18n="cfgOpenPalette">色票調色盤</span>
             </button>
           </div>
         </div>
@@ -1540,7 +1519,7 @@
   <script src="js/firebase-config.js?v=2026102601"></script>
   <!-- Application Data & Translations -->
   <script src="data.js?v=2026103102"></script>
-  <script src="js/i18n.js?v=2026103102"></script>
+  <script src="js/i18n.js?v=2026110102"></script>
   <script src="js/countries.js?v=2026103102"></script>
   <script src="js/state.js?v=2026103102"></script>
     <!-- Utilities, Dialogs & Visual Effects -->
