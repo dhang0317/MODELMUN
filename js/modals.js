@@ -302,32 +302,35 @@
     if (swatchPreview) swatchPreview.style.backgroundColor = customAccent;
 
     // Auth & Sync status
+    const t = I18N[state.language] || I18N.en || {};
     if (state.currentUser) {
       if (authAvatar) {
         authAvatar.innerHTML = `<img src="${state.currentUser.picture || 'https://lh3.googleusercontent.com/a/default-user'}" class="w-full h-full object-cover">`;
       }
-      if (authName) authName.textContent = state.currentUser.name || '已登入使用者';
+      if (authName) authName.textContent = state.currentUser.name || (state.language === 'zh' ? '已登入使用者' : 'Signed-in User');
       if (authEmail) authEmail.textContent = state.currentUser.email || '';
       if (authBtn) {
-        authBtn.textContent = '登出 (Sign Out)';
+        authBtn.textContent = state.language === 'zh' ? '登出 (Sign Out)' : (t.googleLogout || 'Sign Out');
         authBtn.className = 'px-4 py-2 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 border border-rose-500/30 rounded-xl text-xs font-bold transition cursor-pointer';
       }
     } else {
       if (authAvatar) authAvatar.innerHTML = '<i class="fa-solid fa-user"></i>';
-      if (authName) authName.textContent = '訪客模式 (未登入)';
-      if (authEmail) authEmail.textContent = '登入 Google 帳號可享有跨裝置永久存檔';
+      if (authName) authName.textContent = t.cfgGuestMode || (state.language === 'zh' ? '訪客模式 (未登入)' : 'Guest Mode (Not Signed In)');
+      if (authEmail) authEmail.textContent = t.cfgGuestDesc || (state.language === 'zh' ? '登入 Google 帳號可享有跨裝置永久存檔' : 'Sign in with Google for cross-device cloud backup');
       if (authBtn) {
-        authBtn.textContent = '登入 Google';
+        authBtn.textContent = t.cfgGoogleSignIn || (state.language === 'zh' ? '登入 Google' : 'Sign in with Google');
         authBtn.className = 'px-4 py-2 bg-white text-zinc-900 hover:bg-zinc-200 rounded-xl text-xs font-bold transition shadow cursor-pointer';
       }
     }
 
     if (syncStatusText) {
       if (window.firebaseDb) {
-        syncStatusText.innerHTML = '<span class="w-2 h-2 rounded-full bg-emerald-400"></span><span>Firebase 雲端已連線</span>';
+        const fbConnectedText = state.language === 'zh' ? 'Firebase 雲端已連線' : 'Firebase Cloud Connected';
+        syncStatusText.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-400"></span><span>${fbConnectedText}</span>`;
         syncStatusText.className = 'text-xs text-emerald-400 flex items-center space-x-1.5 mt-0.5';
       } else {
-        syncStatusText.innerHTML = '<span class="w-2 h-2 rounded-full bg-amber-400"></span><span>本機離線模式</span>';
+        const offlineText = state.language === 'zh' ? '本機離線模式' : 'Local Offline Mode';
+        syncStatusText.innerHTML = `<span class="w-2 h-2 rounded-full bg-amber-400"></span><span>${offlineText}</span>`;
         syncStatusText.className = 'text-xs text-amber-400 flex items-center space-x-1.5 mt-0.5';
       }
     }
@@ -449,7 +452,7 @@
         if (previewLogo) previewLogo.src = 'logo.png';
         const mainLogo = document.querySelector('#btn-logo-home img');
         if (mainLogo) mainLogo.src = 'logo.png';
-        showToast('已還原為預設 Logo 圖標', 'info');
+        showToast(state.language === 'zh' ? '已還原為預設 Logo 圖標' : 'Logo reset to default', 'info');
       };
     }
 
@@ -632,7 +635,11 @@
     const btnResetConf = document.getElementById('cfg-btn-reset-conference');
     if (btnResetConf) {
       btnResetConf.onclick = () => {
-        customConfirm('重置會議', '確定要將會議重置為預設空白範本嗎？現有代表名單、點名與發言紀錄將被清除。', () => {
+        const title = state.language === 'zh' ? '重置會議' : 'Reset Conference';
+        const msg = state.language === 'zh'
+          ? '確定要將會議重置為預設空白範本嗎？現有代表名單、點名與發言紀錄將被清除。'
+          : 'Are you sure you want to reset the conference to defaults? All current delegations, attendance, and speaker queues will be cleared.';
+        customConfirm(title, msg, () => {
           if (typeof resetStateToDefaults === 'function') {
             resetStateToDefaults();
           }
@@ -640,7 +647,7 @@
           if (typeof saveToLocalStorage === 'function') saveToLocalStorage(true);
           if (typeof renderAll === 'function') renderAll();
           closeSettings();
-          showToast('會議已重置為預設範本', 'info');
+          showToast(state.language === 'zh' ? '會議已重置為預設範本' : 'Conference reset to defaults', 'info');
         });
       };
     }

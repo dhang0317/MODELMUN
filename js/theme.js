@@ -132,68 +132,69 @@
     }
 
     // User curated palette groups
+    const isZh = state.language === 'zh';
     const paletteGroups = [
       {
-        name: '1. 深巧與開心果綠',
+        name: isZh ? '1. 深巧與開心果綠' : '1. Dark Chocolate & Pistachio Green',
         shades: [
-          { shade: '深巧克力色', hex: '#3E2723' },
-          { shade: '開心果綠', hex: '#B5C99A' },
-          { shade: '象牙米白', hex: '#F3EFEA' }
+          { shade: isZh ? '深巧克力色' : 'Dark Chocolate', hex: '#3E2723' },
+          { shade: isZh ? '開心果綠' : 'Pistachio Green', hex: '#B5C99A' },
+          { shade: isZh ? '象牙米白' : 'Ivory Cream', hex: '#F3EFEA' }
         ]
       },
       {
-        name: '2. 深巧與柔霧玫瑰粉',
+        name: isZh ? '2. 深巧與柔霧玫瑰粉' : '2. Dark Chocolate & Dusty Rose',
         shades: [
-          { shade: '深巧克力色', hex: '#3E2723' },
-          { shade: '柔霧玫瑰粉', hex: '#D8A47F' },
-          { shade: '淺杏粉', hex: '#F5EBE6' }
+          { shade: isZh ? '深巧克力色' : 'Dark Chocolate', hex: '#3E2723' },
+          { shade: isZh ? '柔霧玫瑰粉' : 'Dusty Rose', hex: '#D8A47F' },
+          { shade: isZh ? '淺杏粉' : 'Pale Apricot', hex: '#F5EBE6' }
         ]
       },
       {
-        name: '3. 深巧與灰湖藍',
+        name: isZh ? '3. 深巧與灰湖藍' : '3. Dark Chocolate & Slate Lake Blue',
         shades: [
-          { shade: '深巧克力色', hex: '#3E2723' },
-          { shade: '灰湖藍', hex: '#7D9D9C' },
-          { shade: '晨霧淺灰', hex: '#E4E8E8' }
+          { shade: isZh ? '深巧克力色' : 'Dark Chocolate', hex: '#3E2723' },
+          { shade: isZh ? '灰湖藍' : 'Slate Lake Blue', hex: '#7D9D9C' },
+          { shade: isZh ? '晨霧淺灰' : 'Mist Light Grey', hex: '#E4E8E8' }
         ]
       },
       {
-        name: '4. 奶油白與柔杏桃',
+        name: isZh ? '4. 奶油白與柔杏桃' : '4. Cream White & Soft Peach',
         shades: [
-          { shade: '奶油白', hex: '#F7F4EE' },
-          { shade: '柔杏桃', hex: '#E7B596' },
-          { shade: '鼠尾草灰', hex: '#9CAAA2' }
+          { shade: isZh ? '奶油白' : 'Cream White', hex: '#F7F4EE' },
+          { shade: isZh ? '柔杏桃' : 'Soft Peach', hex: '#E7B596' },
+          { shade: isZh ? '鼠尾草灰' : 'Sage Grey', hex: '#9CAAA2' }
         ]
       },
       {
-        name: '5. 經典雙色',
+        name: isZh ? '5. 經典雙色' : '5. Classic Duo',
         shades: [
-          { shade: '深巧克力色', hex: '#3E2723' },
-          { shade: '奶油白', hex: '#F7F4EE' }
+          { shade: isZh ? '深巧克力色' : 'Dark Chocolate', hex: '#3E2723' },
+          { shade: isZh ? '奶油白' : 'Cream White', hex: '#F7F4EE' }
         ]
       },
       {
-        name: '6. 覆盆子酒紅 × 焦糖杏',
+        name: isZh ? '6. 覆盆子酒紅 × 焦糖杏' : '6. Raspberry Wine × Caramel Apricot',
         shades: [
-          { shade: '淺酒紅 (覆盆子)', hex: '#913D48' },
-          { shade: '奶油白', hex: '#F7F4EE' },
-          { shade: '焦糖杏', hex: '#C48B68' }
+          { shade: isZh ? '淺酒紅 (覆盆子)' : 'Raspberry Wine', hex: '#913D48' },
+          { shade: isZh ? '奶油白' : 'Cream White', hex: '#F7F4EE' },
+          { shade: isZh ? '焦糖杏' : 'Caramel Apricot', hex: '#C48B68' }
         ]
       },
       {
-        name: '7. 乾燥玫瑰酒紅 × 霧霾灰藍',
+        name: isZh ? '7. 乾燥玫瑰酒紅 × 霧霾灰藍' : '7. Dried Rose Wine × Hazy Slate Blue',
         shades: [
-          { shade: '乾燥玫瑰酒紅', hex: '#9E5362' },
-          { shade: '霧霾灰藍', hex: '#8898A6' },
-          { shade: '晨霧灰', hex: '#EAE6E3' }
+          { shade: isZh ? '乾燥玫瑰酒紅' : 'Dried Rose Wine', hex: '#9E5362' },
+          { shade: isZh ? '霧霾灰藍' : 'Hazy Slate Blue', hex: '#8898A6' },
+          { shade: isZh ? '晨霧灰' : 'Morning Mist', hex: '#EAE6E3' }
         ]
       },
       {
-        name: '8. 木質淡酒紅 × 柔杏粉',
+        name: isZh ? '8. 木質淡酒紅 × 柔杏粉' : '8. Woody Bordeaux × Soft Apricot Pink',
         shades: [
-          { shade: '淺波爾多紅', hex: '#873E49' },
-          { shade: '柔杏粉', hex: '#E8C8BE' },
-          { shade: '香檳淡金', hex: '#D6B575' }
+          { shade: isZh ? '淺波爾多紅' : 'Light Bordeaux', hex: '#873E49' },
+          { shade: isZh ? '柔杏粉' : 'Soft Apricot Pink', hex: '#E8C8BE' },
+          { shade: isZh ? '香檳淡金' : 'Champagne Gold', hex: '#D6B575' }
         ]
       }
     ];
@@ -503,7 +504,7 @@
           }
           cleanup();
         } else {
-          showToast('請輸入正確的 6 碼 Hex 色碼，例如 #3683a8', 'error');
+          showToast(state.language === 'zh' ? '請輸入正確的 6 碼 Hex 色碼，例如 #3683a8' : 'Please enter a valid 6-digit Hex color code (e.g. #3683a8)', 'error');
         }
       });
     }

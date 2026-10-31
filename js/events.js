@@ -131,7 +131,7 @@
               closeDrawer();
             } catch (err) {
               console.error('Save logo error:', err);
-              showToast('圖片檔案較大，請選擇較小的圖片檔', 'error');
+              showToast(state.language === 'zh' ? '圖片檔案較大，請選擇較小的圖片檔' : 'Image file is too large, please choose a smaller image', 'error');
             }
           };
           reader.readAsDataURL(file);
@@ -529,7 +529,7 @@
     const btnProconSetTime = document.getElementById('btn-procon-set-time');
     if (btnProconSetTime) {
       btnProconSetTime.addEventListener('click', () => {
-        customPrompt('Pro / Con Debate', '請輸入個別代表發言時間（秒）：', String(state.proConSpeakerSecs || 60), (val) => {
+        customPrompt('Pro / Con Debate', state.language === 'zh' ? '請輸入個別代表發言時間（秒）：' : 'Enter individual speaking time (seconds):', String(state.proConSpeakerSecs || 60), (val) => {
           if (val) {
             const secs = parseInt(val, 10) || 60;
             state.proConSpeakerSecs = secs;

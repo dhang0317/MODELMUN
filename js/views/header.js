@@ -53,15 +53,93 @@
         threshSelect.options[0].text = '簡單多數決 (50% + 1)';
         threshSelect.options[1].text = '絕對多數決 (2/3)';
         threshSelect.options[2].text = '安理會常任決 (9/15)';
+        if (threshSelect.options[3]) threshSelect.options[3].text = '協商一致 (Consensus)';
       } else if (state.language === 'fr') {
         threshSelect.options[0].text = 'Majorité simple (50% + 1)';
         threshSelect.options[1].text = 'Majorité des deux tiers (2/3)';
         threshSelect.options[2].text = 'Conseil de sécurité (9/15)';
+        if (threshSelect.options[3]) threshSelect.options[3].text = 'Consensus';
       } else {
         threshSelect.options[0].text = 'Simple Majority (50% + 1)';
         threshSelect.options[1].text = 'Two-Thirds Majority (2/3)';
         threshSelect.options[2].text = 'Security Council (9/15)';
+        if (threshSelect.options[3]) threshSelect.options[3].text = 'Consensus (All Votes)';
       }
+    }
+
+    // Translate Header Preset Select Options (#header-ga-select)
+    const headerGaSelect = document.getElementById('header-ga-select');
+    if (headerGaSelect && headerGaSelect.options) {
+      const gaPresetTextMap = {
+        zh: {
+          unsc: 'UNSC 安全理事會',
+          unga: 'UNGA 全體大會',
+          ga1: 'GA1 裁軍安全 (DISEC)',
+          ga2: 'GA2 經濟金融 (ECOFIN)',
+          ga3: 'GA3 社會人道 (SOCHUM)',
+          ga4: 'GA4 特別政治 (SPECPOL)',
+          ga6: 'GA6 法律委員會 (Legal)',
+          ecosoc: 'ECOSOC 經社理事會',
+          unhrc: 'UNHRC 人權理事會',
+          unesco: 'UNESCO 教科文組織',
+          who: 'WHO 世界衛生組織',
+          unep: 'UNEP 環境規劃署',
+          iaea: 'IAEA 國際原子能總署',
+          g20: 'G20 二十國集團'
+        },
+        en: {
+          unsc: 'UNSC Security Council',
+          unga: 'UNGA General Assembly',
+          ga1: 'GA1 Disarmament (DISEC)',
+          ga2: 'GA2 Economic & Financial (ECOFIN)',
+          ga3: 'GA3 Social & Humanitarian (SOCHUM)',
+          ga4: 'GA4 Special Political (SPECPOL)',
+          ga6: 'GA6 Legal Committee',
+          ecosoc: 'ECOSOC Economic & Social Council',
+          unhrc: 'UNHRC Human Rights Council',
+          unesco: 'UNESCO',
+          who: 'WHO World Health Organization',
+          unep: 'UNEP Environment Programme',
+          iaea: 'IAEA Atomic Energy Agency',
+          g20: 'G20 Summit'
+        },
+        fr: {
+          unsc: 'CSNU Conseil de Sécurité',
+          unga: 'AGNU Assemblée Générale',
+          ga1: 'GA1 Désarmement (DISEC)',
+          ga2: 'GA2 Économique & Financier (ECOFIN)',
+          ga3: 'GA3 Social & Humanitaire (SOCHUM)',
+          ga4: 'GA4 Politique Spéciale (SPECPOL)',
+          ga6: 'GA6 Commission Juridique',
+          ecosoc: 'ECOSOC Conseil Économique et Social',
+          unhrc: 'CDH Conseil des Droits de l\'Homme',
+          unesco: 'UNESCO',
+          who: 'OMS Organisation Mondiale de la Santé',
+          unep: 'PNUE Programme pour l\'Environnement',
+          iaea: 'AIEA Énergie Atomique',
+          g20: 'Sommet du G20'
+        }
+      };
+      const curLang = state.language === 'zh' ? 'zh' : (state.language === 'fr' ? 'fr' : 'en');
+      Array.from(headerGaSelect.options).forEach(opt => {
+        if (opt.value && gaPresetTextMap[curLang] && gaPresetTextMap[curLang][opt.value]) {
+          opt.text = gaPresetTextMap[curLang][opt.value];
+        }
+      });
+    }
+
+    // Auto-localize default unmodified committeeName & agenda
+    const defaultCommNames = ['聯合國安全理事會 (UNSC)', 'United Nations Security Council', 'Conseil de sécurité des Nations unies'];
+    const defaultAgendas = ['對國際和平與安全之威脅', 'Threats to international peace and security', 'Menaces contre la paix et la sécurité internationales'];
+    if (defaultCommNames.includes(state.committeeName)) {
+      state.committeeName = state.language === 'zh' ? '聯合國安全理事會 (UNSC)' : (state.language === 'fr' ? 'Conseil de sécurité des Nations unies' : 'United Nations Security Council');
+      const cInput = document.getElementById('input-committee-name');
+      if (cInput && document.activeElement !== cInput) cInput.value = state.committeeName;
+    }
+    if (defaultAgendas.includes(state.agenda)) {
+      state.agenda = state.language === 'zh' ? '對國際和平與安全之威脅' : (state.language === 'fr' ? 'Menaces contre la paix et la sécurité internationales' : 'Threats to international peace and security');
+      const aInput = document.getElementById('input-agenda-title');
+      if (aInput && document.activeElement !== aInput) aInput.value = state.agenda;
     }
 
     // Translate Motion Type Select Options
@@ -109,6 +187,7 @@
 
     // Sync tab button texts dynamically
     const tabKeyMap = {
+      setup: 'tabSetup',
       rollcall: 'tabRollCall',
       mod: 'tabMod',
       unmod: 'tabUnmod',

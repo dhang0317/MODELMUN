@@ -132,15 +132,19 @@
 
       let rightContent = '';
 
+      const presentLabel = state.language === 'zh' ? '出席' : (t.present || 'Present');
+      const absentLabel = state.language === 'zh' ? '缺席' : (t.absent || 'Absent');
+      const pvLabel = state.language === 'zh' ? '出席且投票' : (t.pv || 'P & Voting');
+
       if (isUncalled) {
-        // 出席缺席大小要一樣，不用英文，透亮半透明色彩 (橄欖抹茶綠 #7D9462 / 覆盆子紅 #913D48)
+        // 出席缺席大小要一樣，透亮半透明色彩 (橄欖抹茶綠 #7D9462 / 覆盆子紅 #913D48)
         rightContent = `
           <div class="rollcall-btn-container flex items-center space-x-2 shrink-0">
             <button type="button" class="btn-rollcall-present flex-1 rounded-xl font-black text-center transition cursor-pointer" style="border: 1.5px solid #7D9462 !important; color: #7D9462 !important; background-color: rgba(125, 148, 98, 0.2) !important;">
-              出席
+              ${presentLabel}
             </button>
             <button type="button" class="btn-rollcall-absent flex-1 rounded-xl font-black text-center transition cursor-pointer" style="border: 1.5px solid #913D48 !important; color: #913D48 !important; background-color: rgba(145, 61, 72, 0.15) !important;">
-              缺席
+              ${absentLabel}
             </button>
           </div>
         `;
@@ -149,7 +153,7 @@
         rightContent = `
           <div class="rollcall-btn-container shrink-0 flex justify-end">
             <button type="button" class="btn-rollcall-expanded btn-rollcall-status-present w-full rounded-xl font-black text-center transition cursor-pointer" style="background-color: rgba(125, 148, 98, 0.32) !important; background: rgba(125, 148, 98, 0.32) !important; color: #5B6D46 !important; border: 2px solid #7D9462 !important;">
-              出席
+              ${presentLabel}
             </button>
           </div>
         `;
@@ -158,7 +162,7 @@
         rightContent = `
           <div class="rollcall-btn-container shrink-0 flex justify-end">
             <button type="button" class="btn-rollcall-expanded btn-rollcall-status-pv w-full rounded-xl font-black text-center transition cursor-pointer" style="background-color: rgba(214, 181, 117, 0.28) !important; background: rgba(214, 181, 117, 0.28) !important; color: #B58A38 !important; border: 2px solid #D6B575 !important;">
-              出席且投票
+              ${pvLabel}
             </button>
           </div>
         `;
@@ -167,7 +171,7 @@
         rightContent = `
           <div class="rollcall-btn-container shrink-0 flex justify-end">
             <button type="button" class="btn-rollcall-expanded btn-rollcall-status-absent w-full rounded-xl font-black text-center transition cursor-pointer" style="background-color: rgba(145, 61, 72, 0.25) !important; background: rgba(145, 61, 72, 0.25) !important; color: #913D48 !important; border: 2px solid #913D48 !important;">
-              缺席
+              ${absentLabel}
             </button>
           </div>
         `;
@@ -601,7 +605,11 @@
           const hintText = document.getElementById('motion-session-hint-text');
           if (hintText) {
             const m = state.votingMotion || (state.motions && state.motions[0]);
-            hintText.textContent = m ? `正在進行動議會期快速表決：${formatMotionType(m.type)} (${m.proposer})` : '正在進行動議會期快速表決';
+            if (state.language === 'zh') {
+              hintText.textContent = m ? `正在進行動議會期快速表決：${formatMotionType(m.type)} (${m.proposer})` : '正在進行動議會期快速表決';
+            } else {
+              hintText.textContent = m ? `Quick Session Vote in Progress: ${formatMotionType(m.type)} (${m.proposer})` : 'Quick Session Vote in Progress';
+            }
           }
         } else {
           hintBanner.classList.add('hidden');
@@ -1009,7 +1017,7 @@
               <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold">
                 ${t.totalVotesLabel || '總票'}: ${totalVotes}
               </span>
-              <button type="button" class="btn-clear-session text-slate-400 hover:text-rose-500 p-1 text-xs transition cursor-pointer" data-id="${sess.id}" title="清空此會期票數">
+              <button type="button" class="btn-clear-session text-slate-400 hover:text-rose-500 p-1 text-xs transition cursor-pointer" data-id="${sess.id}" title="${state.language === 'zh' ? '清空此會期票數' : 'Clear this session votes'}">
                 ✕
               </button>
             </div>

@@ -24,7 +24,8 @@
         if (userMenu) userMenu.style.display = 'block';
         if (avatarImg) avatarImg.src = state.currentUser.picture || 'https://lh3.googleusercontent.com/a/default-user';
         const userMenuName = document.getElementById('user-menu-name');
-        if (userMenuName) userMenuName.textContent = '登出 (' + (state.currentUser.name || '已登入') + ')';
+        const t = I18N[state.language] || I18N.en || {};
+        if (userMenuName) userMenuName.textContent = (t.googleLogout || (state.language === 'zh' ? '登出' : 'Log Out')) + ' (' + (state.currentUser.name || (state.language === 'zh' ? '已登入' : 'Signed in')) + ')';
         if (nameText) nameText.textContent = state.currentUser.name || 'MUN Delegate';
         if (emailText) emailText.textContent = state.currentUser.email || '';
         hidePortal();
@@ -105,7 +106,7 @@
         saveToLocalStorage(true);
         renderAll();
       }
-      showToast(`歡迎回來，${state.currentUser.name}！`, 'success');
+      showToast(state.language === 'zh' ? `歡迎回來，${state.currentUser.name}！` : `Welcome back, ${state.currentUser.name}!`, 'success');
     }
 
     function handleGoogleCredential(response) {
@@ -169,7 +170,7 @@
           saveToCloudKV(payload, true);
         } else {
           saveToLocalStorage(true);
-          showToast('進度已儲存至本機，登入後可雲端同步', 'info');
+          showToast(state.language === 'zh' ? '進度已儲存至本機，登入後可雲端同步' : 'Progress saved locally. Sign in for cloud sync.', 'info');
         }
         if (popover) {
           popover.classList.add('hidden');
@@ -214,7 +215,7 @@
         const backdrop = document.getElementById('drawer-backdrop');
         if (drawer) drawer.classList.add('-translate-x-full');
         if (backdrop) backdrop.classList.add('hidden');
-        showToast('已登出', 'info');
+        showToast(state.language === 'zh' ? '已登出' : 'Signed out', 'info');
       });
     }
 
@@ -232,14 +233,14 @@
             return;
           }
           if (err.code === 'auth/unauthorized-domain') {
-            showToast('Firebase 網域未授權，請至 Firebase Console 新增 authorized domain', 'error');
+            showToast(state.language === 'zh' ? 'Firebase 網域未授權，請至 Firebase Console 新增 authorized domain' : 'Firebase domain not authorized. Please add this domain in Firebase Console.', 'error');
           }
         }
       }
 
       // Priority 2: Fallback to GIS
       if (!window.google || !window.google.accounts) {
-        showToast('Google 登入服務尚未載入，請稍候重試', 'error');
+        showToast(state.language === 'zh' ? 'Google 登入服務尚未載入，請稍候重試' : 'Google Sign-In service is still loading, please try again shortly.', 'error');
         return;
       }
       
@@ -320,7 +321,7 @@
       portalGuestBtn.addEventListener('click', () => {
         sessionStorage.setItem('MUN_PORTAL_GUEST', 'true');
         hidePortal();
-        showToast('已以訪客模式進入會議系統', 'info');
+        showToast(state.language === 'zh' ? '已以訪客模式進入會議系統' : 'Entered conference system in Guest Mode', 'info');
       });
     }
 

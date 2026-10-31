@@ -366,7 +366,7 @@
         state.currentProConSpeaker = targetQueue.shift();
         state.proConSecsRemaining = state.proConSpeakerSecs || 60;
       } else {
-        customAlert('Pro / Con Debate', '請先從正方或反方名單加入發言代表！');
+        customAlert('Pro / Con Debate', state.language === 'zh' ? '請先從正方或反方名單加入發言代表！' : 'Please add a delegate to the PRO or CON queue first!');
         return;
       }
     }

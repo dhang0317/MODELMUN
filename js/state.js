@@ -373,7 +373,7 @@
     if (!userId && !roomId) return;
 
     const statusEl = document.getElementById('cloud-sync-status');
-    if (statusEl) statusEl.textContent = '雲端同步中...';
+    if (statusEl) statusEl.textContent = state.language === 'zh' ? '雲端同步中...' : 'Syncing to cloud...';
 
     const payloadToSave = {
       ...payload,
@@ -392,8 +392,8 @@
           promises.push(window.firebaseDb.collection('rooms').doc(roomId).set(cleanData, { merge: true }));
         }
         await Promise.all(promises);
-        if (statusEl) statusEl.textContent = '雲端已同步最新進度';
-        if (notify) showToast('會議資訊與進度已儲存至 Firebase 雲端！', 'success');
+        if (statusEl) statusEl.textContent = state.language === 'zh' ? '雲端已同步最新進度' : 'Cloud synced';
+        if (notify) showToast(state.language === 'zh' ? '會議資訊與進度已儲存至 Firebase 雲端！' : 'Conference progress saved to Firebase Cloud!', 'success');
         return;
       }
 
@@ -405,15 +405,15 @@
       });
       const data = await res.json();
       if (data && data.success) {
-        if (statusEl) statusEl.textContent = '雲端已同步最新進度';
-        if (notify) showToast('會議資訊與進度已同步至雲端！', 'success');
+        if (statusEl) statusEl.textContent = state.language === 'zh' ? '雲端已同步最新進度' : 'Cloud synced';
+        if (notify) showToast(state.language === 'zh' ? '會議資訊與進度已同步至雲端！' : 'Conference progress synced to cloud!', 'success');
       } else {
         throw new Error(data.error || 'Sync failed');
       }
     } catch (err) {
       console.warn('Firebase / Cloud save error:', err);
-      if (statusEl) statusEl.textContent = '雲端同步失敗';
-      if (notify) showToast('無法同步至雲端：' + (err.message || '請確認網路連線'), 'error');
+      if (statusEl) statusEl.textContent = state.language === 'zh' ? '雲端同步失敗' : 'Cloud sync failed';
+      if (notify) showToast((state.language === 'zh' ? '無法同步至雲端：' : 'Failed to sync to cloud: ') + (err.message || (state.language === 'zh' ? '請確認網路連線' : 'Please check network connection')), 'error');
     }
   }
 
@@ -560,7 +560,7 @@
           updateAvailableCountriesPool();
           renderAll();
           const statusEl = document.getElementById('cloud-sync-status');
-          if (statusEl) statusEl.textContent = '雲端已同步最新進度';
+          if (statusEl) statusEl.textContent = state.language === 'zh' ? '雲端已同步最新進度' : 'Cloud synced';
           return true;
         }
         return false;
@@ -579,7 +579,7 @@
           updateAvailableCountriesPool();
           renderAll();
           const statusEl = document.getElementById('cloud-sync-status');
-          if (statusEl) statusEl.textContent = '雲端已同步最新進度';
+          if (statusEl) statusEl.textContent = state.language === 'zh' ? '雲端已同步最新進度' : 'Cloud synced';
           return true;
         }
       }

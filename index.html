@@ -722,11 +722,11 @@
         <!-- Motions List -->
         <div class="bg-surface-primary rounded-2xl p-5 shadow-card border border-subtle">
           <div class="flex items-center justify-between pb-3 border-b border-subtle">
-            <h3 class="font-medium text-content-primary text-base">動議清單</h3>
+            <h3 class="font-medium text-content-primary text-base" data-i18n="motionsOnFloor">動議清單</h3>
             <div class="flex items-center space-x-2">
               <button id="btn-add-motion" class="px-4 py-1.5 border border-subtle bg-surface-secondary text-content-primary rounded-lg text-xs font-medium flex items-center space-x-1 transition hover:bg-surface-tertiary cursor-pointer">
                 
-                <span>新增動議</span>
+                <span data-i18n="addMotion">新增動議</span>
               </button>
             </div>
           </div>
@@ -813,7 +813,7 @@
                 <span id="motion-vote-details-text" class="truncate"></span>
               </div>
               <div id="resolution-title-container" class="flex items-center space-x-2 mt-0.5">
-                <input id="vote-resolution-title-input" type="text" value="Draft Resolution 1.1" placeholder="輸入決議案名稱..." class="w-full text-lg sm:text-xl font-bold text-slate-800 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-primary focus:outline-none transition py-0.5 px-1 rounded">
+                <input id="vote-resolution-title-input" type="text" value="Draft Resolution 1.1" placeholder="輸入決議案名稱..." data-i18n-placeholder="resolutionTitlePlaceholder" class="w-full text-lg sm:text-xl font-bold text-slate-800 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-primary focus:outline-none transition py-0.5 px-1 rounded">
               </div>
               <!-- Bottom line: Motion Type / Category subtitle (Small secondary style) -->
               <div id="motion-vote-type-subtitle" class="text-xs text-slate-500 font-medium px-1 mt-0.5 hidden">
@@ -830,7 +830,7 @@
                 <option value="consensus">Consensus (All Votes)</option>
               </select>
               <button id="btn-motion-vote-execute" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition shadow-sm hidden flex items-center space-x-1.5">
-                <span id="btn-motion-vote-execute-text">執行動議</span>
+                <span id="btn-motion-vote-execute-text" data-i18n="executeMotionBtn">執行動議</span>
               </button>
             </div>
           </div>
@@ -862,7 +862,7 @@
                 <span id="vote-progress-label-favor">Favor: 0%</span>
                 <div class="flex items-center space-x-2">
                   <span id="vote-verdict" class="text-xs sm:text-sm font-bold tracking-wide text-slate-600">PENDING</span>
-                  <button id="btn-quick-pass" type="button" class="px-2 py-0.5 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold rounded shadow-sm transition hidden cursor-pointer">
+                  <button id="btn-quick-pass" type="button" class="px-2 py-0.5 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold rounded shadow-sm transition hidden cursor-pointer" data-i18n="concludeVote">
                     通過 (Pass)
                   </button>
                 </div>
@@ -1147,7 +1147,7 @@
         <input id="input-motion-topic" type="text" data-i18n-placeholder="topicPlaceholder" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm" placeholder="請輸入議題名稱...">
       </div>
       <div id="motion-field-dr-select" class="hidden">
-        <label id="label-motion-dr-select" class="block text-xs font-semibold text-slate-300 mb-1">決議案草案 (Draft Resolution)</label>
+        <label id="label-motion-dr-select" class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="draftResolutionLabel">決議案草案 (Draft Resolution)</label>
         <div class="flex gap-2">
           <select id="select-motion-dr" class="flex-1 px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm font-medium">
             <option value="DR 1.1" selected>DR 1.1</option>
@@ -1155,21 +1155,21 @@
             <option value="DR 1.3">DR 1.3</option>
             <option value="DR 2.1">DR 2.1</option>
             <option value="DR 2.2">DR 2.2</option>
-            <option value="custom">自訂草案名稱...</option>
+            <option value="custom" data-i18n="customDrOption">自訂草案名稱...</option>
           </select>
-          <input id="input-motion-dr-custom" type="text" class="hidden flex-1 px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm" placeholder="輸入自訂草案名稱...">
+          <input id="input-motion-dr-custom" type="text" data-i18n-placeholder="customDrPlaceholder" class="hidden flex-1 px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm" placeholder="輸入自訂草案名稱...">
         </div>
       </div>
       <div id="motion-field-amendment-select" class="hidden">
-        <label class="block text-xs font-semibold text-slate-300 mb-1">修正案 (Amendment)</label>
+        <label class="block text-xs font-semibold text-slate-300 mb-1" data-i18n="amendmentLabel">修正案 (Amendment)</label>
         <div class="flex gap-2">
           <select id="select-motion-amendment" class="flex-1 px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm font-medium">
-            <option value="Amendment A" selected>Amendment A (修正案 A)</option>
-            <option value="Amendment B">Amendment B (修正案 B)</option>
-            <option value="Amendment C">Amendment C (修正案 C)</option>
-            <option value="custom">自訂修正案名稱...</option>
+            <option value="Amendment A" selected data-i18n="amendmentOptionA">Amendment A (修正案 A)</option>
+            <option value="Amendment B" data-i18n="amendmentOptionB">Amendment B (修正案 B)</option>
+            <option value="Amendment C" data-i18n="amendmentOptionC">Amendment C (修正案 C)</option>
+            <option value="custom" data-i18n="customAmendmentOption">自訂修正案名稱...</option>
           </select>
-          <input id="input-motion-amendment-custom" type="text" class="hidden flex-1 px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm" placeholder="輸入自訂修正案名稱...">
+          <input id="input-motion-amendment-custom" type="text" data-i18n-placeholder="customAmendmentPlaceholder" class="hidden flex-1 px-3 py-2 bg-slate-900 border border-slate-700 text-white rounded-lg text-sm" placeholder="輸入自訂修正案名稱...">
         </div>
       </div>
       <div class="grid grid-cols-2 gap-3" id="motion-time-fields">
@@ -1204,20 +1204,20 @@
 
       <!-- Voting Type: Procedural vs Substantive -->
       <div class="space-y-2">
-        <label class="block text-xs uppercase tracking-wider text-slate-400">Voting Type (表決性質)</label>
+        <label class="block text-xs uppercase tracking-wider text-slate-400" data-i18n="votingTypeLabel">Voting Type (表決性質)</label>
         <div class="grid grid-cols-2 gap-3">
           <label class="flex items-center space-x-2.5 p-3 rounded-xl border border-slate-700 bg-slate-900/50 cursor-pointer hover:border-slate-500 transition">
             <input type="radio" name="modal-vote-type" value="substantive" class="accent-white" checked>
             <div class="text-xs">
-              <div class="text-slate-100">Substantive (實質性)</div>
-              <div class="text-[10px] text-slate-400">可棄權、可發言權</div>
+              <div class="text-slate-100" data-i18n="substantiveVote">Substantive (實質性)</div>
+              <div class="text-[10px] text-slate-400" data-i18n="substantiveDesc">可棄權、可發言權</div>
             </div>
           </label>
           <label class="flex items-center space-x-2.5 p-3 rounded-xl border border-slate-700 bg-slate-900/50 cursor-pointer hover:border-slate-500 transition">
             <input type="radio" name="modal-vote-type" value="procedural" class="accent-white">
             <div class="text-xs">
-              <div class="text-slate-100">Procedural (程序性)</div>
-              <div class="text-[10px] text-slate-400">不可棄權</div>
+              <div class="text-slate-100" data-i18n="proceduralVote">Procedural (程序性)</div>
+              <div class="text-[10px] text-slate-400" data-i18n="proceduralDesc">不可棄權</div>
             </div>
           </label>
         </div>
@@ -1225,23 +1225,23 @@
 
       <!-- Required Majority -->
       <div class="space-y-2">
-        <label class="block text-xs uppercase tracking-wider text-slate-400">Required Majority (所需多數)</label>
+        <label class="block text-xs uppercase tracking-wider text-slate-400" data-i18n="thresholdRuleLabel">Required Majority (所需多數)</label>
         <div class="space-y-2">
           <label class="flex items-center space-x-2.5 p-2.5 rounded-xl border border-slate-700 bg-slate-900/50 cursor-pointer hover:border-slate-500 transition">
             <input type="radio" name="modal-vote-threshold" value="simple" class="accent-white" checked>
-            <div class="text-xs text-slate-100">Simple Majority (簡單多數決 50% + 1)</div>
+            <div class="text-xs text-slate-100" data-i18n="simpleMajorityOption">Simple Majority (簡單多數決 50% + 1)</div>
           </label>
           <label class="flex items-center space-x-2.5 p-2.5 rounded-xl border border-slate-700 bg-slate-900/50 cursor-pointer hover:border-slate-500 transition">
             <input type="radio" name="modal-vote-threshold" value="twothirds" class="accent-white">
-            <div class="text-xs text-slate-100">Two-Thirds Majority (三分之二絕對多數 2/3)</div>
+            <div class="text-xs text-slate-100" data-i18n="twoThirdsMajorityOption">Two-Thirds Majority (三分之二絕對多數 2/3)</div>
           </label>
           <label class="flex items-center space-x-2.5 p-2.5 rounded-xl border border-slate-700 bg-slate-900/50 cursor-pointer hover:border-slate-500 transition">
             <input type="radio" name="modal-vote-threshold" value="unsc9" class="accent-white">
-            <div class="text-xs text-slate-100">Security Council (安理會 9 票 + 無常任否決)</div>
+            <div class="text-xs text-slate-100" data-i18n="unscMajorityOption">Security Council (安理會 9 票 + 無常任否決)</div>
           </label>
           <label class="flex items-center space-x-2.5 p-2.5 rounded-xl border border-slate-700 bg-slate-900/50 cursor-pointer hover:border-slate-500 transition">
             <input type="radio" name="modal-vote-threshold" value="consensus" class="accent-white">
-            <div class="text-xs text-slate-100">Consensus Vote (共識決 / 無反對票)</div>
+            <div class="text-xs text-slate-100" data-i18n="consensusOption">Consensus Vote (共識決 / 無反對票)</div>
           </label>
         </div>
       </div>
@@ -1257,24 +1257,24 @@
   <div id="modal-recess" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-[100] flex flex-col items-center justify-center p-6 hidden">
     <div class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-8 text-center space-y-6 text-white shadow-2xl">
       <div>
-        <span id="recess-badge" class="hidden px-3 py-1 bg-amber-500/20 text-amber-300 rounded-full text-xs font-bold tracking-wider uppercase border border-amber-500/30">Procedural Action</span>
-        <h2 id="recess-title" class="text-3xl font-black mt-1 tracking-tight">暫停會議</h2>
-        <p id="recess-subtitle" class="hidden text-slate-400 text-xs sm:text-sm mt-1">Session Suspended • Recess</p>
+        <span id="recess-badge" class="hidden px-3 py-1 bg-amber-500/20 text-amber-300 rounded-full text-xs font-bold tracking-wider uppercase border border-amber-500/30" data-i18n="proceduralAction">Procedural Action</span>
+        <h2 id="recess-title" class="text-3xl font-black mt-1 tracking-tight" data-i18n="recessSuspendedTitle">暫停會議</h2>
+        <p id="recess-subtitle" class="hidden text-slate-400 text-xs sm:text-sm mt-1" data-i18n="recessSuspendedSubtitle">Session Suspended • Recess</p>
       </div>
       
       <!-- Big Recess Countdown Timer -->
       <div id="recess-timer-container" class="bg-black/40 border border-white/10 rounded-2xl p-6 shadow-inner">
-        <div class="hidden text-xs font-bold tracking-widest text-slate-400 uppercase mb-2">預計復會倒數</div>
+        <div class="hidden text-xs font-bold tracking-widest text-slate-400 uppercase mb-2" data-i18n="recessUntilReconvene">預計復會倒數</div>
         <div id="recess-timer-display" class="font-mono text-6xl sm:text-7xl font-black text-amber-400 tracking-wider">15:00</div>
         <div id="recess-reconvene-time" class="hidden text-xs text-slate-400 mt-3 font-medium">復會時間：--:--</div>
       </div>
 
       <div class="flex items-center justify-center gap-3 pt-2">
         <button id="btn-recess-toggle-timer" type="button" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl shadow transition text-sm flex items-center space-x-1.5 cursor-pointer">
-          <span id="recess-toggle-label">開始計時</span>
+          <span id="recess-toggle-label" data-i18n="recessStartTimer">開始計時</span>
         </button>
         <button id="btn-recess-reconvene" type="button" class="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl shadow transition text-sm border border-slate-600 cursor-pointer">
-          <span>正式復會 (Reconvene)</span>
+          <span data-i18n="recessFormalReconvene">正式復會 (Reconvene)</span>
         </button>
       </div>
     </div>
@@ -1320,14 +1320,14 @@
         <!-- Panel 1: Conference -->
         <div id="cfg-panel-conference" class="cfg-panel space-y-5">
           <div>
-            <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">委員會名稱</label>
+            <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2" data-i18n="committeeName">委員會名稱</label>
             <div class="flex items-center space-x-2">
               <input id="cfg-input-committee" type="text" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-medium text-white focus:outline-none focus:border-zinc-400">
             </div>
           </div>
 
           <div>
-            <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">會議議題</label>
+            <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2" data-i18n="agendaTopic">會議議題</label>
             <input id="cfg-input-agenda" type="text" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-medium text-white focus:outline-none focus:border-zinc-400">
           </div>
 
@@ -1337,12 +1337,12 @@
                 <img id="cfg-preview-logo" src="logo.png" alt="Logo Preview" class="w-full h-full object-cover">
               </div>
               <div>
-                <div class="text-sm font-bold text-white">會議專屬 Logo 圖標</div>
-                <div class="text-xs text-zinc-400">支援 PNG, JPG, SVG 格式</div>
+                <div class="text-sm font-bold text-white" data-i18n="cfgCommitteeLogo">會議專屬 Logo 圖標</div>
+                <div class="text-xs text-zinc-400" data-i18n="cfgLogoSupportDesc">支援 PNG, JPG, SVG 格式</div>
               </div>
             </div>
             <div class="flex items-center space-x-2">
-              <button id="cfg-btn-upload-logo" type="button" class="px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-xs font-semibold transition border border-zinc-700 cursor-pointer">
+              <button id="cfg-btn-upload-logo" type="button" class="px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-xs font-semibold transition border border-zinc-700 cursor-pointer" data-i18n="cfgChangeLogo">
                 更換圖標
               </button>
             </div>
@@ -1353,7 +1353,7 @@
         <div id="cfg-panel-display" class="cfg-panel space-y-5 hidden">
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">語言</label>
+              <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2" data-i18n="cfgLangShort">語言</label>
               <select id="cfg-select-language" class="w-full px-4 py-2.5 bg-zinc-950 border border-zinc-700 rounded-xl text-sm font-medium text-white">
                 <option value="zh">繁體中文 (Traditional Chinese)</option>
                 <option value="en">English (US)</option>
@@ -1361,15 +1361,15 @@
               </select>
             </div>
             <div>
-              <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2">模式</label>
+              <label class="block text-xs font-semibold text-zinc-300 uppercase tracking-wider mb-2" data-i18n="cfgModeShort">模式</label>
               <div class="grid grid-cols-2 gap-2">
                 <button type="button" id="cfg-btn-theme-dark" class="px-3 py-2.5 rounded-xl border border-zinc-700 text-xs font-bold transition flex items-center justify-center space-x-2 bg-zinc-800 text-white cursor-pointer">
                   
-                  <span>深色模式</span>
+                  <span data-i18n="cfgDarkMode">深色模式</span>
                 </button>
                 <button type="button" id="cfg-btn-theme-light" class="px-3 py-2.5 rounded-xl border border-zinc-800 text-xs font-bold transition flex items-center justify-center space-x-2 bg-zinc-950 text-zinc-400 hover:text-white cursor-pointer">
                   
-                  <span>淺色模式</span>
+                  <span data-i18n="cfgLightMode">淺色模式</span>
                 </button>
               </div>
             </div>
@@ -1378,23 +1378,23 @@
           <div class="p-4 rounded-2xl bg-zinc-950/60 border border-zinc-800 space-y-3">
             <div class="flex items-center justify-between">
               <div>
-                <div class="text-sm font-bold text-white">比例</div>
+                <div class="text-sm font-bold text-white" data-i18n="cfgScaleShort">比例</div>
               </div>
               <span id="cfg-label-scale" class="text-xs font-mono font-bold px-2.5 py-1 rounded-lg border border-zinc-700 bg-zinc-900">95%</span>
             </div>
             <div class="flex items-center space-x-3">
               <input id="cfg-slider-scale" type="range" min="0.5" max="2.0" step="0.05" value="0.95" class="w-full accent-white cursor-pointer h-2 bg-zinc-700 rounded-lg">
-              <button id="cfg-btn-reset-scale" type="button" class="text-xs text-zinc-400 hover:text-white whitespace-nowrap px-2 py-1 rounded border border-zinc-800 cursor-pointer">重設 95%</button>
+              <button id="cfg-btn-reset-scale" type="button" class="text-xs text-zinc-400 hover:text-white whitespace-nowrap px-2 py-1 rounded border border-zinc-800 cursor-pointer" data-i18n="cfgResetScale">重設 95%</button>
             </div>
           </div>
 
           <div class="p-4 rounded-2xl bg-zinc-950/60 border border-zinc-800 flex items-center justify-between">
             <div>
-              <div class="text-sm font-bold text-white">自訂主題品牌色</div>
+              <div class="text-sm font-bold text-white" data-i18n="cfgCustomBrandColor">自訂主題品牌色</div>
             </div>
             <button id="cfg-btn-open-palette" type="button" class="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-xs font-semibold transition border border-zinc-700 flex items-center space-x-2 cursor-pointer">
               <span id="cfg-swatch-preview" class="w-4 h-4 rounded-full border border-white/40 inline-block bg-sky-500"></span>
-              <span>開啟色票調色盤</span>
+              <span data-i18n="cfgOpenPalette">開啟色票調色盤</span>
             </button>
           </div>
         </div>
@@ -1408,11 +1408,11 @@
                 
               </div>
               <div>
-                <div id="cfg-auth-name" class="text-sm font-bold text-white">訪客模式 (未登入)</div>
-                <div id="cfg-auth-email" class="text-xs text-zinc-400">登入 Google 帳號可享有跨裝置永久存檔</div>
+                <div id="cfg-auth-name" class="text-sm font-bold text-white" data-i18n="cfgGuestMode">訪客模式 (未登入)</div>
+                <div id="cfg-auth-email" class="text-xs text-zinc-400" data-i18n="cfgGuestDesc">登入 Google 帳號可享有跨裝置永久存檔</div>
               </div>
             </div>
-            <button id="cfg-btn-auth-action" type="button" class="px-4 py-2 bg-white text-zinc-900 hover:bg-zinc-200 rounded-xl text-xs font-bold transition shadow cursor-pointer">
+            <button id="cfg-btn-auth-action" type="button" class="px-4 py-2 bg-white text-zinc-900 hover:bg-zinc-200 rounded-xl text-xs font-bold transition shadow cursor-pointer" data-i18n="cfgGoogleSignIn">
               登入 Google
             </button>
           </div>
@@ -1420,13 +1420,13 @@
           <!-- Cloud Sync -->
           <div class="p-4 rounded-2xl bg-zinc-950/60 border border-zinc-800 flex items-center justify-between">
             <div>
-              <div class="text-sm font-bold text-white">Firebase 雲端即時同步</div>
+              <div class="text-sm font-bold text-white" data-i18n="cfgFirebaseSyncTitle">Firebase 雲端即時同步</div>
               <div id="cfg-sync-status-text" class="text-xs text-emerald-400 flex items-center space-x-1.5 mt-0.5">
                 <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                <span>雲端資料庫已就緒</span>
+                <span data-i18n="cfgFirebaseReady">雲端資料庫已就緒</span>
               </div>
             </div>
-            <button id="cfg-btn-sync-now" type="button" class="px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-xs font-semibold transition border border-zinc-700 cursor-pointer">
+            <button id="cfg-btn-sync-now" type="button" class="px-3.5 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl text-xs font-semibold transition border border-zinc-700 cursor-pointer" data-i18n="cfgPushBackupNow">
               立即推播備份
             </button>
           </div>
@@ -1436,15 +1436,15 @@
             <button id="cfg-btn-export-file" type="button" class="p-3.5 rounded-2xl border border-zinc-800 bg-zinc-950/60 hover:bg-zinc-800/80 text-left transition flex items-center space-x-3 cursor-pointer">
               
               <div>
-                <div class="text-xs font-bold text-white">匯出會議設定檔</div>
-                <div class="text-[10px] text-zinc-400">下載為本機 JSON 備份</div>
+                <div class="text-xs font-bold text-white" data-i18n="cfgExportJsonTitle">匯出會議設定檔</div>
+                <div class="text-[10px] text-zinc-400" data-i18n="cfgExportJsonDesc">下載為本機 JSON 備份</div>
               </div>
             </button>
             <button id="cfg-btn-import-file" type="button" class="p-3.5 rounded-2xl border border-zinc-800 bg-zinc-950/60 hover:bg-zinc-800/80 text-left transition flex items-center space-x-3 cursor-pointer">
               
               <div>
-                <div class="text-xs font-bold text-white">匯入會議設定檔</div>
-                <div class="text-[10px] text-zinc-400">上傳 JSON 還原進度</div>
+                <div class="text-xs font-bold text-white" data-i18n="cfgImportJsonTitle">匯入會議設定檔</div>
+                <div class="text-[10px] text-zinc-400" data-i18n="cfgImportJsonDesc">上傳 JSON 還原進度</div>
               </div>
             </button>
           </div>
@@ -1452,10 +1452,10 @@
           <!-- Reset Conference -->
           <div class="pt-2 border-t border-zinc-800/80 flex items-center justify-between">
             <div>
-              <div class="text-xs font-bold text-rose-400">重置會議進度 (Danger Zone)</div>
-              <div class="text-[10px] text-zinc-500">將會議重置為預設空白範本，清除所有點名與投票紀錄</div>
+              <div class="text-xs font-bold text-rose-400" data-i18n="cfgDangerZoneTitle">重置會議進度 (Danger Zone)</div>
+              <div class="text-[10px] text-zinc-500" data-i18n="cfgDangerZoneDesc">將會議重置為預設空白範本，清除所有點名與投票紀錄</div>
             </div>
-            <button id="cfg-btn-reset-conference" type="button" class="px-3 py-1.5 rounded-lg border border-rose-500/30 text-rose-400 hover:bg-rose-500/10 text-xs font-semibold transition cursor-pointer">
+            <button id="cfg-btn-reset-conference" type="button" class="px-3 py-1.5 rounded-lg border border-rose-500/30 text-rose-400 hover:bg-rose-500/10 text-xs font-semibold transition cursor-pointer" data-i18n="cfgResetConferenceBtn">
               重置會議
             </button>
           </div>
@@ -1465,7 +1465,7 @@
 
       <!-- Modal Footer -->
       <div class="px-6 py-4 border-t border-zinc-800 bg-zinc-950/60 flex items-center justify-end shrink-0">
-        <button id="btn-save-settings-done" type="button" class="px-6 py-2.5 bg-white text-zinc-900 hover:bg-zinc-200 font-bold text-xs rounded-xl transition shadow cursor-pointer">
+        <button id="btn-save-settings-done" type="button" class="px-6 py-2.5 bg-white text-zinc-900 hover:bg-zinc-200 font-bold text-xs rounded-xl transition shadow cursor-pointer" data-i18n="done">
           完成 (Done)
         </button>
       </div>
@@ -1539,29 +1539,29 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
   <script src="js/firebase-config.js?v=2026102601"></script>
   <!-- Application Data & Translations -->
-  <script src="data.js?v=2026102601"></script>
-  <script src="js/i18n.js?v=2026103101"></script>
-  <script src="js/countries.js?v=2026102601"></script>
-  <script src="js/state.js?v=2026102635"></script>
+  <script src="data.js?v=2026103102"></script>
+  <script src="js/i18n.js?v=2026103102"></script>
+  <script src="js/countries.js?v=2026103102"></script>
+  <script src="js/state.js?v=2026103102"></script>
     <!-- Utilities, Dialogs & Visual Effects -->
-    <script src="js/dialogs.js?v=2026102635"></script>
-    <script src="js/confetti.js?v=2026102601"></script>
-    <script src="js/theme.js?v=2026102642"></script>
-    <script src="js/modals.js?v=2026102635"></script>
-    <script src="js/p2p.js?v=2026102601"></script>
+    <script src="js/dialogs.js?v=2026103102"></script>
+    <script src="js/confetti.js?v=2026103102"></script>
+    <script src="js/theme.js?v=2026103102"></script>
+    <script src="js/modals.js?v=2026103102"></script>
+    <script src="js/p2p.js?v=2026103102"></script>
     <!-- View Renderers -->
-    <script src="js/views/header.js?v=2026102601"></script>
-    <script src="js/views/setup.js?v=2026102601"></script>
-    <script src="js/views/gsl.js?v=2026102601"></script>
-    <script src="js/views/mod.js?v=2026102601"></script>
-    <script src="js/views/unmod.js?v=2026102601"></script>
-    <script src="js/views/single.js?v=2026102601"></script>
-    <script src="js/views/motions.js?v=2026102601"></script>
-    <script src="js/views/voting.js?v=2026102645"></script>
+    <script src="js/views/header.js?v=2026103102"></script>
+    <script src="js/views/setup.js?v=2026103102"></script>
+    <script src="js/views/gsl.js?v=2026103102"></script>
+    <script src="js/views/mod.js?v=2026103102"></script>
+    <script src="js/views/unmod.js?v=2026103102"></script>
+    <script src="js/views/single.js?v=2026103102"></script>
+    <script src="js/views/motions.js?v=2026103102"></script>
+    <script src="js/views/voting.js?v=2026103102"></script>
     <!-- Events, Auth & Entry Point -->
-    <script src="js/events.js?v=2026103101"></script>
-    <script src="js/auth.js?v=2026102635"></script>
-    <script src="app.js?v=2026102601"></script>
+    <script src="js/events.js?v=2026103102"></script>
+    <script src="js/auth.js?v=2026103102"></script>
+    <script src="app.js?v=2026103102"></script>
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
