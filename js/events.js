@@ -870,14 +870,16 @@
       });
     }
 
-    // Recess modal buttons
-    const btnRecessToggle = document.getElementById('btn-recess-toggle-timer');
-    if (btnRecessToggle) {
-      btnRecessToggle.addEventListener('click', toggleRecessTimer);
-    }
-    const btnRecessReconvene = document.getElementById('btn-recess-reconvene');
-    if (btnRecessReconvene) {
-      btnRecessReconvene.addEventListener('click', closeRecessScreen);
+    // Recess modal double click on backdrop to close/reconvene
+    const modalRecess = document.getElementById('modal-recess');
+    if (modalRecess) {
+      modalRecess.addEventListener('dblclick', (e) => {
+        // 只有點擊旁邊（非中央卡片內部元素）或是點擊兩下背景時觸發復會
+        const card = document.getElementById('modal-recess-card');
+        if (!card || !card.contains(e.target)) {
+          closeRecessScreen();
+        }
+      });
     }
 
     // Roll Call Bulk Actions

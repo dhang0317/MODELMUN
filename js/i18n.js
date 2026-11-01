@@ -517,7 +517,7 @@ const I18N = {
       editResolutionTitle: "修改決議草案名稱",
       enterResolutionPrompt: "請輸入決議草案或表決議題名稱：",
       sessionReconvenedToast: "會議正式復會",
-      recessSuspendedTitle: "會議暫停 / 休會中",
+      recessSuspendedTitle: "休會",
       recessSuspendedSubtitle: "會議暫停 • 休會 (Recess)",
       recessAdjournDaySubtitle: "本日議程休會 • Adjourned for the Day",
       recessAdjournSessionSubtitle: "本次模聯大會全體會議正式閉幕 • Session Adjourned",

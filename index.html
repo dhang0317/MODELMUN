@@ -117,7 +117,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/style.css?v=2026110113">
+  <link rel="stylesheet" href="css/style.css?v=2026110114">
 </head>
 <body class="h-screen w-screen flex flex-col overflow-hidden">
 
@@ -1262,28 +1262,11 @@
   </div>
 
   <!-- Modal: Recess / Meeting Suspended Screen -->
-  <div id="modal-recess" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-[100] flex flex-col items-center justify-center p-6 hidden">
-    <div class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-8 text-center space-y-6 text-white shadow-2xl">
+  <div id="modal-recess" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-[100] flex flex-col items-center justify-center p-6 hidden select-none cursor-pointer">
+    <div id="modal-recess-card" class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 text-center space-y-4 text-white shadow-2xl cursor-default">
       <div>
-        <span id="recess-badge" class="hidden px-3 py-1 bg-amber-500/20 text-amber-300 rounded-full text-xs font-bold tracking-wider uppercase border border-amber-500/30" data-i18n="proceduralAction">Procedural Action</span>
-        <h2 id="recess-title" class="text-3xl font-black mt-1 tracking-tight" data-i18n="recessSuspendedTitle">暫停會議</h2>
-        <p id="recess-subtitle" class="hidden text-slate-400 text-xs sm:text-sm mt-1" data-i18n="recessSuspendedSubtitle">Session Suspended • Recess</p>
-      </div>
-      
-      <!-- Big Recess Countdown Timer -->
-      <div id="recess-timer-container" class="bg-black/40 border border-white/10 rounded-2xl p-6 shadow-inner">
-        <div class="hidden text-xs font-bold tracking-widest text-slate-400 uppercase mb-2" data-i18n="recessUntilReconvene">預計復會倒數</div>
-        <div id="recess-timer-display" class="font-mono text-6xl sm:text-7xl font-black text-amber-400 tracking-wider">15:00</div>
-        <div id="recess-reconvene-time" class="hidden text-xs text-slate-400 mt-3 font-medium">復會時間：--:--</div>
-      </div>
-
-      <div class="flex items-center justify-center gap-3 pt-2">
-        <button id="btn-recess-toggle-timer" type="button" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold rounded-xl shadow transition text-sm flex items-center space-x-1.5 cursor-pointer">
-          <span id="recess-toggle-label" data-i18n="recessStartTimer">開始計時</span>
-        </button>
-        <button id="btn-recess-reconvene" type="button" class="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white font-bold rounded-xl shadow transition text-sm border border-slate-600 cursor-pointer">
-          <span data-i18n="recessFormalReconvene">正式復會 (Reconvene)</span>
-        </button>
+        <h2 id="recess-title" class="text-4xl font-black mt-1 tracking-tight" data-i18n="recessSuspendedTitle">休會</h2>
+        <p class="text-xs text-slate-400 mt-3">點擊旁邊兩下即可復會</p>
       </div>
     </div>
   </div>
@@ -1549,7 +1532,7 @@
     <script src="js/views/mod.js?v=2026110103"></script>
     <script src="js/views/unmod.js?v=2026110103"></script>
     <script src="js/views/single.js?v=2026110103"></script>
-    <script src="js/views/motions.js?v=2026110103"></script>
+    <script src="js/views/motions.js?v=2026110106"></script>
     <script src="js/views/voting.js?v=2026110103"></script>
     <!-- Events, Auth & Entry Point -->
     <script src="js/events.js?v=2026110106"></script>

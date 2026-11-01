@@ -406,7 +406,7 @@
     if (!modal) return;
     const t = I18N[state.language] || I18N.en;
 
-    state.recessSecsRemaining = totalMins * 60;
+    state.recessSecsRemaining = 0;
     state.recessRunning = false;
     state.recessModalOpen = true;
     state.recessTitle = title || '';
@@ -414,60 +414,11 @@
     clearInterval(state.recessTimerInterval);
 
     const titleEl = document.getElementById('recess-title');
-    if (titleEl) titleEl.textContent = title || t.recessSuspendedTitle;
+    if (titleEl) titleEl.textContent = title || t.recessSuspendedTitle || '休會';
 
-    const subtitleEl = document.getElementById('recess-subtitle');
-    if (subtitleEl) {
-      if (mode === 'adjourn_session') {
-        subtitleEl.textContent = t.recessAdjournSessionSubtitle;
-      } else if (mode === 'adjourn_day' || mode === 'adjourn') {
-        subtitleEl.textContent = t.recessAdjournDaySubtitle;
-      } else {
-        subtitleEl.textContent = t.recessSuspendedSubtitle;
-      }
-    }
-
-    const toggleBtn = document.getElementById('btn-recess-toggle-timer');
-    const timerDisplay = document.getElementById('recess-timer-display');
-    const reconveneEl = document.getElementById('recess-reconvene-time');
-    const timerBox = document.getElementById('recess-timer-container');
-
-    const badgeEl = document.getElementById('recess-badge');
-    const reconveneBtn = document.getElementById('btn-recess-reconvene');
-
-    if (badgeEl) badgeEl.classList.add('hidden');
-    if (subtitleEl) subtitleEl.classList.add('hidden');
-    if (reconveneEl) reconveneEl.classList.add('hidden');
-
-    if (mode === 'adjourn_session') {
-      if (toggleBtn) toggleBtn.classList.add('hidden');
-      if (timerBox) timerBox.classList.add('hidden');
-      if (reconveneBtn) {
-        reconveneBtn.innerHTML = `<span>${t.confirm || '確定'}</span>`;
-      }
-      // Gentle celebratory confetti ribbons for session close
-      setTimeout(() => {
-        launchConfettiCannon();
-      }, 300);
-    } else if (mode === 'adjourn_day' || mode === 'adjourn') {
-      if (toggleBtn) toggleBtn.classList.add('hidden');
-      if (timerBox) timerBox.classList.add('hidden');
-      if (reconveneBtn) {
-        reconveneBtn.innerHTML = `<span>${t.recessFormalReconvene}</span>`;
-      }
-    } else {
-      if (toggleBtn) toggleBtn.classList.remove('hidden');
-      if (timerBox) timerBox.classList.remove('hidden');
-      if (reconveneBtn) {
-        reconveneBtn.innerHTML = `<span>${t.recessFormalReconvene}</span>`;
-      }
-      const toggleBtnLabel = document.getElementById('recess-toggle-label');
-      if (toggleBtnLabel) toggleBtnLabel.textContent = t.recessStartTimer;
-      updateRecessDisplay();
-    }
-
-    updateRecessDisplay();
     modal.classList.remove('hidden');
+    if (window.lucide) window.lucide.createIcons();
+  }
     if (window.lucide) window.lucide.createIcons();
   }
 
