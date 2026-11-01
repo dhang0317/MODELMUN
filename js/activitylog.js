@@ -33,32 +33,16 @@
       return `${m.proposer || ''} ${typeText}${m.topic ? '「' + m.topic + '」' : ''}`.trim();
     }
 
-    // ---------- 1. 按鈕點擊（事件委派） ----------
+    // ---------- 1. 主要里程碑操作（僅記錄核心會議決策） ----------
     const clickMap = {
       'btn-set-all-uncalled': () => tr('點名：全部設為未點名', 'Roll call: set all to uncalled', 'Appel : tous non appelés'),
       'btn-set-all-present': () => tr('點名：全部設為出席', 'Roll call: set all present', 'Appel : tous présents'),
       'btn-set-all-absent': () => tr('點名：全部設為缺席', 'Roll call: set all absent', 'Appel : tous absents'),
-      'btn-gsl-start': () => tr('主發言名單：開始計時', 'GSL: timer started', 'GSL : chrono démarré'),
-      'btn-gsl-pause': () => tr('主發言名單：暫停計時', 'GSL: timer paused', 'GSL : chrono en pause'),
-      'btn-gsl-next': () => tr('主發言名單：下一位發言', 'GSL: next speaker', 'GSL : orateur suivant'),
-      'btn-mod-start': () => tr('有主持磋商：開始計時', 'Moderated caucus: timer started', 'Caucus modéré : chrono démarré'),
-      'btn-mod-next': () => tr('有主持磋商：下一位發言', 'Moderated caucus: next speaker', 'Caucus modéré : orateur suivant'),
-      'btn-unmod-start': () => tr('無主持磋商：開始計時', 'Unmoderated caucus: timer started', 'Caucus non modéré : chrono démarré'),
-      'btn-single-start': () => tr('單一代表發言：開始計時', 'Single speaker: timer started', 'Orateur unique : chrono démarré'),
-      'btn-procon-start': () => tr('正反方辯論：開始計時', 'Pro/Con: timer started', 'Pour/Contre : chrono démarré'),
-      'btn-procon-next': () => tr('正反方辯論：下一位發言', 'Pro/Con: next speaker', 'Pour/Contre : orateur suivant'),
       'btn-reset-votes': () => tr('表決：重置票數', 'Voting: votes reset', 'Vote : votes réinitialisés'),
       'btn-reset-current-session': () => tr('會期表決：重設當前會期票數', 'Session vote: reset current session', 'Session : session actuelle réinitialisée'),
       'btn-reset-all-sessions': () => tr('會期表決：重設所有會期票數', 'Session vote: reset all sessions', 'Session : toutes les sessions réinitialisées'),
       'btn-add-new-session': () => tr('會期表決：新增會期', 'Session vote: session added', 'Session : session ajoutée'),
       'btn-clear-motions': () => tr('動議：清除所有動議', 'Motions: all cleared', 'Motions : toutes effacées')
-    };
-
-    const castMap = {
-      'btn-cast-favor': ['贊成', 'In favor', 'Pour'],
-      'btn-cast-against': ['反對', 'Against', 'Contre'],
-      'btn-cast-abstain': ['棄權', 'Abstain', 'Abstention'],
-      'btn-cast-pass': ['跳過 (Pass)', 'Pass', 'Passe']
     };
 
     document.addEventListener('click', (e) => {
@@ -68,11 +52,6 @@
       const id = btn.id;
       if (clickMap[id]) {
         logAction(clickMap[id]());
-      } else if (castMap[id]) {
-        const nameEl = document.getElementById('active-voter-name');
-        const who = nameEl ? nameEl.textContent.trim() : '';
-        const v = castMap[id];
-        logAction(tr(`唱名表決：${who} → ${v[0]}`, `Roll-call vote: ${who} → ${v[1]}`, `Vote nominal : ${who} → ${v[2]}`));
       }
     }, true);
 
