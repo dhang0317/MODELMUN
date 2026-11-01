@@ -177,6 +177,11 @@
     }
     window.openActivityLogModal = openActivityLogModal;
 
+    const cfgBtn = document.getElementById('cfg-btn-activity-log');
+    if (cfgBtn) {
+      cfgBtn.addEventListener('click', openActivityLogModal);
+    }
+
     const drawerBtn = document.getElementById('drawer-btn-activity-log');
     if (drawerBtn) {
       drawerBtn.addEventListener('click', () => {
