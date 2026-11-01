@@ -2267,6 +2267,28 @@ body:not(.light-mode) {
       color: #3E2723 !important;
     }
 
+    body.light-mode #modal-add-motion .btn-close-modal {
+      background-color: transparent !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
+    }
+    body.light-mode #modal-add-motion .btn-close-modal:hover {
+      background-color: #D7CCC8 !important;
+      color: #3E2723 !important;
+    }
+    body.light-mode #modal-add-motion #btn-submit-motion {
+      background-color: #3E2723 !important;
+      border: 1px solid #3E2723 !important;
+      color: #F7F4EE !important;
+    }
+    body.light-mode #modal-add-motion #btn-submit-motion * {
+      color: #F7F4EE !important;
+    }
+    body.light-mode #modal-add-motion #btn-submit-motion:hover {
+      background-color: #4E342E !important;
+      color: #FFFFFF !important;
+    }
+
     /* Unmoderated Caucus & Recess screens in Light Mode */
     body.light-mode:not(.has-custom-accent) #view-unmod {
       background-color: #F7F4EE !important;

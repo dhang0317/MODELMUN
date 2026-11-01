@@ -755,14 +755,7 @@
         if (fieldTopic) fieldTopic.classList.add('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
         if (fieldAmendmentSelect) fieldAmendmentSelect.classList.add('hidden');
-        if (fieldTimeContainer) {
-          fieldTimeContainer.classList.remove('hidden');
-          fieldTimeContainer.className = 'grid grid-cols-1 gap-3';
-        }
-        if (fieldTotalMins) fieldTotalMins.classList.remove('hidden');
-        if (labelTotalMins) labelTotalMins.textContent = state.language === 'zh' ? '暫停時間 (分鐘)' : 'Suspension Duration (mins)';
-        if (inputTotalMins) inputTotalMins.value = 15;
-        if (fieldSpeakerSecs) fieldSpeakerSecs.classList.add('hidden');
+        if (fieldTimeContainer) fieldTimeContainer.classList.add('hidden');
       } else if (type === 'gsl') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
