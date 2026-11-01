@@ -522,7 +522,7 @@ body:not(.light-mode) {
       border-color: #D7CCC8 !important;
     }
 
-    /* Big Timers Display: Dark Chocolate (#3E2723) */
+    /* Big Timers Display: Dark Chocolate (#3E2723) in Dark Mode, Cream White (#F7F4EE) in Light Mode */
     body:not(.light-mode) #gsl-timer-display,
     body:not(.light-mode) #mod-speaker-timer-display,
     body:not(.light-mode) #single-timer-display,
@@ -531,6 +531,9 @@ body:not(.light-mode) {
     body:not(.light-mode) #recess-timer-display,
     body:not(.light-mode) #procon-timer-input {
       color: #3E2723 !important;
+    }
+    body.light-mode #unmod-timer-display {
+      color: #F7F4EE !important;
     }
     body:not(.light-mode) .text-primary {
       color: #3E2723 !important;
@@ -796,15 +799,36 @@ body:not(.light-mode) {
     body.light-mode #btn-voting-subtab-session.bg-white * {
       color: #3E2723 !important;
     }
-      background-color: transparent !important;
-      border-color: transparent !important;
-    }
-    body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active) *,
-    body:not(.light-mode) #btn-voting-subtab-session:not(.active) * {
+
+    /* Voting View Subtabs: Rollcall vs Session button states */
+    #btn-voting-subtab-rollcall.active,
+    #btn-voting-subtab-rollcall.active *,
+    #btn-voting-subtab-session.active,
+    #btn-voting-subtab-session.active * {
+      background-color: #F7F4EE !important;
       color: #3E2723 !important;
     }
-
-    /* Timer Bars / Progress Tracks */
+    #btn-voting-subtab-rollcall:not(.active),
+    #btn-voting-subtab-rollcall:not(.active) *,
+    #btn-voting-subtab-session:not(.active),
+    #btn-voting-subtab-session:not(.active) * {
+      background-color: transparent !important;
+      color: #F7F4EE !important;
+    }
+    body:not(.light-mode) #btn-voting-subtab-rollcall.active,
+    body:not(.light-mode) #btn-voting-subtab-rollcall.active *,
+    body:not(.light-mode) #btn-voting-subtab-session.active,
+    body:not(.light-mode) #btn-voting-subtab-session.active * {
+      background-color: #3E2723 !important;
+      color: #F7F4EE !important;
+    }
+    body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active),
+    body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active) *,
+    body:not(.light-mode) #btn-voting-subtab-session:not(.active),
+    body:not(.light-mode) #btn-voting-subtab-session:not(.active) * {
+      background-color: transparent !important;
+      color: #3E2723 !important;
+    }
     body:not(.light-mode) .w-full.bg-slate-100,
     body:not(.light-mode) #gsl-progress-bar-bg {
       background-color: #EFEBE9 !important;
@@ -1793,6 +1817,10 @@ body:not(.light-mode) {
     }
     body.light-mode main .bg-white *,
     body.light-mode main [class*="bg-white"] *,
+    body.light-mode main .bg-slate-50 *,
+    body.light-mode main [class*="bg-slate-50"] *,
+    body.light-mode main .bg-slate-100 *,
+    body.light-mode main [class*="bg-slate-100"] *,
     body.light-mode main [class*="bg-black"] *,
     body.light-mode main [class*="bg-zinc-950"] *,
     body.light-mode main [class*="bg-zinc-900"] *,
