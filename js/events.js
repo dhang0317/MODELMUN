@@ -1577,7 +1577,8 @@
     const openSettingsBtn = document.getElementById('btn-open-settings');
     if (openSettingsBtn) {
       openSettingsBtn.addEventListener('click', () => {
-        if (typeof openUnifiedSettingsModal === 'function') openUnifiedSettingsModal('conference');
+        // 漢堡按鈕：開啟左側抽屜選單（設定、操作紀錄等皆在其中）
+        openDrawer();
       });
     }
 
