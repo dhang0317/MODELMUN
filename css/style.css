@@ -2296,8 +2296,40 @@ body:not(.light-mode) {
     body.light-mode #modal-recess {
       background-color: rgba(247, 244, 238, 0.98) !important;
     }
-    body.light-mode #modal-recess * {
+    body.light-mode #modal-recess > div {
+      background-color: #3E2723 !important;
+      border: 1px solid #5D4037 !important;
+      color: #F7F4EE !important;
+      box-shadow: 0 20px 25px -5px rgba(62, 39, 35, 0.3) !important;
+    }
+    body.light-mode #modal-recess > div * {
+      color: #F7F4EE !important;
+    }
+    body.light-mode #modal-recess #recess-title {
+      color: #F7F4EE !important;
+    }
+    body.light-mode #modal-recess #recess-timer-container {
+      background-color: #2D1B18 !important;
+      border: 1px solid #5D4037 !important;
+    }
+    body.light-mode #modal-recess #recess-timer-display {
+      color: #F7F4EE !important;
+    }
+    body.light-mode #modal-recess #btn-recess-toggle-timer {
+      background-color: #F7F4EE !important;
       color: #3E2723 !important;
+      border: 1px solid #F7F4EE !important;
+    }
+    body.light-mode #modal-recess #btn-recess-toggle-timer * {
+      color: #3E2723 !important;
+    }
+    body.light-mode #modal-recess #btn-recess-reconvene {
+      background-color: transparent !important;
+      color: #F7F4EE !important;
+      border: 1px solid #6D4C41 !important;
+    }
+    body.light-mode #modal-recess #btn-recess-reconvene * {
+      color: #F7F4EE !important;
     }
 
     /* Scrollbars & Hover Row Highlights in Light Mode */
