@@ -2,11 +2,11 @@
   (function () {
     // 色票：light = 底色較亮時使用，dark = 底色較深時使用
     const PALETTE = {
-      green:  { light: { main: '#7D9462', text: '#5B6D46', onSolid: '#FFFFFF', rgb: '125,148,98' },
+      green:  { light: { main: '#7D9462', text: '#5B6D46', onSolid: '#1F2A14', rgb: '125,148,98' },
                 dark:  { main: '#B5C99A', text: '#C9DBAF', onSolid: '#1F2A14', rgb: '181,201,154' } },
       red:    { light: { main: '#913D48', text: '#913D48', onSolid: '#FFFFFF', rgb: '145,61,72' },
                 dark:  { main: '#E59EA6', text: '#EBB0B7', onSolid: '#3A1015', rgb: '229,158,166' } },
-      yellow: { light: { main: '#B58A38', text: '#8F6A22', onSolid: '#FFFFFF', rgb: '214,181,117' },
+      yellow: { light: { main: '#B58A38', text: '#8F6A22', onSolid: '#2E2008', rgb: '214,181,117' },
                 dark:  { main: '#EBD3A0', text: '#F0DDB4', onSolid: '#3D2E0F', rgb: '235,211,160' } }
     };
 
@@ -59,6 +59,7 @@
         setImp(el, 'background', p.main);
         setImp(el, 'color', p.onSolid);
         setImp(el, 'border', '1.5px solid ' + p.main);
+        el.querySelectorAll('*').forEach(child => setImp(child, 'color', p.onSolid));
       } else if (kind === 'outline') {
         setImp(el, 'background-color', 'transparent');
         setImp(el, 'background', 'transparent');
