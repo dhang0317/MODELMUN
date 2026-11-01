@@ -2264,11 +2264,34 @@ body:not(.light-mode) {
     body.light-mode:not(.has-custom-accent) #view-unmod {
       background-color: #F7F4EE !important;
     }
-    body.light-mode #view-unmod * {
-      color: #3E2723 !important;
+    body.light-mode #view-unmod .bg-white,
+    body.light-mode #view-unmod [class*="bg-white"] {
+      background-color: #3E2723 !important;
+      border-color: #5D4037 !important;
     }
-    body.light-mode #unmod-timer-display {
-      color: #3E2723 !important;
+    body.light-mode #view-unmod .bg-white *,
+    body.light-mode #view-unmod [class*="bg-white"] * {
+      color: #F7F4EE !important;
+    }
+    body.light-mode #view-unmod #unmod-timer-display {
+      color: #F7F4EE !important;
+    }
+    body.light-mode #view-unmod #unmod-total-progress {
+      background-color: #F7F4EE !important;
+    }
+    body.light-mode #view-unmod .w-full.bg-slate-100 {
+      background-color: #5D4037 !important;
+    }
+    body.light-mode #view-unmod #btn-unmod-start,
+    body.light-mode #view-unmod #btn-unmod-pause {
+      background-color: #2E7D32 !important;
+      color: #FFFFFF !important;
+      border: 1px solid #2E7D32 !important;
+    }
+    body.light-mode #view-unmod #btn-unmod-reset {
+      background-color: transparent !important;
+      color: #F7F4EE !important;
+      border: 1px solid #6D4C41 !important;
     }
     body.light-mode #modal-recess {
       background-color: rgba(247, 244, 238, 0.98) !important;
