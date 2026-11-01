@@ -560,10 +560,20 @@
     const isSession = state.votingSubtab === 'session';
 
     // Update Subtab button styling
+    const isLightMode = document.body && document.body.classList.contains('light-mode');
     if (btnSubtabRollcall) {
       btnSubtabRollcall.className = `px-3 py-1.5 rounded-lg text-xs transition cursor-pointer ${
         isRollcall ? 'active font-bold' : ''
       }`;
+      if (isRollcall) {
+        btnSubtabRollcall.style.setProperty('background-color', '#B5C99A', 'important');
+        btnSubtabRollcall.style.setProperty('color', '#1F2A14', 'important');
+        btnSubtabRollcall.style.setProperty('border', 'none', 'important');
+      } else {
+        btnSubtabRollcall.style.setProperty('background-color', 'transparent', 'important');
+        btnSubtabRollcall.style.setProperty('color', isLightMode ? '#3E2723' : '#FFFFFF', 'important');
+        btnSubtabRollcall.style.setProperty('border', 'none', 'important');
+      }
     }
     if (btnSubtabSession) {
       btnSubtabSession.disabled = false;
@@ -573,6 +583,15 @@
       btnSubtabSession.className = `px-3 py-1.5 rounded-lg text-xs transition cursor-pointer ${
         isSession ? 'active font-bold' : ''
       }`;
+      if (isSession) {
+        btnSubtabSession.style.setProperty('background-color', '#B5C99A', 'important');
+        btnSubtabSession.style.setProperty('color', '#1F2A14', 'important');
+        btnSubtabSession.style.setProperty('border', 'none', 'important');
+      } else {
+        btnSubtabSession.style.setProperty('background-color', 'transparent', 'important');
+        btnSubtabSession.style.setProperty('color', isLightMode ? '#3E2723' : '#FFFFFF', 'important');
+        btnSubtabSession.style.setProperty('border', 'none', 'important');
+      }
     }
 
     // Toggle top controls based on subtab

@@ -821,12 +821,43 @@ body:not(.light-mode) {
       color: #3E2723 !important;
     }
 
-    /* Voting View Subtabs: Rollcall vs Session button states */
+    /* Voting Subtabs Container & Buttons */
+    #voting-subtabs-pill {
+      border: 1px solid rgba(215, 204, 200, 0.4) !important;
+      background-color: transparent !important;
+    }
+    body:not(.light-mode) #voting-subtabs-pill {
+      border: 1px solid #5D4037 !important;
+      background-color: rgba(62, 39, 35, 0.3) !important;
+    }
+    body.light-mode #voting-subtabs-pill {
+      border: 1px solid #D7CCC8 !important;
+      background-color: #EFEBE9 !important;
+    }
+
     #btn-voting-subtab-rollcall,
     #btn-voting-subtab-session {
       border: none !important;
       outline: none !important;
       box-shadow: none !important;
+    }
+    body.light-mode #btn-voting-subtab-rollcall:not(.active),
+    body.light-mode #btn-voting-subtab-rollcall:not(.active) *,
+    body.light-mode #btn-voting-subtab-session:not(.active),
+    body.light-mode #btn-voting-subtab-session:not(.active) * {
+      color: #3E2723 !important;
+      background-color: transparent !important;
+      background: transparent !important;
+      border: none !important;
+    }
+    body.light-mode #btn-voting-subtab-rollcall.active,
+    body.light-mode #btn-voting-subtab-rollcall.active *,
+    body.light-mode #btn-voting-subtab-session.active,
+    body.light-mode #btn-voting-subtab-session.active * {
+      background-color: #B5C99A !important;
+      background: #B5C99A !important;
+      color: #1F2A14 !important;
+      border: none !important;
     }
     #btn-voting-subtab-rollcall.active,
     #btn-voting-subtab-rollcall.active *,
