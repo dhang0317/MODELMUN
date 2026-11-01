@@ -151,7 +151,7 @@
           unmod: '非主持核心磋商',
           gsl: '常設發言名單',
           singlespeaker: '介紹決議案草案',
-          amendment: '介紹修正案',
+          amendment: '介紹條款',
           suspend: '休會',
           close: '結束辯論',
           adjourn: '全會結束'
@@ -171,7 +171,7 @@
           unmod: 'Unmoderated Caucus',
           gsl: "General Speakers' List",
           singlespeaker: 'Introduce Draft Resolution',
-          amendment: 'Introduce Amendment',
+          amendment: 'Introduce Clause',
           suspend: 'Suspension / Recess',
           close: 'Closure of Debate',
           adjourn: 'Adjournment of Meeting'

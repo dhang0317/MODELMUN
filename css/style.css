@@ -1067,6 +1067,8 @@ body:not(.light-mode) {
     #modal-mod-config select,
     #modal-configure-voting input,
     #modal-configure-voting select,
+    #motion-field-amendment-select div,
+    #motion-field-amendment-select button,
     body:not(.light-mode) .custom-dialog-box input,
     body:not(.light-mode) .custom-dialog-box select,
     body:not(.light-mode) #modal-unified-settings input:not([type="range"]),
@@ -1079,10 +1081,20 @@ body:not(.light-mode) {
     body:not(.light-mode) #modal-mod-config input,
     body:not(.light-mode) #modal-mod-config select,
     body:not(.light-mode) #modal-configure-voting input,
-    body:not(.light-mode) #modal-configure-voting select {
+    body:not(.light-mode) #modal-configure-voting select,
+    body:not(.light-mode) #motion-field-amendment-select div,
+    body:not(.light-mode) #motion-field-amendment-select button {
       background-color: #FFFFFF !important;
       background: #FFFFFF !important;
       border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
+      border-radius: 0.75rem !important;
+    }
+    #motion-field-amendment-select button:hover,
+    body:not(.light-mode) #motion-field-amendment-select button:hover {
+      background-color: #EFEBE9 !important;
+      background: #EFEBE9 !important;
+    }
       color: #3E2723 !important;
       border-radius: 0.75rem !important;
     }

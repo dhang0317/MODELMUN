@@ -233,7 +233,7 @@
         case 'unmod': return '非主持核心磋商 (Unmod)';
         case 'mod': return '主持核心磋商 (Mod)';
         case 'singlespeaker': return '介紹決議案草案';
-        case 'amendment': return '介紹修正案';
+        case 'amendment': return '介紹條款';
         case 'gsl': return '常設發言名單';
         case 'suspend': return '休會';
         case 'adjourn_session': return t.motionAdjournSession;
@@ -264,7 +264,7 @@
       case 'unmod': return 'Unmoderated Caucus';
       case 'mod': return 'Moderated Caucus';
       case 'singlespeaker': return 'Introduce Draft Resolution';
-      case 'amendment': return 'Introduce Amendment';
+      case 'amendment': return 'Introduce Clause';
       case 'gsl': return "General Speakers' List";
       case 'suspend': return 'Suspension of Meeting';
       case 'adjourn_session': return t.motionAdjournSession;

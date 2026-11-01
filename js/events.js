@@ -723,8 +723,8 @@
           fieldTimeContainer.className = 'grid grid-cols-2 gap-3';
         }
         if (fieldTotalMins) fieldTotalMins.classList.remove('hidden');
-        if (labelTotalMins) labelTotalMins.textContent = t.durationMins || 'Duration (mins)';
-        if (inputTotalMins) inputTotalMins.value = 10;
+        if (labelTotalMins) labelTotalMins.textContent = t.durationMins || 'Duration (secs)';
+        if (inputTotalMins) inputTotalMins.value = 600;
         if (fieldSpeakerSecs) fieldSpeakerSecs.classList.remove('hidden');
       } else if (type === 'unmod') {
         if (fieldTopic) fieldTopic.classList.remove('hidden');
@@ -735,8 +735,8 @@
           fieldTimeContainer.className = 'grid grid-cols-1 gap-3';
         }
         if (fieldTotalMins) fieldTotalMins.classList.remove('hidden');
-        if (labelTotalMins) labelTotalMins.textContent = t.durationMins || 'Duration (mins)';
-        if (inputTotalMins) inputTotalMins.value = 10;
+        if (labelTotalMins) labelTotalMins.textContent = t.durationMins || 'Duration (secs)';
+        if (inputTotalMins) inputTotalMins.value = 600;
         if (fieldSpeakerSecs) fieldSpeakerSecs.classList.add('hidden');
       } else if (type === 'singlespeaker') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
@@ -747,8 +747,8 @@
           fieldTimeContainer.className = 'grid grid-cols-1 gap-3';
         }
         if (fieldTotalMins) fieldTotalMins.classList.remove('hidden');
-        if (labelTotalMins) labelTotalMins.textContent = state.language === 'zh' ? '發言時間 (分鐘)' : 'Speaking Time (mins)';
-        if (inputTotalMins) inputTotalMins.value = 1; // 預設 1 分鐘
+        if (labelTotalMins) labelTotalMins.textContent = state.language === 'zh' ? '發言時間 (秒)' : 'Speaking Time (secs)';
+        if (inputTotalMins) inputTotalMins.value = 60; // 預設 60 秒
         if (fieldSpeakerSecs) fieldSpeakerSecs.classList.add('hidden');
       } else if (type === 'amendment') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
@@ -815,11 +815,14 @@
           topic = selectDr.value;
         }
       } else if (type === 'amendment') {
-        topic = `Amendment ${motionAmendmentNum}`;
+        topic = `Clause ${motionAmendmentNum}`;
       }
       const defaultMins = (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' ? 0 : (type === 'suspend' ? 15 : ((type === 'singlespeaker' || type === 'amendment') ? 1 : 10)));
       const speakerSecs = parseInt(document.getElementById('input-motion-speaker-secs').value) || 60;
-      const totalMins = (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' || type === 'close') ? 0 : (type === 'amendment' ? Math.max(1, Math.ceil(speakerSecs / 60)) : (parseInt(document.getElementById('input-motion-total-mins').value) || defaultMins));
+      let rawTotal = parseInt(document.getElementById('input-motion-total-mins').value);
+      if (isNaN(rawTotal)) rawTotal = defaultMins * 60;
+      // 將秒數換算為儲存的 totalMins（相容計時器計算）
+      const totalMins = (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' || type === 'close') ? 0 : (type === 'amendment' ? Math.max(1, Math.ceil(speakerSecs / 60)) : (rawTotal >= 60 ? Math.round(rawTotal / 60) : Math.max(1, Math.ceil(rawTotal / 60))));
 
       const motion = {
         id: 'M_' + Date.now(),
