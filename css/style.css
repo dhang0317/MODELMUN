@@ -829,7 +829,7 @@ body:not(.light-mode) {
     #btn-voting-subtab-session:not(.active),
     #btn-voting-subtab-session:not(.active) * {
       background-color: transparent !important;
-      color: inherit !important;
+      color: #FFFFFF !important;
       border: 1px solid transparent !important;
     }
     body:not(.light-mode) #btn-voting-subtab-rollcall.active,
@@ -845,7 +845,7 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-voting-subtab-session:not(.active),
     body:not(.light-mode) #btn-voting-subtab-session:not(.active) * {
       background-color: transparent !important;
-      color: rgba(247, 244, 238, 0.7) !important;
+      color: #FFFFFF !important;
       border: 1px solid transparent !important;
     }
     body:not(.light-mode) .w-full.bg-slate-100,
@@ -3136,10 +3136,14 @@ body:not(.light-mode) {
     /* Voting subtabs active & inactive styles */
     body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active),
     body:not(.light-mode) #btn-voting-subtab-session:not(.active) {
-      color: rgba(247, 244, 238, 0.7) !important;
+      color: #FFFFFF !important;
       background-color: transparent !important;
       background: transparent !important;
       border: 1px solid transparent !important;
+    }
+    body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active) *,
+    body:not(.light-mode) #btn-voting-subtab-session:not(.active) * {
+      color: #FFFFFF !important;
     }
     body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active):hover,
     body:not(.light-mode) #btn-voting-subtab-session:not(.active):hover {
