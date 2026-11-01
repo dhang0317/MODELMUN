@@ -755,11 +755,7 @@ body:not(.light-mode) {
     }
 
     body.light-mode .speaking-subtab-btn,
-    body.light-mode #btn-voting-subtab-rollcall,
-    body.light-mode #btn-voting-subtab-session,
-    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active),
-    body.light-mode #btn-voting-subtab-rollcall:not(.active),
-    body.light-mode #btn-voting-subtab-session:not(.active) {
+    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) {
       color: #F7F4EE !important;
       background-color: #3E2723 !important;
       background: #3E2723 !important;
@@ -767,19 +763,11 @@ body:not(.light-mode) {
       font-weight: 500 !important;
     }
     body.light-mode .speaking-subtab-btn *,
-    body.light-mode #btn-voting-subtab-rollcall *,
-    body.light-mode #btn-voting-subtab-session *,
-    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) *,
-    body.light-mode #btn-voting-subtab-rollcall:not(.active) *,
-    body.light-mode #btn-voting-subtab-session:not(.active) * {
+    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) * {
       color: #F7F4EE !important;
     }
     body.light-mode .speaking-subtab-btn:hover,
-    body.light-mode #btn-voting-subtab-rollcall:hover,
-    body.light-mode #btn-voting-subtab-session:hover,
-    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover,
-    body.light-mode #btn-voting-subtab-rollcall:not(.active):hover,
-    body.light-mode #btn-voting-subtab-session:not(.active):hover {
+    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover {
       background-color: #4E342E !important;
       background: #4E342E !important;
       color: #FFFFFF !important;
@@ -834,13 +822,19 @@ body:not(.light-mode) {
     }
 
     /* Voting View Subtabs: Rollcall vs Session button states */
+    #btn-voting-subtab-rollcall,
+    #btn-voting-subtab-session {
+      border: none !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
     #btn-voting-subtab-rollcall.active,
     #btn-voting-subtab-rollcall.active *,
     #btn-voting-subtab-session.active,
     #btn-voting-subtab-session.active * {
       background-color: #B5C99A !important;
       color: #1F2A14 !important;
-      border: 1px solid #B5C99A !important;
+      border: none !important;
     }
     #btn-voting-subtab-rollcall:not(.active),
     #btn-voting-subtab-rollcall:not(.active) *,
@@ -848,7 +842,7 @@ body:not(.light-mode) {
     #btn-voting-subtab-session:not(.active) * {
       background-color: transparent !important;
       color: #FFFFFF !important;
-      border: 1px solid transparent !important;
+      border: none !important;
     }
     body:not(.light-mode) #btn-voting-subtab-rollcall.active,
     body:not(.light-mode) #btn-voting-subtab-rollcall.active *,
@@ -856,7 +850,7 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-voting-subtab-session.active * {
       background-color: #B5C99A !important;
       color: #1F2A14 !important;
-      border: 1px solid #B5C99A !important;
+      border: none !important;
     }
     body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active),
     body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active) *,
@@ -864,7 +858,23 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-voting-subtab-session:not(.active) * {
       background-color: transparent !important;
       color: #FFFFFF !important;
-      border: 1px solid transparent !important;
+      border: none !important;
+    }
+    body.light-mode #btn-voting-subtab-rollcall.active,
+    body.light-mode #btn-voting-subtab-rollcall.active *,
+    body.light-mode #btn-voting-subtab-session.active,
+    body.light-mode #btn-voting-subtab-session.active * {
+      background-color: #B5C99A !important;
+      color: #1F2A14 !important;
+      border: none !important;
+    }
+    body.light-mode #btn-voting-subtab-rollcall:not(.active),
+    body.light-mode #btn-voting-subtab-rollcall:not(.active) *,
+    body.light-mode #btn-voting-subtab-session:not(.active),
+    body.light-mode #btn-voting-subtab-session:not(.active) * {
+      background-color: transparent !important;
+      color: #3E2723 !important;
+      border: none !important;
     }
     body:not(.light-mode) .w-full.bg-slate-100,
     body:not(.light-mode) #gsl-progress-bar-bg {
@@ -3190,7 +3200,7 @@ body:not(.light-mode) {
       color: #3E2723 !important;
       background-color: transparent !important;
       background: transparent !important;
-      border: 1px solid transparent !important;
+      border: none !important;
     }
     body.light-mode #btn-voting-subtab-rollcall:not(.active) *,
     body.light-mode #btn-voting-subtab-session:not(.active) * {
@@ -3201,7 +3211,7 @@ body:not(.light-mode) {
       color: #1F2A14 !important;
       background-color: rgba(0, 0, 0, 0.05) !important;
       background: rgba(0, 0, 0, 0.05) !important;
-      border: 1px solid #cbd5e1 !important;
+      border: none !important;
     }
     body.light-mode #btn-voting-subtab-rollcall.active,
     body.light-mode #btn-voting-subtab-session.active,
@@ -3210,7 +3220,7 @@ body:not(.light-mode) {
       background-color: #B5C99A !important;
       background: #B5C99A !important;
       color: #1F2A14 !important;
-      border: 1.5px solid #B5C99A !important;
+      border: none !important;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
     }
     body.light-mode #btn-voting-subtab-rollcall.active *,
