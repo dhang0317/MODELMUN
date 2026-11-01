@@ -486,11 +486,27 @@ body:not(.light-mode) {
     #btn-reset-current-session,
     #btn-reset-current-session *,
     #btn-reset-all-sessions,
-    #btn-reset-all-sessions * {
+    #btn-reset-all-sessions *,
+    .btn-inc-against,
+    .btn-inc-against * {
       background-color: #E59EA6 !important;
       background: #E59EA6 !important;
       color: #3A1015 !important;
       border: 1.5px solid #E59EA6 !important;
+    }
+    .btn-inc-favor,
+    .btn-inc-favor * {
+      background-color: #B5C99A !important;
+      background: #B5C99A !important;
+      color: #1F2A14 !important;
+      border: 1.5px solid #B5C99A !important;
+    }
+    .btn-inc-abstain,
+    .btn-inc-abstain * {
+      background-color: #EBD3A0 !important;
+      background: #EBD3A0 !important;
+      color: #3D2E0F !important;
+      border: 1.5px solid #EBD3A0 !important;
     }
     /* Text & Headings inside main view cards and panels */
     body:not(.light-mode) main p,
