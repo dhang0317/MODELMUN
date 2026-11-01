@@ -4,9 +4,9 @@
     const PALETTE = {
       green:  { light: { main: '#7D9462', text: '#5B6D46', onSolid: '#1F2A14', rgb: '125,148,98' },
                 dark:  { main: '#B5C99A', text: '#C9DBAF', onSolid: '#1F2A14', rgb: '181,201,154' } },
-      red:    { light: { main: '#913D48', text: '#913D48', onSolid: '#FFFFFF', rgb: '145,61,72' },
+      red:    { light: { main: '#E59EA6', text: '#913D48', onSolid: '#3A1015', rgb: '229,158,166' },
                 dark:  { main: '#E59EA6', text: '#EBB0B7', onSolid: '#3A1015', rgb: '229,158,166' } },
-      yellow: { light: { main: '#B58A38', text: '#8F6A22', onSolid: '#2E2008', rgb: '214,181,117' },
+      yellow: { light: { main: '#EBD3A0', text: '#8F6A22', onSolid: '#2E2008', rgb: '235,211,160' },
                 dark:  { main: '#EBD3A0', text: '#F0DDB4', onSolid: '#3D2E0F', rgb: '235,211,160' } }
     };
 

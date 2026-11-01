@@ -467,6 +467,14 @@ body:not(.light-mode) {
     .btn-hero-motion-pass * {
       color: #1F2A14 !important;
     }
+    #btn-hero-motion-fail,
+    #btn-hero-motion-fail *,
+    .btn-hero-motion-fail,
+    .btn-hero-motion-fail * {
+      background-color: #E59EA6 !important;
+      color: #3A1015 !important;
+      border: 1.5px solid #E59EA6 !important;
+    }
     /* Text & Headings inside main view cards and panels */
     body:not(.light-mode) main p,
     body:not(.light-mode) main span:not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.badge):not(#label-voter-queue-status):not(#btn-gsl-start *):not(#btn-mod-start *):not(#btn-single-start *):not(#btn-procon-start *):not(#btn-unmod-start *):not(#btn-hero-motion-second *):not(#btn-save-settings-done *):not(#cfg-btn-auth-action *),
