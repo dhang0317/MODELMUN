@@ -1881,12 +1881,12 @@ body:not(.light-mode) {
       border-color: #5D4037 !important;
     }
 
-    /* Light Mode Normal Buttons inside Chocolate cards */
-    body.light-mode button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#main-header button):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent),
-    body.light-mode button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#main-header button):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent) * {
+    /* Light Mode Normal Buttons inside Chocolate cards (排除側邊抽屜及 Header) */
+    body.light-mode main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent),
+    body.light-mode main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent) * {
       color: #F7F4EE !important;
     }
-    body.light-mode button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#main-header button):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent) {
+    body.light-mode main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent) {
       background-color: transparent !important;
       background: transparent !important;
       border: 1px solid #6D4C41 !important;
@@ -2197,8 +2197,15 @@ body:not(.light-mode) {
       background-color: #F7F4EE !important;
       border-right: 1px solid #D7CCC8 !important;
     }
-    body.light-mode #main-drawer * {
+    body.light-mode #main-drawer,
+    body.light-mode #main-drawer *,
+    body.light-mode #main-drawer button,
+    body.light-mode #main-drawer button * {
       color: #3E2723 !important;
+    }
+    body.light-mode #main-drawer button {
+      border-color: #D7CCC8 !important;
+      background-color: transparent !important;
     }
     body.light-mode #main-drawer button:hover {
       background-color: rgba(62, 39, 35, 0.08) !important;
