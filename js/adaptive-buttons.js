@@ -2,7 +2,7 @@
   (function () {
     // 色票：light = 底色較亮時使用，dark = 底色較深時使用
     const PALETTE = {
-      green:  { light: { main: '#7D9462', text: '#5B6D46', onSolid: '#1F2A14', rgb: '125,148,98' },
+      green:  { light: { main: '#B5C99A', text: '#5B6D46', onSolid: '#1F2A14', rgb: '181,201,154' },
                 dark:  { main: '#B5C99A', text: '#C9DBAF', onSolid: '#1F2A14', rgb: '181,201,154' } },
       red:    { light: { main: '#E59EA6', text: '#913D48', onSolid: '#3A1015', rgb: '229,158,166' },
                 dark:  { main: '#E59EA6', text: '#EBB0B7', onSolid: '#3A1015', rgb: '229,158,166' } },

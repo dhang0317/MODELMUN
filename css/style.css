@@ -465,7 +465,10 @@ body:not(.light-mode) {
     #btn-hero-motion-second *,
     .btn-hero-motion-pass,
     .btn-hero-motion-pass * {
+      background-color: #B5C99A !important;
+      background: #B5C99A !important;
       color: #1F2A14 !important;
+      border: 1.5px solid #B5C99A !important;
     }
     #btn-adopt-vote,
     #btn-adopt-vote *,
