@@ -1791,17 +1791,13 @@ body:not(.light-mode) {
     }
     body.light-mode main .bg-white *,
     body.light-mode main [class*="bg-white"] *,
-    body.light-mode main .bg-slate-50 *,
-    body.light-mode main [class*="bg-slate-50"] *,
-    body.light-mode main .bg-slate-100 *,
-    body.light-mode main [class*="bg-slate-100"] *,
     body.light-mode main [class*="bg-black"] *,
     body.light-mode main [class*="bg-zinc-950"] *,
     body.light-mode main [class*="bg-zinc-900"] *,
     body.light-mode main [class*="bg-zinc-800"] *,
     body.light-mode #card-voting-details *,
     body.light-mode #panel-active-voter-card * {
-      color: #F7F4EE;
+      color: #F7F4EE !important;
     }
 
     /* Light Mode Text in Main View Panels */
@@ -1937,13 +1933,26 @@ body:not(.light-mode) {
     body.light-mode #recess-timer-display {
       color: #F7F4EE !important;
     }
+    body.light-mode #unmod-total-timer-text,
     body.light-mode #mod-total-timer-text,
     body.light-mode #badge-queue-count {
       color: #D7CCC8 !important;
     }
+    body.light-mode #btn-unmod-start,
+    body.light-mode #btn-unmod-pause {
+      background-color: #2E7D32 !important;
+      color: #FFFFFF !important;
+      border: 1px solid #2E7D32 !important;
+    }
+    body.light-mode #btn-unmod-reset {
+      background-color: transparent !important;
+      color: #F7F4EE !important;
+      border: 1px solid #6D4C41 !important;
+    }
     body.light-mode #gsl-progress-bar,
     body.light-mode #mod-speaker-progress,
-    body.light-mode #mod-total-progress {
+    body.light-mode #mod-total-progress,
+    body.light-mode #unmod-total-progress {
       background-color: #F7F4EE !important;
     }
     body.light-mode .w-full.bg-slate-100,
