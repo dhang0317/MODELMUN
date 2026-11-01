@@ -118,11 +118,11 @@
       logoUrl: null
     },
     rules: {
-      gslDefaultTime: 90,
+      gslDefaultTime: 60,
       modDefaultTotalMins: 10,
       modDefaultSpeakerSecs: 60,
       unmodDefaultTotalSecs: 900,
-      singleDefaultTime: 180,
+      singleDefaultTime: 60,
       defaultVoteThreshold: 'simple',
       enableVeto: true
     },
@@ -148,8 +148,8 @@
     selectedCountries: [], 
     
     // GSL
-    gslDefaultTime: 90,
-    gslRemainingTime: 90,
+    gslDefaultTime: 60,
+    gslRemainingTime: 60,
     gslTimerInterval: null,
     gslRunning: false,
     gslQueue: [],
@@ -174,7 +174,7 @@
 
     // Single Speaker
     singleSpeaker: null,
-    singleTimeRemaining: 180,
+    singleTimeRemaining: 60,
     singleRunning: false,
     singleTimerInterval: null,
 
@@ -425,7 +425,7 @@
     state.setupSegment = 'template';
     state.selectedCountries = [];
     
-    state.gslDefaultTime = 90;
+    state.gslDefaultTime = 60;
     state.gslRemainingTime = 90;
     if (state.gslTimerInterval) clearInterval(state.gslTimerInterval);
     state.gslTimerInterval = null;

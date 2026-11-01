@@ -766,7 +766,7 @@
         }
         if (fieldTotalMins) fieldTotalMins.classList.add('hidden');
         if (fieldSpeakerSecs) fieldSpeakerSecs.classList.remove('hidden');
-        if (inputSpeakerSecs) inputSpeakerSecs.value = 90;
+        if (inputSpeakerSecs) inputSpeakerSecs.value = 60;
       } else if (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' || type === 'close') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
