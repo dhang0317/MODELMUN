@@ -2267,6 +2267,15 @@ body:not(.light-mode) {
       color: #3E2723 !important;
     }
 
+    body.light-mode #motion-field-amendment-select button,
+    body.light-mode #motion-field-amendment-select div {
+      background-color: #ffffff !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
+    }
+    body.light-mode #motion-field-amendment-select button:hover {
+      background-color: #EFEBE9 !important;
+    }
     body.light-mode #modal-add-motion .btn-close-modal {
       background-color: transparent !important;
       border: 1px solid #D7CCC8 !important;

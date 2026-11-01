@@ -687,15 +687,25 @@
       });
     }
 
-    if (selectMotionAmendment) {
-      selectMotionAmendment.addEventListener('change', () => {
-        if (selectMotionAmendment.value === 'custom') {
-          if (inputMotionAmendmentCustom) {
-            inputMotionAmendmentCustom.classList.remove('hidden');
-            inputMotionAmendmentCustom.focus();
-          }
-        } else {
-          if (inputMotionAmendmentCustom) inputMotionAmendmentCustom.classList.add('hidden');
+    let motionAmendmentNum = 1;
+    const labelAmendmentNum = document.getElementById('label-motion-amendment-num');
+    const btnAmendmentDec = document.getElementById('btn-amendment-num-dec');
+    const btnAmendmentInc = document.getElementById('btn-amendment-num-inc');
+
+    if (btnAmendmentDec) {
+      btnAmendmentDec.addEventListener('click', () => {
+        if (motionAmendmentNum > 1) {
+          motionAmendmentNum--;
+          if (labelAmendmentNum) labelAmendmentNum.textContent = motionAmendmentNum;
+        }
+      });
+    }
+
+    if (btnAmendmentInc) {
+      btnAmendmentInc.addEventListener('click', () => {
+        if (motionAmendmentNum < 100) {
+          motionAmendmentNum++;
+          if (labelAmendmentNum) labelAmendmentNum.textContent = motionAmendmentNum;
         }
       });
     }
@@ -805,13 +815,7 @@
           topic = selectDr.value;
         }
       } else if (type === 'amendment') {
-        const selectAm = document.getElementById('select-motion-amendment');
-        const customAm = document.getElementById('input-motion-amendment-custom');
-        if (selectAm && selectAm.value === 'custom' && customAm && customAm.value.trim()) {
-          topic = customAm.value.trim();
-        } else if (selectAm) {
-          topic = selectAm.value;
-        }
+        topic = `Amendment ${motionAmendmentNum}`;
       }
       const defaultMins = (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' ? 0 : (type === 'suspend' ? 15 : ((type === 'singlespeaker' || type === 'amendment') ? 1 : 10)));
       const speakerSecs = parseInt(document.getElementById('input-motion-speaker-secs').value) || 60;
