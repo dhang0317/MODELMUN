@@ -474,6 +474,7 @@ body:not(.light-mode) {
     #btn-motion-vote-execute,
     #btn-motion-vote-execute * {
       background-color: #B5C99A !important;
+      background: #B5C99A !important;
       color: #1F2A14 !important;
       border: 1.5px solid #B5C99A !important;
     }
@@ -484,6 +485,7 @@ body:not(.light-mode) {
     #btn-reset-all-sessions,
     #btn-reset-all-sessions * {
       background-color: #E59EA6 !important;
+      background: #E59EA6 !important;
       color: #3A1015 !important;
       border: 1.5px solid #E59EA6 !important;
     }
@@ -792,12 +794,11 @@ body:not(.light-mode) {
     body.light-mode #btn-voting-subtab-rollcall.bg-white,
     body.light-mode #btn-voting-subtab-session.active,
     body.light-mode #btn-voting-subtab-session.bg-white {
-      background-color: #F7F4EE !important;
-      background: #F7F4EE !important;
-      color: #3E2723 !important;
-      border: 1px solid #D7CCC8 !important;
-      border-color: #D7CCC8 !important;
-      box-shadow: 0 1px 4px rgba(62, 39, 35, 0.12) !important;
+      background-color: #B5C99A !important;
+      background: #B5C99A !important;
+      color: #1F2A14 !important;
+      border: 1.5px solid #B5C99A !important;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
       font-weight: bold !important;
     }
     body.light-mode .speaking-subtab-btn.active *,
@@ -807,11 +808,25 @@ body:not(.light-mode) {
     body.light-mode #btn-speaking-subtab-gsl.subtab-active *,
     body.light-mode #btn-speaking-subtab-mod.subtab-active *,
     body.light-mode #btn-speaking-subtab-intro.subtab-active *,
-    body.light-mode #btn-speaking-subtab-procon.subtab-active *,
+    body.light-mode #btn-speaking-subtab-procon.subtab-active * {
+      color: #3E2723 !important;
+    }
     body.light-mode #btn-voting-subtab-rollcall.active *,
     body.light-mode #btn-voting-subtab-rollcall.bg-white *,
     body.light-mode #btn-voting-subtab-session.active *,
     body.light-mode #btn-voting-subtab-session.bg-white * {
+      color: #1F2A14 !important;
+    }
+
+    body.light-mode #btn-voting-subtab-rollcall:not(.active),
+    body.light-mode #btn-voting-subtab-session:not(.active) {
+      color: #3E2723 !important;
+      background-color: transparent !important;
+      background: transparent !important;
+      border: 1px solid transparent !important;
+    }
+    body.light-mode #btn-voting-subtab-rollcall:not(.active) *,
+    body.light-mode #btn-voting-subtab-session:not(.active) * {
       color: #3E2723 !important;
     }
 
@@ -1901,16 +1916,16 @@ body:not(.light-mode) {
     }
 
     /* Light Mode Normal Buttons inside Chocolate cards (排除側邊抽屜及 Header) */
-    body.light-mode main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent),
-    body.light-mode main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent) * {
+    body.light-mode main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent):not(#btn-adopt-vote):not(#btn-quick-pass):not(#btn-motion-vote-execute):not(#btn-reset-votes):not(#btn-reset-current-session):not(#btn-reset-all-sessions):not(#btn-hero-motion-second):not(#btn-hero-motion-pass):not(#btn-hero-motion-fail),
+    body.light-mode main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent):not(#btn-adopt-vote):not(#btn-quick-pass):not(#btn-motion-vote-execute):not(#btn-reset-votes):not(#btn-reset-current-session):not(#btn-reset-all-sessions):not(#btn-hero-motion-second):not(#btn-hero-motion-pass):not(#btn-hero-motion-fail) * {
       color: #F7F4EE !important;
     }
-    body.light-mode main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent) {
+    body.light-mode main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent):not(#btn-adopt-vote):not(#btn-quick-pass):not(#btn-motion-vote-execute):not(#btn-reset-votes):not(#btn-reset-current-session):not(#btn-reset-all-sessions):not(#btn-hero-motion-second):not(#btn-hero-motion-pass):not(#btn-hero-motion-fail) {
       background-color: transparent !important;
       background: transparent !important;
       border: 1px solid #6D4C41 !important;
     }
-    body.light-mode button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#main-header button):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent):hover {
+    body.light-mode button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#main-header button):not(.btn-vote-choice):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.btn-vote-motion-pass):not(.btn-vote-motion-fail):not(.btn-rollcall-status-present):not(.btn-rollcall-status-pv):not(.btn-rollcall-status-absent):not(#btn-adopt-vote):not(#btn-quick-pass):not(#btn-motion-vote-execute):not(#btn-reset-votes):not(#btn-reset-current-session):not(#btn-reset-all-sessions):not(#btn-hero-motion-second):not(#btn-hero-motion-pass):not(#btn-hero-motion-fail):hover {
       background-color: rgba(247, 244, 238, 0.12) !important;
       background: rgba(247, 244, 238, 0.12) !important;
       color: #F7F4EE !important;
@@ -3169,14 +3184,18 @@ body:not(.light-mode) {
 
     body.light-mode #btn-voting-subtab-rollcall:not(.active),
     body.light-mode #btn-voting-subtab-session:not(.active) {
-      color: #475569 !important;
+      color: #3E2723 !important;
       background-color: transparent !important;
       background: transparent !important;
       border: 1px solid transparent !important;
     }
+    body.light-mode #btn-voting-subtab-rollcall:not(.active) *,
+    body.light-mode #btn-voting-subtab-session:not(.active) * {
+      color: #3E2723 !important;
+    }
     body.light-mode #btn-voting-subtab-rollcall:not(.active):hover,
     body.light-mode #btn-voting-subtab-session:not(.active):hover {
-      color: #0f172a !important;
+      color: #1F2A14 !important;
       background-color: rgba(0, 0, 0, 0.05) !important;
       background: rgba(0, 0, 0, 0.05) !important;
       border: 1px solid #cbd5e1 !important;
@@ -3185,10 +3204,10 @@ body:not(.light-mode) {
     body.light-mode #btn-voting-subtab-session.active,
     body.light-mode #btn-voting-subtab-rollcall.active:hover,
     body.light-mode #btn-voting-subtab-session.active:hover {
-      background-color: #7D9462 !important;
-      background: #7D9462 !important;
+      background-color: #B5C99A !important;
+      background: #B5C99A !important;
       color: #1F2A14 !important;
-      border: 1px solid #7D9462 !important;
+      border: 1.5px solid #B5C99A !important;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
     }
     body.light-mode #btn-voting-subtab-rollcall.active *,
