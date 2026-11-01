@@ -16,8 +16,7 @@
       ['.btn-rollcall-absent, .btn-rollcall-status-absent, #btn-set-all-absent, #btn-cast-against', 'red', 'soft'],
       ['.btn-rollcall-status-pv, #btn-cast-abstain, #btn-cast-pass', 'yellow', 'soft'],
       ['#btn-adopt-vote, #btn-quick-pass, #btn-motion-vote-execute, #btn-hero-motion-second, #btn-hero-motion-pass', 'green', 'solid'],
-      ['#btn-hero-motion-fail', 'red', 'solid'],
-      ['#btn-reset-votes, #btn-reset-current-session, #btn-reset-all-sessions', 'red', 'outline']
+      ['#btn-hero-motion-fail, #btn-reset-votes, #btn-reset-current-session, #btn-reset-all-sessions', 'red', 'solid'],
     ];
 
     function parseColor(str) {
