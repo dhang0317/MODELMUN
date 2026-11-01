@@ -43,7 +43,7 @@
     // Universal visual & tactile button press feedback with spring bounce
     document.addEventListener('pointerdown', (e) => {
       const btn = e.target.closest('button:not(:disabled), [role="button"]:not(:disabled)');
-      if (!btn) return;
+      if (!btn || btn.closest('#grid-rollcall-delegates')) return;
       btn.classList.remove('btn-spring-release');
       btn.classList.add('btn-pressed-flash');
       clearTimeout(btn._pressFlashTimer);
@@ -52,7 +52,7 @@
 
     const triggerSpringRelease = (e) => {
       const btn = e.target.closest('button:not(:disabled), [role="button"]:not(:disabled)');
-      if (!btn || !btn.classList.contains('btn-pressed-flash')) return;
+      if (!btn || btn.closest('#grid-rollcall-delegates') || !btn.classList.contains('btn-pressed-flash')) return;
       btn.classList.remove('btn-pressed-flash');
       btn.classList.add('btn-spring-release');
       clearTimeout(btn._springReleaseTimer);

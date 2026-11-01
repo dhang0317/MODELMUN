@@ -123,7 +123,8 @@
 
     state.selectedCountries.forEach((c) => {
       const card = document.createElement('div');
-      card.className = 'p-4 sm:p-5 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-between gap-3 transition-all duration-200 shadow-sm';
+      card.setAttribute('data-country-id', c.id || c.name);
+      card.className = 'p-4 sm:p-5 bg-slate-50 border border-slate-200 rounded-2xl flex items-center justify-between gap-3 shadow-sm';
       
       const isPresent = c.attendance === 'present';
       const isPv = c.attendance === 'pv';
@@ -140,10 +141,10 @@
         // 出席缺席大小要一樣，透亮半透明色彩 (橄欖抹茶綠 #7D9462 / 覆盆子紅 #913D48)
         rightContent = `
           <div class="rollcall-btn-container flex items-center space-x-2 shrink-0">
-            <button type="button" class="btn-rollcall-present flex-1 rounded-xl font-black text-center transition cursor-pointer" style="border: 1.5px solid #7D9462 !important; color: #7D9462 !important; background-color: rgba(125, 148, 98, 0.2) !important;">
+            <button type="button" class="btn-rollcall-present flex-1 rounded-xl font-black text-center cursor-pointer" style="border: 1.5px solid #7D9462 !important; color: #7D9462 !important; background-color: rgba(125, 148, 98, 0.2) !important;">
               ${presentLabel}
             </button>
-            <button type="button" class="btn-rollcall-absent flex-1 rounded-xl font-black text-center transition cursor-pointer" style="border: 1.5px solid #913D48 !important; color: #913D48 !important; background-color: rgba(145, 61, 72, 0.15) !important;">
+            <button type="button" class="btn-rollcall-absent flex-1 rounded-xl font-black text-center cursor-pointer" style="border: 1.5px solid #913D48 !important; color: #913D48 !important; background-color: rgba(145, 61, 72, 0.15) !important;">
               ${absentLabel}
             </button>
           </div>
@@ -152,7 +153,7 @@
         // 出席（橄欖抹茶綠）：透亮半透明綠底 (rgba(125, 148, 98, 0.32))，搭配橄欖抹茶綠邊框 (#7D9462)
         rightContent = `
           <div class="rollcall-btn-container shrink-0 flex justify-end">
-            <button type="button" class="btn-rollcall-expanded btn-rollcall-status-present w-full rounded-xl font-black text-center transition cursor-pointer" style="background-color: rgba(125, 148, 98, 0.32) !important; background: rgba(125, 148, 98, 0.32) !important; color: #5B6D46 !important; border: 2px solid #7D9462 !important;">
+            <button type="button" class="btn-rollcall-expanded btn-rollcall-status-present w-full rounded-xl font-black text-center cursor-pointer" style="background-color: rgba(125, 148, 98, 0.32) !important; background: rgba(125, 148, 98, 0.32) !important; color: #5B6D46 !important; border: 2px solid #7D9462 !important;">
               ${presentLabel}
             </button>
           </div>
@@ -161,7 +162,7 @@
         // 出席且投票（PV 琥珀金/香檳金）：透亮半透明金底，搭配金色邊框與文字
         rightContent = `
           <div class="rollcall-btn-container shrink-0 flex justify-end">
-            <button type="button" class="btn-rollcall-expanded btn-rollcall-status-pv w-full rounded-xl font-black text-center transition cursor-pointer" style="background-color: rgba(214, 181, 117, 0.28) !important; background: rgba(214, 181, 117, 0.28) !important; color: #B58A38 !important; border: 2px solid #D6B575 !important;">
+            <button type="button" class="btn-rollcall-expanded btn-rollcall-status-pv w-full rounded-xl font-black text-center cursor-pointer" style="background-color: rgba(214, 181, 117, 0.28) !important; background: rgba(214, 181, 117, 0.28) !important; color: #B58A38 !important; border: 2px solid #D6B575 !important;">
               ${pvLabel}
             </button>
           </div>
@@ -170,7 +171,7 @@
         // 缺席（覆盆子紅）：透亮半透明紅底 (rgba(145, 61, 72, 0.25))，搭配覆盆子紅邊框與文字
         rightContent = `
           <div class="rollcall-btn-container shrink-0 flex justify-end">
-            <button type="button" class="btn-rollcall-expanded btn-rollcall-status-absent w-full rounded-xl font-black text-center transition cursor-pointer" style="background-color: rgba(145, 61, 72, 0.25) !important; background: rgba(145, 61, 72, 0.25) !important; color: #913D48 !important; border: 2px solid #913D48 !important;">
+            <button type="button" class="btn-rollcall-expanded btn-rollcall-status-absent w-full rounded-xl font-black text-center cursor-pointer" style="background-color: rgba(145, 61, 72, 0.25) !important; background: rgba(145, 61, 72, 0.25) !important; color: #913D48 !important; border: 2px solid #913D48 !important;">
               ${absentLabel}
             </button>
           </div>
@@ -188,47 +189,105 @@
         ${rightContent}
       `;
 
-      // Event bindings
-      const btnPresent = card.querySelector('.btn-rollcall-present');
-      const btnAbsent = card.querySelector('.btn-rollcall-absent');
-      const btnExpanded = card.querySelector('.btn-rollcall-expanded');
+      function attachCardHandlers(targetCard, country) {
+        const btnPresent = targetCard.querySelector('.btn-rollcall-present');
+        const btnAbsent = targetCard.querySelector('.btn-rollcall-absent');
+        const btnExpanded = targetCard.querySelector('.btn-rollcall-expanded');
 
-      if (btnPresent) {
-        btnPresent.addEventListener('click', (e) => {
-          e.stopPropagation();
-          if (state.isViewerMode) return;
-          c.attendance = 'present'; // 點擊變成大小為 2 的出席按鈕
+        const updateCardView = () => {
           saveToLocalStorage(true);
-          renderAll();
-        });
-      }
-
-      if (btnAbsent) {
-        btnAbsent.addEventListener('click', (e) => {
-          e.stopPropagation();
-          if (state.isViewerMode) return;
-          c.attendance = 'absent'; // 點擊變成大小為 2 的缺席按鈕
-          saveToLocalStorage(true);
-          renderAll();
-        });
-      }
-
-      if (btnExpanded) {
-        btnExpanded.addEventListener('click', (e) => {
-          e.stopPropagation();
-          if (state.isViewerMode) return;
-          if (c.attendance === 'present') {
-            c.attendance = 'pv'; // 出席再點一下是 PV
-          } else if (c.attendance === 'pv') {
-            c.attendance = 'uncalled'; // PV 再點一下重設回未點名（變回 1:1 兩按鈕）
-          } else if (c.attendance === 'absent') {
-            c.attendance = 'uncalled'; // 缺席再點一下重設回未點名（變回 1:1 兩按鈕）
+          renderHeader();
+          if (state.currentTab === 'vote') {
+            renderResolutionVoteGrid();
           }
-          saveToLocalStorage(true);
-          renderAll();
-        });
+
+          const isPres = country.attendance === 'present';
+          const isP = country.attendance === 'pv';
+          const isAbs = country.attendance === 'absent';
+          const isUn = !country.attendance || country.attendance === 'uncalled';
+
+          let newRight = '';
+          if (isUn) {
+            newRight = `
+              <div class="rollcall-btn-container flex items-center space-x-2 shrink-0">
+                <button type="button" class="btn-rollcall-present flex-1 rounded-xl font-black text-center cursor-pointer" style="border: 1.5px solid #7D9462 !important; color: #7D9462 !important; background-color: rgba(125, 148, 98, 0.2) !important;">
+                  ${presentLabel}
+                </button>
+                <button type="button" class="btn-rollcall-absent flex-1 rounded-xl font-black text-center cursor-pointer" style="border: 1.5px solid #913D48 !important; color: #913D48 !important; background-color: rgba(145, 61, 72, 0.15) !important;">
+                  ${absentLabel}
+                </button>
+              </div>
+            `;
+          } else if (isPres) {
+            newRight = `
+              <div class="rollcall-btn-container shrink-0 flex justify-end">
+                <button type="button" class="btn-rollcall-expanded btn-rollcall-status-present w-full rounded-xl font-black text-center cursor-pointer" style="background-color: rgba(125, 148, 98, 0.32) !important; background: rgba(125, 148, 98, 0.32) !important; color: #5B6D46 !important; border: 2px solid #7D9462 !important;">
+                  ${presentLabel}
+                </button>
+              </div>
+            `;
+          } else if (isP) {
+            newRight = `
+              <div class="rollcall-btn-container shrink-0 flex justify-end">
+                <button type="button" class="btn-rollcall-expanded btn-rollcall-status-pv w-full rounded-xl font-black text-center cursor-pointer" style="background-color: rgba(214, 181, 117, 0.28) !important; background: rgba(214, 181, 117, 0.28) !important; color: #B58A38 !important; border: 2px solid #D6B575 !important;">
+                  ${pvLabel}
+                </button>
+              </div>
+            `;
+          } else if (isAbs) {
+            newRight = `
+              <div class="rollcall-btn-container shrink-0 flex justify-end">
+                <button type="button" class="btn-rollcall-expanded btn-rollcall-status-absent w-full rounded-xl font-black text-center cursor-pointer" style="background-color: rgba(145, 61, 72, 0.25) !important; background: rgba(145, 61, 72, 0.25) !important; color: #913D48 !important; border: 2px solid #913D48 !important;">
+                  ${absentLabel}
+                </button>
+              </div>
+            `;
+          }
+
+          const existingRight = targetCard.querySelector('.rollcall-btn-container');
+          if (existingRight) {
+            const temp = document.createElement('div');
+            temp.innerHTML = newRight.trim();
+            existingRight.replaceWith(temp.firstElementChild);
+            attachCardHandlers(targetCard, country);
+          }
+        };
+
+        if (btnPresent) {
+          btnPresent.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (state.isViewerMode) return;
+            country.attendance = 'present';
+            updateCardView();
+          });
+        }
+
+        if (btnAbsent) {
+          btnAbsent.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (state.isViewerMode) return;
+            country.attendance = 'absent';
+            updateCardView();
+          });
+        }
+
+        if (btnExpanded) {
+          btnExpanded.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (state.isViewerMode) return;
+            if (country.attendance === 'present') {
+              country.attendance = 'pv';
+            } else if (country.attendance === 'pv') {
+              country.attendance = 'uncalled';
+            } else if (country.attendance === 'absent') {
+              country.attendance = 'uncalled';
+            }
+            updateCardView();
+          });
+        }
       }
 
+      attachCardHandlers(card, c);
       grid.appendChild(card);
     });
   }

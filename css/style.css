@@ -2736,7 +2736,15 @@ body:not(.light-mode) {
     }
 
     /* Scale applied across views: Setup, GSL, Mod, Unmod, Motions, Roll Call, Resolution Vote */
-    /* 1. Roll Call view scaling */
+    /* 1. Roll Call view scaling & animation disable */
+    #grid-rollcall-delegates,
+    #grid-rollcall-delegates *,
+    #grid-rollcall-delegates > div,
+    #grid-rollcall-delegates button {
+      transition: none !important;
+      animation: none !important;
+      transform: none !important;
+    }
     #grid-rollcall-delegates > div {
       padding: calc(1.25rem * var(--content-scale)) calc(1.35rem * var(--content-scale)) !important;
       border-radius: calc(1rem * var(--content-scale)) !important;
