@@ -419,8 +419,6 @@
     modal.classList.remove('hidden');
     if (window.lucide) window.lucide.createIcons();
   }
-    if (window.lucide) window.lucide.createIcons();
-  }
 
   function updateRecessDisplay() {
     const t = I18N[state.language] || I18N.en;
