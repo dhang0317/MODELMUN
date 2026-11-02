@@ -104,7 +104,7 @@
       }).sort(countrySortCompare);
 
       if (list.length === 0) {
-        container.innerHTML = `<div class="p-4 text-center text-xs text-slate-400">${t.noMatchingDelegates}</div>`;
+        container.innerHTML = `<div class="col-span-full p-4 text-center text-xs text-slate-400">${t.noMatchingDelegates}</div>`;
         return;
       }
 
@@ -112,16 +112,16 @@
         const item = document.createElement('div');
         const queueList = getQueueList();
         const inQueueCount = keepOpen ? queueList.filter(m => m.id === c.id).length : 0;
-        item.className = 'py-3 px-3.5 flex items-center justify-between hover:bg-slate-50 cursor-pointer rounded-xl transition';
+        item.className = 'p-3 flex items-center justify-between bg-white border border-slate-200 hover:border-slate-400 hover:shadow-sm cursor-pointer rounded-xl transition';
         item.innerHTML = `
-          <div class="flex items-center space-x-3.5 min-w-0">
-            <img src="${getFlagUrl(c)}" class="w-9 h-6 object-cover rounded-md shadow-sm border border-slate-700/30 shrink-0">
-            <span class="text-sm sm:text-base font-bold text-slate-100 truncate">${getCountryDisplayName(c)}</span>
+          <div class="flex items-center space-x-3 min-w-0">
+            <img src="${getFlagUrl(c)}" class="w-8 h-5.5 object-cover rounded shadow-sm border border-slate-700/30 shrink-0">
+            <span class="text-sm font-bold text-slate-800 truncate">${getCountryDisplayName(c)}</span>
             ${inQueueCount > 0 ? `<span class="px-2 py-0.5 text-xs font-bold rounded-full bg-primary/20 text-primary shrink-0">#${inQueueCount}</span>` : ''}
           </div>
           <div class="flex items-center space-x-2 shrink-0 ml-2">
             ${c.powerStatus === 'observer' ? `<span class="text-xs text-slate-400">${t.observer}</span>` : ''}
-            ${keepOpen ? `<button type="button" class="px-3 py-1.5 text-xs font-semibold bg-slate-700 hover:bg-primary hover:text-white rounded-lg text-slate-200 transition">+ ${t.add}</button>` : ''}
+            ${keepOpen ? `<button type="button" class="px-2.5 py-1 text-xs font-semibold bg-slate-100 hover:bg-primary hover:text-white rounded-lg text-slate-700 transition cursor-pointer">+ ${t.add}</button>` : ''}
           </div>
         `;
         item.addEventListener('click', (e) => {

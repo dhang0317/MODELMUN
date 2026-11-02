@@ -452,6 +452,25 @@ body:not(.light-mode) {
       background-color: #D7CCC8 !important;
       color: #3E2723 !important;
     }
+
+    /* Modal Selectable Speakers Grid & Cards */
+    #list-selectable-speakers > div,
+    body:not(.light-mode) #list-selectable-speakers > div,
+    body.light-mode #list-selectable-speakers > div {
+      background-color: #FFFFFF !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
+    }
+    #list-selectable-speakers > div:hover,
+    body:not(.light-mode) #list-selectable-speakers > div:hover,
+    body.light-mode #list-selectable-speakers > div:hover {
+      background-color: #EFEBE9 !important;
+      border-color: #A1887F !important;
+    }
+    #list-selectable-speakers span,
+    #list-selectable-speakers div {
+      color: #3E2723;
+    }
     body:not(.light-mode) #btn-hero-motion-vote {
       background-color: rgba(245, 158, 11, 0.2) !important;
       border-color: rgba(245, 158, 11, 0.6) !important;
