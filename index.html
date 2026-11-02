@@ -350,8 +350,9 @@
 
                 <!-- Main Big Timer Display (Always visible) -->
                 <div class="py-2">
-                  <div class="relative inline-flex items-center justify-center group cursor-pointer" title="點擊設定發言時間" onclick="document.getElementById('btn-gsl-set-time')?.click()">
+                  <div class="relative inline-flex items-center justify-center group cursor-pointer" title="點擊直接打字修改時間">
                     <div id="gsl-timer-display" class="text-7xl sm:text-8xl font-mono font-black text-primary tracking-tight transition group-hover:opacity-75">01:30</div>
+                    <input id="gsl-timer-input" type="text" maxlength="5" class="timer-direct-input absolute inset-0 opacity-0 cursor-pointer text-center font-mono font-black text-7xl sm:text-8xl bg-transparent border-0 outline-none text-transparent caret-white selection:bg-primary/40 focus:opacity-100 focus:text-primary focus:bg-zinc-900/90 rounded-2xl transition z-10" value="01:30" placeholder="01:30">
                   </div>
                   <div id="gsl-progress-bar-bg" class="w-full bg-slate-100 h-2.5 rounded-full mt-4 overflow-hidden">
                     <div id="gsl-progress-bar" class="bg-secondary h-full transition-all duration-300 w-full"></div>
@@ -429,7 +430,10 @@
                     </div>
                   </div>
                   <div class="py-2">
-                    <div id="mod-speaker-timer-display" class="text-7xl sm:text-8xl font-mono font-black text-primary tracking-tight">01:00</div>
+                    <div class="relative inline-flex items-center justify-center group cursor-pointer" title="點擊直接打字修改時間">
+                      <div id="mod-speaker-timer-display" class="text-7xl sm:text-8xl font-mono font-black text-primary tracking-tight transition group-hover:opacity-75">01:00</div>
+                      <input id="mod-speaker-timer-input" type="text" maxlength="5" class="timer-direct-input absolute inset-0 opacity-0 cursor-pointer text-center font-mono font-black text-7xl sm:text-8xl bg-transparent border-0 outline-none text-transparent caret-white selection:bg-primary/40 focus:opacity-100 focus:text-primary focus:bg-zinc-900/90 rounded-2xl transition z-10" value="01:00" placeholder="01:00">
+                    </div>
                     <div class="w-full bg-slate-100 h-2.5 rounded-full mt-4 overflow-hidden">
                       <div id="mod-speaker-progress" class="bg-secondary h-full transition-all duration-300 w-full"></div>
                     </div>
@@ -510,7 +514,12 @@
               </div>
             </div>
 
-            <div id="single-timer-display" class="text-7xl sm:text-8xl font-mono font-black text-primary py-1">03:00</div>
+            <div class="py-1">
+              <div class="relative inline-flex items-center justify-center group cursor-pointer" title="點擊直接打字修改時間">
+                <div id="single-timer-display" class="text-7xl sm:text-8xl font-mono font-black text-primary py-1 transition group-hover:opacity-75">03:00</div>
+                <input id="single-timer-input" type="text" maxlength="5" class="timer-direct-input absolute inset-0 opacity-0 cursor-pointer text-center font-mono font-black text-7xl sm:text-8xl bg-transparent border-0 outline-none text-transparent caret-white selection:bg-primary/40 focus:opacity-100 focus:text-primary focus:bg-zinc-900/90 rounded-2xl transition z-10" value="03:00" placeholder="03:00">
+              </div>
+            </div>
 
             <!-- Controls (順序：重置、開始、設定時間、進入正反方辯論) -->
             <div class="flex flex-wrap items-center justify-center gap-3 pt-1">
@@ -565,9 +574,9 @@
 
                 <!-- Timer Display -->
                 <div class="py-2">
-                  <div class="relative inline-flex items-center justify-center group cursor-pointer" title="點擊直接修改時間">
+                  <div class="relative inline-flex items-center justify-center group cursor-pointer" title="點擊直接打字修改時間">
                     <div id="procon-timer-display" class="text-7xl sm:text-8xl font-mono font-black text-primary tracking-tight transition group-hover:opacity-75">01:00</div>
-                    <input id="procon-timer-input" type="text" maxlength="5" class="absolute inset-0 opacity-0 cursor-pointer text-center font-mono font-black text-7xl sm:text-8xl bg-transparent border-0 outline-none text-transparent caret-white selection:bg-primary/40 focus:opacity-100 focus:text-primary focus:bg-zinc-900/90 rounded-2xl transition z-10" value="01:00" placeholder="01:00">
+                    <input id="procon-timer-input" type="text" maxlength="5" class="timer-direct-input absolute inset-0 opacity-0 cursor-pointer text-center font-mono font-black text-7xl sm:text-8xl bg-transparent border-0 outline-none text-transparent caret-white selection:bg-primary/40 focus:opacity-100 focus:text-primary focus:bg-zinc-900/90 rounded-2xl transition z-10" value="01:00" placeholder="01:00">
                   </div>
                   <div class="w-full bg-slate-100 h-2.5 rounded-full mt-4 overflow-hidden">
                     <div id="procon-speaker-progress" class="bg-secondary h-full transition-all duration-300 w-full"></div>
@@ -647,7 +656,10 @@
           </div>
 
           <div class="space-y-4 py-2">
-            <div id="unmod-timer-display" class="text-7xl sm:text-8xl md:text-9xl font-mono font-black text-primary tracking-tight">15:00</div>
+            <div class="relative inline-flex items-center justify-center group cursor-pointer" title="點擊直接打字修改時間">
+              <div id="unmod-timer-display" class="text-7xl sm:text-8xl md:text-9xl font-mono font-black text-primary tracking-tight transition group-hover:opacity-75">15:00</div>
+              <input id="unmod-timer-input" type="text" maxlength="5" class="timer-direct-input absolute inset-0 opacity-0 cursor-pointer text-center font-mono font-black text-7xl sm:text-8xl md:text-9xl bg-transparent border-0 outline-none text-transparent caret-white selection:bg-primary/40 focus:opacity-100 focus:text-primary focus:bg-zinc-900/90 rounded-2xl transition z-10" value="15:00" placeholder="15:00">
+            </div>
             
             <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
               <div id="unmod-total-progress" class="bg-primary h-full w-full transition-all duration-300"></div>
@@ -1525,7 +1537,7 @@
     <script src="js/modals.js?v=2026110102"></script>
     <script src="js/p2p.js?v=2026103102"></script>
     <!-- View Renderers -->
-    <script src="js/views/header.js?v=2026110104"></script>
+    <script src="js/views/header.js?v=2026110105"></script>
     <script src="js/views/setup.js?v=2026110106"></script>
     <script src="js/views/gsl.js?v=2026110103"></script>
     <script src="js/views/mod.js?v=2026110103"></script>
@@ -1534,7 +1546,7 @@
     <script src="js/views/motions.js?v=2026110108"></script>
     <script src="js/views/voting.js?v=2026110105"></script>
     <!-- Events, Auth & Entry Point -->
-    <script src="js/events.js?v=2026110109"></script>
+    <script src="js/events.js?v=2026110110"></script>
     <script src="js/auth.js?v=2026110103"></script>
     <script src="js/activitylog.js?v=2026110103"></script>
     <script src="js/adaptive-buttons.js?v=2026110110"></script>

@@ -541,56 +541,111 @@
       });
     }
 
-    // Direct Inline Typing on Pro / Con Big Timer Display
-    const proconTimerInput = document.getElementById('procon-timer-input');
-    if (proconTimerInput) {
-      proconTimerInput.addEventListener('focus', () => {
-        const m = Math.floor(state.proConSecsRemaining / 60);
-        const s = state.proConSecsRemaining % 60;
-        proconTimerInput.value = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
-        proconTimerInput.select();
+    // Helper for direct typing on any timer display
+    function setupDirectTimerInput(inputId, getSecs, onApply) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+
+      input.addEventListener('focus', () => {
+        const secs = getSecs();
+        const m = Math.floor(secs / 60);
+        const s = secs % 60;
+        input.value = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+        input.select();
       });
-      proconTimerInput.addEventListener('blur', () => {
-        applyProConTypedTime();
-      });
-      proconTimerInput.addEventListener('keydown', (e) => {
+
+      const apply = () => {
+        const val = input.value.trim();
+        let totalSecs = 0;
+        if (val.includes(':')) {
+          const parts = val.split(':');
+          const min = parseInt(parts[0], 10) || 0;
+          const sec = parseInt(parts[1], 10) || 0;
+          totalSecs = min * 60 + sec;
+        } else {
+          const num = parseInt(val, 10);
+          if (!isNaN(num)) {
+            // If user enters seconds (e.g. 60, 90) or minutes (e.g. 1, 2)
+            totalSecs = num > 59 ? num : num * 60;
+          }
+        }
+        if (totalSecs > 0) {
+          onApply(totalSecs);
+        } else {
+          const secs = getSecs();
+          const m = Math.floor(secs / 60);
+          const s = secs % 60;
+          input.value = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+        }
+      };
+
+      input.addEventListener('blur', apply);
+      input.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
-          proconTimerInput.blur();
+          input.blur();
         } else if (e.key === 'Escape') {
-          const m = Math.floor(state.proConSecsRemaining / 60);
-          const s = state.proConSecsRemaining % 60;
-          proconTimerInput.value = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
-          proconTimerInput.blur();
+          const secs = getSecs();
+          const m = Math.floor(secs / 60);
+          const s = secs % 60;
+          input.value = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
+          input.blur();
         }
       });
     }
 
-    function applyProConTypedTime() {
-      if (!proconTimerInput) return;
-      const val = proconTimerInput.value.trim();
-      let totalSecs = 0;
-      if (val.includes(':')) {
-        const parts = val.split(':');
-        const min = parseInt(parts[0], 10) || 0;
-        const sec = parseInt(parts[1], 10) || 0;
-        totalSecs = min * 60 + sec;
-      } else {
-        const num = parseInt(val, 10);
-        if (!isNaN(num)) {
-          totalSecs = num > 59 ? num : num * 60;
-        }
-      }
-      if (totalSecs > 0) {
-        state.proConSpeakerSecs = totalSecs;
-        state.proConSecsRemaining = totalSecs;
+    // 1. GSL Timer Direct Input
+    setupDirectTimerInput('gsl-timer-input', 
+      () => state.gslRemainingTime,
+      (secs) => {
+        state.gslDefaultTime = secs;
+        state.gslRemainingTime = secs;
         saveToLocalStorage(true, true);
         renderAll();
-      } else {
-        const m = Math.floor(state.proConSecsRemaining / 60);
-        const s = state.proConSecsRemaining % 60;
-        proconTimerInput.value = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
       }
-    }
+    );
+
+    // 2. Mod Speaker Timer Direct Input
+    setupDirectTimerInput('mod-speaker-timer-input',
+      () => state.modSpeakerSecsRemaining,
+      (secs) => {
+        state.modSpeakerSecs = secs;
+        state.modSpeakerSecsRemaining = secs;
+        saveToLocalStorage(true, true);
+        renderAll();
+      }
+    );
+
+    // 3. Pro / Con Timer Direct Input
+    setupDirectTimerInput('procon-timer-input',
+      () => state.proConSecsRemaining,
+      (secs) => {
+        state.proConSpeakerSecs = secs;
+        state.proConSecsRemaining = secs;
+        saveToLocalStorage(true, true);
+        renderAll();
+      }
+    );
+
+    // 4. Single Speaker (Intro) Timer Direct Input
+    setupDirectTimerInput('single-timer-input',
+      () => state.singleTimeRemaining,
+      (secs) => {
+        state.singleTimeRemaining = secs;
+        saveToLocalStorage(true, true);
+        renderAll();
+      }
+    );
+
+    // 5. Unmod Caucus Timer Direct Input
+    setupDirectTimerInput('unmod-timer-input',
+      () => state.unmodSecsRemaining,
+      (secs) => {
+        state.unmodTotalSecs = secs;
+        state.unmodSecsRemaining = secs;
+        saveToLocalStorage(true, true);
+        renderAll();
+      }
+    );
 
     const btnAddPro = document.getElementById('btn-procon-add-pro');
     if (btnAddPro) {

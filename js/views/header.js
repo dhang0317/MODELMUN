@@ -273,6 +273,14 @@
   }
 
   function formatTimerDisplay(elemId, totalSecs) {
+    const formatted = formatMinutesSeconds(totalSecs);
     const elem = document.getElementById(elemId);
-    if (elem) elem.textContent = formatMinutesSeconds(totalSecs);
+    if (elem) elem.textContent = formatted;
+    
+    // Synchronize matching direct inline typing input if not currently focused
+    const inputId = elemId.replace('-display', '-input');
+    const inputElem = document.getElementById(inputId);
+    if (inputElem && document.activeElement !== inputElem) {
+      inputElem.value = formatted;
+    }
   }
