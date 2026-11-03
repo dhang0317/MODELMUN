@@ -734,8 +734,33 @@
     const fieldTotalMins = document.getElementById('motion-field-total-mins');
     const inputTotalMins = document.getElementById('input-motion-total-mins');
     const labelTotalMins = document.getElementById('label-motion-total-mins');
+    const inputTotalM = document.getElementById('input-motion-total-m');
+    const inputTotalS = document.getElementById('input-motion-total-s');
     const fieldSpeakerSecs = document.getElementById('motion-field-speaker-secs');
     const inputSpeakerSecs = document.getElementById('input-motion-speaker-secs');
+    const labelSpeakerSecs = document.getElementById('label-motion-speaker-secs');
+    const inputSpeakerM = document.getElementById('input-motion-speaker-m');
+    const inputSpeakerS = document.getElementById('input-motion-speaker-s');
+
+    function syncMotionTimeInputs() {
+      if (inputTotalM && inputTotalS && inputTotalMins) {
+        const m = parseInt(inputTotalM.value, 10) || 0;
+        const s = parseInt(inputTotalS.value, 10) || 0;
+        inputTotalMins.value = m * 60 + s;
+      }
+      if (inputSpeakerM && inputSpeakerS && inputSpeakerSecs) {
+        const m = parseInt(inputSpeakerM.value, 10) || 0;
+        const s = parseInt(inputSpeakerS.value, 10) || 0;
+        inputSpeakerSecs.value = m * 60 + s;
+      }
+    }
+
+    [inputTotalM, inputTotalS, inputSpeakerM, inputSpeakerS].forEach(inp => {
+      if (inp) {
+        inp.addEventListener('input', syncMotionTimeInputs);
+        inp.addEventListener('change', syncMotionTimeInputs);
+      }
+    });
 
     if (selectMotionDr) {
       selectMotionDr.addEventListener('change', () => {
@@ -786,9 +811,13 @@
           fieldTimeContainer.className = 'grid grid-cols-2 gap-3';
         }
         if (fieldTotalMins) fieldTotalMins.classList.remove('hidden');
-        if (labelTotalMins) labelTotalMins.textContent = t.durationMins || 'Duration (secs)';
-        if (inputTotalMins) inputTotalMins.value = 600;
+        if (labelTotalMins) labelTotalMins.textContent = state.language === 'zh' ? '磋商總時間' : (t.totalCaucusTime || 'Total Time');
+        if (inputTotalM) inputTotalM.value = 10;
+        if (inputTotalS) inputTotalS.value = 0;
         if (fieldSpeakerSecs) fieldSpeakerSecs.classList.remove('hidden');
+        if (labelSpeakerSecs) labelSpeakerSecs.textContent = state.language === 'zh' ? '個別發言時間' : (t.speakingTimeSecs || 'Speaker Time');
+        if (inputSpeakerM) inputSpeakerM.value = 1;
+        if (inputSpeakerS) inputSpeakerS.value = 0;
       } else if (type === 'unmod') {
         if (fieldTopic) fieldTopic.classList.remove('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
@@ -798,8 +827,9 @@
           fieldTimeContainer.className = 'grid grid-cols-1 gap-3';
         }
         if (fieldTotalMins) fieldTotalMins.classList.remove('hidden');
-        if (labelTotalMins) labelTotalMins.textContent = t.durationMins || 'Duration (secs)';
-        if (inputTotalMins) inputTotalMins.value = 600;
+        if (labelTotalMins) labelTotalMins.textContent = state.language === 'zh' ? '磋商總時間' : (t.durationMins || 'Duration');
+        if (inputTotalM) inputTotalM.value = 10;
+        if (inputTotalS) inputTotalS.value = 0;
         if (fieldSpeakerSecs) fieldSpeakerSecs.classList.add('hidden');
       } else if (type === 'singlespeaker') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
@@ -810,8 +840,9 @@
           fieldTimeContainer.className = 'grid grid-cols-1 gap-3';
         }
         if (fieldTotalMins) fieldTotalMins.classList.remove('hidden');
-        if (labelTotalMins) labelTotalMins.textContent = state.language === 'zh' ? '發言時間 (秒)' : 'Speaking Time (secs)';
-        if (inputTotalMins) inputTotalMins.value = 60; // 預設 60 秒
+        if (labelTotalMins) labelTotalMins.textContent = state.language === 'zh' ? '發言時間' : 'Speaking Time';
+        if (inputTotalM) inputTotalM.value = 1;
+        if (inputTotalS) inputTotalS.value = 0;
         if (fieldSpeakerSecs) fieldSpeakerSecs.classList.add('hidden');
       } else if (type === 'amendment') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
@@ -823,12 +854,22 @@
         }
         if (fieldTotalMins) fieldTotalMins.classList.add('hidden');
         if (fieldSpeakerSecs) fieldSpeakerSecs.classList.remove('hidden');
-        if (inputSpeakerSecs) inputSpeakerSecs.value = 60;
+        if (labelSpeakerSecs) labelSpeakerSecs.textContent = state.language === 'zh' ? '發言時間' : 'Speaking Time';
+        if (inputSpeakerM) inputSpeakerM.value = 1;
+        if (inputSpeakerS) inputSpeakerS.value = 0;
       } else if (type === 'suspend') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
         if (fieldAmendmentSelect) fieldAmendmentSelect.classList.add('hidden');
-        if (fieldTimeContainer) fieldTimeContainer.classList.add('hidden');
+        if (fieldTimeContainer) {
+          fieldTimeContainer.classList.remove('hidden');
+          fieldTimeContainer.className = 'grid grid-cols-1 gap-3';
+        }
+        if (fieldTotalMins) fieldTotalMins.classList.remove('hidden');
+        if (labelTotalMins) labelTotalMins.textContent = state.language === 'zh' ? '休會時間' : 'Suspension Time';
+        if (inputTotalM) inputTotalM.value = 15;
+        if (inputTotalS) inputTotalS.value = 0;
+        if (fieldSpeakerSecs) fieldSpeakerSecs.classList.add('hidden');
       } else if (type === 'gsl') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
@@ -839,13 +880,16 @@
         }
         if (fieldTotalMins) fieldTotalMins.classList.add('hidden');
         if (fieldSpeakerSecs) fieldSpeakerSecs.classList.remove('hidden');
-        if (inputSpeakerSecs) inputSpeakerSecs.value = 60;
+        if (labelSpeakerSecs) labelSpeakerSecs.textContent = state.language === 'zh' ? '發言時間' : 'Speaking Time';
+        if (inputSpeakerM) inputSpeakerM.value = 1;
+        if (inputSpeakerS) inputSpeakerS.value = 30;
       } else if (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' || type === 'close') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
         if (fieldAmendmentSelect) fieldAmendmentSelect.classList.add('hidden');
         if (fieldTimeContainer) fieldTimeContainer.classList.add('hidden');
       }
+      syncMotionTimeInputs();
     }
 
     if (selectMotionType) {
@@ -866,6 +910,7 @@
     });
 
     document.getElementById('btn-submit-motion').addEventListener('click', () => {
+      syncMotionTimeInputs();
       const proposer = document.getElementById('select-motion-proposer').value;
       const type = document.getElementById('select-motion-type').value;
       let topic = document.getElementById('input-motion-topic').value.trim();
@@ -893,6 +938,7 @@
         type,
         topic,
         totalMins,
+        totalSecs: rawTotal,
         speakerSecs,
         precedence: PRECEDENCE[type] || 50
       };

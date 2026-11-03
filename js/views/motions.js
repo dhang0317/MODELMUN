@@ -16,33 +16,46 @@
     }
 
     function formatMotionDetails(m) {
+      const fmtSecs = (sec) => {
+        const mins = Math.floor(sec / 60);
+        const remSec = sec % 60;
+        if (mins > 0 && remSec > 0) return `${mins}m ${remSec}s`;
+        if (mins > 0) return `${mins}m`;
+        return `${remSec}s`;
+      };
+
       if (m.type === 'gsl') {
-        if (state.language === 'zh') return `發言時間：${m.speakerSecs} 秒`;
-        return `Speaking Time: ${m.speakerSecs}s`;
+        const s = m.speakerSecs || 60;
+        if (state.language === 'zh') return `發言時間：${fmtSecs(s)}`;
+        return `Speaking Time: ${fmtSecs(s)}`;
       }
-      if (!m.totalMins) return t.proceduralAction || 'Procedural Action';
+      if (!m.totalMins && !m.totalSecs) return t.proceduralAction || 'Procedural Action';
+      const totalSec = m.totalSecs || ((m.totalMins || 10) * 60);
+
       if (m.type === 'mod') {
-        if (t.durationAndSpeakingTime) {
-          return t.durationAndSpeakingTime.replace('{total}', m.totalMins).replace('{speaker}', m.speakerSecs);
+        const spkSec = m.speakerSecs || 60;
+        if (state.language === 'zh') {
+          return `總時間：${fmtSecs(totalSec)} • 個別：${fmtSecs(spkSec)}`;
         }
-        return `Duration: ${m.totalMins} mins • Individual: ${m.speakerSecs}s`;
+        return `Duration: ${fmtSecs(totalSec)} • Individual: ${fmtSecs(spkSec)}`;
       } else if (m.type === 'singlespeaker' || m.type === 'amendment') {
-        if (state.language === 'zh') return `發言時間：${m.totalMins} 分鐘`;
-        if (state.language === 'fr') return `Temps de parole : ${m.totalMins} mins`;
-        return `Speaking Time: ${m.totalMins} mins`;
+        const s = m.type === 'amendment' ? (m.speakerSecs || 60) : totalSec;
+        if (state.language === 'zh') return `發言時間：${fmtSecs(s)}`;
+        if (state.language === 'fr') return `Temps de parole : ${fmtSecs(s)}`;
+        return `Speaking Time: ${fmtSecs(s)}`;
       } else if (m.type === 'suspend') {
-        if (state.language === 'zh') return `暫停時間：${m.totalMins} 分鐘`;
-        if (state.language === 'fr') return `Durée de la suspension : ${m.totalMins} mins`;
-        return `Suspension Duration: ${m.totalMins} mins`;
+        if (state.language === 'zh') return `暫停時間：${fmtSecs(totalSec)}`;
+        if (state.language === 'fr') return `Durée de la suspension : ${fmtSecs(totalSec)}`;
+        return `Suspension Duration: ${fmtSecs(totalSec)}`;
       } else if (m.type === 'adjourn_session') {
         return t.motionAdjournSession;
       } else if (m.type === 'adjourn_day' || m.type === 'adjourn') {
         return t.motionAdjournDay;
       } else {
         // unmod or others
-        if (state.language === 'zh') return `磋商時長：${m.totalMins} 分鐘`;
-        if (state.language === 'fr') return `Durée du caucus : ${m.totalMins} mins`;
-        return `Duration: ${m.totalMins} mins`;
+        if (state.language === 'zh') return `磋商時長：${fmtSecs(totalSec)}`;
+        if (state.language === 'fr') return `Durée du caucus : ${fmtSecs(totalSec)}`;
+        return `Duration: ${fmtSecs(totalSec)}`;
       }
     }
 
@@ -296,11 +309,11 @@
 
     if (motion.type === 'mod') {
       pauseModTimer();
-      const totalMins = parseInt(motion.totalMins, 10) || 10;
+      const totalSecs = motion.totalSecs || (parseInt(motion.totalMins, 10) || 10) * 60;
       const speakerSecs = parseInt(motion.speakerSecs, 10) || 60;
       state.modTopic = motion.topic || '';
-      state.modTotalMins = totalMins;
-      state.modTotalSecsRemaining = totalMins * 60;
+      state.modTotalMins = Math.round(totalSecs / 60) || 1;
+      state.modTotalSecsRemaining = totalSecs;
       state.modSpeakerSecs = speakerSecs;
       state.modSpeakerSecsRemaining = speakerSecs;
       state.modQueue = [];
@@ -319,12 +332,13 @@
       switchTab('gsl');
     } else if (motion.type === 'unmod') {
       pauseUnmodTimer();
-      const totalMins = parseInt(motion.totalMins, 10) || 10;
-      state.unmodSecsRemaining = totalMins * 60;
+      const totalSecs = motion.totalSecs || (parseInt(motion.totalMins, 10) || 10) * 60;
+      state.unmodTotalSecs = totalSecs;
+      state.unmodSecsRemaining = totalSecs;
       switchTab('unmod');
     } else if (motion.type === 'singlespeaker' || motion.type === 'amendment') {
       pauseSingleTimer();
-      const durationSecs = motion.type === 'amendment' ? (parseInt(motion.speakerSecs, 10) || 60) : ((parseInt(motion.totalMins, 10) || 1) * 60);
+      const durationSecs = motion.type === 'amendment' ? (parseInt(motion.speakerSecs, 10) || 60) : (motion.totalSecs || ((parseInt(motion.totalMins, 10) || 1) * 60));
       state.singleTimeRemaining = durationSecs;
       state.singleMotionType = motion.type;
       state.singleMotionTitle = formatMotionType(motion.type);
