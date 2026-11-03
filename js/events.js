@@ -222,10 +222,18 @@
     });
 
     document.getElementById('btn-clear-selection').addEventListener('click', () => {
-      state.selectedCountries = [];
-      updateAvailableCountriesPool();
-      saveToLocalStorage();
-      renderAll();
+      if (!state.selectedCountries || state.selectedCountries.length === 0) return;
+      const lang = state.language;
+      const title = lang === 'zh' ? '清空已選名冊' : (lang === 'fr' ? 'Effacer la sélection' : 'Clear Selection');
+      const msg = lang === 'zh'
+        ? '確定要清空所有已選代表名單嗎？'
+        : (lang === 'fr' ? 'Êtes-vous sûr de vouloir effacer tous les membres sélectionnés ?' : 'Are you sure you want to clear all selected delegations?');
+      customConfirm(title, msg, () => {
+        state.selectedCountries = [];
+        updateAvailableCountriesPool();
+        saveToLocalStorage();
+        renderAll();
+      });
     });
 
     const btnAddCustom = document.getElementById('btn-add-custom-country');
