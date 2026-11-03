@@ -128,6 +128,7 @@
           e.preventDefault();
           if (!keepOpen) {
             modal.classList.add('hidden');
+            modal.style.display = 'none';
             onSelectCallback(c);
           } else {
             onSelectCallback(c);

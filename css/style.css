@@ -471,6 +471,23 @@ body:not(.light-mode) {
     #list-selectable-speakers div {
       color: #F7F4EE !important;
     }
+    #list-selectable-speakers button,
+    body:not(.light-mode) #list-selectable-speakers button,
+    body.light-mode #list-selectable-speakers button {
+      background-color: #3E2723 !important;
+      border: 1px solid #6D4C41 !important;
+      color: #F7F4EE !important;
+    }
+    #list-selectable-speakers button:hover,
+    body:not(.light-mode) #list-selectable-speakers button:hover,
+    body.light-mode #list-selectable-speakers button:hover {
+      background-color: #F7F4EE !important;
+      color: #3E2723 !important;
+      border-color: #F7F4EE !important;
+    }
+    #list-selectable-speakers button:hover * {
+      color: #3E2723 !important;
+    }
     body:not(.light-mode) #btn-hero-motion-vote {
       background-color: rgba(245, 158, 11, 0.2) !important;
       border-color: rgba(245, 158, 11, 0.6) !important;
@@ -1278,10 +1295,12 @@ body:not(.light-mode) {
     #modal-configure-voting .flex.justify-end .btn-close-modal,
     #modal-define-time .btn-close-modal,
     #modal-mod-config .btn-close-modal,
+    #modal-add-speaker .btn-close-modal,
     body:not(.light-mode) #modal-add-motion .btn-close-modal,
     body:not(.light-mode) #modal-configure-voting .flex.justify-end .btn-close-modal,
     body:not(.light-mode) #modal-define-time .btn-close-modal,
-    body:not(.light-mode) #modal-mod-config .btn-close-modal {
+    body:not(.light-mode) #modal-mod-config .btn-close-modal,
+    body:not(.light-mode) #modal-add-speaker .btn-close-modal {
       background-color: #4E342E !important;
       border: 1px solid #6D4C41 !important;
       color: #F7F4EE !important;
@@ -1290,10 +1309,12 @@ body:not(.light-mode) {
     #modal-configure-voting .flex.justify-end .btn-close-modal:hover,
     #modal-define-time .btn-close-modal:hover,
     #modal-mod-config .btn-close-modal:hover,
+    #modal-add-speaker .btn-close-modal:hover,
     body:not(.light-mode) #modal-add-motion .btn-close-modal:hover,
     body:not(.light-mode) #modal-configure-voting .flex.justify-end .btn-close-modal:hover,
     body:not(.light-mode) #modal-define-time .btn-close-modal:hover,
-    body:not(.light-mode) #modal-mod-config .btn-close-modal:hover {
+    body:not(.light-mode) #modal-mod-config .btn-close-modal:hover,
+    body:not(.light-mode) #modal-add-speaker .btn-close-modal:hover {
       background-color: #5D4037 !important;
       color: #FFFFFF !important;
     }
@@ -2572,6 +2593,7 @@ body:not(.light-mode) {
     body.light-mode #modal-add-motion .btn-close-modal,
     body.light-mode #modal-define-time .btn-close-modal,
     body.light-mode #modal-mod-config .btn-close-modal,
+    body.light-mode #modal-add-speaker .btn-close-modal,
     body.light-mode #modal-configure-voting .flex.justify-end .btn-close-modal {
       background-color: #4E342E !important;
       border: 1px solid #6D4C41 !important;
@@ -2580,6 +2602,7 @@ body:not(.light-mode) {
     body.light-mode #modal-add-motion .btn-close-modal:hover,
     body.light-mode #modal-define-time .btn-close-modal:hover,
     body.light-mode #modal-mod-config .btn-close-modal:hover,
+    body.light-mode #modal-add-speaker .btn-close-modal:hover,
     body.light-mode #modal-configure-voting .flex.justify-end .btn-close-modal:hover {
       background-color: #5D4037 !important;
       color: #FFFFFF !important;

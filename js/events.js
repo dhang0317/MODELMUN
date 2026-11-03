@@ -399,6 +399,7 @@
       state.gslDefaultTime = m * 60 + s;
       state.gslRemainingTime = state.gslDefaultTime;
       defineTimeModal.classList.add('hidden');
+      defineTimeModal.style.display = 'none';
       saveToLocalStorage();
       renderAll();
     });
@@ -437,7 +438,10 @@
         state.modTotalSecsRemaining = state.modTotalMins * 60;
         state.modSpeakerSecs = parseInt(document.getElementById('input-mod-speaker-secs').value) || 60;
         state.modSpeakerSecsRemaining = state.modSpeakerSecs;
-        if (modConfigModal) modConfigModal.classList.add('hidden');
+        if (modConfigModal) {
+          modConfigModal.classList.add('hidden');
+          modConfigModal.style.display = 'none';
+        }
         saveToLocalStorage();
         renderAll();
       });
@@ -698,6 +702,7 @@
     document.getElementById('btn-single-select-country').addEventListener('click', () => {
       openAddSpeakerModal((c) => {
         state.singleSpeaker = c;
+        saveToLocalStorage(true, true);
         renderAll();
       });
     });
