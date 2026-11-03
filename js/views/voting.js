@@ -45,6 +45,14 @@
         state.selectedCountries.forEach(c => { c.vote = 'none'; c.hasRights = false; });
         state.voteStage = 'r1';
         state.activeVoterIndex = 0;
+        if (Array.isArray(state.sessionVotes)) {
+          state.sessionVotes.forEach(s => {
+            s.favor = 0;
+            s.against = 0;
+            s.abstain = 0;
+            s.status = '';
+          });
+        }
         if (typeof removeMotion === 'function') {
           removeMotion(originalIdx);
         } else if (typeof originalIdx === 'number' && originalIdx >= 0 && state.motions) {
@@ -1313,11 +1321,16 @@
       cancelText: t.cancel || '取消',
       onConfirm: () => {
         sess.status = 'passed';
+        sess.favor = 0;
+        sess.against = 0;
+        sess.abstain = 0;
+        sess.note = '';
         saveToLocalStorage(true, true);
         renderSessionVotesGrid();
+        updateScoreboardAndVerdict();
         customAlert(
           state.language === 'zh' ? '表決已通過' : 'Vote Adopted',
-          state.language === 'zh' ? `【${sessName}】已正式通過！` : `【${sessName}】has been officially passed and adopted!`
+          state.language === 'zh' ? `【${sessName}】已正式通過！會期票數已清空。` : `【${sessName}】has been officially passed! Session votes cleared.`
         );
       }
     });
@@ -1375,8 +1388,19 @@
           verdictElem.textContent = (t.passed || 'PASSED').toUpperCase();
           verdictElem.className = 'text-xs sm:text-sm font-black tracking-wide text-emerald-600';
         }
+        // 清空所有會期票數
+        if (Array.isArray(state.sessionVotes)) {
+          state.sessionVotes.forEach(s => {
+            s.favor = 0;
+            s.against = 0;
+            s.abstain = 0;
+            s.status = '';
+          });
+        }
         saveToLocalStorage(true, true);
         renderResolutionVoteGrid();
+        renderSessionVotesGrid();
+        updateScoreboardAndVerdict();
         customAlert(
           state.language === 'zh' ? '通過' : 'Passed',
           ''

@@ -303,6 +303,16 @@
     });
     state.voteStage = 'r1';
     state.activeVoterIndex = 0;
+
+    // 清空當前會期票數（或所有會期票數）
+    if (Array.isArray(state.sessionVotes)) {
+      state.sessionVotes.forEach(s => {
+        s.favor = 0;
+        s.against = 0;
+        s.abstain = 0;
+        s.status = '';
+      });
+    }
     const proposerCountry = motion.proposer
       ? state.selectedCountries.find(c => getCountryDisplayName(c) === motion.proposer)
       : null;
