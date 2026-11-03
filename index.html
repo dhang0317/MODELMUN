@@ -117,7 +117,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/style.css?v=2026110129">
+  <link rel="stylesheet" href="css/style.css?v=2026110130">
 </head>
 <body class="h-screen w-screen flex flex-col overflow-hidden">
 
@@ -769,19 +769,19 @@
     </div>
 
     <!-- 8. RESOLUTION VOTE VIEW (/tabs/vote) - MUN Command Style (Compact & Scroll-Free) -->
-    <div id="view-vote" class="view-panel absolute inset-0 overflow-y-auto p-3 sm:p-5 lg:p-6 bg-slate-50 custom-scroll hidden">
-      <div class="max-w-6xl mx-auto space-y-3.5 sm:space-y-4">
+    <div id="view-vote" class="view-panel absolute inset-0 overflow-y-auto sm:overflow-hidden p-2 sm:p-3.5 lg:p-4 bg-slate-50 custom-scroll flex flex-col justify-start hidden">
+      <div class="max-w-6xl w-full mx-auto flex-1 flex flex-col justify-between space-y-2 sm:space-y-2.5 min-h-0">
 
         <!-- Top Header & Stages Bar -->
-        <div class="bg-white rounded-2xl p-3 sm:p-3.5 shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-3">
+        <div class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-2 shrink-0">
           <!-- View / Sub-Tab Toggle & Stage Bar -->
-          <div class="flex flex-wrap items-center gap-2.5">
+          <div class="flex flex-wrap items-center gap-2">
             <!-- View Sub-tabs -->
-            <div id="voting-subtabs-pill" class="flex items-center space-x-1 p-1 bg-slate-100 rounded-xl border border-slate-200">
-              <button id="btn-voting-subtab-rollcall" class="px-3 py-1.5 rounded-lg text-xs transition cursor-pointer" data-i18n="subtabRollcall">
+            <div id="voting-subtabs-pill" class="flex items-center space-x-1 p-0.5 sm:p-1 bg-slate-100 rounded-lg sm:rounded-xl border border-slate-200">
+              <button id="btn-voting-subtab-rollcall" class="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg text-xs transition cursor-pointer" data-i18n="subtabRollcall">
                 點名
               </button>
-              <button id="btn-voting-subtab-session" class="px-3 py-1.5 rounded-lg text-xs transition cursor-pointer" data-i18n="subtabSession">
+              <button id="btn-voting-subtab-session" class="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg text-xs transition cursor-pointer" data-i18n="subtabSession">
                 會期
               </button>
             </div>
@@ -796,91 +796,91 @@
             <div id="vote-session-top-controls" class="hidden flex items-center space-x-2 pl-2 border-l border-slate-200">
               <span class="text-xs font-bold text-slate-500 uppercase tracking-wider" data-i18n="sessionCountLabel">會期數量：</span>
               <div class="flex items-center space-x-1">
-                <button id="btn-session-dec" type="button" class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center transition border border-slate-300 cursor-pointer">-</button>
-                <input id="input-session-count" type="number" min="1" max="20" value="3" class="w-12 h-7 text-center text-xs font-bold border border-slate-300 rounded-lg bg-transparent text-slate-800 focus:outline-none focus:ring-1 focus:ring-primary">
-                <button id="btn-session-inc" type="button" class="w-7 h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center transition border border-slate-300 cursor-pointer">+</button>
+                <button id="btn-session-dec" type="button" class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center transition border border-slate-300 cursor-pointer text-xs sm:text-sm">-</button>
+                <input id="input-session-count" type="number" min="1" max="20" value="3" class="w-10 sm:w-12 h-6 sm:h-7 text-center text-xs font-bold border border-slate-300 rounded-lg bg-transparent text-slate-800 focus:outline-none focus:ring-1 focus:ring-primary">
+                <button id="btn-session-inc" type="button" class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center transition border border-slate-300 cursor-pointer text-xs sm:text-sm">+</button>
               </div>
-              <button id="btn-reset-current-session" type="button" class="ml-2 px-2.5 py-1 text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition cursor-pointer" data-i18n="resetCurrentSession">重設當前會期票數</button>
-              <button id="btn-reset-all-sessions" type="button" class="ml-1 px-2.5 py-1 text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition cursor-pointer" data-i18n="resetAllSessions">重設所有會期票數</button>
+              <button id="btn-reset-current-session" type="button" class="ml-1 sm:ml-2 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[11px] sm:text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition cursor-pointer" data-i18n="resetCurrentSession">重設當前會期票數</button>
+              <button id="btn-reset-all-sessions" type="button" class="ml-1 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[11px] sm:text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition cursor-pointer" data-i18n="resetAllSessions">重設所有會期票數</button>
             </div>
           </div>
 
           <div class="flex items-center space-x-2 text-xs">
-            <button id="btn-adopt-vote" type="button" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg shadow-sm transition flex items-center space-x-1.5 cursor-pointer" title="通過當前表決 (Pass Vote)">
+            <button id="btn-adopt-vote" type="button" class="px-3 sm:px-3.5 py-1 sm:py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg shadow-sm transition flex items-center space-x-1.5 cursor-pointer text-xs" title="通過當前表決 (Pass Vote)">
               <span data-i18n="concludeVote">通過</span>
             </button>
-            <button id="btn-reset-votes" class="px-3 py-1.5 text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition flex items-center space-x-1 cursor-pointer" data-i18n="resetVotes">
+            <button id="btn-reset-votes" class="px-2.5 sm:px-3 py-1 sm:py-1.5 text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition flex items-center space-x-1 cursor-pointer text-xs" data-i18n="resetVotes">
               <span>Reset</span>
             </button>
           </div>
         </div>
 
         <!-- MUN Command Dashboard Card: Four Stats + Progress Bar + Verdict -->
-        <div id="card-voting-details" class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 space-y-3 transition-all duration-300">
-          <div id="voting-header-row" class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-3 gap-3">
+        <div id="card-voting-details" class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3.5 shadow-sm border border-slate-200 space-y-2 sm:space-y-2.5 transition-all duration-300 shrink-0">
+          <div id="voting-header-row" class="flex flex-col sm:flex-row sm:items-center justify-between border-b pb-2 sm:pb-2.5 gap-2">
             <div class="flex-1 max-w-md">
               <!-- Top line: Motion/Resolution details (Flag + Country + Topic / DR Title) - Large title style -->
-              <div id="motion-vote-desc" class="flex items-center space-x-1.5 py-0.5 px-1 text-lg sm:text-xl font-bold text-slate-800 hidden">
+              <div id="motion-vote-desc" class="flex items-center space-x-1.5 py-0.5 px-1 text-base sm:text-lg font-bold text-slate-800 hidden">
                 <span id="motion-vote-proposer-flag" class="shrink-0 flex items-center"></span>
                 <span id="motion-vote-details-text" class="truncate"></span>
               </div>
-              <div id="resolution-title-container" class="flex items-center space-x-2 mt-0.5">
-                <input id="vote-resolution-title-input" type="text" value="Draft Resolution 1.1" placeholder="輸入決議案名稱..." data-i18n-placeholder="resolutionTitlePlaceholder" class="w-full text-lg sm:text-xl font-bold text-slate-800 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-primary focus:outline-none transition py-0.5 px-1 rounded">
+              <div id="resolution-title-container" class="flex items-center space-x-2">
+                <input id="vote-resolution-title-input" type="text" value="Draft Resolution 1.1" placeholder="輸入決議案名稱..." data-i18n-placeholder="resolutionTitlePlaceholder" class="w-full text-base sm:text-lg font-bold text-slate-800 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-primary focus:outline-none transition py-0.5 px-1 rounded">
               </div>
               <!-- Bottom line: Motion Type / Category subtitle (Small secondary style) -->
-              <div id="motion-vote-type-subtitle" class="text-xs text-slate-500 font-medium px-1 mt-0.5 hidden">
+              <div id="motion-vote-type-subtitle" class="text-[11px] text-slate-500 font-medium px-1 hidden">
                 <span id="motion-vote-type-text"></span>
               </div>
             </div>
             <!-- Quick select threshold & Action buttons -->
             <div class="flex items-center space-x-2 text-xs">
-              <span class="text-slate-500" data-i18n="majorityRule">Majority Rule:</span>
-              <select id="select-vote-threshold" class="px-2.5 py-1.5 border border-slate-200 rounded-lg text-slate-700 bg-transparent">
+              <span class="text-slate-500 text-[11px] sm:text-xs" data-i18n="majorityRule">Majority Rule:</span>
+              <select id="select-vote-threshold" class="px-2 py-1 border border-slate-200 rounded-lg text-slate-700 bg-transparent text-xs">
                 <option value="simple">Simple Majority (50% + 1)</option>
                 <option value="twothirds">Two-Thirds Majority (2/3)</option>
                 <option value="unsc9">Security Council (9/15)</option>
                 <option value="consensus">Consensus (All Votes)</option>
               </select>
-              <button id="btn-motion-vote-execute" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition shadow-sm hidden flex items-center space-x-1.5">
+              <button id="btn-motion-vote-execute" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition shadow-sm hidden flex items-center space-x-1.5 text-xs">
                 <span id="btn-motion-vote-execute-text" data-i18n="executeMotionBtn">執行動議</span>
               </button>
             </div>
           </div>
 
           <!-- Live Scoreboard (MUN Command Dashboard: In Favor / Against / Abstaining / Majority) -->
-          <div id="voting-scoreboard" class="space-y-3">
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
-              <div class="bg-slate-50 border border-slate-200 p-2.5 sm:p-3 rounded-xl flex flex-col justify-center">
-                <div class="text-[11px] uppercase tracking-wider text-slate-500" data-i18n="inFavor">In Favor</div>
-                <div id="vote-count-favor" class="text-2xl sm:text-3xl font-black text-slate-900 mt-0.5">0</div>
+          <div id="voting-scoreboard" class="space-y-2">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center">
+              <div class="bg-slate-50 border border-slate-200 py-1.5 px-2 sm:py-2 rounded-xl flex flex-col justify-center">
+                <div class="text-[10px] sm:text-[11px] uppercase tracking-wider text-slate-500 font-semibold" data-i18n="inFavor">In Favor</div>
+                <div id="vote-count-favor" class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">0</div>
               </div>
-              <div class="bg-slate-50 border border-slate-200 p-2.5 sm:p-3 rounded-xl flex flex-col justify-center">
-                <div class="text-[11px] uppercase tracking-wider text-slate-500" data-i18n="against">Against</div>
-                <div id="vote-count-against" class="text-2xl sm:text-3xl font-black text-slate-900 mt-0.5">0</div>
+              <div class="bg-slate-50 border border-slate-200 py-1.5 px-2 sm:py-2 rounded-xl flex flex-col justify-center">
+                <div class="text-[10px] sm:text-[11px] uppercase tracking-wider text-slate-500 font-semibold" data-i18n="against">Against</div>
+                <div id="vote-count-against" class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">0</div>
               </div>
-              <div class="bg-slate-50 border border-slate-200 p-2.5 sm:p-3 rounded-xl flex flex-col justify-center">
-                <div class="text-[11px] uppercase tracking-wider text-slate-500" data-i18n="abstaining">Abstaining</div>
-                <div id="vote-count-abstain" class="text-2xl sm:text-3xl font-black text-slate-900 mt-0.5">0</div>
+              <div class="bg-slate-50 border border-slate-200 py-1.5 px-2 sm:py-2 rounded-xl flex flex-col justify-center">
+                <div class="text-[10px] sm:text-[11px] uppercase tracking-wider text-slate-500 font-semibold" data-i18n="abstaining">Abstaining</div>
+                <div id="vote-count-abstain" class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">0</div>
               </div>
-              <div class="bg-slate-50 border border-slate-200 p-2.5 sm:p-3 rounded-xl flex flex-col justify-center">
-                <div class="text-[11px] uppercase tracking-wider text-slate-500" data-i18n="majority">Majority Required</div>
-                <div id="vote-count-majority" class="text-2xl sm:text-3xl font-black text-slate-900 mt-0.5">0</div>
+              <div class="bg-slate-50 border border-slate-200 py-1.5 px-2 sm:py-2 rounded-xl flex flex-col justify-center">
+                <div class="text-[10px] sm:text-[11px] uppercase tracking-wider text-slate-500 font-semibold" data-i18n="majority">Majority Required</div>
+                <div id="vote-count-majority" class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">0</div>
               </div>
             </div>
 
             <!-- MUN Command Voting Percentage Progress Bar -->
-            <div class="space-y-1">
-              <div class="flex items-center justify-between text-xs text-slate-500 px-1">
+            <div class="space-y-0.5">
+              <div class="flex items-center justify-between text-[11px] text-slate-500 px-1">
                 <span id="vote-progress-label-favor">Favor: 0%</span>
-                <div class="flex items-center space-x-2">
-                  <span id="vote-verdict" class="text-xs sm:text-sm font-bold tracking-wide text-slate-600">PENDING</span>
-                  <button id="btn-quick-pass" type="button" class="px-2 py-0.5 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold rounded shadow-sm transition hidden cursor-pointer" data-i18n="concludeVote">
+                <div class="flex items-center space-x-1.5">
+                  <span id="vote-verdict" class="text-xs font-bold tracking-wide text-slate-600">PENDING</span>
+                  <button id="btn-quick-pass" type="button" class="px-2 py-0.5 bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold rounded shadow-sm transition hidden cursor-pointer" data-i18n="concludeVote">
                     通過 (Pass)
                   </button>
                 </div>
                 <span id="vote-progress-label-against">Against: 0%</span>
               </div>
-              <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden flex">
+              <div class="w-full h-2 sm:h-2.5 bg-slate-200 rounded-full overflow-hidden flex">
                 <div id="bar-vote-favor" class="h-full bg-emerald-500 transition-all duration-300" style="width: 0%;"></div>
                 <div id="bar-vote-abstain" class="h-full bg-amber-400 transition-all duration-300" style="width: 0%;"></div>
                 <div id="bar-vote-against" class="h-full bg-rose-500 transition-all duration-300" style="width: 0%;"></div>
@@ -890,47 +890,47 @@
         </div>
 
         <!-- MUN Command Active Calling Card (當前正在點名投票的國家卡片 - ROLLCALL VOTING 子分頁) -->
-        <div id="panel-active-voter-card" class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 flex flex-col items-center text-center space-y-3">
-          <div class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold" id="label-active-voter-stage">Round 1 Roll Call</div>
-          <div class="flex items-center justify-center gap-3 sm:gap-4">
-            <img id="active-voter-flag" src="" alt="Flag" class="w-14 h-9 sm:w-16 sm:h-10 object-cover rounded-lg shadow border border-slate-200 shrink-0">
+        <div id="panel-active-voter-card" class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-sm border border-slate-200 flex flex-col items-center text-center space-y-2 shrink-0">
+          <div class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold" id="label-active-voter-stage">Round 1 Roll Call</div>
+          <div class="flex items-center justify-center gap-3">
+            <img id="active-voter-flag" src="" alt="Flag" class="w-12 h-8 sm:w-14 sm:h-9 object-cover rounded-lg shadow border border-slate-200 shrink-0">
             <div class="text-left">
-              <div id="active-voter-name" class="text-xl sm:text-2xl font-black text-slate-800 leading-tight">Select or Start Voting</div>
-              <div id="active-voter-status" class="text-xs text-slate-400 mt-0.5">Present and voting</div>
+              <div id="active-voter-name" class="text-lg sm:text-xl lg:text-2xl font-black text-slate-800 leading-tight">Select or Start Voting</div>
+              <div id="active-voter-status" class="text-[11px] text-slate-400 mt-0.5">Present and voting</div>
             </div>
           </div>
 
           <!-- MUN Command Primary Voting Action Buttons (With Rights 整合在按鈕內原位循環) -->
-          <div id="active-voter-actions" class="w-full max-w-xl grid grid-cols-3 gap-2.5 pt-1">
+          <div id="active-voter-actions" class="w-full max-w-xl grid grid-cols-3 gap-2 pt-0.5">
             <!-- Favor -->
-            <button id="btn-cast-favor" type="button" class="w-full min-h-[44px] py-2 px-3 rounded-xl border border-slate-300 bg-slate-100 hover:bg-slate-200 text-xs sm:text-sm font-bold transition cursor-pointer" data-i18n="yes">
+            <button id="btn-cast-favor" type="button" class="w-full min-h-[38px] sm:min-h-[42px] py-1.5 sm:py-2 px-3 rounded-xl border border-slate-300 bg-slate-100 hover:bg-slate-200 text-xs sm:text-sm font-bold transition cursor-pointer" data-i18n="yes">
               贊成
             </button>
             <!-- Against -->
-            <button id="btn-cast-against" type="button" class="w-full min-h-[44px] py-2 px-3 rounded-xl border border-slate-300 bg-slate-100 hover:bg-slate-200 text-xs sm:text-sm font-bold transition cursor-pointer" data-i18n="no">
+            <button id="btn-cast-against" type="button" class="w-full min-h-[38px] sm:min-h-[42px] py-1.5 sm:py-2 px-3 rounded-xl border border-slate-300 bg-slate-100 hover:bg-slate-200 text-xs sm:text-sm font-bold transition cursor-pointer" data-i18n="no">
               反對
             </button>
             <!-- Abstain -->
-            <button id="btn-cast-abstain" type="button" class="w-full min-h-[44px] py-2 px-3 rounded-xl border border-slate-300 bg-slate-100 hover:bg-slate-200 text-xs sm:text-sm font-bold transition cursor-pointer" data-i18n="abs">
+            <button id="btn-cast-abstain" type="button" class="w-full min-h-[38px] sm:min-h-[42px] py-1.5 sm:py-2 px-3 rounded-xl border border-slate-300 bg-slate-100 hover:bg-slate-200 text-xs sm:text-sm font-bold transition cursor-pointer" data-i18n="abs">
               棄權
             </button>
           </div>
 
-          <div class="flex items-center space-x-6 text-xs text-slate-400 pt-0.5">
-            <button id="btn-prev-voter" class="hover:text-slate-700 transition flex items-center space-x-1 cursor-pointer font-medium">
-              <span data-i18n="previousVoter">上一個 (Previous)</span>
+          <div class="flex items-center space-x-5 text-xs text-slate-400 pt-0.5">
+            <button id="btn-prev-voter" class="hover:text-slate-700 transition flex items-center space-x-1 cursor-pointer font-medium text-xs">
+              <span data-i18n="previousVoter">上一個</span>
             </button>
-            <span id="label-voter-queue-status" class="font-mono font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full">1 / 15</span>
-            <button id="btn-next-voter" class="hover:text-slate-700 transition flex items-center space-x-1 cursor-pointer font-medium">
-              <span data-i18n="nextVoter">下一個 (Next)</span>
+            <span id="label-voter-queue-status" class="font-mono font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full text-xs">1 / 15</span>
+            <button id="btn-next-voter" class="hover:text-slate-700 transition flex items-center space-x-1 cursor-pointer font-medium text-xs">
+              <span data-i18n="nextVoter">下一個</span>
             </button>
           </div>
         </div>
 
         <!-- 3. Non-Voting Session Records Subtab (會期表決 / 非投票點名) -->
-        <div id="panel-session-votes-container" class="space-y-4 hidden">
+        <div id="panel-session-votes-container" class="space-y-3 hidden flex-1 overflow-y-auto custom-scroll pr-1 min-h-0">
           <!-- Session Cards Grid -->
-          <div id="grid-session-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div id="grid-session-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             <!-- Injected via JS -->
           </div>
         </div>
