@@ -203,10 +203,11 @@
     let currentSliderVal = 0;
 
     const backdrop = document.createElement('div');
+    backdrop.id = 'modal-custom-color-palette';
     backdrop.className = 'fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 animate-fade-in';
 
     const box = document.createElement('div');
-    box.className = 'bg-slate-900 text-white rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-5 border border-slate-700 max-h-[90vh] overflow-y-auto';
+    box.className = 'custom-popup-card bg-[#3E2723] text-[#F7F4EE] rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-5 border border-[#5D4037] max-h-[90vh] overflow-y-auto custom-scroll';
 
     let paletteHtml = paletteGroups.map(group => `
       <div class="space-y-1.5 p-2 rounded-lg bg-slate-800/60 border border-slate-700/50">

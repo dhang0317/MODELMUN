@@ -381,13 +381,13 @@ body:not(.light-mode) {
       color: #3E2723 !important;
       border-color: #282828 !important;
     }
-    body:not(.light-mode) .bg-white,
-    body:not(.light-mode) .bg-slate-50,
-    body:not(.light-mode) .bg-slate-100,
-    body:not(.light-mode) .bg-slate-800,
-    body:not(.light-mode) .bg-slate-900,
-    body:not(.light-mode) .bg-surface-primary,
-    body:not(.light-mode) [class*="bg-zinc"],
+    body:not(.light-mode) main .bg-white,
+    body:not(.light-mode) main .bg-slate-50,
+    body:not(.light-mode) main .bg-slate-100,
+    body:not(.light-mode) main .bg-slate-800,
+    body:not(.light-mode) main .bg-slate-900,
+    body:not(.light-mode) main .bg-surface-primary,
+    body:not(.light-mode) main [class*="bg-zinc"],
     body:not(.light-mode) #card-voting-details,
     body:not(.light-mode) #panel-active-voter-card,
     body:not(.light-mode) #hero-motion-card,
@@ -405,11 +405,11 @@ body:not(.light-mode) {
       border-radius: 1.25rem !important;
       box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.15), 0 2px 4px -2px rgba(0, 0, 0, 0.1) !important;
     }
-    body:not(.light-mode) .bg-white *,
-    body:not(.light-mode) .bg-slate-50 *,
-    body:not(.light-mode) .bg-slate-100 *,
-    body:not(.light-mode) .bg-surface-primary *,
-    body:not(.light-mode) [class*="bg-zinc"] *,
+    body:not(.light-mode) main .bg-white *,
+    body:not(.light-mode) main .bg-slate-50 *,
+    body:not(.light-mode) main .bg-slate-100 *,
+    body:not(.light-mode) main .bg-surface-primary *,
+    body:not(.light-mode) main [class*="bg-zinc"] *,
     body:not(.light-mode) #card-voting-details *,
     body:not(.light-mode) #panel-active-voter-card *,
     body:not(.light-mode) #hero-motion-card *,
@@ -453,23 +453,23 @@ body:not(.light-mode) {
       color: #3E2723 !important;
     }
 
-    /* Modal Selectable Speakers Grid & Cards */
+    /* Modal Selectable Speakers Grid & Cards (深色底白字) */
     #list-selectable-speakers > div,
     body:not(.light-mode) #list-selectable-speakers > div,
     body.light-mode #list-selectable-speakers > div {
-      background-color: #FFFFFF !important;
-      border: 1px solid #D7CCC8 !important;
-      color: #3E2723 !important;
+      background-color: #4E342E !important;
+      border: 1px solid #6D4C41 !important;
+      color: #F7F4EE !important;
     }
     #list-selectable-speakers > div:hover,
     body:not(.light-mode) #list-selectable-speakers > div:hover,
     body.light-mode #list-selectable-speakers > div:hover {
-      background-color: #EFEBE9 !important;
+      background-color: #5D4037 !important;
       border-color: #A1887F !important;
     }
     #list-selectable-speakers span,
     #list-selectable-speakers div {
-      color: #3E2723;
+      color: #F7F4EE !important;
     }
     body:not(.light-mode) #btn-hero-motion-vote {
       background-color: rgba(245, 158, 11, 0.2) !important;
@@ -1019,9 +1019,19 @@ body:not(.light-mode) {
     }
 
     /* =======================================================
-       UNIFIED SETTINGS MODAL & POPUP MODALS IN CHOCOLATE THEME
+       UNIFIED SETTINGS MODAL & ALL POPUP MODALS — DARK BG WITH WHITE TEXT (深色底白字)
        ======================================================= */
+    .custom-dialog-box,
+    .custom-popup-card,
+    #modal-unified-settings > div,
+    #modal-add-speaker > div,
+    #modal-define-time > div,
+    #modal-mod-config > div,
+    #modal-add-motion > div,
+    #modal-configure-voting > div,
+    #modal-recess > div,
     body:not(.light-mode) .custom-dialog-box,
+    body:not(.light-mode) .custom-popup-card,
     body:not(.light-mode) #modal-unified-settings > div,
     body:not(.light-mode) #modal-add-speaker > div,
     body:not(.light-mode) #modal-define-time > div,
@@ -1029,62 +1039,103 @@ body:not(.light-mode) {
     body:not(.light-mode) #modal-add-motion > div,
     body:not(.light-mode) #modal-configure-voting > div,
     body:not(.light-mode) #modal-recess > div {
-      background-color: #F7F4EE !important;
-      color: #3E2723 !important;
-      border: 1px solid #D7CCC8 !important;
-      box-shadow: 0 20px 25px -5px rgba(62, 39, 35, 0.25), 0 8px 10px -6px rgba(62, 39, 35, 0.2) !important;
+      background-color: #3E2723 !important;
+      color: #F7F4EE !important;
+      border: 1px solid #5D4037 !important;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.55) !important;
     }
+    .custom-dialog-box *,
+    .custom-popup-card *,
+    #modal-unified-settings > div *,
+    #modal-add-speaker > div *,
+    #modal-define-time > div *,
+    #modal-mod-config > div *,
+    #modal-add-motion > div *,
+    #modal-configure-voting > div *,
+    #modal-recess > div *,
     body:not(.light-mode) .custom-dialog-box *,
+    body:not(.light-mode) .custom-popup-card *,
     body:not(.light-mode) #modal-unified-settings > div *,
     body:not(.light-mode) #modal-add-speaker > div *,
     body:not(.light-mode) #modal-define-time > div *,
     body:not(.light-mode) #modal-mod-config > div *,
     body:not(.light-mode) #modal-add-motion > div *,
-    body:not(.light-mode) #modal-configure-voting > div * {
-      color: #3E2723;
+    body:not(.light-mode) #modal-configure-voting > div *,
+    body:not(.light-mode) #modal-recess > div * {
+      color: #F7F4EE;
     }
-    body:not(.light-mode) .custom-dialog-box .border-b,
-    body:not(.light-mode) .custom-dialog-box .border-slate-700 {
-      border-color: #D7CCC8 !important;
+    .custom-dialog-box .border-b,
+    .custom-dialog-box .border-slate-700,
+    #modal-add-speaker .border-b,
+    #modal-add-speaker .border-t,
+    #modal-configure-voting .border-b,
+    #modal-configure-voting .border-t,
+    #modal-unified-settings .border-b,
+    #modal-unified-settings .border-t {
+      border-color: #5D4037 !important;
     }
-    body:not(.light-mode) .custom-dialog-box .modal-btn-confirm {
-      background-color: #3E2723 !important;
-      color: #F7F4EE !important;
-      border: 1px solid #3E2723 !important;
+    .custom-dialog-box .modal-btn-confirm,
+    body:not(.light-mode) .custom-dialog-box .modal-btn-confirm,
+    body.light-mode .custom-dialog-box .modal-btn-confirm {
+      background-color: #F7F4EE !important;
+      color: #3E2723 !important;
+      border: 1px solid #F7F4EE !important;
     }
-    body:not(.light-mode) .custom-dialog-box .modal-btn-confirm:hover {
+    .custom-dialog-box .modal-btn-confirm:hover,
+    body:not(.light-mode) .custom-dialog-box .modal-btn-confirm:hover,
+    body.light-mode .custom-dialog-box .modal-btn-confirm:hover {
+      background-color: #FFFFFF !important;
+      color: #3E2723 !important;
+    }
+    .custom-dialog-box .modal-btn-confirm *,
+    body:not(.light-mode) .custom-dialog-box .modal-btn-confirm *,
+    body.light-mode .custom-dialog-box .modal-btn-confirm * {
+      color: #3E2723 !important;
+    }
+    .custom-dialog-box .modal-btn-cancel,
+    body:not(.light-mode) .custom-dialog-box .modal-btn-cancel,
+    body.light-mode .custom-dialog-box .modal-btn-cancel {
       background-color: #4E342E !important;
+      border: 1px solid #6D4C41 !important;
+      color: #F7F4EE !important;
+    }
+    .custom-dialog-box .modal-btn-cancel:hover,
+    body:not(.light-mode) .custom-dialog-box .modal-btn-cancel:hover,
+    body.light-mode .custom-dialog-box .modal-btn-cancel:hover {
+      background-color: #5D4037 !important;
       color: #FFFFFF !important;
     }
-    body:not(.light-mode) .custom-dialog-box .modal-btn-confirm * {
-      color: #F7F4EE !important;
-    }
-    body:not(.light-mode) .custom-dialog-box .modal-btn-cancel {
-      background-color: #EFEBE9 !important;
-      border: 1px solid #D7CCC8 !important;
-      color: #3E2723 !important;
-    }
-    body:not(.light-mode) .custom-dialog-box .modal-btn-cancel:hover {
-      background-color: #D7CCC8 !important;
-    }
+    .custom-dialog-box .text-sm,
+    .custom-dialog-box .text-slate-300,
     body:not(.light-mode) .custom-dialog-box .text-sm,
     body:not(.light-mode) .custom-dialog-box .text-slate-300 {
-      color: #3E2723 !important;
+      color: #EFEBE9 !important;
     }
+    #modal-unified-settings .bg-zinc-900,
+    #modal-unified-settings .bg-zinc-900\/90,
+    #modal-unified-settings .bg-zinc-900\/60,
     body:not(.light-mode) #modal-unified-settings .bg-zinc-900,
     body:not(.light-mode) #modal-unified-settings .bg-zinc-900\/90,
-    body:not(.light-mode) #modal-unified-settings .bg-zinc-900\/60,
+    body:not(.light-mode) #modal-unified-settings .bg-zinc-900\/60 {
+      background-color: #3E2723 !important;
+    }
+    #modal-unified-settings .bg-zinc-950,
+    #modal-unified-settings .bg-zinc-950\/50,
+    #modal-unified-settings .bg-zinc-950\/60,
     body:not(.light-mode) #modal-unified-settings .bg-zinc-950,
     body:not(.light-mode) #modal-unified-settings .bg-zinc-950\/50,
     body:not(.light-mode) #modal-unified-settings .bg-zinc-950\/60 {
-      background-color: #EFEBE9 !important;
+      background-color: #2D1B18 !important;
     }
+    #modal-unified-settings .border-zinc-800,
+    #modal-unified-settings .border-zinc-700,
+    #modal-unified-settings .border-zinc-800\/80,
     body:not(.light-mode) #modal-unified-settings .border-zinc-800,
     body:not(.light-mode) #modal-unified-settings .border-zinc-700,
     body:not(.light-mode) #modal-unified-settings .border-zinc-800\/80 {
-      border-color: #D7CCC8 !important;
+      border-color: #5D4037 !important;
     }
-    /* All Dialogs & Modals Inputs and Selects (淺色底深色字) */
+    /* All Dialogs & Modals Inputs, Selects & Steppers (深色底白字) */
     .custom-dialog-box input,
     .custom-dialog-box select,
     #modal-unified-settings input:not([type="range"]),
@@ -1096,9 +1147,9 @@ body:not(.light-mode) {
     #modal-define-time input,
     #modal-mod-config input,
     #modal-mod-config select,
-    #modal-configure-voting input,
+    #modal-configure-voting input:not([type="radio"]),
     #modal-configure-voting select,
-    #motion-field-amendment-select div,
+    #motion-field-amendment-select div.flex-1,
     #motion-field-amendment-select button,
     body:not(.light-mode) .custom-dialog-box input,
     body:not(.light-mode) .custom-dialog-box select,
@@ -1111,23 +1162,28 @@ body:not(.light-mode) {
     body:not(.light-mode) #modal-define-time input,
     body:not(.light-mode) #modal-mod-config input,
     body:not(.light-mode) #modal-mod-config select,
-    body:not(.light-mode) #modal-configure-voting input,
+    body:not(.light-mode) #modal-configure-voting input:not([type="radio"]),
     body:not(.light-mode) #modal-configure-voting select,
-    body:not(.light-mode) #motion-field-amendment-select div,
+    body:not(.light-mode) #motion-field-amendment-select div.flex-1,
     body:not(.light-mode) #motion-field-amendment-select button {
-      background-color: #FFFFFF !important;
-      background: #FFFFFF !important;
-      border: 1px solid #D7CCC8 !important;
-      color: #3E2723 !important;
+      background-color: #2D1B18 !important;
+      background: #2D1B18 !important;
+      border: 1px solid #6D4C41 !important;
+      color: #F7F4EE !important;
       border-radius: 0.75rem !important;
+    }
+    #modal-add-motion select option,
+    #modal-unified-settings select option,
+    #modal-configure-voting select option,
+    .custom-dialog-box select option {
+      background-color: #2D1B18 !important;
+      color: #F7F4EE !important;
     }
     #motion-field-amendment-select button:hover,
     body:not(.light-mode) #motion-field-amendment-select button:hover {
-      background-color: #EFEBE9 !important;
-      background: #EFEBE9 !important;
-    }
-      color: #3E2723 !important;
-      border-radius: 0.75rem !important;
+      background-color: #4E342E !important;
+      background: #4E342E !important;
+      color: #FFFFFF !important;
     }
     .custom-dialog-box input::placeholder,
     #modal-unified-settings input::placeholder,
@@ -1141,103 +1197,182 @@ body:not(.light-mode) {
     body:not(.light-mode) #modal-mod-config input::placeholder {
       color: #A1887F !important;
     }
+    #modal-add-motion label,
+    #modal-add-speaker label,
+    #modal-define-time label,
+    #modal-mod-config label,
+    #modal-configure-voting label,
     body:not(.light-mode) #modal-add-motion label,
     body:not(.light-mode) #modal-add-speaker label,
     body:not(.light-mode) #modal-define-time label,
     body:not(.light-mode) #modal-mod-config label,
     body:not(.light-mode) #modal-configure-voting label {
-      color: #6D4C41 !important;
+      color: #D7CCC8 !important;
     }
+    #modal-configure-voting label.flex,
+    body:not(.light-mode) #modal-configure-voting label.flex,
+    body.light-mode #modal-configure-voting label.flex {
+      background-color: #2D1B18 !important;
+      border: 1px solid #6D4C41 !important;
+      color: #F7F4EE !important;
+    }
+    #modal-configure-voting label.flex:hover,
+    body:not(.light-mode) #modal-configure-voting label.flex:hover,
+    body.light-mode #modal-configure-voting label.flex:hover {
+      background-color: #4E342E !important;
+      border-color: #A1887F !important;
+    }
+    #btn-submit-motion,
+    #btn-done-add-speaker,
+    #btn-save-speaking-time,
+    #btn-save-mod-config,
+    #btn-save-vote-config,
     body:not(.light-mode) #btn-submit-motion,
     body:not(.light-mode) #btn-done-add-speaker,
-    body:not(.light-mode) #btn-save-speaking-time {
-      background-color: #3E2723 !important;
-      color: #F7F4EE !important;
-      border: 1px solid #3E2723 !important;
+    body:not(.light-mode) #btn-save-speaking-time,
+    body:not(.light-mode) #btn-save-mod-config,
+    body:not(.light-mode) #btn-save-vote-config {
+      background-color: #F7F4EE !important;
+      color: #3E2723 !important;
+      border: 1px solid #F7F4EE !important;
     }
+    #btn-submit-motion:hover,
+    #btn-done-add-speaker:hover,
+    #btn-save-speaking-time:hover,
+    #btn-save-mod-config:hover,
+    #btn-save-vote-config:hover,
     body:not(.light-mode) #btn-submit-motion:hover,
     body:not(.light-mode) #btn-done-add-speaker:hover,
-    body:not(.light-mode) #btn-save-speaking-time:hover {
-      background-color: #4E342E !important;
-      color: #FFFFFF !important;
-    }
-    body:not(.light-mode) #btn-submit-motion *,
-    body:not(.light-mode) #btn-done-add-speaker *,
-    body:not(.light-mode) #btn-save-speaking-time * {
-      color: #F7F4EE !important;
-    }
-    body:not(.light-mode) #modal-add-motion .btn-close-modal,
-    body:not(.light-mode) #modal-configure-voting .btn-close-modal,
-    body:not(.light-mode) #modal-add-speaker .btn-close-modal,
-    body:not(.light-mode) #modal-define-time .btn-close-modal,
-    body:not(.light-mode) #modal-mod-config .btn-close-modal {
-      background-color: #EFEBE9 !important;
-      border: 1px solid #D7CCC8 !important;
+    body:not(.light-mode) #btn-save-speaking-time:hover,
+    body:not(.light-mode) #btn-save-mod-config:hover,
+    body:not(.light-mode) #btn-save-vote-config:hover {
+      background-color: #FFFFFF !important;
       color: #3E2723 !important;
     }
+    #btn-submit-motion *,
+    #btn-done-add-speaker *,
+    #btn-save-speaking-time *,
+    #btn-save-mod-config *,
+    #btn-save-vote-config *,
+    body:not(.light-mode) #btn-submit-motion *,
+    body:not(.light-mode) #btn-done-add-speaker *,
+    body:not(.light-mode) #btn-save-speaking-time *,
+    body:not(.light-mode) #btn-save-mod-config *,
+    body:not(.light-mode) #btn-save-vote-config * {
+      color: #3E2723 !important;
+    }
+    #modal-add-motion .btn-close-modal,
+    #modal-configure-voting .flex.justify-end .btn-close-modal,
+    #modal-define-time .btn-close-modal,
+    #modal-mod-config .btn-close-modal,
+    body:not(.light-mode) #modal-add-motion .btn-close-modal,
+    body:not(.light-mode) #modal-configure-voting .flex.justify-end .btn-close-modal,
+    body:not(.light-mode) #modal-define-time .btn-close-modal,
+    body:not(.light-mode) #modal-mod-config .btn-close-modal {
+      background-color: #4E342E !important;
+      border: 1px solid #6D4C41 !important;
+      color: #F7F4EE !important;
+    }
+    #modal-add-motion .btn-close-modal:hover,
+    #modal-configure-voting .flex.justify-end .btn-close-modal:hover,
+    #modal-define-time .btn-close-modal:hover,
+    #modal-mod-config .btn-close-modal:hover,
     body:not(.light-mode) #modal-add-motion .btn-close-modal:hover,
-    body:not(.light-mode) #modal-configure-voting .btn-close-modal:hover,
-    body:not(.light-mode) #modal-add-speaker .btn-close-modal:hover,
+    body:not(.light-mode) #modal-configure-voting .flex.justify-end .btn-close-modal:hover,
     body:not(.light-mode) #modal-define-time .btn-close-modal:hover,
     body:not(.light-mode) #modal-mod-config .btn-close-modal:hover {
-      background-color: #D7CCC8 !important;
+      background-color: #5D4037 !important;
+      color: #FFFFFF !important;
     }
+    #modal-unified-settings .text-zinc-400,
+    #modal-unified-settings .text-zinc-500,
+    #modal-unified-settings .text-zinc-300,
     body:not(.light-mode) #modal-unified-settings .text-zinc-400,
     body:not(.light-mode) #modal-unified-settings .text-zinc-500,
     body:not(.light-mode) #modal-unified-settings .text-zinc-300 {
-      color: #6D4C41 !important;
+      color: #D7CCC8 !important;
     }
+    #modal-unified-settings .text-white,
     body:not(.light-mode) #modal-unified-settings .text-white {
-      color: #3E2723 !important;
+      color: #F7F4EE !important;
     }
+    .cfg-nav-btn,
     body:not(.light-mode) .cfg-nav-btn {
-      color: #8D6E63 !important;
+      color: #D7CCC8 !important;
       border-bottom-color: transparent !important;
     }
+    .cfg-nav-btn.border-white,
+    .cfg-nav-btn.text-white,
     body:not(.light-mode) .cfg-nav-btn.border-white,
     body:not(.light-mode) .cfg-nav-btn.text-white {
-      color: #3E2723 !important;
-      border-bottom-color: #3E2723 !important;
+      color: #FFFFFF !important;
+      border-bottom-color: #F7F4EE !important;
       font-weight: bold !important;
     }
-    body:not(.light-mode) #btn-save-settings-done {
-      background-color: #3E2723 !important;
-      color: #F7F4EE !important;
-      border: 1px solid #3E2723 !important;
+    #btn-save-settings-done,
+    body:not(.light-mode) #btn-save-settings-done,
+    body.light-mode #btn-save-settings-done {
+      background-color: #F7F4EE !important;
+      color: #3E2723 !important;
+      border: 1px solid #F7F4EE !important;
     }
-    body:not(.light-mode) #btn-save-settings-done:hover {
-      background-color: #4E342E !important;
-      color: #FFFFFF !important;
+    #btn-save-settings-done:hover,
+    body:not(.light-mode) #btn-save-settings-done:hover,
+    body.light-mode #btn-save-settings-done:hover {
+      background-color: #FFFFFF !important;
+      color: #3E2723 !important;
     }
+    #cfg-btn-theme-dark,
+    #cfg-btn-theme-light,
+    #cfg-btn-upload-logo,
+    #cfg-btn-sync-now,
+    #cfg-btn-export-file,
+    #cfg-btn-import-file,
+    #cfg-btn-open-palette,
+    #cfg-btn-activity-log,
     body:not(.light-mode) #cfg-btn-theme-dark,
     body:not(.light-mode) #cfg-btn-theme-light,
     body:not(.light-mode) #cfg-btn-upload-logo,
     body:not(.light-mode) #cfg-btn-sync-now,
     body:not(.light-mode) #cfg-btn-export-file,
     body:not(.light-mode) #cfg-btn-import-file,
-    body:not(.light-mode) #cfg-btn-open-palette {
-      background-color: #EFEBE9 !important;
-      border-color: #D7CCC8 !important;
-      color: #3E2723 !important;
+    body:not(.light-mode) #cfg-btn-open-palette,
+    body:not(.light-mode) #cfg-btn-activity-log {
+      background-color: #4E342E !important;
+      border-color: #6D4C41 !important;
+      color: #F7F4EE !important;
     }
+    #cfg-btn-theme-dark:hover,
+    #cfg-btn-theme-light:hover,
+    #cfg-btn-upload-logo:hover,
+    #cfg-btn-sync-now:hover,
+    #cfg-btn-export-file:hover,
+    #cfg-btn-import-file:hover,
+    #cfg-btn-open-palette:hover,
+    #cfg-btn-activity-log:hover,
     body:not(.light-mode) #cfg-btn-theme-dark:hover,
     body:not(.light-mode) #cfg-btn-theme-light:hover,
     body:not(.light-mode) #cfg-btn-upload-logo:hover,
     body:not(.light-mode) #cfg-btn-sync-now:hover,
     body:not(.light-mode) #cfg-btn-export-file:hover,
     body:not(.light-mode) #cfg-btn-import-file:hover,
-    body:not(.light-mode) #cfg-btn-open-palette:hover {
-      background-color: #D7CCC8 !important;
-      color: #3E2723 !important;
-    }
-    body:not(.light-mode) #cfg-btn-auth-action {
-      background-color: #3E2723 !important;
-      color: #F7F4EE !important;
-      border: 1px solid #3E2723 !important;
-    }
-    body:not(.light-mode) #cfg-btn-auth-action:hover {
-      background-color: #4E342E !important;
+    body:not(.light-mode) #cfg-btn-open-palette:hover,
+    body:not(.light-mode) #cfg-btn-activity-log:hover {
+      background-color: #5D4037 !important;
       color: #FFFFFF !important;
+    }
+    #cfg-btn-auth-action,
+    body:not(.light-mode) #cfg-btn-auth-action,
+    body.light-mode #cfg-btn-auth-action {
+      background-color: #F7F4EE !important;
+      color: #3E2723 !important;
+      border: 1px solid #F7F4EE !important;
+    }
+    #cfg-btn-auth-action:hover,
+    body:not(.light-mode) #cfg-btn-auth-action:hover,
+    body.light-mode #cfg-btn-auth-action:hover {
+      background-color: #FFFFFF !important;
+      color: #3E2723 !important;
     }
 
     /* Next / Adopt / Action Buttons (取消綠色，統一套用淺摩卡立體質感) */
@@ -1759,9 +1894,9 @@ body:not(.light-mode) {
     body:not(.light-mode) #modal-add-motion > div,
     body:not(.light-mode) #modal-configure-voting > div,
     body:not(.light-mode) #modal-unified-settings > div {
-      background-color: #F7F4EE !important;
-      border-color: #D7CCC8 !important;
-      color: #3E2723 !important;
+      background-color: #3E2723 !important;
+      border-color: #5D4037 !important;
+      color: #F7F4EE !important;
     }
     body:not(.light-mode) .modal-box *, 
     body:not(.light-mode) #modal-add-speaker > div *, 
@@ -1770,7 +1905,7 @@ body:not(.light-mode) {
     body:not(.light-mode) #modal-add-motion > div *,
     body:not(.light-mode) #modal-configure-voting > div *,
     body:not(.light-mode) #modal-unified-settings > div * {
-      color: #3E2723;
+      color: #F7F4EE;
     }
     body:not(.light-mode) .modal-box input, 
     body:not(.light-mode) .modal-box select,
@@ -1779,13 +1914,13 @@ body:not(.light-mode) {
     body:not(.light-mode) #modal-mod-config > div input, 
     body:not(.light-mode) #modal-add-motion > div input,
     body:not(.light-mode) #modal-add-motion > div select,
-    body:not(.light-mode) #modal-configure-voting > div input,
+    body:not(.light-mode) #modal-configure-voting > div input:not([type="radio"]),
     body:not(.light-mode) #modal-configure-voting > div select,
-    body:not(.light-mode) #modal-unified-settings > div input,
+    body:not(.light-mode) #modal-unified-settings > div input:not([type="range"]),
     body:not(.light-mode) #modal-unified-settings > div select {
-      background-color: #FFFFFF !important;
-      color: #3E2723 !important;
-      border: 1px solid #D7CCC8 !important;
+      background-color: #2D1B18 !important;
+      color: #F7F4EE !important;
+      border: 1px solid #6D4C41 !important;
     }
     body:not(.light-mode) .bg-emerald-50, 
     body:not(.light-mode) .bg-rose-50, 
@@ -1892,11 +2027,11 @@ body:not(.light-mode) {
       color: #3E2723 !important;
     }
     body.light-mode #user-dropdown-popover {
-      background-color: #F7F4EE !important;
-      border-color: #D7CCC8 !important;
+      background-color: #3E2723 !important;
+      border-color: #5D4037 !important;
     }
     body.light-mode #user-dropdown-popover * {
-      color: #3E2723 !important;
+      color: #F7F4EE !important;
     }
 
     /* Light Mode Tabs Bar */
@@ -2351,88 +2486,123 @@ body:not(.light-mode) {
       border-color: #D7CCC8 !important;
     }
 
-    /* Modals in Light Mode */
+    /* Modals in Light Mode — Dark Background with White Text (深色底白字) */
+    body.light-mode .custom-dialog-box,
+    body.light-mode .custom-popup-card,
     body.light-mode #modal-add-speaker > div,
     body.light-mode #modal-define-time > div,
     body.light-mode #modal-mod-config > div,
     body.light-mode #modal-add-motion > div,
     body.light-mode #modal-configure-voting > div,
     body.light-mode #modal-unified-settings > div {
-      background-color: #F7F4EE !important;
-      border: 1px solid #D7CCC8 !important;
-      box-shadow: 0 20px 25px -5px rgba(62, 39, 35, 0.15), 0 8px 10px -6px rgba(62, 39, 35, 0.1) !important;
+      background-color: #3E2723 !important;
+      border: 1px solid #5D4037 !important;
+      color: #F7F4EE !important;
+      box-shadow: 0 25px 50px -12px rgba(62, 39, 35, 0.4) !important;
     }
+    body.light-mode .custom-dialog-box *,
+    body.light-mode .custom-popup-card *,
     body.light-mode #modal-add-speaker > div *,
     body.light-mode #modal-define-time > div *,
     body.light-mode #modal-mod-config > div *,
     body.light-mode #modal-add-motion > div *,
     body.light-mode #modal-configure-voting > div *,
     body.light-mode #modal-unified-settings > div * {
-      color: #3E2723 !important;
+      color: #F7F4EE !important;
     }
     body.light-mode #modal-unified-settings .bg-zinc-900,
     body.light-mode #modal-unified-settings .bg-zinc-900\/90,
-    body.light-mode #modal-unified-settings .bg-zinc-900\/60,
+    body.light-mode #modal-unified-settings .bg-zinc-900\/60 {
+      background-color: #3E2723 !important;
+    }
     body.light-mode #modal-unified-settings .bg-zinc-950,
     body.light-mode #modal-unified-settings .bg-zinc-950\/50,
     body.light-mode #modal-unified-settings .bg-zinc-950\/60 {
-      background-color: #EFEBE9 !important;
+      background-color: #2D1B18 !important;
     }
     body.light-mode #modal-unified-settings .border-zinc-800,
     body.light-mode #modal-unified-settings .border-zinc-700 {
-      border-color: #D7CCC8 !important;
+      border-color: #5D4037 !important;
     }
-    body.light-mode #modal-unified-settings input,
+    body.light-mode #modal-unified-settings input:not([type="range"]),
     body.light-mode #modal-unified-settings select {
-      background-color: #ffffff !important;
-      border: 1px solid #D7CCC8 !important;
-      color: #3E2723 !important;
+      background-color: #2D1B18 !important;
+      border: 1px solid #6D4C41 !important;
+      color: #F7F4EE !important;
     }
     body.light-mode #modal-unified-settings .text-zinc-400,
     body.light-mode #modal-unified-settings .text-zinc-500 {
-      color: #8D6E63 !important;
+      color: #D7CCC8 !important;
     }
     body.light-mode #modal-add-speaker > div input,
     body.light-mode #modal-define-time > div input,
     body.light-mode #modal-mod-config > div input,
     body.light-mode #modal-add-motion > div input,
     body.light-mode #modal-add-motion > div select,
-    body.light-mode #modal-configure-voting > div input,
+    body.light-mode #modal-configure-voting > div input:not([type="radio"]),
     body.light-mode #modal-configure-voting > div select {
-      background-color: #ffffff !important;
-      border: 1px solid #D7CCC8 !important;
-      color: #3E2723 !important;
+      background-color: #2D1B18 !important;
+      border: 1px solid #6D4C41 !important;
+      color: #F7F4EE !important;
     }
 
     body.light-mode #motion-field-amendment-select button,
-    body.light-mode #motion-field-amendment-select div {
-      background-color: #ffffff !important;
-      border: 1px solid #D7CCC8 !important;
-      color: #3E2723 !important;
+    body.light-mode #motion-field-amendment-select div.flex-1 {
+      background-color: #2D1B18 !important;
+      border: 1px solid #6D4C41 !important;
+      color: #F7F4EE !important;
     }
     body.light-mode #motion-field-amendment-select button:hover {
-      background-color: #EFEBE9 !important;
-    }
-    body.light-mode #modal-add-motion .btn-close-modal {
-      background-color: transparent !important;
-      border: 1px solid #D7CCC8 !important;
-      color: #3E2723 !important;
-    }
-    body.light-mode #modal-add-motion .btn-close-modal:hover {
-      background-color: #D7CCC8 !important;
-      color: #3E2723 !important;
-    }
-    body.light-mode #modal-add-motion #btn-submit-motion {
-      background-color: #3E2723 !important;
-      border: 1px solid #3E2723 !important;
-      color: #F7F4EE !important;
-    }
-    body.light-mode #modal-add-motion #btn-submit-motion * {
-      color: #F7F4EE !important;
-    }
-    body.light-mode #modal-add-motion #btn-submit-motion:hover {
       background-color: #4E342E !important;
       color: #FFFFFF !important;
+    }
+    body.light-mode #modal-add-motion .btn-close-modal,
+    body.light-mode #modal-define-time .btn-close-modal,
+    body.light-mode #modal-mod-config .btn-close-modal,
+    body.light-mode #modal-configure-voting .flex.justify-end .btn-close-modal {
+      background-color: #4E342E !important;
+      border: 1px solid #6D4C41 !important;
+      color: #F7F4EE !important;
+    }
+    body.light-mode #modal-add-motion .btn-close-modal:hover,
+    body.light-mode #modal-define-time .btn-close-modal:hover,
+    body.light-mode #modal-mod-config .btn-close-modal:hover,
+    body.light-mode #modal-configure-voting .flex.justify-end .btn-close-modal:hover {
+      background-color: #5D4037 !important;
+      color: #FFFFFF !important;
+    }
+    body.light-mode #btn-submit-motion,
+    body.light-mode #btn-done-add-speaker,
+    body.light-mode #btn-save-speaking-time,
+    body.light-mode #btn-save-mod-config,
+    body.light-mode #btn-save-vote-config,
+    body.light-mode #btn-save-settings-done,
+    body.light-mode #cfg-btn-auth-action,
+    body.light-mode .custom-dialog-box .modal-btn-confirm {
+      background-color: #F7F4EE !important;
+      border: 1px solid #F7F4EE !important;
+      color: #3E2723 !important;
+    }
+    body.light-mode #btn-submit-motion *,
+    body.light-mode #btn-done-add-speaker *,
+    body.light-mode #btn-save-speaking-time *,
+    body.light-mode #btn-save-mod-config *,
+    body.light-mode #btn-save-vote-config *,
+    body.light-mode #btn-save-settings-done *,
+    body.light-mode #cfg-btn-auth-action *,
+    body.light-mode .custom-dialog-box .modal-btn-confirm * {
+      color: #3E2723 !important;
+    }
+    body.light-mode #btn-submit-motion:hover,
+    body.light-mode #btn-done-add-speaker:hover,
+    body.light-mode #btn-save-speaking-time:hover,
+    body.light-mode #btn-save-mod-config:hover,
+    body.light-mode #btn-save-vote-config:hover,
+    body.light-mode #btn-save-settings-done:hover,
+    body.light-mode #cfg-btn-auth-action:hover,
+    body.light-mode .custom-dialog-box .modal-btn-confirm:hover {
+      background-color: #FFFFFF !important;
+      color: #3E2723 !important;
     }
 
     /* Unmoderated Caucus & Recess screens in Light Mode */

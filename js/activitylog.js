@@ -97,14 +97,14 @@
     function buildLines() {
       const list = (state.activityLog || []).slice().reverse();
       if (!state.currentUser) {
-        return `<div class="text-sm text-zinc-400 py-8 text-center">${tr('請先登入 Google 帳號，系統才會自動記錄您的所有操作。', 'Sign in with Google to automatically record all your actions.', 'Connectez-vous avec Google pour enregistrer toutes vos actions.')}</div>`;
+        return `<div class="text-sm text-[#D7CCC8] py-8 text-center">${tr('請先登入 Google 帳號，系統才會自動記錄您的所有操作。', 'Sign in with Google to automatically record all your actions.', 'Connectez-vous avec Google pour enregistrer toutes vos actions.')}</div>`;
       }
       if (list.length === 0) {
-        return `<div class="text-sm text-zinc-400 py-8 text-center">${tr('目前尚無紀錄，開始操作後會自動出現在這裡。', 'No records yet. Your actions will appear here.', 'Aucun enregistrement pour le moment.')}</div>`;
+        return `<div class="text-sm text-[#D7CCC8] py-8 text-center">${tr('目前尚無紀錄，開始操作後會自動出現在這裡。', 'No records yet. Your actions will appear here.', 'Aucun enregistrement pour le moment.')}</div>`;
       }
       return list.map(en => {
         const safe = String(en.text).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
-        return `<div class="flex gap-3 py-2 border-b border-zinc-800/60 text-xs sm:text-sm"><span class="font-mono text-zinc-400 shrink-0">${fmtTime(en.ts)}</span><span class="text-white">${safe}</span></div>`;
+        return `<div class="flex gap-3 py-2 border-b border-[#5D4037]/60 text-xs sm:text-sm"><span class="font-mono text-[#D7CCC8] shrink-0">${fmtTime(en.ts)}</span><span class="text-[#F7F4EE]">${safe}</span></div>`;
       }).join('');
     }
 
@@ -128,19 +128,18 @@
     function openActivityLogModal() {
       if (modalEl && document.body.contains(modalEl)) modalEl.remove();
       modalEl = document.createElement('div');
+      modalEl.id = 'modal-activity-log';
       modalEl.className = 'fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[9999] flex items-center justify-center p-4';
       modalEl.innerHTML = `
-        <div class="bg-zinc-900 text-white rounded-3xl max-w-2xl w-full shadow-2xl border border-zinc-800 flex flex-col max-h-[85vh] overflow-hidden">
-          <div class="px-6 py-4 border-b border-zinc-800 flex items-center justify-between shrink-0">
-            <h3 class="font-bold text-lg">${tr('操作紀錄', 'Activity Log', 'Journal d\'activité')}</h3>
-            <button type="button" id="activity-log-close" class="p-2 text-zinc-400 hover:text-white rounded-xl cursor-pointer" aria-label="Close">
-              <svg class="w-5 h-5 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-            </button>
+        <div class="custom-popup-card bg-[#3E2723] text-[#F7F4EE] rounded-3xl max-w-2xl w-full shadow-2xl border border-[#5D4037] flex flex-col max-h-[85vh] overflow-hidden">
+          <div class="px-6 py-4 border-b border-[#5D4037] flex items-center justify-between shrink-0">
+            <h3 class="font-bold text-lg text-[#F7F4EE]">${tr('操作紀錄', 'Activity Log', 'Journal d\'activité')}</h3>
+            <button type="button" id="activity-log-close" class="p-2 text-[#D7CCC8] hover:text-white rounded-xl cursor-pointer" aria-label="Close">✕</button>
           </div>
-          <div id="activity-log-body" class="px-6 py-3 overflow-y-auto flex-1">${buildLines()}</div>
-          <div class="px-6 py-4 border-t border-zinc-800 flex items-center justify-end gap-2 shrink-0">
-            <button type="button" id="activity-log-clear" class="px-4 py-2 rounded-xl border border-rose-500/30 text-rose-400 text-xs font-semibold cursor-pointer">${tr('清除紀錄', 'Clear', 'Effacer')}</button>
-            <button type="button" id="activity-log-export" class="px-4 py-2 rounded-xl border border-zinc-700 text-xs font-semibold cursor-pointer">${tr('匯出', 'Export', 'Exporter')}</button>
+          <div id="activity-log-body" class="px-6 py-3 overflow-y-auto flex-1 custom-scroll">${buildLines()}</div>
+          <div class="px-6 py-4 border-t border-[#5D4037] flex items-center justify-end gap-2 shrink-0">
+            <button type="button" id="activity-log-clear" class="px-4 py-2 rounded-xl border border-rose-400/50 bg-rose-950/40 text-rose-300 hover:bg-rose-900/50 text-xs font-semibold cursor-pointer">${tr('清除紀錄', 'Clear', 'Effacer')}</button>
+            <button type="button" id="activity-log-export" class="px-4 py-2 rounded-xl border border-[#6D4C41] bg-[#4E342E] hover:bg-[#5D4037] text-[#F7F4EE] text-xs font-semibold cursor-pointer">${tr('匯出', 'Export', 'Exporter')}</button>
           </div>
         </div>`;
       document.body.appendChild(modalEl);

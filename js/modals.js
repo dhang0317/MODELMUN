@@ -104,7 +104,7 @@
       }).sort(countrySortCompare);
 
       if (list.length === 0) {
-        container.innerHTML = `<div class="col-span-full p-4 text-center text-xs text-slate-400">${t.noMatchingDelegates}</div>`;
+        container.innerHTML = `<div class="col-span-full p-4 text-center text-xs text-[#D7CCC8]">${t.noMatchingDelegates}</div>`;
         return;
       }
 
@@ -112,16 +112,16 @@
         const item = document.createElement('div');
         const queueList = getQueueList();
         const inQueueCount = keepOpen ? queueList.filter(m => m.id === c.id).length : 0;
-        item.className = 'p-3 flex items-center justify-between bg-white border border-slate-200 hover:border-slate-400 hover:shadow-sm cursor-pointer rounded-xl transition';
+        item.className = 'p-3 flex items-center justify-between bg-[#4E342E] border border-[#6D4C41] hover:bg-[#5D4037] hover:border-[#A1887F] hover:shadow-sm cursor-pointer rounded-xl transition';
         item.innerHTML = `
           <div class="flex items-center space-x-3 min-w-0">
-            <img src="${getFlagUrl(c)}" class="w-8 h-5.5 object-cover rounded shadow-sm border border-slate-700/30 shrink-0">
-            <span class="text-sm font-bold text-slate-800 truncate">${getCountryDisplayName(c)}</span>
-            ${inQueueCount > 0 ? `<span class="px-2 py-0.5 text-xs font-bold rounded-full bg-primary/20 text-primary shrink-0">#${inQueueCount}</span>` : ''}
+            <img src="${getFlagUrl(c)}" class="w-8 h-5.5 object-cover rounded shadow-sm border border-white/20 shrink-0">
+            <span class="text-sm font-bold text-[#F7F4EE] truncate">${getCountryDisplayName(c)}</span>
+            ${inQueueCount > 0 ? `<span class="px-2 py-0.5 text-xs font-bold rounded-full bg-[#F7F4EE]/20 text-[#F7F4EE] shrink-0">#${inQueueCount}</span>` : ''}
           </div>
           <div class="flex items-center space-x-2 shrink-0 ml-2">
-            ${c.powerStatus === 'observer' ? `<span class="text-xs text-slate-400">${t.observer}</span>` : ''}
-            ${keepOpen ? `<button type="button" class="px-2.5 py-1 text-xs font-semibold bg-slate-100 hover:bg-primary hover:text-white rounded-lg text-slate-700 transition cursor-pointer">+ ${t.add}</button>` : ''}
+            ${c.powerStatus === 'observer' ? `<span class="text-xs text-[#D7CCC8]">${t.observer}</span>` : ''}
+            ${keepOpen ? `<button type="button" class="px-2.5 py-1 text-xs font-semibold bg-[#3E2723] hover:bg-[#F7F4EE] hover:text-[#3E2723] border border-[#6D4C41] rounded-lg text-[#F7F4EE] transition cursor-pointer">+ ${t.add}</button>` : ''}
           </div>
         `;
         item.addEventListener('click', (e) => {

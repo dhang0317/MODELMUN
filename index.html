@@ -117,7 +117,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/style.css?v=2026110128">
+  <link rel="stylesheet" href="css/style.css?v=2026110129">
 </head>
 <body class="h-screen w-screen flex flex-col overflow-hidden">
 
@@ -1080,7 +1080,7 @@
     <div class="bg-slate-800 text-white rounded-2xl max-w-4xl w-full p-6 shadow-2xl space-y-4 max-h-[85vh] flex flex-col border border-slate-700">
       <div class="flex items-center justify-between border-b border-slate-700 pb-3">
         <h3 class="font-bold text-lg text-slate-100" data-i18n="addSpeaker">Add Speaker</h3>
-        <button class="btn-close-modal p-1 text-slate-400 hover:text-slate-200"></button>
+        <button type="button" class="btn-close-modal p-1.5 text-slate-300 hover:text-white rounded-lg transition cursor-pointer" aria-label="Close">✕</button>
       </div>
       <input id="search-queue-speaker" type="text" data-i18n-placeholder="searchSpeakerPlaceholder" placeholder="搜尋出席代表國..." class="w-full px-3 py-2 bg-white border border-slate-300 text-slate-800 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate-400">
       <div id="list-selectable-speakers" class="flex-1 overflow-y-auto custom-scroll pr-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 content-start">
@@ -1213,12 +1213,9 @@
     <div class="bg-slate-800 text-white rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-5 border border-slate-700">
       <div class="flex items-center justify-between border-b border-slate-700 pb-3">
         <h3 class="text-base text-slate-100 flex items-center space-x-2">
-          
           <span data-i18n="configureVoting">Configure Voting</span>
         </h3>
-        <button type="button" class="btn-close-modal text-slate-400 hover:text-white p-1">
-          
-        </button>
+        <button type="button" class="btn-close-modal text-slate-300 hover:text-white p-1.5 rounded-lg transition cursor-pointer" aria-label="Close">✕</button>
       </div>
 
       <!-- Voting Type: Procedural vs Substantive -->
@@ -1531,10 +1528,10 @@
   <script src="js/countries.js?v=2026110103"></script>
   <script src="js/state.js?v=2026110106"></script>
     <!-- Utilities, Dialogs & Visual Effects -->
-    <script src="js/dialogs.js?v=2026110103"></script>
+    <script src="js/dialogs.js?v=2026110104"></script>
     <script src="js/confetti.js?v=2026110103"></script>
-    <script src="js/theme.js?v=2026110103"></script>
-    <script src="js/modals.js?v=2026110102"></script>
+    <script src="js/theme.js?v=2026110104"></script>
+    <script src="js/modals.js?v=2026110103"></script>
     <script src="js/p2p.js?v=2026103102"></script>
     <!-- View Renderers -->
     <script src="js/views/header.js?v=2026110105"></script>
@@ -1548,7 +1545,7 @@
     <!-- Events, Auth & Entry Point -->
     <script src="js/events.js?v=2026110110"></script>
     <script src="js/auth.js?v=2026110103"></script>
-    <script src="js/activitylog.js?v=2026110103"></script>
+    <script src="js/activitylog.js?v=2026110104"></script>
     <script src="js/adaptive-buttons.js?v=2026110110"></script>
     <script src="app.js?v=2026110103"></script>
   <script>

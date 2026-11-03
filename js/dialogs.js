@@ -4,22 +4,22 @@
     backdrop.className = 'fixed inset-0 bg-black/60 backdrop-blur-sm z-[9999] flex items-center justify-center p-4 animate-fade-in custom-dialog-backdrop';
     
     const box = document.createElement('div');
-    box.className = 'custom-dialog-box bg-[#F7F4EE] text-[#3E2723] rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 transform transition-all scale-100 border border-[#D7CCC8]';
+    box.className = 'custom-dialog-box bg-[#3E2723] text-[#F7F4EE] rounded-2xl max-w-md w-full p-6 shadow-2xl space-y-4 transform transition-all scale-100 border border-[#5D4037]';
 
     const lang = state.language;
     const okBtnText = confirmText || I18N[lang].confirm;
     const noBtnText = cancelText || I18N[lang].cancel;
 
     box.innerHTML = `
-      <div class="flex items-center justify-between border-b border-[#D7CCC8] pb-3">
-        <h3 class="font-bold text-lg text-[#3E2723]">${title || ''}</h3>
-        <button class="modal-close-icon p-1 text-[#8D6E63] hover:text-[#3E2723] transition cursor-pointer"><i data-lucide="x" class="w-5 h-5"></i></button>
+      <div class="flex items-center justify-between border-b border-[#5D4037] pb-3">
+        <h3 class="font-bold text-lg text-[#F7F4EE]">${title || ''}</h3>
+        <button type="button" class="modal-close-icon p-1.5 text-[#D7CCC8] hover:text-white transition cursor-pointer">✕</button>
       </div>
-      ${message ? `<div class="text-sm text-[#5D4037] leading-relaxed font-medium">${message}</div>` : ''}
-      ${showInput ? `<input type="text" class="modal-input w-full px-3 py-2 bg-white border border-[#D7CCC8] text-[#3E2723] rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#3E2723] font-medium" value="${inputDefault}" placeholder="${inputPlaceholder}">` : ''}
+      ${message ? `<div class="text-sm text-[#EFEBE9] leading-relaxed font-medium">${message}</div>` : ''}
+      ${showInput ? `<input type="text" class="modal-input w-full px-3 py-2 bg-[#2D1B18] border border-[#6D4C41] text-[#F7F4EE] placeholder-[#A1887F] rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-[#F7F4EE] font-medium" value="${inputDefault}" placeholder="${inputPlaceholder}">` : ''}
       <div class="flex items-center justify-end space-x-2 pt-2">
-        ${cancelText !== false ? `<button class="modal-btn-cancel px-4 py-2 border border-[#D7CCC8] bg-[#EFEBE9] hover:bg-[#D7CCC8] text-[#3E2723] rounded-xl text-xs font-semibold cursor-pointer">${noBtnText}</button>` : ''}
-        <button class="modal-btn-confirm px-5 py-2 bg-[#3E2723] hover:bg-[#4E342E] text-[#F7F4EE] rounded-xl text-xs font-bold shadow border border-[#3E2723] cursor-pointer">${okBtnText}</button>
+        ${cancelText !== false ? `<button type="button" class="modal-btn-cancel px-4 py-2 border border-[#6D4C41] bg-[#4E342E] hover:bg-[#5D4037] text-[#F7F4EE] rounded-xl text-xs font-semibold cursor-pointer">${noBtnText}</button>` : ''}
+        <button type="button" class="modal-btn-confirm px-5 py-2 bg-[#F7F4EE] hover:bg-white text-[#3E2723] rounded-xl text-xs font-bold shadow border border-[#F7F4EE] cursor-pointer">${okBtnText}</button>
       </div>
     `;
 
