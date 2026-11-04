@@ -50,7 +50,7 @@
         row.innerHTML = `
           <div class="flex items-center space-x-3.5 min-w-0">
             <img src="${getFlagUrl(c)}" class="w-10 h-7 object-cover rounded shadow border border-slate-700/40 shrink-0">
-            <span class="text-base sm:text-lg font-bold text-slate-100 truncate">${getCountryDisplayName(c)}</span>
+            <span class="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 truncate">${getCountryDisplayName(c)}</span>
             <span class="text-xs text-slate-400 font-mono shrink-0">(${c.id})</span>
           </div>
           <button class="btn-add-country-item px-2.5 py-1 text-xs font-semibold rounded-xl shrink-0 ml-2 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 cursor-pointer">＋</button>
@@ -85,7 +85,7 @@
         row.innerHTML = `
           <div class="flex items-center space-x-3.5 min-w-0">
             <img src="${getFlagUrl(c)}" class="w-10 h-7 object-cover rounded shadow border border-slate-700/40 shrink-0">
-            <span class="text-base sm:text-lg font-bold text-slate-100 truncate">${getCountryDisplayName(c)}</span>
+            <span class="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100 truncate">${getCountryDisplayName(c)}</span>
           </div>
           <div class="flex items-center space-x-2.5 shrink-0 ml-2">
             ${powerBadge ? `<div class="status-toggle-btn">${powerBadge}</div>` : ''}

@@ -13,6 +13,20 @@
   color: var(--theme-selection-color, #F7F4EE) !important;
 }
 
+/* 待選國家名冊與代表名冊反白後字體顏色為深色 */
+#list-available-countries ::selection,
+#list-selected-countries ::selection,
+#view-setup ::selection {
+  background-color: #B5C99A !important;
+  color: #1F2A14 !important;
+}
+#list-available-countries ::-moz-selection,
+#list-selected-countries ::-moz-selection,
+#view-setup ::-moz-selection {
+  background-color: #B5C99A !important;
+  color: #1F2A14 !important;
+}
+
 @font-face {
   font-family: 'Iansui';
   src: url('../Iansui-Regular.ttf') format('truetype'),
