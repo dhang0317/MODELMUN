@@ -333,7 +333,10 @@
           const flagHtml = mCountry ? `<img src="${getFlagUrl(mCountry)}" class="w-5 h-3.5 inline-block rounded object-cover mr-1.5 align-middle border border-slate-300">` : '';
           if (motionProposerFlag) motionProposerFlag.innerHTML = flagHtml;
           if (motionDetailsText) {
-            motionDetailsText.textContent = `${activeMotion.proposer} • ${activeMotion.topic || t.generalDiscussion || 'General Discussion'}`;
+            const topicDisplay = (activeMotion.topic && activeMotion.topic.trim())
+              ? activeMotion.topic.trim()
+              : (activeMotion.type === 'mod' ? (t.generalDiscussion || '一般議題磋商') : motionTypeName);
+            motionDetailsText.textContent = `${activeMotion.proposer} • ${topicDisplay}`;
           }
         }
 

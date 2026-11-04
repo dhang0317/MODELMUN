@@ -558,7 +558,25 @@
         }
 
         if (docData && typeof docData === 'object' && Object.keys(docData).length > 0) {
+          // 比較雲端與本機的時間戳記：如果本機資料比雲端還要新，保留本機資料並反推至雲端，防止覆蓋最新修改
+          let localLastUpdated = 0;
+          try {
+            const localRaw = localStorage.getItem('MUN_COMMAND_STATE');
+            if (localRaw) {
+              const localParsed = JSON.parse(localRaw);
+              if (localParsed && localParsed.lastUpdated) localLastUpdated = localParsed.lastUpdated;
+            }
+          } catch (e) {}
+
+          if (!state.isViewerMode && localLastUpdated > 0 && docData.lastUpdated && localLastUpdated > docData.lastUpdated) {
+            saveToLocalStorage(true, true);
+            return true;
+          }
+
           loadStateFromData(docData);
+          try {
+            localStorage.setItem('MUN_COMMAND_STATE', JSON.stringify(getFullStatePayload()));
+          } catch (e) {}
           updateAvailableCountriesPool();
           renderAll();
           const statusEl = document.getElementById('cloud-sync-status');

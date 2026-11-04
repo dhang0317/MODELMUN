@@ -63,9 +63,15 @@
     const top = state.motions[0];
     const topRule = (typeof MOTION_RULES !== 'undefined' && MOTION_RULES[top.type]) ? MOTION_RULES[top.type] : { requiresVote: false, threshold: 'simple', voteType: 'procedural', canSecond: true };
 
+    const getMotionDisplayTopic = (m) => {
+      if (m.topic && m.topic.trim()) return m.topic.trim();
+      if (m.type === 'mod') return t.generalDiscussion || '一般議題磋商';
+      return formatMotionType(m.type);
+    };
+
     document.getElementById('hero-motion-type').textContent = formatMotionType(top.type);
     document.getElementById('hero-motion-proposer').textContent = top.proposer;
-    document.getElementById('hero-motion-topic').textContent = top.topic || t.generalDiscussion;
+    document.getElementById('hero-motion-topic').textContent = getMotionDisplayTopic(top);
     document.getElementById('hero-motion-details').textContent = formatMotionDetails(top);
     const topCountry = state.selectedCountries.find(c => getCountryDisplayName(c) === top.proposer);
     const topFlagEl = document.getElementById('hero-motion-flag');
@@ -123,7 +129,7 @@
                 <span class="text-xs font-medium text-content-secondary truncate">${m.proposer}</span>
                 ${ruleBadgeHtml}
               </div>
-              <div class="text-sm font-medium text-content-primary truncate mt-0.5">${m.topic || t.generalDiscussion}</div>
+              <div class="text-sm font-medium text-content-primary truncate mt-0.5">${getMotionDisplayTopic(m)}</div>
               <div class="text-[11px] text-content-muted mt-0.5 flex items-center space-x-1">
                 <span>${motionTimeLabel}</span>
               </div>

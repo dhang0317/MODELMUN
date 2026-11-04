@@ -98,8 +98,9 @@
       // 檢查該使用者在 Firebase / 雲端是否已有專屬的會議紀錄
       const loaded = await loadFromCloudKV();
       if (!loaded) {
-        // 如果此帳號為初次登入或雲端尚無存檔，重置為預設會議範本，避免受到前一位使用者留存資料影響
-        if (typeof resetStateToDefaults === 'function') {
+        // 如果雲端暫時無資料（或離線），保留當前本機瀏覽器內的資料並同步至雲端，絕不洗掉使用者的進度！
+        const hasLocalData = !!localStorage.getItem('MUN_COMMAND_STATE');
+        if (!hasLocalData && typeof resetStateToDefaults === 'function') {
           resetStateToDefaults();
         }
         updateAvailableCountriesPool();
