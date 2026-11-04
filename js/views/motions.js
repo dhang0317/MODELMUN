@@ -66,12 +66,22 @@
     const getMotionDisplayTopic = (m) => {
       if (m.topic && m.topic.trim()) return m.topic.trim();
       if (m.type === 'mod') return t.generalDiscussion || '一般議題磋商';
-      return formatMotionType(m.type);
+      return '';
     };
 
+    const topDisplayTopic = getMotionDisplayTopic(top);
     document.getElementById('hero-motion-type').textContent = formatMotionType(top.type);
     document.getElementById('hero-motion-proposer').textContent = top.proposer;
-    document.getElementById('hero-motion-topic').textContent = getMotionDisplayTopic(top);
+    const heroTopicEl = document.getElementById('hero-motion-topic');
+    if (heroTopicEl) {
+      if (topDisplayTopic) {
+        heroTopicEl.textContent = topDisplayTopic;
+        heroTopicEl.classList.remove('hidden');
+      } else {
+        heroTopicEl.textContent = '';
+        heroTopicEl.classList.add('hidden');
+      }
+    }
     document.getElementById('hero-motion-details').textContent = formatMotionDetails(top);
     const topCountry = state.selectedCountries.find(c => getCountryDisplayName(c) === top.proposer);
     const topFlagEl = document.getElementById('hero-motion-flag');
@@ -118,6 +128,7 @@
           ? `<span class="text-[10px] font-semibold px-2 py-0.5 rounded-md border border-rose-500/30 bg-rose-500/10 text-rose-500">${t.ruleTwoThirdsMandatory || '2/3 強制表決'}</span>`
           : `<span class="text-[10px] font-semibold px-2 py-0.5 rounded-md border border-amber-500/30 bg-amber-500/10 text-amber-500">${t.ruleSecondOrVote || '附議/表決'}</span>`;
 
+        const rowTopic = getMotionDisplayTopic(m);
         row.innerHTML = `
           <div class="flex items-center space-x-3 min-w-0 flex-1">
             <span class="flex-shrink-0 w-6 h-6 rounded-full border border-subtle bg-surface-tertiary flex items-center justify-center text-[10px] font-mono text-content-secondary font-medium">#${i + 1}</span>
@@ -129,7 +140,7 @@
                 <span class="text-xs font-medium text-content-secondary truncate">${m.proposer}</span>
                 ${ruleBadgeHtml}
               </div>
-              <div class="text-sm font-medium text-content-primary truncate mt-0.5">${getMotionDisplayTopic(m)}</div>
+              ${rowTopic ? `<div class="text-sm font-medium text-content-primary truncate mt-0.5">${rowTopic}</div>` : ''}
               <div class="text-[11px] text-content-muted mt-0.5 flex items-center space-x-1">
                 <span>${motionTimeLabel}</span>
               </div>
