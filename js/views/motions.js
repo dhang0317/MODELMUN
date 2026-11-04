@@ -138,7 +138,6 @@
                 <span class="text-xs font-medium text-content-primary">${formatMotionType(m.type)}</span>
                 <span class="text-content-muted text-xs">•</span>
                 <span class="text-xs font-medium text-content-secondary truncate">${m.proposer}</span>
-                ${ruleBadgeHtml}
               </div>
               ${rowTopic ? `<div class="text-sm font-medium text-content-primary truncate mt-0.5">${rowTopic}</div>` : ''}
               <div class="text-[11px] text-content-muted mt-0.5 flex items-center space-x-1">
