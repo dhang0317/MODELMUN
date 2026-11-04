@@ -66,6 +66,7 @@
 
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
+        if (typeof closeDrawer === 'function') closeDrawer();
         const tab = btn.getAttribute('data-tab');
         switchTab(tab);
       });
@@ -78,9 +79,10 @@
       backdrop.classList.remove('hidden');
     }
     function closeDrawer() {
-      drawer.classList.add('-translate-x-full');
-      backdrop.classList.add('hidden');
+      if (drawer) drawer.classList.add('-translate-x-full');
+      if (backdrop) backdrop.classList.add('hidden');
     }
+    window.closeAppDrawer = closeDrawer;
     const openDrawerBtn = document.getElementById('btn-open-drawer');
     const closeDrawerBtn = document.getElementById('btn-close-drawer');
     if (openDrawerBtn) openDrawerBtn.addEventListener('click', openDrawer);
@@ -388,6 +390,7 @@
     const defineTimeModal = document.getElementById('modal-define-time');
     document.getElementById('btn-gsl-set-time').addEventListener('click', () => {
       defineTimeModal.classList.remove('hidden');
+      defineTimeModal.style.display = 'flex';
       const m = Math.floor(state.gslDefaultTime / 60);
       const s = state.gslDefaultTime % 60;
       document.getElementById('input-time-minutes').value = m;
@@ -424,6 +427,7 @@
       btnModConfig.addEventListener('click', () => {
         if (modConfigModal) {
           modConfigModal.classList.remove('hidden');
+          modConfigModal.style.display = 'flex';
           document.getElementById('input-mod-topic').value = state.modTopic;
           document.getElementById('input-mod-total-mins').value = state.modTotalMins;
           document.getElementById('input-mod-speaker-secs').value = state.modSpeakerSecs;
@@ -902,6 +906,14 @@
     }
 
     document.getElementById('btn-add-motion').addEventListener('click', () => {
+      if (!state.selectedCountries || state.selectedCountries.length === 0) {
+        const t = I18N[state.language] || I18N.en;
+        customAlert(
+          state.language === 'zh' ? '尚未設定代表國' : (t.sessionSetup || 'Setup Required'),
+          state.language === 'zh' ? '名冊內尚無出席代表國家，請先於「設定名冊」選取或匯入國家代表！' : (t.addCountryBeforeStartAlert || 'Please add countries before creating a motion.')
+        );
+        return;
+      }
       const select = document.getElementById('select-motion-proposer');
       select.innerHTML = '';
       state.selectedCountries.forEach(c => {
@@ -912,6 +924,7 @@
       });
       updateMotionModalFields();
       addMotionModal.classList.remove('hidden');
+      addMotionModal.style.display = 'flex';
     });
 
     document.getElementById('btn-submit-motion').addEventListener('click', () => {
@@ -950,6 +963,7 @@
 
       state.motions.push(motion);
       addMotionModal.classList.add('hidden');
+      addMotionModal.style.display = 'none';
       document.getElementById('input-motion-topic').value = '';
 
       // 提動議後自動跳轉至表決頁面（預設進入 Session 表決）
@@ -1205,6 +1219,7 @@
           r.checked = (r.value === (state.voteThreshold || 'simple'));
         });
         modalConfigureVote.classList.remove('hidden');
+        modalConfigureVote.style.display = 'flex';
       });
     }
 
@@ -1216,6 +1231,7 @@
         const checkedThresh = modalConfigureVote.querySelector('input[name="modal-vote-threshold"]:checked');
         if (checkedThresh) state.voteThreshold = checkedThresh.value;
         modalConfigureVote.classList.add('hidden');
+        modalConfigureVote.style.display = 'none';
         saveToLocalStorage(true, true);
         renderResolutionVoteGrid();
       });
@@ -1650,11 +1666,14 @@
       });
     }
 
-    ['modal-add-speaker', 'modal-define-time', 'modal-mod-config', 'modal-add-motion'].forEach(id => {
+    ['modal-add-speaker', 'modal-define-time', 'modal-mod-config', 'modal-add-motion', 'modal-configure-voting'].forEach(id => {
       const modalEl = document.getElementById(id);
       if (modalEl) {
         modalEl.addEventListener('click', (e) => {
-          if (e.target === modalEl) modalEl.classList.add('hidden');
+          if (e.target === modalEl) {
+            modalEl.classList.add('hidden');
+            modalEl.style.display = 'none';
+          }
         });
       }
     });
