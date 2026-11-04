@@ -1731,6 +1731,31 @@
       });
     }
 
+    // 防止 iOS / iPad / 觸控裝置快速連續點擊 (double tap) 觸發瀏覽器縮放
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', (e) => {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) {
+        // 若點擊目標為輸入框，保留預設行為以利聚焦
+        const tag = e.target && e.target.tagName;
+        if (tag !== 'INPUT' && tag !== 'TEXTAREA' && tag !== 'SELECT') {
+          e.preventDefault();
+        }
+      }
+      lastTouchEnd = now;
+    }, { passive: false });
+
+    // 防止 iOS 手勢縮放 (雙指 pinch zoom)
+    document.addEventListener('gesturestart', (e) => {
+      e.preventDefault();
+    });
+    document.addEventListener('gesturechange', (e) => {
+      e.preventDefault();
+    });
+    document.addEventListener('gestureend', (e) => {
+      e.preventDefault();
+    });
+
   }
 
   // Celebratory Confetti / Ribbon Burst Animation (Simpler & Elegant for Session Adjournment)
