@@ -253,8 +253,8 @@
       switch (type) {
         case 'previous_question': return '結束辯論動議 / 提請表決 (Previous Question)';
         case 'close': return '結束辯論動議 (Closure of Debate)';
-        case 'unmod': return '非主持核心磋商 (Unmod)';
-        case 'mod': return '主持核心磋商 (Mod)';
+        case 'unmod': return '非主持磋商 (Unmod)';
+        case 'mod': return '主持磋商 (Mod)';
         case 'singlespeaker': return '介紹決議案草案';
         case 'amendment': return '介紹條款';
         case 'gsl': return '常設發言名單';

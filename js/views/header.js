@@ -147,8 +147,8 @@
     if (motionTypeSelect && motionTypeSelect.options) {
       const typeTextMap = {
         zh: {
-          mod: '主持核心磋商',
-          unmod: '非主持核心磋商',
+          mod: '主持磋商',
+          unmod: '非主持磋商',
           gsl: '常設發言名單',
           singlespeaker: '介紹決議案草案',
           amendment: '介紹條款',
