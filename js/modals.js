@@ -121,7 +121,7 @@
           </div>
           <div class="flex items-center space-x-2 shrink-0 ml-2">
             ${c.powerStatus === 'observer' ? `<span class="text-xs text-[#D7CCC8]">${t.observer}</span>` : ''}
-            ${keepOpen ? `<button type="button" class="px-2.5 py-1 text-xs font-semibold bg-[#3E2723] hover:bg-[#F7F4EE] hover:text-[#3E2723] border border-[#6D4C41] rounded-lg text-[#F7F4EE] transition cursor-pointer">+ ${t.add}</button>` : ''}
+            ${keepOpen ? `<button type="button" class="px-2.5 py-1 text-xs font-semibold bg-[#3E2723] hover:bg-[#F7F4EE] hover:text-[#3E2723] border border-[#6D4C41] rounded-xl text-[#F7F4EE] transition cursor-pointer">+ ${t.add}</button>` : ''}
           </div>
         `;
         item.addEventListener('click', (e) => {

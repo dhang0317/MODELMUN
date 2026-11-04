@@ -214,7 +214,7 @@
         <div class="text-[12px] font-bold text-slate-300 tracking-wide">${group.name}</div>
         <div class="grid grid-cols-3 gap-2">
           ${group.shades.map(s => `
-            <button data-hex="${s.hex}" class="btn-theme-swatch group relative p-1.5 rounded-lg border border-slate-700 hover:border-white transition flex flex-col items-center space-y-1 bg-slate-900/50 ${baseColor.toLowerCase() === s.hex.toLowerCase() ? 'ring-2 ring-white border-transparent' : ''}" title="${group.name} - ${s.shade} (${s.hex})">
+            <button data-hex="${s.hex}" class="btn-theme-swatch group relative p-1.5 rounded-xl border border-slate-700 hover:border-white transition flex flex-col items-center space-y-1 bg-slate-900/50 ${baseColor.toLowerCase() === s.hex.toLowerCase() ? 'ring-2 ring-white border-transparent' : ''}" title="${group.name} - ${s.shade} (${s.hex})">
               <span class="w-full h-7 rounded-md shadow-inner border border-white/20 transition group-hover:scale-105" style="background-color: ${s.hex}"></span>
               <span class="text-[11px] font-medium text-slate-300 w-full text-center truncate">${s.shade}</span>
               <span class="text-[9px] font-mono text-slate-400">${s.hex}</span>
@@ -244,7 +244,7 @@
           <div class="flex items-center space-x-3">
             <input type="color" id="theme-color-input" value="${baseColor}" class="w-11 h-9 rounded-lg cursor-pointer bg-transparent border border-slate-600 p-0.5">
             <input type="text" id="theme-color-hex-text" value="${baseColor}" placeholder="#3683a8" maxlength="7" class="flex-1 px-3 py-1.5 bg-slate-900 border border-slate-700 rounded-lg text-sm font-mono text-white focus:outline-none focus:border-sky-400">
-            <button id="btn-apply-custom-color" class="px-3.5 py-1.5 border border-sky-400 text-sky-300 hover:text-white font-bold text-xs rounded-lg transition">${t.apply}</button>
+            <button id="btn-apply-custom-color" class="px-3.5 py-1.5 border border-sky-400 text-sky-300 hover:text-white font-bold text-xs rounded-xl transition">${t.apply}</button>
           </div>
         </div>
 
@@ -275,7 +275,7 @@
         <button id="btn-reset-theme-color" class="text-xs text-rose-400 hover:text-rose-300 font-semibold transition">
           <span>${t.resetDefaultColor}</span>
         </button>
-        <button class="modal-close-btn px-4 py-1.5 border border-slate-700 hover:bg-slate-800 rounded-lg text-xs font-semibold text-slate-200 transition">${t.done}</button>
+        <button class="modal-close-btn px-4 py-1.5 border border-slate-700 hover:bg-slate-800 rounded-xl text-xs font-semibold text-slate-200 transition">${t.done}</button>
       </div>
     `;
 

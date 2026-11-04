@@ -676,7 +676,7 @@
     // Update Subtab button styling
     const isLightMode = document.body && document.body.classList.contains('light-mode');
     if (btnSubtabRollcall) {
-      btnSubtabRollcall.className = `px-3 py-1.5 rounded-lg text-xs transition cursor-pointer ${
+      btnSubtabRollcall.className = `px-3 py-1.5 rounded-xl text-xs transition cursor-pointer ${
         isRollcall ? 'active font-bold' : ''
       }`;
       if (isRollcall) {
@@ -694,7 +694,7 @@
       btnSubtabSession.style.opacity = '1';
       btnSubtabSession.style.cursor = 'pointer';
       btnSubtabSession.title = '';
-      btnSubtabSession.className = `px-3 py-1.5 rounded-lg text-xs transition cursor-pointer ${
+      btnSubtabSession.className = `px-3 py-1.5 rounded-xl text-xs transition cursor-pointer ${
         isSession ? 'active font-bold' : ''
       }`;
       if (isSession) {
@@ -764,17 +764,17 @@
 
     // Stage button styles
     [btnR1, btnR2].forEach(b => {
-      if (b) b.className = 'px-3 py-1.5 bg-slate-100 text-slate-700 rounded-lg text-xs hover:bg-slate-200 transition';
+      if (b) b.className = 'px-3 py-1.5 bg-slate-100 text-slate-700 rounded-xl text-xs hover:bg-slate-200 transition';
     });
     
     if (state.voteStage === 'r2') {
-      if (btnR2) btnR2.className = 'px-3 py-1.5 bg-primary text-white rounded-lg text-xs transition shadow-sm';
+      if (btnR2) btnR2.className = 'px-3 py-1.5 bg-primary text-white rounded-xl text-xs transition shadow-sm';
       if (pRights) pRights.classList.add('hidden');
       if (pBallots) pBallots.classList.add('hidden');
       if (pActiveCard) pActiveCard.classList.remove('hidden');
     } else {
       state.voteStage = 'r1';
-      if (btnR1) btnR1.className = 'px-3 py-1.5 bg-primary text-white rounded-lg text-xs transition shadow-sm';
+      if (btnR1) btnR1.className = 'px-3 py-1.5 bg-primary text-white rounded-xl text-xs transition shadow-sm';
       if (pRights) pRights.classList.add('hidden');
       if (pBallots) pBallots.classList.add('hidden');
       if (pActiveCard) pActiveCard.classList.remove('hidden');
@@ -793,11 +793,11 @@
 
     if (btnTargetRes && btnTargetMot) {
       if (isMotionVote) {
-        btnTargetRes.className = 'px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-600 hover:text-slate-900 flex items-center space-x-1.5 cursor-pointer';
-        btnTargetMot.className = 'px-3 py-1.5 rounded-lg text-xs font-medium transition bg-white shadow-sm text-slate-800 flex items-center space-x-1.5 cursor-pointer font-bold';
+        btnTargetRes.className = 'px-3 py-1.5 rounded-xl text-xs font-medium transition text-slate-600 hover:text-slate-900 flex items-center space-x-1.5 cursor-pointer';
+        btnTargetMot.className = 'px-3 py-1.5 rounded-xl text-xs font-medium transition bg-white shadow-sm text-slate-800 flex items-center space-x-1.5 cursor-pointer font-bold';
       } else {
-        btnTargetRes.className = 'px-3 py-1.5 rounded-lg text-xs font-medium transition bg-white shadow-sm text-slate-800 flex items-center space-x-1.5 cursor-pointer font-bold';
-        btnTargetMot.className = 'px-3 py-1.5 rounded-lg text-xs font-medium transition text-slate-600 hover:text-slate-900 flex items-center space-x-1.5 cursor-pointer';
+        btnTargetRes.className = 'px-3 py-1.5 rounded-xl text-xs font-medium transition bg-white shadow-sm text-slate-800 flex items-center space-x-1.5 cursor-pointer font-bold';
+        btnTargetMot.className = 'px-3 py-1.5 rounded-xl text-xs font-medium transition text-slate-600 hover:text-slate-900 flex items-center space-x-1.5 cursor-pointer';
       }
     }
 
@@ -837,7 +837,7 @@
                 <span class="text-[10px] text-primary block">${t.voting || 'Vote'}: ${(c.vote || '').toUpperCase()}</span>
               </div>
             </div>
-            <button class="px-3 py-1 bg-secondary text-white rounded-lg text-xs hover:bg-cyan-600 transition">${t.giveFloor60s || 'Give Floor (60s)'}</button>
+            <button class="px-3 py-1 bg-secondary text-white rounded-xl text-xs hover:bg-cyan-600 transition">${t.giveFloor60s || 'Give Floor (60s)'}</button>
           `;
           item.querySelector('button').addEventListener('click', () => {
             state.singleSpeaker = c;
@@ -1023,10 +1023,10 @@
             ? `<span class="text-xs text-slate-400">${isObserver ? t.observer : (isAbsent ? t.absent : (t.uncalled || '未點名'))}</span>`
             : `
               <div class="flex items-center space-x-1.5">
-                <button data-vote="favor" class="btn-vote-choice px-3 py-1.5 rounded-lg text-xs transition ${c.vote === 'favor' ? (c.hasRights ? 'vote-favor ring-2 ring-emerald-500' : 'vote-favor') : 'border'}">${favorLabel}</button>
-                <button data-vote="against" class="btn-vote-choice px-3 py-1.5 rounded-lg text-xs transition ${c.vote === 'against' ? (c.hasRights ? 'vote-against ring-2 ring-rose-500' : 'vote-against') : 'border'}">${againstLabel}</button>
-                ${canAbstain ? `<button data-vote="abstain" class="btn-vote-choice px-2.5 py-1.5 rounded-lg text-xs transition ${c.vote === 'abstain' ? 'vote-abstain' : 'border'}">${t.abs || '棄權'}</button>` : ''}
-                ${state.voteStage === 'r1' ? `<button data-vote="pass" class="btn-vote-choice px-2.5 py-1.5 rounded-lg text-xs transition ${c.vote === 'pass' ? 'vote-pass' : 'border'}">${t.pass || 'Pass'}</button>` : ''}
+                <button data-vote="favor" class="btn-vote-choice px-3 py-1.5 rounded-xl text-xs transition ${c.vote === 'favor' ? (c.hasRights ? 'vote-favor ring-2 ring-emerald-500' : 'vote-favor') : 'border'}">${favorLabel}</button>
+                <button data-vote="against" class="btn-vote-choice px-3 py-1.5 rounded-xl text-xs transition ${c.vote === 'against' ? (c.hasRights ? 'vote-against ring-2 ring-rose-500' : 'vote-against') : 'border'}">${againstLabel}</button>
+                ${canAbstain ? `<button data-vote="abstain" class="btn-vote-choice px-2.5 py-1.5 rounded-xl text-xs transition ${c.vote === 'abstain' ? 'vote-abstain' : 'border'}">${t.abs || '棄權'}</button>` : ''}
+                ${state.voteStage === 'r1' ? `<button data-vote="pass" class="btn-vote-choice px-2.5 py-1.5 rounded-xl text-xs transition ${c.vote === 'pass' ? 'vote-pass' : 'border'}">${t.pass || 'Pass'}</button>` : ''}
               </div>
             `
           }
@@ -1165,9 +1165,9 @@
                 <span class="text-xs font-bold text-emerald-600">${t.yes || '同意'}</span>
               </div>
               <div class="flex items-center space-x-1.5">
-                <button type="button" class="btn-dec-favor w-7 h-7 rounded-lg bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-700 font-black text-sm flex items-center justify-center transition cursor-pointer" data-id="${sess.id}">-</button>
+                <button type="button" class="btn-dec-favor w-7 h-7 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-700 font-black text-sm flex items-center justify-center transition cursor-pointer" data-id="${sess.id}">-</button>
                 <input type="number" min="0" class="input-val-favor w-14 h-7 text-center font-mono font-bold text-sm bg-white border border-emerald-500/30 rounded-lg text-emerald-700 focus:outline-none focus:ring-1 focus:ring-emerald-500" value="${sess.favor || 0}" data-id="${sess.id}">
-                <button type="button" class="btn-inc-favor w-7 h-7 rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 font-black text-sm flex items-center justify-center transition cursor-pointer shadow-sm" data-id="${sess.id}">+</button>
+                <button type="button" class="btn-inc-favor w-7 h-7 rounded-xl bg-emerald-500 text-white hover:bg-emerald-600 font-black text-sm flex items-center justify-center transition cursor-pointer shadow-sm" data-id="${sess.id}">+</button>
               </div>
             </div>
 
@@ -1178,9 +1178,9 @@
                 <span class="text-xs font-bold text-rose-600">${t.no || '不同意'}</span>
               </div>
               <div class="flex items-center space-x-1.5">
-                <button type="button" class="btn-dec-against w-7 h-7 rounded-lg bg-rose-500/15 hover:bg-rose-500/25 text-rose-700 font-black text-sm flex items-center justify-center transition cursor-pointer" data-id="${sess.id}">-</button>
+                <button type="button" class="btn-dec-against w-7 h-7 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 text-rose-700 font-black text-sm flex items-center justify-center transition cursor-pointer" data-id="${sess.id}">-</button>
                 <input type="number" min="0" class="input-val-against w-14 h-7 text-center font-mono font-bold text-sm bg-white border border-rose-500/30 rounded-lg text-rose-700 focus:outline-none focus:ring-1 focus:ring-rose-500" value="${sess.against || 0}" data-id="${sess.id}">
-                <button type="button" class="btn-inc-against w-7 h-7 rounded-lg bg-rose-500 text-white hover:bg-rose-600 font-black text-sm flex items-center justify-center transition cursor-pointer shadow-sm" data-id="${sess.id}">+</button>
+                <button type="button" class="btn-inc-against w-7 h-7 rounded-xl bg-rose-500 text-white hover:bg-rose-600 font-black text-sm flex items-center justify-center transition cursor-pointer shadow-sm" data-id="${sess.id}">+</button>
               </div>
             </div>
 
@@ -1191,9 +1191,9 @@
                 <span class="text-xs font-bold text-amber-600">${t.abs || '棄票'}</span>
               </div>
               <div class="flex items-center space-x-1.5">
-                <button type="button" class="btn-dec-abstain w-7 h-7 rounded-lg bg-amber-500/15 hover:bg-amber-500/25 text-amber-700 font-black text-sm flex items-center justify-center transition cursor-pointer" data-id="${sess.id}">-</button>
+                <button type="button" class="btn-dec-abstain w-7 h-7 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-700 font-black text-sm flex items-center justify-center transition cursor-pointer" data-id="${sess.id}">-</button>
                 <input type="number" min="0" class="input-val-abstain w-14 h-7 text-center font-mono font-bold text-sm bg-white border border-amber-500/30 rounded-lg text-amber-700 focus:outline-none focus:ring-1 focus:ring-amber-500" value="${sess.abstain || 0}" data-id="${sess.id}">
-                <button type="button" class="btn-inc-abstain w-7 h-7 rounded-lg bg-amber-500 text-white hover:bg-amber-600 font-black text-sm flex items-center justify-center transition cursor-pointer shadow-sm" data-id="${sess.id}">+</button>
+                <button type="button" class="btn-inc-abstain w-7 h-7 rounded-xl bg-amber-500 text-white hover:bg-amber-600 font-black text-sm flex items-center justify-center transition cursor-pointer shadow-sm" data-id="${sess.id}">+</button>
               </div>
             </div>
           </div>

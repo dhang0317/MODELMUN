@@ -117,7 +117,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/style.css?v=2026110132">
+  <link rel="stylesheet" href="css/style.css?v=2026110133">
 </head>
 <body class="h-screen w-screen flex flex-col overflow-hidden">
 
@@ -126,7 +126,7 @@
     <div id="header-top-bar" class="px-3 sm:px-4 py-2 flex items-center justify-start gap-4 sm:gap-6 shrink-0">
       <div class="flex items-center space-x-3 shrink-0 min-w-0">
         <!-- Unified Settings Hamburger Button (Left of Logo) -->
-        <button id="btn-open-settings" type="button" class="p-1.5 rounded-lg hover:opacity-80 transition flex items-center justify-center cursor-pointer shrink-0 focus:outline-none border-0" title="全域會議與系統設定">
+        <button id="btn-open-settings" type="button" class="p-1.5 rounded-xl hover:opacity-80 transition flex items-center justify-center cursor-pointer shrink-0 focus:outline-none border-0" title="全域會議與系統設定">
           <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="4" y1="6" x2="20" y2="6"></line>
             <line x1="4" y1="12" x2="20" y2="12"></line>
@@ -306,16 +306,16 @@
         <!-- Speaking Sub-tabs Navigation Bar -->
         <div class="bg-white rounded-2xl p-2 shadow-sm border border-slate-200">
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-1.5 p-1 bg-slate-100 rounded-xl border border-slate-200 w-full">
-            <button id="btn-speaking-subtab-gsl" type="button" class="speaking-subtab-btn w-full text-center px-3 py-2.5 rounded-lg text-xs subtab-active font-bold transition cursor-pointer" data-i18n="speakingSubtabGsl">
+            <button id="btn-speaking-subtab-gsl" type="button" class="speaking-subtab-btn w-full text-center px-3 py-2.5 rounded-xl text-xs subtab-active font-bold transition cursor-pointer" data-i18n="speakingSubtabGsl">
               GSL (一般發言)
             </button>
-            <button id="btn-speaking-subtab-mod" type="button" class="speaking-subtab-btn w-full text-center px-3 py-2.5 rounded-lg text-xs font-medium transition cursor-pointer" data-i18n="speakingSubtabMod">
+            <button id="btn-speaking-subtab-mod" type="button" class="speaking-subtab-btn w-full text-center px-3 py-2.5 rounded-xl text-xs font-medium transition cursor-pointer" data-i18n="speakingSubtabMod">
               MOD (主持磋商)
             </button>
-            <button id="btn-speaking-subtab-intro" type="button" class="speaking-subtab-btn w-full text-center px-3 py-2.5 rounded-lg text-xs font-medium transition cursor-pointer" data-i18n="speakingSubtabIntro">
+            <button id="btn-speaking-subtab-intro" type="button" class="speaking-subtab-btn w-full text-center px-3 py-2.5 rounded-xl text-xs font-medium transition cursor-pointer" data-i18n="speakingSubtabIntro">
               INTRO (草案介紹)
             </button>
-            <button id="btn-speaking-subtab-procon" type="button" class="speaking-subtab-btn w-full text-center px-3 py-2.5 rounded-lg text-xs font-medium transition cursor-pointer" data-i18n="speakingSubtabProCon">
+            <button id="btn-speaking-subtab-procon" type="button" class="speaking-subtab-btn w-full text-center px-3 py-2.5 rounded-xl text-xs font-medium transition cursor-pointer" data-i18n="speakingSubtabProCon">
               PRO/CON (正反方辯論)
             </button>
           </div>
@@ -382,13 +382,13 @@
               <div id="gsl-yield-options" class="hidden border-t border-slate-100 pt-5 mt-6">
                 <div class="text-xs font-semibold text-slate-400 mb-2" data-i18n="yieldRemaining">YIELD TIME REMAINING</div>
                 <div class="flex flex-wrap items-center justify-center gap-2">
-                  <button id="btn-yield-chair" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center space-x-1.5">
+                  <button id="btn-yield-chair" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold flex items-center space-x-1.5">
                     <span data-i18n="yieldChair">Yield to the Chair</span>
                   </button>
-                  <button id="btn-yield-delegate" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center space-x-1.5">
+                  <button id="btn-yield-delegate" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold flex items-center space-x-1.5">
                     <span data-i18n="yieldDelegate">Yield to another Delegate</span>
                   </button>
-                  <button id="btn-yield-questions" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold flex items-center space-x-1.5">
+                  <button id="btn-yield-questions" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold flex items-center space-x-1.5">
                     <span data-i18n="yieldQuestions">Yield to Questions</span>
                   </button>
                 </div>
@@ -404,7 +404,7 @@
                 <h3 class="font-bold text-slate-800 text-base" data-i18n="upcomingSpeakers">Upcoming Speakers</h3>
                 <span id="badge-queue-count" class="text-xs text-slate-400">0 queued</span>
               </div>
-              <button id="btn-open-add-speaker" class="px-3.5 py-1.5 bg-primary text-white rounded-lg text-xs font-semibold hover:bg-primary-dark flex items-center space-x-1.5 cursor-pointer">
+              <button id="btn-open-add-speaker" class="px-3.5 py-1.5 bg-primary text-white rounded-xl text-xs font-semibold hover:bg-primary-dark flex items-center space-x-1.5 cursor-pointer">
                 <span data-i18n="addSpeaker">Add Speaker</span>
               </button>
             </div>
@@ -479,7 +479,7 @@
                   </div>
                 </div>
                 <div class="flex items-center gap-1.5">
-                  <button id="btn-mod-add-speaker" class="px-3.5 py-1.5 bg-primary text-white rounded-lg text-xs font-semibold hover:bg-primary-dark flex items-center space-x-1.5 cursor-pointer">
+                  <button id="btn-mod-add-speaker" class="px-3.5 py-1.5 bg-primary text-white rounded-xl text-xs font-semibold hover:bg-primary-dark flex items-center space-x-1.5 cursor-pointer">
                     <span data-i18n="addSpeaker">新增代表</span>
                   </button>
                 </div>
@@ -550,10 +550,10 @@
                 <!-- Side Switcher (Pro vs Con) - Hidden for automatic alternating order -->
                 <div class="hidden items-center justify-between border-b pb-4 mb-4">
                   <div class="grid grid-cols-2 gap-2 flex-1 max-w-xs">
-                    <button id="btn-procon-side-pro" type="button" class="w-full text-center px-4 py-2 rounded-lg text-xs font-bold transition bg-emerald-600 text-white shadow-sm cursor-pointer" data-i18n="proSide">
+                    <button id="btn-procon-side-pro" type="button" class="w-full text-center px-4 py-2 rounded-xl text-xs font-bold transition bg-emerald-600 text-white shadow-sm cursor-pointer" data-i18n="proSide">
                       正方發言
                     </button>
-                    <button id="btn-procon-side-con" type="button" class="w-full text-center px-4 py-2 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900 bg-slate-100 cursor-pointer" data-i18n="conSide">
+                    <button id="btn-procon-side-con" type="button" class="w-full text-center px-4 py-2 rounded-xl text-xs font-bold transition text-slate-600 hover:text-slate-900 bg-slate-100 cursor-pointer" data-i18n="conSide">
                       反方發言
                     </button>
                   </div>
@@ -611,7 +611,7 @@
                     <h4 class="font-bold text-slate-800 text-sm" data-i18n="proQueueTitle">正方</h4>
                     <span id="badge-pro-queue-count" class="text-xs text-slate-400">0</span>
                   </div>
-                  <button id="btn-procon-add-pro" type="button" class="px-2.5 py-1 bg-emerald-600 text-white rounded-lg text-xs font-semibold hover:bg-emerald-700 cursor-pointer pointer-events-auto">
+                  <button id="btn-procon-add-pro" type="button" class="px-2.5 py-1 bg-emerald-600 text-white rounded-xl text-xs font-semibold hover:bg-emerald-700 cursor-pointer pointer-events-auto">
                     <span class="pointer-events-none" data-i18n="addProSpeaker">+ 加入正方</span>
                   </button>
                 </div>
@@ -628,7 +628,7 @@
                     <h4 class="font-bold text-slate-800 text-sm" data-i18n="conQueueTitle">反方</h4>
                     <span id="badge-con-queue-count" class="text-xs text-slate-400">0</span>
                   </div>
-                  <button id="btn-procon-add-con" type="button" class="px-2.5 py-1 bg-rose-600 text-white rounded-lg text-xs font-semibold hover:bg-rose-700 cursor-pointer pointer-events-auto">
+                  <button id="btn-procon-add-con" type="button" class="px-2.5 py-1 bg-rose-600 text-white rounded-xl text-xs font-semibold hover:bg-rose-700 cursor-pointer pointer-events-auto">
                     <span class="pointer-events-none" data-i18n="addConSpeaker">+ 加入反方</span>
                   </button>
                 </div>
@@ -736,7 +736,7 @@
           <div class="flex items-center justify-between pb-3 border-b border-subtle">
             <div></div>
             <div class="flex items-center space-x-2">
-              <button id="btn-add-motion" class="px-4 py-1.5 border border-subtle bg-surface-secondary text-content-primary rounded-lg text-xs font-medium flex items-center space-x-1 transition hover:bg-surface-tertiary cursor-pointer">
+              <button id="btn-add-motion" class="px-4 py-1.5 border border-subtle bg-surface-secondary text-content-primary rounded-xl text-xs font-medium flex items-center space-x-1 transition hover:bg-surface-tertiary cursor-pointer">
                 
                 <span data-i18n="addMotion">新增動議</span>
               </button>
@@ -756,9 +756,9 @@
         <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 flex-1 flex flex-col min-h-0">
           <div class="flex flex-wrap items-center justify-between gap-3 pb-3 mb-3 border-b border-slate-200 shrink-0">
             <div class="flex items-center space-x-2">
-              <button id="btn-set-all-uncalled" type="button" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-bold transition border border-slate-300 cursor-pointer" data-i18n="setAllUncalled">全設為未點名</button>
-              <button id="btn-set-all-present" type="button" class="px-3 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-700 font-bold rounded-lg text-xs transition border border-emerald-500/50 cursor-pointer" data-i18n="setAllPresent">全設為出席</button>
-              <button id="btn-set-all-absent" type="button" class="px-3 py-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-700 font-bold rounded-lg text-xs transition border border-rose-500/50 cursor-pointer" data-i18n="setAllAbsent">全設為缺席</button>
+              <button id="btn-set-all-uncalled" type="button" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition border border-slate-300 cursor-pointer" data-i18n="setAllUncalled">全設為未點名</button>
+              <button id="btn-set-all-present" type="button" class="px-3 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-700 font-bold rounded-xl text-xs transition border border-emerald-500/50 cursor-pointer" data-i18n="setAllPresent">全設為出席</button>
+              <button id="btn-set-all-absent" type="button" class="px-3 py-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-700 font-bold rounded-xl text-xs transition border border-rose-500/50 cursor-pointer" data-i18n="setAllAbsent">全設為缺席</button>
             </div>
           </div>
           <div id="grid-rollcall-delegates" class="flex-1 overflow-y-auto custom-scroll pr-1 grid grid-cols-1 md:grid-cols-2 gap-3.5 min-h-0">
@@ -778,10 +778,10 @@
           <div class="flex flex-wrap items-center gap-2">
             <!-- View Sub-tabs -->
             <div id="voting-subtabs-pill" class="flex items-center space-x-1 p-0.5 sm:p-1 bg-slate-100 rounded-lg sm:rounded-xl border border-slate-200">
-              <button id="btn-voting-subtab-rollcall" class="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg text-xs transition cursor-pointer" data-i18n="subtabRollcall">
+              <button id="btn-voting-subtab-rollcall" class="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-xs transition cursor-pointer" data-i18n="subtabRollcall">
                 點名
               </button>
-              <button id="btn-voting-subtab-session" class="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg text-xs transition cursor-pointer" data-i18n="subtabSession">
+              <button id="btn-voting-subtab-session" class="px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl text-xs transition cursor-pointer" data-i18n="subtabSession">
                 會期
               </button>
             </div>
@@ -789,27 +789,27 @@
             <!-- Stage Buttons (Roll Call only) - Hidden as requested -->
             <div id="vote-stages-group" class="hidden flex items-center space-x-1.5">
               <span class="text-xs text-slate-400 uppercase tracking-wider ml-1" data-i18n="stage">Stage:</span>
-              <button id="vote-stage-r1" class="px-3 py-1.5 bg-primary text-white rounded-lg text-xs transition" data-i18n="stage1st">1st Round</button>
+              <button id="vote-stage-r1" class="px-3 py-1.5 bg-primary text-white rounded-xl text-xs transition" data-i18n="stage1st">1st Round</button>
             </div>
 
             <!-- Session Controls (Visible when in Session mode) -->
             <div id="vote-session-top-controls" class="hidden flex items-center space-x-2 pl-2 border-l border-slate-200">
               <span class="text-xs font-bold text-slate-500 uppercase tracking-wider" data-i18n="sessionCountLabel">會期數量：</span>
               <div class="flex items-center space-x-1">
-                <button id="btn-session-dec" type="button" class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center transition border border-slate-300 cursor-pointer text-xs sm:text-sm">-</button>
+                <button id="btn-session-dec" type="button" class="w-6 h-6 sm:w-7 sm:h-7 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center transition border border-slate-300 cursor-pointer text-xs sm:text-sm">-</button>
                 <input id="input-session-count" type="number" min="1" max="20" value="3" class="w-10 sm:w-12 h-6 sm:h-7 text-center text-xs font-bold border border-slate-300 rounded-lg bg-transparent text-slate-800 focus:outline-none focus:ring-1 focus:ring-primary">
-                <button id="btn-session-inc" type="button" class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center transition border border-slate-300 cursor-pointer text-xs sm:text-sm">+</button>
+                <button id="btn-session-inc" type="button" class="w-6 h-6 sm:w-7 sm:h-7 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold flex items-center justify-center transition border border-slate-300 cursor-pointer text-xs sm:text-sm">+</button>
               </div>
-              <button id="btn-reset-current-session" type="button" class="ml-1 sm:ml-2 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[11px] sm:text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition cursor-pointer" data-i18n="resetCurrentSession">重設當前會期票數</button>
-              <button id="btn-reset-all-sessions" type="button" class="ml-1 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[11px] sm:text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition cursor-pointer" data-i18n="resetAllSessions">重設所有會期票數</button>
+              <button id="btn-reset-current-session" type="button" class="ml-1 sm:ml-2 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[11px] sm:text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-xl border border-rose-200 transition cursor-pointer" data-i18n="resetCurrentSession">重設當前會期票數</button>
+              <button id="btn-reset-all-sessions" type="button" class="ml-1 px-2 py-0.5 sm:px-2.5 sm:py-1 text-[11px] sm:text-xs font-semibold text-rose-600 hover:bg-rose-50 rounded-xl border border-rose-200 transition cursor-pointer" data-i18n="resetAllSessions">重設所有會期票數</button>
             </div>
           </div>
 
           <div class="flex items-center space-x-2 text-xs">
-            <button id="btn-adopt-vote" type="button" class="px-3 sm:px-3.5 py-1 sm:py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg shadow-sm transition flex items-center space-x-1.5 cursor-pointer text-xs" title="通過當前表決 (Pass Vote)">
+            <button id="btn-adopt-vote" type="button" class="px-3 sm:px-3.5 py-1 sm:py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-sm transition flex items-center space-x-1.5 cursor-pointer text-xs" title="通過當前表決 (Pass Vote)">
               <span data-i18n="concludeVote">通過</span>
             </button>
-            <button id="btn-reset-votes" class="px-2.5 sm:px-3 py-1 sm:py-1.5 text-rose-600 hover:bg-rose-50 rounded-lg border border-rose-200 transition flex items-center space-x-1 cursor-pointer text-xs" data-i18n="resetVotes">
+            <button id="btn-reset-votes" class="px-2.5 sm:px-3 py-1 sm:py-1.5 text-rose-600 hover:bg-rose-50 rounded-xl border border-rose-200 transition flex items-center space-x-1 cursor-pointer text-xs" data-i18n="resetVotes">
               <span>Reset</span>
             </button>
           </div>
@@ -841,7 +841,7 @@
                 <option value="unsc9">Security Council (9/15)</option>
                 <option value="consensus">Consensus (All Votes)</option>
               </select>
-              <button id="btn-motion-vote-execute" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium transition shadow-sm hidden flex items-center space-x-1.5 text-xs">
+              <button id="btn-motion-vote-execute" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-medium transition shadow-sm hidden flex items-center space-x-1.5 text-xs">
                 <span id="btn-motion-vote-execute-text" data-i18n="executeMotionBtn">執行動議</span>
               </button>
             </div>
@@ -874,7 +874,7 @@
                 <span id="vote-progress-label-favor">Favor: 0%</span>
                 <div class="flex items-center space-x-1.5">
                   <span id="vote-verdict" class="text-xs font-bold tracking-wide text-slate-600">PENDING</span>
-                  <button id="btn-quick-pass" type="button" class="px-2 py-0.5 bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold rounded shadow-sm transition hidden cursor-pointer" data-i18n="concludeVote">
+                  <button id="btn-quick-pass" type="button" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold rounded-xl shadow-sm transition hidden cursor-pointer" data-i18n="concludeVote">
                     通過 (Pass)
                   </button>
                 </div>
@@ -947,7 +947,7 @@
       <div>
         <h2 class="font-bold text-lg tracking-wide">NNKIEH MUN</h2>
       </div>
-      <button id="btn-close-drawer" class="p-1.5 hover:opacity-80 rounded-lg text-white" aria-label="Close">
+      <button id="btn-close-drawer" class="p-1.5 hover:opacity-80 rounded-xl text-white" aria-label="Close">
         <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -1080,7 +1080,7 @@
     <div class="bg-slate-800 text-white rounded-2xl max-w-4xl w-full p-6 shadow-2xl space-y-4 max-h-[85vh] flex flex-col border border-slate-700">
       <div class="flex items-center justify-between border-b border-slate-700 pb-3">
         <h3 class="font-bold text-lg text-slate-100" data-i18n="addSpeaker">Add Speaker</h3>
-        <button type="button" class="btn-close-modal p-1.5 text-slate-300 hover:text-white rounded-lg transition cursor-pointer" aria-label="Close">✕</button>
+        <button type="button" class="btn-close-modal p-1.5 text-slate-300 hover:text-white rounded-xl transition cursor-pointer" aria-label="Close">✕</button>
       </div>
       <input id="search-queue-speaker" type="text" data-i18n-placeholder="searchSpeakerPlaceholder" placeholder="搜尋出席代表國..." class="w-full px-3 py-2 bg-white border border-slate-300 text-slate-800 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate-400">
       <div id="list-selectable-speakers" class="flex-1 overflow-y-auto custom-scroll pr-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 content-start">
@@ -1108,8 +1108,8 @@
         </div>
       </div>
       <div class="flex justify-end space-x-2 pt-2">
-        <button class="btn-close-modal px-4 py-2 border border-slate-700 hover:bg-slate-700 rounded-lg text-xs font-semibold text-slate-300" data-i18n="cancel">Cancel</button>
-        <button id="btn-save-speaking-time" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-bold border border-slate-600" data-i18n="apply">Apply</button>
+        <button class="btn-close-modal px-4 py-2 border border-slate-700 hover:bg-slate-700 rounded-xl text-xs font-semibold text-slate-300" data-i18n="cancel">Cancel</button>
+        <button id="btn-save-speaking-time" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-xs font-bold border border-slate-600" data-i18n="apply">Apply</button>
       </div>
     </div>
   </div>
@@ -1133,8 +1133,8 @@
         </div>
       </div>
       <div class="flex justify-end space-x-2 pt-2">
-        <button class="btn-close-modal px-4 py-2 border border-slate-700 hover:bg-slate-700 rounded-lg text-xs font-semibold text-slate-300" data-i18n="cancel">Cancel</button>
-        <button id="btn-save-mod-config" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-bold border border-slate-600" data-i18n="saveAndUpdate">Save & Update</button>
+        <button class="btn-close-modal px-4 py-2 border border-slate-700 hover:bg-slate-700 rounded-xl text-xs font-semibold text-slate-300" data-i18n="cancel">Cancel</button>
+        <button id="btn-save-mod-config" class="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-xs font-bold border border-slate-600" data-i18n="saveAndUpdate">Save & Update</button>
       </div>
     </div>
   </div>
@@ -1226,8 +1226,8 @@
         </div>
       </div>
       <div class="flex justify-end space-x-2 pt-2">
-        <button class="btn-close-modal px-4 py-2 border border-slate-700 hover:bg-slate-700 rounded-lg text-xs font-semibold text-slate-300" data-i18n="cancel">Cancel</button>
-        <button id="btn-submit-motion" class="px-5 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg text-xs font-bold border border-slate-600" data-i18n="submit">Submit</button>
+        <button class="btn-close-modal px-4 py-2 border border-slate-700 hover:bg-slate-700 rounded-xl text-xs font-semibold text-slate-300" data-i18n="cancel">Cancel</button>
+        <button id="btn-submit-motion" class="px-5 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-xl text-xs font-bold border border-slate-600" data-i18n="submit">Submit</button>
       </div>
     </div>
   </div>
@@ -1239,7 +1239,7 @@
         <h3 class="text-base text-slate-100 flex items-center space-x-2">
           <span data-i18n="configureVoting">Configure Voting</span>
         </h3>
-        <button type="button" class="btn-close-modal text-slate-300 hover:text-white p-1.5 rounded-lg transition cursor-pointer" aria-label="Close">✕</button>
+        <button type="button" class="btn-close-modal text-slate-300 hover:text-white p-1.5 rounded-xl transition cursor-pointer" aria-label="Close">✕</button>
       </div>
 
       <!-- Voting Type: Procedural vs Substantive -->
@@ -1287,8 +1287,8 @@
       </div>
 
       <div class="flex justify-end space-x-2 pt-2 border-t border-slate-700">
-        <button type="button" class="btn-close-modal px-4 py-2 border border-slate-700 hover:bg-slate-700 rounded-lg text-xs text-slate-300" data-i18n="cancel">Cancel</button>
-        <button id="btn-save-vote-config" type="button" class="px-5 py-2 bg-slate-100 hover:bg-white text-slate-900 rounded-lg text-xs font-medium transition" data-i18n="save">Save Settings</button>
+        <button type="button" class="btn-close-modal px-4 py-2 border border-slate-700 hover:bg-slate-700 rounded-xl text-xs text-slate-300" data-i18n="cancel">Cancel</button>
+        <button id="btn-save-vote-config" type="button" class="px-5 py-2 bg-slate-100 hover:bg-white text-slate-900 rounded-xl text-xs font-medium transition" data-i18n="save">Save Settings</button>
       </div>
     </div>
   </div>
@@ -1386,7 +1386,7 @@
             </div>
             <div class="flex items-center space-x-3">
               <input id="cfg-slider-scale" type="range" min="0.5" max="2.0" step="0.05" value="0.95" class="w-full accent-white cursor-pointer h-2 bg-zinc-700 rounded-lg">
-              <button id="cfg-btn-reset-scale" type="button" class="text-xs text-zinc-400 hover:text-white whitespace-nowrap px-2 py-1 rounded border border-zinc-800 cursor-pointer" data-i18n="cfgResetScale">重設 95%</button>
+              <button id="cfg-btn-reset-scale" type="button" class="text-xs text-zinc-400 hover:text-white whitespace-nowrap px-2.5 py-1 rounded-xl border border-zinc-800 cursor-pointer" data-i18n="cfgResetScale">重設 95%</button>
             </div>
           </div>
 
@@ -1434,21 +1434,21 @@
           </div>
 
           <!-- Activity Log -->
-          <button id="cfg-btn-activity-log" type="button" class="w-full p-3.5 rounded-2xl border border-zinc-800 bg-zinc-950/60 hover:bg-zinc-800/80 text-left transition flex items-center justify-between cursor-pointer">
+          <button id="cfg-btn-activity-log" type="button" class="w-full p-3.5 rounded-xl border border-zinc-800 bg-zinc-950/60 hover:bg-zinc-800/80 text-left transition flex items-center justify-between cursor-pointer">
             <span class="text-xs font-bold text-white" data-i18n="activityLog">操作紀錄</span>
             <span class="text-xs text-zinc-400" data-i18n="openAction">開啟</span>
           </button>
 
           <!-- Backup & Restore -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-            <button id="cfg-btn-export-file" type="button" class="p-3.5 rounded-2xl border border-zinc-800 bg-zinc-950/60 hover:bg-zinc-800/80 text-left transition flex items-center space-x-3 cursor-pointer">
+            <button id="cfg-btn-export-file" type="button" class="p-3.5 rounded-xl border border-zinc-800 bg-zinc-950/60 hover:bg-zinc-800/80 text-left transition flex items-center space-x-3 cursor-pointer">
               
               <div>
                 <div class="text-xs font-bold text-white" data-i18n="cfgExportJsonTitle">匯出會議設定檔</div>
                 <div class="text-[10px] text-zinc-400" data-i18n="cfgExportJsonDesc">下載為本機 JSON 備份</div>
               </div>
             </button>
-            <button id="cfg-btn-import-file" type="button" class="p-3.5 rounded-2xl border border-zinc-800 bg-zinc-950/60 hover:bg-zinc-800/80 text-left transition flex items-center space-x-3 cursor-pointer">
+            <button id="cfg-btn-import-file" type="button" class="p-3.5 rounded-xl border border-zinc-800 bg-zinc-950/60 hover:bg-zinc-800/80 text-left transition flex items-center space-x-3 cursor-pointer">
               
               <div>
                 <div class="text-xs font-bold text-white" data-i18n="cfgImportJsonTitle">匯入會議設定檔</div>
@@ -1463,7 +1463,7 @@
               <div class="text-xs font-bold text-rose-400" data-i18n="cfgDangerZoneTitle">重置會議進度 (Danger Zone)</div>
               <div class="text-[10px] text-zinc-500" data-i18n="cfgDangerZoneDesc">將會議重置為預設空白範本，清除所有點名與投票紀錄</div>
             </div>
-            <button id="cfg-btn-reset-conference" type="button" class="px-3 py-1.5 rounded-lg border border-rose-500/30 text-rose-400 hover:bg-rose-500/10 text-xs font-semibold transition cursor-pointer" data-i18n="cfgResetConferenceBtn">
+            <button id="cfg-btn-reset-conference" type="button" class="px-3 py-1.5 rounded-xl border border-rose-500/30 text-rose-400 hover:bg-rose-500/10 text-xs font-semibold transition cursor-pointer" data-i18n="cfgResetConferenceBtn">
               重置會議
             </button>
           </div>
@@ -1515,7 +1515,7 @@
 
         <div class="space-y-3 pt-2">
           <!-- Button 1: Google Login -->
-          <button id="btn-portal-google-login" type="button" class="w-full flex items-center justify-center space-x-3 px-5 py-3.5 rounded-2xl bg-white hover:bg-zinc-100 text-zinc-900 font-semibold text-sm transition shadow-lg hover:shadow-xl cursor-pointer">
+          <button id="btn-portal-google-login" type="button" class="w-full flex items-center justify-center space-x-3 px-5 py-3.5 rounded-xl bg-white hover:bg-zinc-100 text-zinc-900 font-semibold text-sm transition shadow-lg hover:shadow-xl cursor-pointer">
             <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
               <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -1526,7 +1526,7 @@
           </button>
 
           <!-- Button 2: Guest Continue (免登入選項) -->
-          <button id="btn-portal-guest-continue" type="button" class="w-full flex items-center justify-center space-x-2 px-5 py-3.5 rounded-2xl bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-sm transition border border-zinc-700/70 hover:border-zinc-500 cursor-pointer">
+          <button id="btn-portal-guest-continue" type="button" class="w-full flex items-center justify-center space-x-2 px-5 py-3.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white font-medium text-sm transition border border-zinc-700/70 hover:border-zinc-500 cursor-pointer">
             <span>免登入直接體驗 (Continue as Guest)</span>
             
           </button>
@@ -1554,18 +1554,18 @@
     <!-- Utilities, Dialogs & Visual Effects -->
     <script src="js/dialogs.js?v=2026110105"></script>
     <script src="js/confetti.js?v=2026110103"></script>
-    <script src="js/theme.js?v=2026110104"></script>
-    <script src="js/modals.js?v=2026110104"></script>
+    <script src="js/theme.js?v=2026110105"></script>
+    <script src="js/modals.js?v=2026110105"></script>
     <script src="js/p2p.js?v=2026103102"></script>
     <!-- View Renderers -->
     <script src="js/views/header.js?v=2026110106"></script>
-    <script src="js/views/setup.js?v=2026110106"></script>
-    <script src="js/views/gsl.js?v=2026110103"></script>
+    <script src="js/views/setup.js?v=2026110107"></script>
+    <script src="js/views/gsl.js?v=2026110104"></script>
     <script src="js/views/mod.js?v=2026110103"></script>
     <script src="js/views/unmod.js?v=2026110103"></script>
     <script src="js/views/single.js?v=2026110103"></script>
-    <script src="js/views/motions.js?v=2026110115"></script>
-    <script src="js/views/voting.js?v=2026110108"></script>
+    <script src="js/views/motions.js?v=2026110116"></script>
+    <script src="js/views/voting.js?v=2026110109"></script>
     <!-- Events, Auth & Entry Point -->
     <script src="js/events.js?v=2026110115"></script>
     <script src="js/auth.js?v=2026110104"></script>

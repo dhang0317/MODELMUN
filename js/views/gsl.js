@@ -25,7 +25,7 @@
     // Update active button styling
     const updateBtn = (btn, isActive) => {
       if (!btn) return;
-      btn.className = `speaking-subtab-btn w-full text-center px-3 py-2.5 rounded-lg text-xs transition cursor-pointer ${
+      btn.className = `speaking-subtab-btn w-full text-center px-3 py-2.5 rounded-xl text-xs transition cursor-pointer ${
         isActive ? 'subtab-active font-bold' : 'font-medium'
       }`;
     };
@@ -113,10 +113,10 @@
             <span class="text-sm sm:text-base font-bold text-slate-800 truncate">${getCountryDisplayName(c)}</span>
           </div>
           <div class="flex items-center space-x-2 shrink-0 ml-2">
-            <button class="btn-top-queue p-1.5 text-xs text-slate-400 hover:text-primary rounded-lg transition" title="Move to Next">
+            <button class="btn-top-queue p-1.5 text-xs text-slate-400 hover:text-primary rounded-xl transition" title="Move to Next">
               ▲
             </button>
-            <button class="btn-del-queue p-1.5 text-xs text-slate-400 hover:text-rose-500 rounded-lg transition" title="Delete">
+            <button class="btn-del-queue p-1.5 text-xs text-slate-400 hover:text-rose-500 rounded-xl transition" title="Delete">
               ✕
             </button>
           </div>
@@ -229,11 +229,11 @@
 
     if (btnSidePro && btnSideCon) {
       if (isPro) {
-        btnSidePro.className = 'w-full text-center px-4 py-2 rounded-lg text-xs font-bold transition bg-emerald-600 text-white shadow-sm cursor-pointer';
-        btnSideCon.className = 'w-full text-center px-4 py-2 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900 bg-slate-100 cursor-pointer';
+        btnSidePro.className = 'w-full text-center px-4 py-2 rounded-xl text-xs font-bold transition bg-emerald-600 text-white shadow-sm cursor-pointer';
+        btnSideCon.className = 'w-full text-center px-4 py-2 rounded-xl text-xs font-bold transition text-slate-600 hover:text-slate-900 bg-slate-100 cursor-pointer';
       } else {
-        btnSidePro.className = 'w-full text-center px-4 py-2 rounded-lg text-xs font-bold transition text-slate-600 hover:text-slate-900 bg-slate-100 cursor-pointer';
-        btnSideCon.className = 'w-full text-center px-4 py-2 rounded-lg text-xs font-bold transition bg-rose-600 text-white shadow-sm cursor-pointer';
+        btnSidePro.className = 'w-full text-center px-4 py-2 rounded-xl text-xs font-bold transition text-slate-600 hover:text-slate-900 bg-slate-100 cursor-pointer';
+        btnSideCon.className = 'w-full text-center px-4 py-2 rounded-xl text-xs font-bold transition bg-rose-600 text-white shadow-sm cursor-pointer';
       }
     }
 
@@ -292,7 +292,7 @@
             <img src="${getFlagUrl(c)}" class="w-6 h-4 object-cover rounded shadow-sm shrink-0">
             <span class="text-xs font-bold text-slate-800 truncate">${getCountryDisplayName(c)}</span>
           </div>
-          <button class="btn-del-pro p-1 text-xs text-slate-400 hover:text-rose-500 rounded transition" title="Delete">✕</button>
+          <button class="btn-del-pro p-1 text-xs text-slate-400 hover:text-rose-500 rounded-xl transition" title="Delete">✕</button>
         `;
         item.querySelector('.select-pro-item').addEventListener('click', () => {
           setProConSpeaker(c, 'pro');
@@ -322,7 +322,7 @@
             <img src="${getFlagUrl(c)}" class="w-6 h-4 object-cover rounded shadow-sm shrink-0">
             <span class="text-xs font-bold text-slate-800 truncate">${getCountryDisplayName(c)}</span>
           </div>
-          <button class="btn-del-con p-1 text-xs text-slate-400 hover:text-rose-500 rounded transition" title="Delete">✕</button>
+          <button class="btn-del-con p-1 text-xs text-slate-400 hover:text-rose-500 rounded-xl transition" title="Delete">✕</button>
         `;
         item.querySelector('.select-con-item').addEventListener('click', () => {
           setProConSpeaker(c, 'con');

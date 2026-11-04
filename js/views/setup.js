@@ -53,7 +53,7 @@
             <span class="text-base sm:text-lg font-bold text-slate-100 truncate">${getCountryDisplayName(c)}</span>
             <span class="text-xs text-slate-400 font-mono shrink-0">(${c.id})</span>
           </div>
-          <button class="btn-add-country-item px-2.5 py-1 text-xs font-semibold rounded-lg shrink-0 ml-2 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 cursor-pointer">＋</button>
+          <button class="btn-add-country-item px-2.5 py-1 text-xs font-semibold rounded-xl shrink-0 ml-2 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-500/10 cursor-pointer">＋</button>
         `;
         const addBtn = row.querySelector('.btn-add-country-item');
         if (addBtn) {
@@ -79,7 +79,7 @@
         
         let powerBadge = '';
         if (c.powerStatus === 'observer') {
-          powerBadge = `<span class="cursor-pointer text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-700 text-slate-200 hover:bg-slate-600 border border-slate-600" title="Click to cycle status">${t.observer}</span>`;
+          powerBadge = `<span class="cursor-pointer text-xs font-bold px-2.5 py-1 rounded-xl bg-slate-700 text-slate-200 hover:bg-slate-600 border border-slate-600" title="Click to cycle status">${t.observer}</span>`;
         }
 
         row.innerHTML = `
@@ -89,7 +89,7 @@
           </div>
           <div class="flex items-center space-x-2.5 shrink-0 ml-2">
             ${powerBadge ? `<div class="status-toggle-btn">${powerBadge}</div>` : ''}
-            <button class="btn-remove-country px-2.5 py-1 text-xs font-semibold text-rose-400 hover:bg-rose-500/10 rounded-lg border border-rose-500/30">✕</button>
+            <button class="btn-remove-country px-2.5 py-1 text-xs font-semibold text-rose-400 hover:bg-rose-500/10 rounded-xl border border-rose-500/30">✕</button>
           </div>
         `;
 
