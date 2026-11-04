@@ -200,15 +200,19 @@
     if (!state.activeSessionId) {
       state.activeSessionId = 1;
     }
+    // 自動清空所有會期票數，開啟新投票無需手動按清空
+    if (Array.isArray(state.sessionVotes)) {
+      state.sessionVotes.forEach(s => {
+        s.favor = 0;
+        s.against = 0;
+        s.abstain = 0;
+        s.status = '';
+      });
+    }
     const currentSess = state.sessionVotes.find(s => s.id === state.activeSessionId) || state.sessionVotes[0];
     const motionName = formatMotionType(motion.type);
     if (currentSess) {
       currentSess.note = `${motionName} (${motion.proposer})`;
-      // 自動清空當前會期票數，開啟新投票無需手動按清空
-      currentSess.favor = 0;
-      currentSess.against = 0;
-      currentSess.abstain = 0;
-      currentSess.status = '';
     }
 
     // Auto-populate current vote topic from the motion
@@ -294,15 +298,7 @@
   }
 
   function executeMotion(motion, index) {
-    if (!ensureRollCallDone()) return;
-
-    // Remove the motion from floor first
-    if (typeof index === 'number' && index >= 0) {
-      state.motions.splice(index, 1);
-      saveToLocalStorage();
-    }
-
-    // Auto-clear vote tallies once a motion is decided
+    // 只要結算動議投票，優先清空所有會期票數與點名選票
     state.selectedCountries.forEach(c => {
       c.vote = 'none';
       c.hasRights = false;
@@ -310,14 +306,26 @@
     state.voteStage = 'r1';
     state.activeVoterIndex = 0;
 
-    // 清空當前會期票數（或所有會期票數）
     if (Array.isArray(state.sessionVotes)) {
       state.sessionVotes.forEach(s => {
         s.favor = 0;
         s.against = 0;
         s.abstain = 0;
         s.status = '';
+        s.note = '';
       });
+    }
+    state.votingMotion = null;
+    if (typeof renderSessionVotesGrid === 'function') renderSessionVotesGrid();
+    if (typeof updateScoreboardAndVerdict === 'function') updateScoreboardAndVerdict();
+    saveToLocalStorage(true, true);
+
+    if (!ensureRollCallDone()) return;
+
+    // Remove the motion from floor first
+    if (typeof index === 'number' && index >= 0) {
+      state.motions.splice(index, 1);
+      saveToLocalStorage();
     }
     const proposerCountry = motion.proposer
       ? state.selectedCountries.find(c => getCountryDisplayName(c) === motion.proposer)
@@ -410,13 +418,13 @@
       state.voteStage = 'r1';
       state.activeVoterIndex = 0;
       if (Array.isArray(state.sessionVotes)) {
-        const curSess = state.sessionVotes.find(s => s.id === state.activeSessionId) || state.sessionVotes[0];
-        if (curSess) {
-          curSess.favor = 0;
-          curSess.against = 0;
-          curSess.abstain = 0;
-          curSess.status = '';
-        }
+        state.sessionVotes.forEach(s => {
+          s.favor = 0;
+          s.against = 0;
+          s.abstain = 0;
+          s.status = '';
+          s.note = '';
+        });
       }
       switchTab('vote');
       setTimeout(() => {
@@ -501,6 +509,18 @@
 
   function removeMotion(index) {
     state.motions.splice(index, 1);
+    if (Array.isArray(state.sessionVotes)) {
+      state.sessionVotes.forEach(s => {
+        s.favor = 0;
+        s.against = 0;
+        s.abstain = 0;
+        s.status = '';
+      });
+    }
+    state.selectedCountries.forEach(c => {
+      c.vote = 'none';
+      c.hasRights = false;
+    });
     saveToLocalStorage(true, true);
     renderAll();
   }

@@ -1045,24 +1045,24 @@
     const btnResetVotes = document.getElementById('btn-reset-votes');
     if (btnResetVotes) {
       btnResetVotes.addEventListener('click', () => {
-        // 1. Reset Rollcall & Substantive Ballots for all delegates
-        state.selectedCountries.forEach(c => {
-          c.vote = 'none';
-          c.hasRights = false;
-        });
-        state.voteStage = 'r1';
-        state.activeVoterIndex = 0;
-
-        // 2. If currently in Session voting subtab, also reset the active session votes
-        if (state.votingSubtab === 'session' && Array.isArray(state.sessionVotes)) {
-          const curSess = state.sessionVotes.find(s => s.id === state.activeSessionId) || state.sessionVotes[0];
-          if (curSess) {
-            curSess.favor = 0;
-            curSess.against = 0;
-            curSess.abstain = 0;
+        if (typeof window.clearAllSessionVotes === 'function') {
+          window.clearAllSessionVotes();
+        } else {
+          state.selectedCountries.forEach(c => {
+            c.vote = 'none';
+            c.hasRights = false;
+          });
+          state.voteStage = 'r1';
+          state.activeVoterIndex = 0;
+          if (Array.isArray(state.sessionVotes)) {
+            state.sessionVotes.forEach(s => {
+              s.favor = 0;
+              s.against = 0;
+              s.abstain = 0;
+              s.status = '';
+            });
           }
         }
-
         saveToLocalStorage(true, true);
         renderAll();
       });
@@ -1144,13 +1144,10 @@
           confirmText: t.consensusPassConfirm,
           cancelText: t.consensusObjectionCancel,
           onConfirm: () => {
-            // Adopt by consensus
-            state.selectedCountries.forEach(c => {
-              if (c.powerStatus !== 'observer' && c.attendance !== 'absent') {
-                c.vote = 'favor';
-                c.hasRights = false;
-              }
-            });
+            // Adopt by consensus & clear session votes
+            if (typeof window.clearAllSessionVotes === 'function') {
+              window.clearAllSessionVotes();
+            }
             saveToLocalStorage(true, true);
             renderAll();
             customAlert(t.consensusVote, t.consensusAdoptedAlert);

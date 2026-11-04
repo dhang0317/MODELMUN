@@ -95,8 +95,8 @@
     }, duration);
   }
 
-  function customAlert(title, message) {
-    showModal({ title, message, cancelText: false });
+  function customAlert(title, message, onConfirm = null) {
+    showModal({ title, message, cancelText: false, onConfirm });
   }
 
   function customPrompt(title, message, defaultVal, callback) {

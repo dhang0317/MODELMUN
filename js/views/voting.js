@@ -1,4 +1,23 @@
   // Check if roll call voting for a motion has finished, determine pass/fail, and auto-navigate
+  function clearAllSessionVotes() {
+    if (Array.isArray(state.sessionVotes)) {
+      state.sessionVotes.forEach(s => {
+        s.favor = 0;
+        s.against = 0;
+        s.abstain = 0;
+        s.status = '';
+        s.note = '';
+      });
+    }
+    state.selectedCountries.forEach(c => {
+      c.vote = 'none';
+      c.hasRights = false;
+    });
+    state.voteStage = 'r1';
+    state.activeVoterIndex = 0;
+  }
+  window.clearAllSessionVotes = clearAllSessionVotes;
+
   function checkMotionVotingAutoFinish(eligibleVoters, favorCount, againstCount, remainingToVote, requiredMajority) {
     if (state.activeVoteTarget !== 'motion' || state.currentTab !== 'vote') return;
     const curMot = state.votingMotion || (state.motions && state.motions[0]);
@@ -96,20 +115,45 @@
         verdictElem.className = 'text-xs sm:text-sm font-black tracking-wide text-rose-600';
       }
     }
+    // 結算投票時同步清空所有會期票數
+    if (Array.isArray(state.sessionVotes)) {
+      state.sessionVotes.forEach(s => {
+        s.favor = 0;
+        s.against = 0;
+        s.abstain = 0;
+        s.status = '';
+        s.note = '';
+      });
+    }
     saveToLocalStorage(true, true);
+    renderSessionVotesGrid();
 
     if (isPassed) {
       if (typeof customAlert === 'function') {
         customAlert(
           state.language === 'zh' ? '通過' : 'Passed',
-          ''
+          '',
+          () => {
+            clearAllSessionVotes();
+            saveToLocalStorage(true, true);
+            renderResolutionVoteGrid();
+            renderSessionVotesGrid();
+            updateScoreboardAndVerdict();
+          }
         );
       }
     } else {
       if (typeof customAlert === 'function') {
         customAlert(
           state.language === 'zh' ? '未通過' : 'Failed',
-          ''
+          '',
+          () => {
+            clearAllSessionVotes();
+            saveToLocalStorage(true, true);
+            renderResolutionVoteGrid();
+            renderSessionVotesGrid();
+            updateScoreboardAndVerdict();
+          }
         );
       }
     }
@@ -1323,11 +1367,7 @@
       confirmText: state.language === 'zh' ? '確認通過' : 'Pass & Adopt',
       cancelText: t.cancel || '取消',
       onConfirm: () => {
-        sess.status = 'passed';
-        sess.favor = 0;
-        sess.against = 0;
-        sess.abstain = 0;
-        sess.note = '';
+        clearAllSessionVotes();
         saveToLocalStorage(true, true);
         renderSessionVotesGrid();
         updateScoreboardAndVerdict();
@@ -1347,20 +1387,29 @@
       const curMot = state.votingMotion || (state.motions && state.motions[0]);
       if (curMot) {
         const targetIdx = (typeof curMot.originalIndex === 'number') ? curMot.originalIndex : 0;
+        const mTitle = curMot.topic ? `${formatMotionType(curMot.type)}：${curMot.topic}` : formatMotionType(curMot.type);
         showModal({
           title: state.language === 'zh' ? '確認通過動議' : 'Adopt Motion',
           message: state.language === 'zh' 
-            ? `確定要宣布通過此動議嗎？\n【${curMot.topic || curMot.type || '動議'}】`
-            : `Confirm adoption of this motion?\n【${curMot.topic || curMot.type || 'Motion'}】`,
+            ? `確定要宣布通過此動議嗎？\n【${mTitle}】`
+            : `Confirm adoption of this motion?\n【${mTitle}】`,
           confirmText: state.language === 'zh' ? '通過並執行' : 'Adopt & Execute',
           cancelText: t.cancel || '取消',
           onConfirm: () => {
+            clearAllSessionVotes();
+            saveToLocalStorage(true, true);
+            renderSessionVotesGrid();
+            updateScoreboardAndVerdict();
             if (typeof executeMotion === 'function') {
               executeMotion(curMot, targetIdx);
             }
           }
         });
         return;
+      } else {
+        // 若當前處於 motion 模式但已無待決動議，自動重設為一般表決並進入會期/決議案結算
+        state.activeVoteTarget = 'resolution';
+        state.votingMotion = null;
       }
     }
 
@@ -1385,25 +1434,18 @@
       onConfirm: () => {
         state.resolutionPassed = true;
         if (window.logAction) window.logAction(state.language === 'zh' ? `決議案結算通過：${resTitle}` : `Resolution passed: ${resTitle}`);
-        // Set all non-voted or current verdict to passed
+        // 清空所有會期票數與點名選票
+        clearAllSessionVotes();
+        saveToLocalStorage(true, true);
+        renderResolutionVoteGrid();
+        renderSessionVotesGrid();
+        updateScoreboardAndVerdict();
+        // Set verdict to passed after scoreboard refresh
         const verdictElem = document.getElementById('vote-verdict');
         if (verdictElem) {
           verdictElem.textContent = (t.passed || 'PASSED').toUpperCase();
           verdictElem.className = 'text-xs sm:text-sm font-black tracking-wide text-emerald-600';
         }
-        // 清空所有會期票數
-        if (Array.isArray(state.sessionVotes)) {
-          state.sessionVotes.forEach(s => {
-            s.favor = 0;
-            s.against = 0;
-            s.abstain = 0;
-            s.status = '';
-          });
-        }
-        saveToLocalStorage(true, true);
-        renderResolutionVoteGrid();
-        renderSessionVotesGrid();
-        updateScoreboardAndVerdict();
         customAlert(
           state.language === 'zh' ? '通過' : 'Passed',
           ''
