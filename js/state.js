@@ -225,35 +225,8 @@
 
     // Theme & Background sync
     themeMode: 'dark', // 'dark' or 'light'
-    customAccent: null, // hex color or null
-
-    // Room & Viewer (Delegate) Mode
-    roomId: null,
-    isViewerMode: false,
-    viewerPollingInterval: null
+    customAccent: null // hex color or null
   };
-
-  // Check URL parameters for Room & Viewer Mode
-  (function detectViewerMode() {
-    const params = new URLSearchParams(window.location.search);
-    const view = params.get('view');
-    const room = params.get('room');
-    if (room) {
-      state.roomId = room;
-    }
-    if (view === '1' || view === 'true') {
-      state.isViewerMode = true;
-    }
-    // Generate or restore room ID for chair if not in viewer mode
-    if (!state.isViewerMode && !state.roomId) {
-      let savedRoom = localStorage.getItem('MUN_ROOM_ID');
-      if (!savedRoom) {
-        savedRoom = 'room-' + Math.random().toString(36).substring(2, 8);
-        localStorage.setItem('MUN_ROOM_ID', savedRoom);
-      }
-      state.roomId = savedRoom;
-    }
-  })();
 
   function getFullStatePayload() {
     return {
@@ -320,18 +293,11 @@
   let pendingCloudPayload = null;
 
   function saveToLocalStorage(syncToCloud = true, immediate = false) {
-    if (state.isViewerMode) return; // Spectators have no write permission
-
     const payload = getFullStatePayload();
 
     try {
       localStorage.setItem('MUN_COMMAND_STATE', JSON.stringify(payload));
     } catch (e) {}
-
-    // Instant P2P / BroadcastChannel Push (0.00ms ~ 0.03s latency)
-    if (window.P2PSync && typeof window.P2PSync.broadcast === 'function') {
-      window.P2PSync.broadcast(payload);
-    }
 
     // Cloud Auto-Sync to Cloudflare KV (Reliable Fallback)
     if (syncToCloud) {
@@ -367,11 +333,8 @@
   }
 
   async function saveToCloudKV(payload, notify = false) {
-    if (state.isViewerMode) return;
-
     const userId = state.currentUser ? (state.currentUser.uid || state.currentUser.sub || state.currentUser.email) : null;
-    const roomId = state.roomId;
-    if (!userId && !roomId) return;
+    if (!userId) return;
 
     const statusEl = document.getElementById('cloud-sync-status');
     if (statusEl) statusEl.textContent = state.language === 'zh' ? '雲端同步中...' : 'Syncing to cloud...';
@@ -385,14 +348,7 @@
       if (window.firebaseDb) {
         // Strip out any undefined values for Firestore
         const cleanData = JSON.parse(JSON.stringify(payloadToSave));
-        const promises = [];
-        if (userId) {
-          promises.push(window.firebaseDb.collection('users').doc(userId).set(cleanData, { merge: true }));
-        }
-        if (roomId) {
-          promises.push(window.firebaseDb.collection('rooms').doc(roomId).set(cleanData, { merge: true }));
-        }
-        await Promise.all(promises);
+        await window.firebaseDb.collection('users').doc(userId).set(cleanData, { merge: true });
         if (statusEl) statusEl.textContent = state.language === 'zh' ? '雲端已同步最新進度' : 'Cloud synced';
         if (notify) showToast(state.language === 'zh' ? '會議資訊與進度已儲存至 Firebase 雲端！' : 'Conference progress saved to Firebase Cloud!', 'success');
         return;
@@ -402,7 +358,7 @@
       const res = await fetch('/api/sync', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ userId, roomId, payload: payloadToSave })
+        body: JSON.stringify({ userId, payload: payloadToSave })
       });
       const data = await res.json();
       if (data && data.success) {
@@ -540,22 +496,13 @@
 
   async function loadFromCloudKV() {
     const userId = state.currentUser ? (state.currentUser.uid || state.currentUser.sub || state.currentUser.email) : null;
-    const roomId = state.roomId;
-    if (!userId && !roomId) return false;
+    if (!userId) return false;
 
     try {
       if (window.firebaseDb) {
         let docData = null;
-        if (state.isViewerMode && roomId) {
-          const docSnap = await window.firebaseDb.collection('rooms').doc(roomId).get();
-          if (docSnap.exists) docData = docSnap.data();
-        } else if (userId) {
-          const docSnap = await window.firebaseDb.collection('users').doc(userId).get();
-          if (docSnap.exists) docData = docSnap.data();
-        } else if (roomId) {
-          const docSnap = await window.firebaseDb.collection('rooms').doc(roomId).get();
-          if (docSnap.exists) docData = docSnap.data();
-        }
+        const docSnap = await window.firebaseDb.collection('users').doc(userId).get();
+        if (docSnap.exists) docData = docSnap.data();
 
         if (docData && typeof docData === 'object' && Object.keys(docData).length > 0) {
           // 比較雲端與本機的時間戳記：如果本機資料比雲端還要新，保留本機資料並反推至雲端，防止覆蓋最新修改
@@ -568,7 +515,7 @@
             }
           } catch (e) {}
 
-          if (!state.isViewerMode && localLastUpdated > 0 && docData.lastUpdated && localLastUpdated > docData.lastUpdated) {
+          if (localLastUpdated > 0 && docData.lastUpdated && localLastUpdated > docData.lastUpdated) {
             saveToLocalStorage(true, true);
             return true;
           }
@@ -587,11 +534,7 @@
       }
 
       // Fallback to /api/sync if firebaseDb is not present
-      const query = (state.isViewerMode && roomId) 
-        ? `roomId=${encodeURIComponent(roomId)}` 
-        : (userId ? `userId=${encodeURIComponent(userId)}` : `roomId=${encodeURIComponent(roomId)}`);
-
-      const res = await fetch(`/api/sync?${query}`);
+      const res = await fetch(`/api/sync?userId=${encodeURIComponent(userId)}`);
       if (res.ok) {
         const data = await res.json();
         if (data && typeof data === 'object' && Object.keys(data).length > 0) {
@@ -607,54 +550,6 @@
       console.warn('Cloud load error:', err);
     }
     return false;
-  }
-
-  // Start polling / real-time listener in Viewer (Delegate) Mode
-  function startViewerPolling() {
-    if (!state.isViewerMode || !state.roomId) return;
-
-    // Initial load immediately
-    loadFromCloudKV();
-
-    // Use Firestore real-time onSnapshot listener for instant updates
-    if (window.firebaseDb) {
-      if (window._viewerUnsubscribe) {
-        try { window._viewerUnsubscribe(); } catch (e) {}
-      }
-      window._viewerUnsubscribe = window.firebaseDb.collection('rooms').doc(state.roomId).onSnapshot((docSnap) => {
-        if (docSnap.exists) {
-          const data = docSnap.data();
-          if (data && typeof data === 'object' && (!state.lastUpdated || data.lastUpdated > state.lastUpdated)) {
-            state.lastUpdated = data.lastUpdated;
-            loadStateFromData(data);
-            updateAvailableCountriesPool();
-            renderAll();
-          }
-        }
-      }, (e) => {
-        console.warn('Firestore viewer real-time error:', e);
-      });
-      return;
-    }
-
-    // Polling fallback
-    if (state.viewerPollingInterval) clearInterval(state.viewerPollingInterval);
-    state.viewerPollingInterval = setInterval(async () => {
-      try {
-        const res = await fetch(`/api/sync?roomId=${encodeURIComponent(state.roomId)}`);
-        if (res.ok) {
-          const data = await res.json();
-          if (data && typeof data === 'object' && (!state.lastUpdated || data.lastUpdated > state.lastUpdated)) {
-            state.lastUpdated = data.lastUpdated;
-            loadStateFromData(data);
-            updateAvailableCountriesPool();
-            renderAll();
-          }
-        }
-      } catch (e) {
-        console.warn('Viewer polling error:', e);
-      }
-    }, 500);
   }
 
   function loadStateFromData(parsed) {
@@ -678,9 +573,6 @@
     }
     if (parsed.committeeName) state.committeeName = parsed.committeeName;
     if (parsed.agenda) state.agenda = parsed.agenda;
-    if (parsed.currentTab && state.isViewerMode) {
-      if (typeof switchTab === 'function') switchTab(parsed.currentTab);
-    }
     if (Array.isArray(parsed.selectedCountries) && parsed.selectedCountries.length > 0) {
       const rawMap = {};
       (window.MUN_COUNTRIES || []).forEach(item => { rawMap[item.id] = item; });
@@ -733,20 +625,7 @@
     if (typeof parsed.recessMode !== 'undefined') state.recessMode = parsed.recessMode;
 
     if (typeof parsed.recessModalOpen !== 'undefined') {
-      const wasOpen = !!state.recessModalOpen;
       state.recessModalOpen = !!parsed.recessModalOpen;
-      if (state.isViewerMode) {
-        const modal = document.getElementById('modal-recess');
-        if (state.recessModalOpen) {
-          if (typeof openRecessScreen === 'function') {
-            openRecessScreen(Math.ceil((state.recessSecsRemaining || 0) / 60), state.recessTitle, state.recessMode);
-          } else if (modal) {
-            modal.classList.remove('hidden');
-          }
-        } else if (modal) {
-          modal.classList.add('hidden');
-        }
-      }
     }
 
     if (Array.isArray(parsed.motions)) state.motions = parsed.motions;
@@ -766,26 +645,6 @@
     if (Array.isArray(parsed.sessionVotes)) state.sessionVotes = parsed.sessionVotes;
     if (Array.isArray(parsed.activityLog)) state.activityLog = parsed.activityLog;
     if (parsed.language) state.language = parsed.language;
-
-    // Synchronize dark/light theme and background color with Chair
-    if (state.isViewerMode) {
-      if (parsed.themeMode) {
-        state.themeMode = parsed.themeMode;
-        const isLight = parsed.themeMode === 'light';
-        document.body.classList.toggle('light-mode', isLight);
-        const themeIcon = document.getElementById('theme-icon');
-        if (themeIcon) {
-          themeIcon.classList.toggle('fa-sun', !isLight);
-          themeIcon.classList.toggle('fa-moon', isLight);
-        }
-      }
-      if (typeof parsed.customAccent !== 'undefined') {
-        state.customAccent = parsed.customAccent;
-        if (typeof applyCustomThemeColor === 'function') {
-          applyCustomThemeColor(parsed.customAccent);
-        }
-      }
-    }
   }
 
   function loadFromLocalStorage() {

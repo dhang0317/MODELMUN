@@ -308,7 +308,6 @@
         if (btnPresent) {
           btnPresent.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (state.isViewerMode) return;
             country.attendance = 'present';
             updateCardView();
           });
@@ -317,7 +316,6 @@
         if (btnAbsent) {
           btnAbsent.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (state.isViewerMode) return;
             country.attendance = 'absent';
             updateCardView();
           });
@@ -326,7 +324,6 @@
         if (btnExpanded) {
           btnExpanded.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (state.isViewerMode) return;
             if (country.attendance === 'present') {
               country.attendance = 'pv';
             } else if (country.attendance === 'pv') {
@@ -1035,7 +1032,6 @@
         card.querySelectorAll('.btn-vote-choice').forEach(btn => {
           btn.addEventListener('click', (e) => {
             e.stopPropagation();
-            if (state.isViewerMode) return;
             const action = btn.getAttribute('data-vote');
             
             // PV-style cycle logic:

@@ -29,25 +29,7 @@ function playAlertChime() {}
     renderAll();
     setupEventListeners();
     initTheme();
-
-    if (window.P2PSync) {
-      window.P2PSync.init();
-    }
-
-    if (state.isViewerMode) {
-      const portalModal = document.getElementById('modal-portal-landing');
-      if (portalModal) {
-        portalModal.classList.add('portal-hidden');
-        portalModal.style.display = 'none';
-      }
-      // Delegate Viewer Mode: default to roll call or gsl view if in setup
-      if (state.currentTab === 'setup') {
-        switchTab('rollcall');
-      }
-      startViewerPolling();
-    } else {
-      initGoogleAuth();
-    }
+    initGoogleAuth();
   }
 
   function updateAvailableCountriesPool() {

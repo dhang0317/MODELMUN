@@ -32,9 +32,7 @@
     if (document.body) document.body.scrollTop = 0;
     if (document.documentElement) document.documentElement.scrollTop = 0;
 
-    if (!state.isViewerMode) {
-      saveToLocalStorage(true, true);
-    }
+    saveToLocalStorage(true, true);
     renderAll();
   }
 
@@ -97,21 +95,6 @@
       });
     }
 
-    // Delegate QR Code Launch Buttons (Header and Drawer)
-    const btnOpenQrCode = document.getElementById('btn-open-qrcode');
-    if (btnOpenQrCode) {
-      btnOpenQrCode.addEventListener('click', () => {
-        openQRCodeModal();
-      });
-    }
-    const drawerBtnQrCode = document.getElementById('drawer-btn-qrcode');
-    if (drawerBtnQrCode) {
-      drawerBtnQrCode.addEventListener('click', () => {
-        closeDrawer();
-        openQRCodeModal();
-      });
-    }
-
     // Upload Logo handler
     const uploadLogoBtn = document.getElementById('drawer-btn-upload-logo');
     const inputLogoFile = document.getElementById('input-logo-file');
@@ -144,7 +127,6 @@
     const btnLogoHome = document.getElementById('btn-logo-home');
     if (btnLogoHome) {
       btnLogoHome.addEventListener('click', () => {
-        if (state.isViewerMode) return; // Spectators cannot enter setup
         switchTab('setup');
       });
     }
@@ -1274,7 +1256,6 @@
     const btnSessionInc = document.getElementById('btn-session-inc');
     if (btnSessionInc) {
       btnSessionInc.addEventListener('click', () => {
-        if (state.isViewerMode) return;
         state.sessionCount = (state.sessionCount || 3) + 1;
         if (!state.sessionVotes) state.sessionVotes = [];
         state.sessionVotes.push({
@@ -1293,7 +1274,6 @@
     const btnSessionDec = document.getElementById('btn-session-dec');
     if (btnSessionDec) {
       btnSessionDec.addEventListener('click', () => {
-        if (state.isViewerMode) return;
         if ((state.sessionCount || 1) <= 1) return;
         state.sessionCount--;
         if (state.sessionVotes && state.sessionVotes.length > state.sessionCount) {
@@ -1310,7 +1290,6 @@
     const inputSessionCount = document.getElementById('input-session-count');
     if (inputSessionCount) {
       inputSessionCount.addEventListener('change', (e) => {
-        if (state.isViewerMode) return;
         let val = parseInt(e.target.value) || 1;
         if (val < 1) val = 1;
         if (val > 50) val = 50;
@@ -1341,7 +1320,6 @@
     const btnAddNewSession = document.getElementById('btn-add-new-session');
     if (btnAddNewSession) {
       btnAddNewSession.addEventListener('click', () => {
-        if (state.isViewerMode) return;
         state.sessionCount = (state.sessionCount || 3) + 1;
         if (!state.sessionVotes) state.sessionVotes = [];
         state.sessionVotes.push({
@@ -1361,7 +1339,6 @@
     const btnResetCurrentSession = document.getElementById('btn-reset-current-session');
     if (btnResetCurrentSession) {
       btnResetCurrentSession.addEventListener('click', () => {
-        if (state.isViewerMode) return;
         const curSession = (state.sessionVotes || []).find(s => s.id === state.activeSessionId);
         if (curSession) {
           curSession.favor = 0;
@@ -1376,7 +1353,6 @@
     const btnResetAllSessions = document.getElementById('btn-reset-all-sessions');
     if (btnResetAllSessions) {
       btnResetAllSessions.addEventListener('click', () => {
-        if (state.isViewerMode) return;
         if (Array.isArray(state.sessionVotes)) {
           state.sessionVotes.forEach(s => {
             s.favor = 0;
@@ -1395,7 +1371,6 @@
 
     // Helper function for active voter buttons with single-click (vote & next) vs double-click (+Rights)
     function handleActiveVoterClick(action) {
-      if (state.isViewerMode) return;
       const eligible = state.selectedCountries.filter(c => {
         if (state.voteType === 'procedural') {
           return c.attendance === 'present' || c.attendance === 'pv';
@@ -1639,7 +1614,7 @@
           sModal.classList.add('hidden');
           sModal.style.display = 'none';
         }
-        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) {
+        if (typeof saveToLocalStorage === 'function') {
           saveToLocalStorage(true);
         }
         if (typeof renderAll === 'function') renderAll();
@@ -1656,7 +1631,7 @@
           sModal.classList.add('hidden');
           sModal.style.display = 'none';
         }
-        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) {
+        if (typeof saveToLocalStorage === 'function') {
           saveToLocalStorage(true);
         }
         if (typeof renderAll === 'function') renderAll();

@@ -114,7 +114,6 @@
   }
 
   function selectCountry(c) {
-    if (state.isViewerMode) return;
     state.selectedCountries.push(c);
     state.selectedCountries.sort(countrySortCompare);
     updateAvailableCountriesPool();
@@ -123,7 +122,6 @@
   }
 
   function deselectCountry(index) {
-    if (state.isViewerMode) return;
     state.selectedCountries.splice(index, 1);
     updateAvailableCountriesPool();
     saveToLocalStorage();

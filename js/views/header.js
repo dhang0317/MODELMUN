@@ -238,31 +238,6 @@
       }
     });
 
-    // Handle Viewer Mode UI tweaks
-    const viewerBadge = document.getElementById('badge-viewer-mode');
-    const qrBtn = document.getElementById('btn-open-qrcode');
-    const drawerBtn = document.getElementById('btn-open-drawer');
-    const logoHomeBtn = document.getElementById('btn-logo-home');
-
-    if (state.isViewerMode) {
-      if (viewerBadge) viewerBadge.classList.remove('hidden');
-      if (viewerBadge) viewerBadge.classList.add('flex');
-      if (qrBtn) qrBtn.classList.add('hidden');
-      if (drawerBtn) drawerBtn.classList.add('hidden');
-      if (headerCommInput) headerCommInput.setAttribute('readonly', 'true');
-      if (headerAgendaInput) headerAgendaInput.setAttribute('readonly', 'true');
-      if (logoHomeBtn) logoHomeBtn.style.pointerEvents = 'none';
-      document.body.classList.add('is-viewer-mode');
-    } else {
-      if (viewerBadge) viewerBadge.classList.add('hidden');
-      if (viewerBadge) viewerBadge.classList.remove('flex');
-      if (qrBtn) qrBtn.classList.remove('hidden');
-      if (drawerBtn) drawerBtn.classList.remove('hidden');
-      if (headerCommInput) headerCommInput.removeAttribute('readonly');
-      if (headerAgendaInput) headerAgendaInput.removeAttribute('readonly');
-      if (logoHomeBtn) logoHomeBtn.style.pointerEvents = '';
-      document.body.classList.remove('is-viewer-mode');
-    }
   }
 
 

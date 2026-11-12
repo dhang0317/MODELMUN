@@ -2,10 +2,9 @@ export async function onRequestGet(context) {
   const { request, env } = context;
   const url = new URL(request.url);
   const userId = url.searchParams.get('userId');
-  const roomId = url.searchParams.get('roomId');
 
-  if (!userId && !roomId) {
-    return new Response(JSON.stringify({ error: 'Missing userId or roomId' }), {
+  if (!userId) {
+    return new Response(JSON.stringify({ error: 'Missing userId' }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' }
     });
@@ -18,7 +17,7 @@ export async function onRequestGet(context) {
     });
   }
 
-  const kvKey = roomId ? `room_state_${roomId}` : `user_state_${userId}`;
+  const kvKey = `user_state_${userId}`;
   const data = await env.MUN_KV.get(kvKey);
   return new Response(data || 'null', {
     headers: {
@@ -40,23 +39,16 @@ export async function onRequestPost(context) {
 
   try {
     const body = await request.json();
-    const { userId, roomId, payload } = body;
+    const { userId, payload } = body;
 
-    if ((!userId && !roomId) || !payload) {
-      return new Response(JSON.stringify({ error: 'Missing identifier or payload' }), {
+    if (!userId || !payload) {
+      return new Response(JSON.stringify({ error: 'Missing userId or payload' }), {
         status: 400,
         headers: { 'Content-Type': 'application/json' }
       });
     }
 
-    if (userId) {
-      await env.MUN_KV.put(`user_state_${userId}`, JSON.stringify(payload));
-    }
-    if (roomId) {
-      await env.MUN_KV.put(`room_state_${roomId}`, JSON.stringify(payload), {
-        expirationTtl: 172800
-      });
-    }
+    await env.MUN_KV.put(`user_state_${userId}`, JSON.stringify(payload));
 
     return new Response(JSON.stringify({ success: true }), {
       headers: { 'Content-Type': 'application/json' }

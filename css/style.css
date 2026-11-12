@@ -316,8 +316,7 @@ body:not(.light-mode) {
       display: none !important;
     }
     body:not(.light-mode) #btn-toggle-theme,
-    body:not(.light-mode) #btn-google-login,
-    body:not(.light-mode) #btn-open-qrcode {
+    body:not(.light-mode) #btn-google-login {
       border: 1px solid #5D4037 !important;
       background-color: #4E342E !important;
       color: #F7F4EE !important;
@@ -334,14 +333,6 @@ body:not(.light-mode) {
       background: rgba(247, 244, 238, 0.12) !important;
       border: none !important;
       color: #FFFFFF !important;
-    }
-    body:not(.light-mode) #btn-open-qrcode:hover {
-      background-color: #5D4037 !important;
-      border-color: #8D6E63 !important;
-      color: #FFFFFF !important;
-    }
-    body:not(.light-mode) #btn-open-qrcode * {
-      color: #F7F4EE !important;
     }
     body:not(.light-mode) #btn-toggle-theme:hover,
     body:not(.light-mode) #btn-google-login:hover {
@@ -2044,8 +2035,7 @@ body:not(.light-mode) {
       background-color: rgba(62, 39, 35, 0.2) !important;
     }
     body.light-mode #btn-toggle-theme,
-    body.light-mode #btn-google-login,
-    body.light-mode #btn-open-qrcode {
+    body.light-mode #btn-google-login {
       border: 1px solid #D7CCC8 !important;
       background-color: #EFEBE9 !important;
       color: #3E2723 !important;
@@ -2058,8 +2048,7 @@ body:not(.light-mode) {
       box-shadow: none !important;
     }
     body.light-mode #btn-toggle-theme:hover,
-    body.light-mode #btn-google-login:hover,
-    body.light-mode #btn-open-qrcode:hover {
+    body.light-mode #btn-google-login:hover {
       background-color: #D7CCC8 !important;
       border-color: #8D6E63 !important;
       color: #3E2723 !important;
@@ -2071,9 +2060,6 @@ body:not(.light-mode) {
       color: #3E2723 !important;
     }
     body.light-mode #btn-open-settings * {
-      color: #3E2723 !important;
-    }
-    body.light-mode #btn-open-qrcode * {
       color: #3E2723 !important;
     }
     body.light-mode #user-dropdown-popover {
@@ -2809,89 +2795,6 @@ body:not(.light-mode) {
       background-color: var(--theme-text, #000000) !important;
     }
 
-    /* =====================================================
-       DELEGATE VIEWER (READ-ONLY) MODE
-       ===================================================== */
-    /* Hide all control / action buttons across every view & modal */
-    body.is-viewer-mode button[id^="btn-gsl-"],
-    body.is-viewer-mode button[id^="btn-mod-"],
-    body.is-viewer-mode button[id^="btn-unmod-"],
-    body.is-viewer-mode button[id^="btn-single-"],
-    body.is-viewer-mode #btn-open-motion-modal,
-    body.is-viewer-mode #btn-add-motion,
-    body.is-viewer-mode #btn-clear-motions,
-    body.is-viewer-mode #btn-clear-selection,
-    body.is-viewer-mode .btn-execute-motion,
-    body.is-viewer-mode .btn-remove-motion,
-    body.is-viewer-mode .btn-vote-motion-pass,
-    body.is-viewer-mode .btn-vote-motion-fail,
-    body.is-viewer-mode #btn-hero-motion-pass,
-    body.is-viewer-mode #btn-hero-motion-fail,
-    body.is-viewer-mode #btn-recess-toggle-timer,
-    body.is-viewer-mode #btn-recess-reconvene,
-    body.is-viewer-mode #panel-setup-file,
-    body.is-viewer-mode #segment-btn-template,
-    body.is-viewer-mode #segment-btn-file,
-    body.is-viewer-mode .btn-add-country-item,
-    body.is-viewer-mode .btn-remove-country-item,
-    body.is-viewer-mode .btn-remove-country,
-    body.is-viewer-mode .status-toggle-btn,
-    body.is-viewer-mode .btn-top-queue,
-    body.is-viewer-mode .btn-del-queue,
-    body.is-viewer-mode .btn-del-mod-queue,
-    body.is-viewer-mode .btn-extend-unmod,
-    body.is-viewer-mode #btn-open-add-speaker,
-    body.is-viewer-mode #btn-yield-chair,
-    body.is-viewer-mode #btn-yield-delegate,
-    body.is-viewer-mode #btn-yield-questions,
-    body.is-viewer-mode #btn-rollcall-warning,
-    body.is-viewer-mode #btn-start-session,
-    body.is-viewer-mode #btn-add-custom-country,
-    body.is-viewer-mode #btn-trigger-upload,
-    body.is-viewer-mode #btn-open-drawer,
-    body.is-viewer-mode #btn-open-settings,
-    body.is-viewer-mode #btn-floating-confetti,
-    body.is-viewer-mode #btn-open-qrcode,
-    body.is-viewer-mode #panel-rights-speeches button,
-    body.is-viewer-mode #list-rights-speeches button,
-    body.is-viewer-mode #btn-set-all-uncalled,
-    body.is-viewer-mode #btn-set-all-present,
-    body.is-viewer-mode #btn-set-all-absent,
-    body.is-viewer-mode #btn-reset-votes,
-    body.is-viewer-mode #btn-consensus-vote,
-    body.is-viewer-mode #btn-toggle-results,
-    body.is-viewer-mode #btn-edit-resolution-title,
-    body.is-viewer-mode #select-vote-threshold,
-    body.is-viewer-mode #vote-stage-r1,
-    body.is-viewer-mode #vote-stage-r2,
-    body.is-viewer-mode #vote-stage-rights,
-    body.is-viewer-mode .btn-close-modal,
-    body.is-viewer-mode .modal-close-btn,
-    body.is-viewer-mode .modal-close-icon {
-      display: none !important;
-      pointer-events: none !important;
-    }
-
-    /* Disable clicking / changing ballots & roll call attendance */
-    body.is-viewer-mode .btn-toggle-attendance,
-    body.is-viewer-mode .btn-rollcall-present,
-    body.is-viewer-mode .btn-rollcall-absent,
-    body.is-viewer-mode .btn-rollcall-expanded,
-    body.is-viewer-mode .btn-vote-choice {
-      pointer-events: none !important;
-      cursor: default !important;
-      box-shadow: none !important;
-    }
-
-    /* Completely lock all inputs and select fields */
-    body.is-viewer-mode input,
-    body.is-viewer-mode select,
-    body.is-viewer-mode textarea {
-      pointer-events: none !important;
-      cursor: default !important;
-      user-select: none !important;
-    }
-
     /* ================= PORTAL / COVER LANDING SCREEN ================= */
     #modal-portal-landing {
       background-color: #000000;
@@ -2947,10 +2850,6 @@ body:not(.light-mode) {
       background-color: #f1f5f9 !important;
       border-color: #e2e8f0 !important;
       color: #475569 !important;
-    }
-    body.is-viewer-mode #modal-portal-landing {
-      display: none !important;
-      pointer-events: none !important;
     }
 
     /* Global Content Scale Slider & Page-wide Scale Styling */

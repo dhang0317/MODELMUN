@@ -147,71 +147,6 @@
     searchInput.focus();
   }
 
-  function openQRCodeModal() {
-    const modal = document.getElementById('modal-qrcode-join');
-    const qrContainer = document.getElementById('qrcode-container');
-    const roomLabel = document.getElementById('label-qrcode-room');
-    const linkInput = document.getElementById('input-qrcode-link');
-    const closeBtn = document.getElementById('btn-close-qrcode-modal');
-    const copyBtn = document.getElementById('btn-copy-qrcode-link');
-    const t = I18N[state.language] || I18N.en;
-
-    if (!modal || !qrContainer) return;
-
-    // Ensure we have a valid room ID
-    if (!state.roomId) {
-      state.roomId = 'room-' + Math.random().toString(36).substring(2, 8);
-      localStorage.setItem('MUN_ROOM_ID', state.roomId);
-    }
-
-    // Save current state immediately so delegates scanning will have instant data
-    saveToLocalStorage(true);
-
-    const fullUrl = `${window.location.origin}${window.location.pathname}?view=1&room=${encodeURIComponent(state.roomId)}`;
-    
-    if (roomLabel) roomLabel.textContent = state.roomId;
-    if (linkInput) linkInput.value = fullUrl;
-
-    // Clear and re-render QR Code
-    qrContainer.innerHTML = '';
-    if (typeof QRCode !== 'undefined') {
-      new QRCode(qrContainer, {
-        text: fullUrl,
-        width: 200,
-        height: 200,
-        colorDark: "#090d16",
-        colorLight: "#ffffff",
-        correctLevel: QRCode.CorrectLevel.H
-      });
-    } else {
-      qrContainer.innerHTML = `<div class="p-4 text-xs text-rose-500 font-mono">QRCode library loading...<br><a href="${fullUrl}" target="_blank" class="underline">${fullUrl}</a></div>`;
-    }
-
-    modal.classList.remove('hidden');
-
-    function cleanup() {
-      modal.classList.add('hidden');
-    }
-
-    if (closeBtn) closeBtn.onclick = cleanup;
-    modal.onclick = (e) => {
-      if (e.target === modal) cleanup();
-    };
-
-    if (copyBtn && linkInput) {
-      copyBtn.onclick = async () => {
-        try {
-          await navigator.clipboard.writeText(fullUrl);
-          showToast(t.linkCopied || '已複製觀看連結！', 'success');
-        } catch (err) {
-          linkInput.select();
-          document.execCommand('copy');
-          showToast(t.linkCopied || '已複製觀看連結！', 'success');
-        }
-      };
-    }
-  }
-
   // ================= UNIFIED SETTINGS CENTER CONTROLLER =================
   let settingsInitialized = false;
 
@@ -367,7 +302,7 @@
         modal.classList.add('hidden');
         modal.style.display = 'none';
       }
-      if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) {
+      if (typeof saveToLocalStorage === 'function') {
         saveToLocalStorage(true);
       }
       if (typeof renderAll === 'function') renderAll();
@@ -399,7 +334,7 @@
         state.committeeName = e.target.value;
         const headerComm = document.getElementById('header-committee-input');
         if (headerComm) headerComm.value = e.target.value;
-        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) saveToLocalStorage(true);
+        if (typeof saveToLocalStorage === 'function') saveToLocalStorage(true);
       });
     }
 
@@ -422,7 +357,7 @@
           if (inputCommittee) inputCommittee.value = title;
           const headerComm = document.getElementById('header-committee-input');
           if (headerComm) headerComm.value = title;
-          if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) saveToLocalStorage(true);
+          if (typeof saveToLocalStorage === 'function') saveToLocalStorage(true);
         }
       });
     }
@@ -433,7 +368,7 @@
         state.agenda = e.target.value;
         const headerAgenda = document.getElementById('header-agenda-input');
         if (headerAgenda) headerAgenda.value = e.target.value;
-        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) saveToLocalStorage(true);
+        if (typeof saveToLocalStorage === 'function') saveToLocalStorage(true);
       });
     }
 
@@ -465,7 +400,7 @@
         state.gslRemainingTime = val;
         const label = document.getElementById('label-gsl-default-time');
         if (label) label.textContent = `${val}s`;
-        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) saveToLocalStorage(true);
+        if (typeof saveToLocalStorage === 'function') saveToLocalStorage(true);
       });
     }
 
@@ -477,7 +412,7 @@
         state.gslRemainingTime = val;
         const label = document.getElementById('label-gsl-default-time');
         if (label) label.textContent = `${val}s`;
-        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) saveToLocalStorage(true);
+        if (typeof saveToLocalStorage === 'function') saveToLocalStorage(true);
       });
     });
 
@@ -486,7 +421,7 @@
       inputModTotal.addEventListener('change', (e) => {
         state.modTotalMins = parseInt(e.target.value, 10) || 10;
         state.modTotalSecsRemaining = state.modTotalMins * 60;
-        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) saveToLocalStorage(true);
+        if (typeof saveToLocalStorage === 'function') saveToLocalStorage(true);
       });
     }
 
@@ -495,7 +430,7 @@
       inputModSpeaker.addEventListener('change', (e) => {
         state.modSpeakerSecs = parseInt(e.target.value, 10) || 60;
         state.modSpeakerSecsRemaining = state.modSpeakerSecs;
-        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) saveToLocalStorage(true);
+        if (typeof saveToLocalStorage === 'function') saveToLocalStorage(true);
       });
     }
 
@@ -505,7 +440,7 @@
         const mins = parseInt(e.target.value, 10) || 15;
         state.unmodTotalSecs = mins * 60;
         state.unmodSecsRemaining = state.unmodTotalSecs;
-        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) saveToLocalStorage(true);
+        if (typeof saveToLocalStorage === 'function') saveToLocalStorage(true);
       });
     }
 
@@ -513,7 +448,7 @@
     if (selectVoteThreshold) {
       selectVoteThreshold.addEventListener('change', (e) => {
         state.voteThreshold = e.target.value;
-        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) saveToLocalStorage(true);
+        if (typeof saveToLocalStorage === 'function') saveToLocalStorage(true);
       });
     }
 
@@ -524,7 +459,7 @@
         const lang = e.target.value;
         state.language = lang;
         if (typeof updateAvailableCountriesPool === 'function') updateAvailableCountriesPool();
-        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) saveToLocalStorage();
+        if (typeof saveToLocalStorage === 'function') saveToLocalStorage();
         if (typeof renderAll === 'function') renderAll();
       });
     }
@@ -540,7 +475,7 @@
         if (icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
         const headerIcon = document.getElementById('header-theme-icon');
         if (headerIcon) { headerIcon.classList.remove('fa-moon'); headerIcon.classList.add('fa-sun'); }
-        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) saveToLocalStorage(true, true);
+        if (typeof saveToLocalStorage === 'function') saveToLocalStorage(true, true);
       };
     }
     if (btnThemeLight) {
@@ -552,7 +487,7 @@
         if (icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
         const headerIcon = document.getElementById('header-theme-icon');
         if (headerIcon) { headerIcon.classList.remove('fa-sun'); headerIcon.classList.add('fa-moon'); }
-        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) saveToLocalStorage(true, true);
+        if (typeof saveToLocalStorage === 'function') saveToLocalStorage(true, true);
       };
     }
 

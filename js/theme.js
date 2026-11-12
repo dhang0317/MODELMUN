@@ -500,7 +500,7 @@
         if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
           baseColor = val;
           updateActiveColor(true);
-          if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) {
+          if (typeof saveToLocalStorage === 'function') {
             saveToLocalStorage(true, true);
           }
           cleanup();
@@ -515,7 +515,7 @@
     if (resetBtn) {
       resetBtn.addEventListener('click', () => {
         applyCustomThemeColor(null);
-        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) {
+        if (typeof saveToLocalStorage === 'function') {
           saveToLocalStorage(true, true);
         }
         cleanup();
@@ -541,7 +541,7 @@ function initTheme() {
           themeIcon.classList.toggle('fa-sun', !isLight);
           themeIcon.classList.toggle('fa-moon', isLight);
         }
-        if (typeof saveToLocalStorage === 'function' && !state.isViewerMode) {
+        if (typeof saveToLocalStorage === 'function') {
           saveToLocalStorage(true, true);
         }
       });

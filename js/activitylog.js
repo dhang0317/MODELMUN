@@ -8,9 +8,9 @@
       return l === 'zh' ? zh : (l === 'fr' ? (fr || en) : en);
     }
 
-    // 只有登入後才記錄；代表檢視模式不記錄
+    // 只有登入後才記錄
     function logAction(text) {
-      if (!state.currentUser || state.isViewerMode || !text) return;
+      if (!state.currentUser || !text) return;
       if (!Array.isArray(state.activityLog)) state.activityLog = [];
       state.activityLog.push({ ts: Date.now(), text: text });
       if (state.activityLog.length > MAX_ENTRIES) {
@@ -46,7 +46,7 @@
     };
 
     document.addEventListener('click', (e) => {
-      if (!state.currentUser || state.isViewerMode) return;
+      if (!state.currentUser) return;
       const btn = e.target.closest('button');
       if (!btn) return;
       const id = btn.id;

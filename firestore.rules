@@ -5,9 +5,5 @@ service cloud.firestore {
     match /users/{userId} {
       allow read, write: if request.auth != null;
     }
-    // 即時房間會議同步（允許代表端/投影端即時存取）
-    match /rooms/{roomId} {
-      allow read, write: if true;
-    }
   }
 }
