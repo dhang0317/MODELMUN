@@ -58,6 +58,12 @@
       font-weight: 400;
       font-style: normal;
       touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    button, [role="button"], .tab-btn, nav#tabs-nav, nav#tabs-nav * {
+      user-select: none !important;
+      -webkit-user-select: none !important;
+      -webkit-touch-callout: none !important;
     }
     html, body {
       height: 100%;
@@ -368,7 +374,8 @@ body:not(.light-mode) {
     body:not(.light-mode) .tab-btn:hover,
     body:not(.light-mode) .tab-btn:hover span {
       color: #FFFFFF !important;
-      background-color: rgba(247, 244, 238, 0.1) !important;
+      background-color: transparent !important;
+      background: transparent !important;
     }
     body:not(.light-mode) .tab-active,
     body:not(.light-mode) .tab-active span {
@@ -1587,7 +1594,8 @@ body:not(.light-mode) {
       color: #FFFFFF !important;
     }
     body:not(.light-mode) nav#tabs-nav button:hover {
-      background-color: rgba(247, 244, 238, 0.1) !important;
+      background-color: transparent !important;
+      background: transparent !important;
       color: #FFFFFF !important;
     }
     body:not(.light-mode) #main-drawer button:hover {
@@ -2084,7 +2092,8 @@ body:not(.light-mode) {
       color: #8D6E63 !important;
     }
     body.light-mode .tab-btn:hover {
-      background-color: rgba(62, 39, 35, 0.08) !important;
+      background-color: transparent !important;
+      background: transparent !important;
     }
     body.light-mode .tab-btn:hover span {
       color: #3E2723 !important;
@@ -3508,13 +3517,14 @@ body:not(.light-mode) {
     nav#tabs-nav .tab-btn:active,
     nav#tabs-nav .tab-btn.btn-pressed-flash {
       transform: scale(0.93) translateY(1px) !important;
-      background-color: rgba(255, 255, 255, 0.14) !important;
-      border-radius: 0.375rem !important;
+      background: transparent !important;
+      background-color: transparent !important;
       transition-duration: 0.07s !important;
     }
     body.light-mode nav#tabs-nav .tab-btn:active,
     body.light-mode nav#tabs-nav .tab-btn.btn-pressed-flash {
-      background-color: rgba(15, 23, 42, 0.1) !important;
+      background: transparent !important;
+      background-color: transparent !important;
     }
 
     /* Dark Mode normal button press flash & tactile ring */
