@@ -85,7 +85,7 @@
       return state.modQueue || [];
     };
 
-    searchInput.value = '';
+    if (searchInput) searchInput.value = '';
     if (statusText) {
       if (keepOpen) {
         statusText.textContent = `${t.queued}: ${getQueueList().length}`;
@@ -98,9 +98,9 @@
 
     function renderSelectable() {
       container.innerHTML = '';
-      const query = searchInput.value;
+      const query = searchInput ? searchInput.value : '';
       const list = state.selectedCountries.filter(c => {
-        return (c.attendance === 'present' || c.attendance === 'pv') && countryMatchesSearch(c, query);
+        return (c.attendance === 'present' || c.attendance === 'pv') && (!query || countryMatchesSearch(c, query));
       }).sort(countrySortCompare);
 
       if (list.length === 0) {
@@ -140,11 +140,15 @@
       });
     }
 
-    searchInput.oninput = renderSelectable;
+    if (searchInput) {
+      searchInput.oninput = renderSelectable;
+    }
     renderSelectable();
     modal.classList.remove('hidden');
     modal.style.display = 'flex';
-    searchInput.focus();
+    if (searchInput) {
+      searchInput.focus();
+    }
   }
 
   // ================= UNIFIED SETTINGS CENTER CONTROLLER =================
