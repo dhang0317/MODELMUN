@@ -676,23 +676,23 @@ body:not(.light-mode) {
       background-color: transparent !important;
       background: transparent !important;
       border: none !important;
+      border-width: 0 !important;
       border-color: transparent !important;
       box-shadow: none !important;
-    }
-    #list-gsl-queue,
-    #list-mod-queue,
-    body:not(.light-mode) #list-gsl-queue,
-    body:not(.light-mode) #list-mod-queue,
-    body.light-mode #list-gsl-queue,
-    body.light-mode #list-mod-queue {
-      border: none !important;
+      outline: none !important;
     }
     #list-gsl-queue.divide-y > :not([hidden]) ~ :not([hidden]),
     #list-mod-queue.divide-y > :not([hidden]) ~ :not([hidden]),
+    #list-pro-queue.divide-y > :not([hidden]) ~ :not([hidden]),
+    #list-con-queue.divide-y > :not([hidden]) ~ :not([hidden]),
     body:not(.light-mode) #list-gsl-queue.divide-y > :not([hidden]) ~ :not([hidden]),
     body:not(.light-mode) #list-mod-queue.divide-y > :not([hidden]) ~ :not([hidden]),
+    body:not(.light-mode) #list-pro-queue.divide-y > :not([hidden]) ~ :not([hidden]),
+    body:not(.light-mode) #list-con-queue.divide-y > :not([hidden]) ~ :not([hidden]),
     body.light-mode #list-gsl-queue.divide-y > :not([hidden]) ~ :not([hidden]),
-    body.light-mode #list-mod-queue.divide-y > :not([hidden]) ~ :not([hidden]) {
+    body.light-mode #list-mod-queue.divide-y > :not([hidden]) ~ :not([hidden]),
+    body.light-mode #list-pro-queue.divide-y > :not([hidden]) ~ :not([hidden]),
+    body.light-mode #list-con-queue.divide-y > :not([hidden]) ~ :not([hidden]) {
       border-top-width: 0px !important;
       border-bottom-width: 0px !important;
       border-color: transparent !important;
@@ -713,6 +713,7 @@ body:not(.light-mode) {
       border-radius: 0.75rem !important;
       background-color: transparent !important;
       border: none !important;
+      border-width: 0 !important;
       border-color: transparent !important;
     }
     #list-gsl-queue > div:hover,
