@@ -316,10 +316,11 @@
         </div>
 
         <!-- 2.1 SUBTAB PANEL: GSL -->
-        <div id="panel-speaking-gsl" class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
-          <!-- Left: Current Speaker & Big Timer (7 cols on lg) -->
-          <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
-            <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-center relative overflow-hidden flex-1 flex flex-col justify-between space-y-6">
+        <div id="panel-speaking-gsl">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+            <!-- Left: Current Speaker & Big Timer (7 cols on lg) -->
+            <div class="lg:col-span-7 flex flex-col justify-between space-y-6">
+              <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-center relative overflow-hidden flex-1 flex flex-col justify-between space-y-6">
               <div>
                 <div class="hidden items-center justify-end border-b pb-3 mb-6">
                   <button id="btn-gsl-set-time" class="text-xs text-primary hover:underline font-semibold flex items-center space-x-1.5">
@@ -391,19 +392,20 @@
             </div>
           </div>
 
-          <!-- Right: Speakers Queue (5 cols on lg) -->
-          <div class="lg:col-span-5 bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col h-full">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-              <div>
-                <h3 class="font-bold text-slate-800 text-base" data-i18n="upcomingSpeakers">Upcoming Speakers</h3>
-                <span id="badge-queue-count" class="text-xs text-slate-400">0 queued</span>
+            <!-- Right: Speakers Queue (5 cols on lg) -->
+            <div class="lg:col-span-5 bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col h-full">
+              <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <div>
+                  <h3 class="font-bold text-slate-800 text-base" data-i18n="upcomingSpeakers">Upcoming Speakers</h3>
+                  <span id="badge-queue-count" class="text-xs text-slate-400">0 queued</span>
+                </div>
+                <button id="btn-open-add-speaker" class="px-3.5 py-1.5 bg-primary text-white rounded-xl text-xs font-semibold hover:bg-primary-dark flex items-center space-x-1.5 cursor-pointer">
+                  <span data-i18n="addSpeaker">Add Speaker</span>
+                </button>
               </div>
-              <button id="btn-open-add-speaker" class="px-3.5 py-1.5 bg-primary text-white rounded-xl text-xs font-semibold hover:bg-primary-dark flex items-center space-x-1.5 cursor-pointer">
-                <span data-i18n="addSpeaker">Add Speaker</span>
-              </button>
-            </div>
-            <div id="list-gsl-queue" class="flex-1 overflow-y-auto mt-3 custom-scroll pr-1 max-h-96">
-              <!-- Injected via JS -->
+              <div id="list-gsl-queue" class="flex-1 overflow-y-auto mt-3 custom-scroll pr-1 max-h-96">
+                <!-- Injected via JS -->
+              </div>
             </div>
           </div>
         </div>
