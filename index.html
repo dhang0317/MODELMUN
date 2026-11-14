@@ -862,24 +862,8 @@
               </div>
             </div>
 
-            <!-- MUN Command Voting Percentage Progress Bar -->
-            <div class="space-y-0.5">
-              <div class="flex items-center justify-between text-[11px] text-slate-500 px-1">
-                <span id="vote-progress-label-favor">Favor: 0%</span>
-                <div class="flex items-center space-x-1.5">
-                  <span id="vote-verdict" class="text-xs font-bold tracking-wide text-slate-600">PENDING</span>
-                  <button id="btn-quick-pass" type="button" class="px-2.5 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold rounded-xl shadow-sm transition hidden cursor-pointer" data-i18n="concludeVote">
-                    通過 (Pass)
-                  </button>
-                </div>
-                <span id="vote-progress-label-against">Against: 0%</span>
-              </div>
-              <div class="w-full h-2 sm:h-2.5 bg-slate-200 rounded-full overflow-hidden flex">
-                <div id="bar-vote-favor" class="h-full bg-emerald-500 transition-all duration-300" style="width: 0%;"></div>
-                <div id="bar-vote-abstain" class="h-full bg-amber-400 transition-all duration-300" style="width: 0%;"></div>
-                <div id="bar-vote-against" class="h-full bg-rose-500 transition-all duration-300" style="width: 0%;"></div>
-              </div>
-            </div>
+            <!-- Quick pass button if needed (kept hidden unless vote passed) -->
+            <button id="btn-quick-pass" type="button" class="hidden"></button>
           </div>
         </div>
 
