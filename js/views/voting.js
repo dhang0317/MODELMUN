@@ -1136,22 +1136,6 @@
 
       card.innerHTML = `
         <div class="space-y-3">
-          <!-- Header: Title & Total Badge -->
-          <div class="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-zinc-800 gap-2">
-            <div class="flex items-center space-x-2 min-w-0">
-              <span class="w-2.5 h-2.5 rounded-full ${isSelected ? 'bg-primary' : 'bg-slate-300'} shrink-0"></span>
-              <input type="text" class="session-name-input font-bold text-slate-800 text-sm bg-transparent border-b border-transparent hover:border-slate-300 focus:border-primary focus:outline-none transition px-1 py-0.5 rounded truncate" value="${sess.name || `Session ${sess.id}`}" placeholder="Session Name">
-            </div>
-            <div class="flex items-center space-x-1 shrink-0">
-              <span class="text-[11px] font-mono px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 font-bold">
-                ${t.totalVotesLabel || '總票'}: ${totalVotes}
-              </span>
-              <button type="button" class="btn-clear-session text-slate-400 hover:text-rose-500 p-1 text-xs transition cursor-pointer" data-id="${sess.id}" title="${state.language === 'zh' ? '清空此會期票數' : 'Clear this session votes'}">
-                ✕
-              </button>
-            </div>
-          </div>
-
           <!-- Pure Counters: Agree / Disagree / Abstain -->
           <div class="space-y-2 pt-1">
             <!-- Agree (Favor) -->
