@@ -1272,7 +1272,8 @@
 
   <!-- Modal: Recess / Meeting Suspended Screen -->
   <div id="modal-recess" class="fixed inset-0 bg-slate-950/90 backdrop-blur-md z-[100] flex flex-col items-center justify-center p-6 hidden select-none cursor-pointer">
-    <div id="modal-recess-card" class="max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 text-center space-y-4 text-white shadow-2xl cursor-default">
+    <div id="modal-recess-card" class="relative max-w-md w-full bg-slate-900 border border-slate-800 rounded-3xl p-10 text-center space-y-4 text-white shadow-2xl cursor-pointer">
+      <button id="btn-close-recess-modal" type="button" class="absolute top-4 right-4 p-2 text-slate-400 hover:text-white rounded-xl transition cursor-pointer" aria-label="Close">✕</button>
       <div>
         <h2 id="recess-title" class="text-3xl sm:text-4xl font-black mt-1 tracking-tight">耶耶耶 ✌️我們好棒😃</h2>
       </div>

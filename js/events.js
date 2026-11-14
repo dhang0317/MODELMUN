@@ -311,6 +311,13 @@
     }
 
     window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const modalRecess = document.getElementById('modal-recess');
+        if (modalRecess && !modalRecess.classList.contains('hidden')) {
+          closeRecessScreen();
+          return;
+        }
+      }
       if (e.code === 'Space' || e.key === ' ') {
         const tag = e.target.tagName;
         if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || e.target.isContentEditable) {
@@ -987,15 +994,19 @@
       });
     }
 
-    // Recess modal double click on backdrop to close/reconvene
+    // Recess modal click to close/reconvene
     const modalRecess = document.getElementById('modal-recess');
     if (modalRecess) {
-      modalRecess.addEventListener('dblclick', (e) => {
-        // 只有點擊旁邊（非中央卡片內部元素）或是點擊兩下背景時觸發復會
+      modalRecess.addEventListener('click', (e) => {
+        const btnClose = document.getElementById('btn-close-recess-modal');
         const card = document.getElementById('modal-recess-card');
-        if (!card || !card.contains(e.target)) {
+        // 點擊關閉按鈕、點擊外圍背景、或點擊中央卡片均可直接退出復會
+        if (e.target === modalRecess || (btnClose && (e.target === btnClose || btnClose.contains(e.target))) || (card && (e.target === card || card.contains(e.target)))) {
           closeRecessScreen();
         }
+      });
+      modalRecess.addEventListener('dblclick', () => {
+        closeRecessScreen();
       });
     }
 
