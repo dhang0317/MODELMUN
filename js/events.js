@@ -1544,49 +1544,6 @@
 
     setupGlobalScaleSlider();
 
-    // Export & Import
-    document.getElementById('drawer-btn-export').addEventListener('click', () => {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify({
-        committeeName: state.committeeName,
-        agenda: state.agenda,
-        selectedCountries: state.selectedCountries
-      }, null, 2));
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", `${state.committeeName.replace(/\s+/g, '_')}_setup.json`);
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
-      closeDrawer();
-    });
-
-    const fileInput = document.getElementById('input-import-file');
-    document.getElementById('drawer-btn-import').addEventListener('click', () => {
-      fileInput.click();
-    });
-    fileInput.addEventListener('change', (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(evt) {
-        const t = I18N[state.language] || I18N.en;
-        try {
-          const parsed = JSON.parse(evt.target.result);
-          if (parsed.committeeName) state.committeeName = parsed.committeeName;
-          if (parsed.agenda) state.agenda = parsed.agenda;
-          if (Array.isArray(parsed.selectedCountries)) state.selectedCountries = parsed.selectedCountries;
-          updateAvailableCountriesPool();
-          saveToLocalStorage();
-          renderAll();
-          closeDrawer();
-          customAlert(t.importCommittee, t.importSuccessAlert);
-        } catch (err) {
-          customAlert(t.importCommittee, t.importInvalidAlert);
-        }
-      };
-      reader.readAsText(file);
-    });
-
     // Modal Close Buttons (General & Settings)
     document.querySelectorAll('.btn-close-modal').forEach(btn => {
       btn.addEventListener('click', () => {
