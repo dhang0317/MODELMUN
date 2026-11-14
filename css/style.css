@@ -1031,12 +1031,17 @@ body:not(.light-mode) {
       color: #3E2723 !important;
     }
 
-    /* Start Buttons: Dark Chocolate Button with Cream White text */
+    /* Start & Pause Buttons: Dark Chocolate Button with Cream White text */
     body:not(.light-mode) #btn-gsl-start,
     body:not(.light-mode) #btn-mod-start,
     body:not(.light-mode) #btn-single-start,
     body:not(.light-mode) #btn-procon-start,
-    body:not(.light-mode) #btn-unmod-start {
+    body:not(.light-mode) #btn-unmod-start,
+    body:not(.light-mode) #btn-gsl-pause,
+    body:not(.light-mode) #btn-mod-pause,
+    body:not(.light-mode) #btn-single-pause,
+    body:not(.light-mode) #btn-procon-pause,
+    body:not(.light-mode) #btn-unmod-pause {
       background-color: #3E2723 !important;
       color: #F7F4EE !important;
       border: 1px solid #3E2723 !important;
@@ -1050,14 +1055,29 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-mod-start span,
     body:not(.light-mode) #btn-single-start span,
     body:not(.light-mode) #btn-procon-start span,
-    body:not(.light-mode) #btn-unmod-start span {
+    body:not(.light-mode) #btn-unmod-start span,
+    body:not(.light-mode) #btn-gsl-pause *,
+    body:not(.light-mode) #btn-mod-pause *,
+    body:not(.light-mode) #btn-single-pause *,
+    body:not(.light-mode) #btn-procon-pause *,
+    body:not(.light-mode) #btn-unmod-pause *,
+    body:not(.light-mode) #btn-gsl-pause span,
+    body:not(.light-mode) #btn-mod-pause span,
+    body:not(.light-mode) #btn-single-pause span,
+    body:not(.light-mode) #btn-procon-pause span,
+    body:not(.light-mode) #btn-unmod-pause span {
       color: #F7F4EE !important;
     }
     body:not(.light-mode) #btn-gsl-start:hover,
     body:not(.light-mode) #btn-mod-start:hover,
     body:not(.light-mode) #btn-single-start:hover,
     body:not(.light-mode) #btn-procon-start:hover,
-    body:not(.light-mode) #btn-unmod-start:hover {
+    body:not(.light-mode) #btn-unmod-start:hover,
+    body:not(.light-mode) #btn-gsl-pause:hover,
+    body:not(.light-mode) #btn-mod-pause:hover,
+    body:not(.light-mode) #btn-single-pause:hover,
+    body:not(.light-mode) #btn-procon-pause:hover,
+    body:not(.light-mode) #btn-unmod-pause:hover {
       background-color: #4E342E !important;
       color: #FFFFFF !important;
     }
@@ -1065,7 +1085,12 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-mod-start:hover *,
     body:not(.light-mode) #btn-single-start:hover *,
     body:not(.light-mode) #btn-procon-start:hover *,
-    body:not(.light-mode) #btn-unmod-start:hover * {
+    body:not(.light-mode) #btn-unmod-start:hover *,
+    body:not(.light-mode) #btn-gsl-pause:hover *,
+    body:not(.light-mode) #btn-mod-pause:hover *,
+    body:not(.light-mode) #btn-single-pause:hover *,
+    body:not(.light-mode) #btn-procon-pause:hover *,
+    body:not(.light-mode) #btn-unmod-pause:hover * {
       color: #FFFFFF !important;
     }
 
