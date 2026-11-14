@@ -68,12 +68,6 @@
       };
     }
 
-    wrap('switchTab', (tabId) => {
-      if (tabId === state.currentTab) return null;
-      const btn = document.querySelector(`.tab-btn[data-tab="${tabId}"] span`);
-      const name = btn ? btn.textContent.trim() : tabId;
-      return tr(`切換至「${name}」分頁`, `Switched to "${name}" tab`, `Onglet « ${name} »`);
-    });
 
     // ---------- 3. 動議 ----------
     wrap('sendMotionToVotingTab', (m) =>
