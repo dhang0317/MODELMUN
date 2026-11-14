@@ -848,6 +848,12 @@
     }
 
     // Determine candidate pool for the active caller card and list
+    const eligibleVoters = state.selectedCountries.filter(c => {
+      if (state.voteType === 'procedural') {
+        return c.attendance === 'present' || c.attendance === 'pv';
+      }
+      return c.powerStatus !== 'observer' && (c.attendance === 'present' || c.attendance === 'pv');
+    });
     let pool = eligibleVoters;
     if (state.voteStage === 'r2') {
       pool = eligibleVoters.filter(c => c.vote === 'pass');
