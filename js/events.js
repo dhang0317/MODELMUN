@@ -124,12 +124,7 @@
       });
     }
 
-    const btnLogoHome = document.getElementById('btn-logo-home');
-    if (btnLogoHome) {
-      btnLogoHome.addEventListener('click', () => {
-        switchTab('setup');
-      });
-    }
+
 
     const segBtnTemplate = document.getElementById('segment-btn-template');
     if (segBtnTemplate) {
