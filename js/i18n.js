@@ -560,7 +560,7 @@ const I18N = {
       addSessionBtn: "+ 新增會期",
       resetCurrentSession: "重設當前會期票數",
       resetAllSessions: "重設所有會期票數",
-      concludeVote: "通過",
+      concludeVote: "結算",
       adoptVote: "通過",
       totalVotesLabel: "目前總票數",
       previousVoter: "上一個 (Previous)",

@@ -1338,28 +1338,92 @@
     });
   }
 
+  function evaluateVotePass(favorCount, againstCount, abstainCount) {
+    const isSessionMode = state.votingSubtab === 'session';
+    const totalVotesCast = favorCount + againstCount + abstainCount;
+    if (totalVotesCast === 0) return false;
+
+    const eligibleVoters = state.selectedCountries.filter(c => {
+      if (state.voteType === 'procedural') {
+        return c.attendance === 'present' || c.attendance === 'pv';
+      }
+      return c.powerStatus !== 'observer' && (c.attendance === 'present' || c.attendance === 'pv');
+    });
+    const totalPresent = eligibleVoters.length;
+    const substantiveVoters = favorCount + againstCount;
+
+    let requiredMajority = 0;
+    if (state.voteThreshold === 'unsc9') {
+      requiredMajority = 9;
+    } else if (state.voteThreshold === 'twothirds') {
+      const base = (state.voteType === 'procedural' || isSessionMode) ? totalPresent : (substantiveVoters > 0 ? substantiveVoters : totalPresent);
+      requiredMajority = Math.ceil((base * 2) / 3);
+    } else if (state.voteThreshold === 'consensus') {
+      requiredMajority = totalPresent;
+    } else {
+      const base = (state.voteType === 'procedural' || isSessionMode) ? totalPresent : (substantiveVoters > 0 ? substantiveVoters : totalPresent);
+      requiredMajority = Math.floor(base / 2) + 1;
+    }
+
+    if (state.voteThreshold === 'twothirds') {
+      return favorCount > 0 && favorCount >= requiredMajority;
+    } else if (state.voteThreshold === 'unsc9') {
+      return favorCount >= 9;
+    } else if (state.voteThreshold === 'consensus') {
+      return againstCount === 0 && favorCount > 0;
+    }
+    return favorCount > againstCount;
+  }
+
+  function getCurrentVoteCounts() {
+    if (state.votingSubtab === 'session' && Array.isArray(state.sessionVotes) && state.sessionVotes.length > 0) {
+      const activeSess = state.sessionVotes.find(s => s.id === state.activeSessionId) || state.sessionVotes[0];
+      if (activeSess) {
+        return {
+          favor: activeSess.favor || 0,
+          against: activeSess.against || 0,
+          abstain: activeSess.abstain || 0
+        };
+      }
+    }
+    return {
+      favor: state.selectedCountries.filter(c => c.vote === 'favor').length,
+      against: state.selectedCountries.filter(c => c.vote === 'against').length,
+      abstain: state.selectedCountries.filter(c => c.vote === 'abstain').length
+    };
+  }
+
   function adoptVotingSession(sess) {
     const t = I18N[state.language] || I18N.en;
     const sessName = sess.name || `Session ${sess.id}`;
     const favor = sess.favor || 0;
     const against = sess.against || 0;
     const abstain = sess.abstain || 0;
+    const isPassed = evaluateVotePass(favor, against, abstain);
+    const resultLabel = state.language === 'zh' ? (isPassed ? '通過' : '未通過') : (isPassed ? 'Passed' : 'Failed');
 
     showModal({
-      title: state.language === 'zh' ? '確認通過表決' : 'Confirm Adoption',
+      title: state.language === 'zh' ? '確認結算表決' : 'Confirm Settlement',
       message: state.language === 'zh' 
-        ? `確定要通過【${sessName}】嗎？\n(贊成: ${favor}，反對: ${against}，棄權: ${abstain})`
-        : `Are you sure you want to adopt 【${sessName}】?\n(In Favor: ${favor}, Against: ${against}, Abstain: ${abstain})`,
-      confirmText: state.language === 'zh' ? '確認通過' : 'Pass & Adopt',
+        ? `確定要結算【${sessName}】嗎？\n(贊成: ${favor}，反對: ${against}，棄權: ${abstain})\n結算結果：${resultLabel}`
+        : `Settle 【${sessName}】?\n(In Favor: ${favor}, Against: ${against}, Abstain: ${abstain})\nResult: ${resultLabel}`,
+      confirmText: state.language === 'zh' ? '確認結算' : 'Settle',
       cancelText: t.cancel || '取消',
       onConfirm: () => {
+        if (window.logAction) {
+          window.logAction(state.language === 'zh'
+            ? `會期表決結算（${resultLabel}）：${sessName}（贊成 ${favor} / 反對 ${against} / 棄權 ${abstain}）`
+            : `Session vote settled (${resultLabel}): ${sessName} (Favor ${favor} / Against ${against} / Abstain ${abstain})`);
+        }
         clearAllSessionVotes();
         saveToLocalStorage(true, true);
         renderSessionVotesGrid();
         updateScoreboardAndVerdict();
         customAlert(
-          state.language === 'zh' ? '表決已通過' : 'Vote Adopted',
-          state.language === 'zh' ? `【${sessName}】已正式通過！會期票數已清空。` : `【${sessName}】has been officially passed! Session votes cleared.`
+          state.language === 'zh' ? `表決${resultLabel}` : `Vote ${resultLabel}`,
+          state.language === 'zh'
+            ? `【${sessName}】結算結果為「${resultLabel}」！會期票數已清空。`
+            : `【${sessName}】settled as ${resultLabel}! Session votes cleared.`
         );
       }
     });
@@ -1368,6 +1432,9 @@
   function adoptCurrentVote() {
     const t = I18N[state.language] || I18N.en;
     const isMotion = state.activeVoteTarget === 'motion' || (state.motions && state.motions.length > 0 && state.votingMotion);
+    const counts = getCurrentVoteCounts();
+    const isPassed = evaluateVotePass(counts.favor, counts.against, counts.abstain);
+    const resultLabel = state.language === 'zh' ? (isPassed ? '通過' : '未通過') : (isPassed ? 'Passed' : 'Failed');
 
     if (isMotion) {
       const curMot = state.votingMotion || (state.motions && state.motions[0]);
@@ -1375,19 +1442,33 @@
         const targetIdx = (typeof curMot.originalIndex === 'number') ? curMot.originalIndex : 0;
         const mTitle = curMot.topic ? `${formatMotionType(curMot.type)}：${curMot.topic}` : formatMotionType(curMot.type);
         showModal({
-          title: state.language === 'zh' ? '確認通過動議' : 'Adopt Motion',
+          title: state.language === 'zh' ? '確認結算動議' : 'Settle Motion',
           message: state.language === 'zh' 
-            ? `確定要宣布通過此動議嗎？\n【${mTitle}】`
-            : `Confirm adoption of this motion?\n【${mTitle}】`,
-          confirmText: state.language === 'zh' ? '通過並執行' : 'Adopt & Execute',
+            ? `確定要結算此動議嗎？\n【${mTitle}】\n(贊成: ${counts.favor}，反對: ${counts.against}，棄權: ${counts.abstain})\n結算結果：${resultLabel}`
+            : `Settle this motion?\n【${mTitle}】\n(In Favor: ${counts.favor}, Against: ${counts.against}, Abstain: ${counts.abstain})\nResult: ${resultLabel}`,
+          confirmText: state.language === 'zh' ? '確認結算' : 'Settle',
           cancelText: t.cancel || '取消',
           onConfirm: () => {
             clearAllSessionVotes();
             saveToLocalStorage(true, true);
             renderSessionVotesGrid();
             updateScoreboardAndVerdict();
-            if (typeof executeMotion === 'function') {
-              executeMotion(curMot, targetIdx);
+            if (isPassed) {
+              if (typeof executeMotion === 'function') {
+                executeMotion(curMot, targetIdx);
+              }
+            } else {
+              if (typeof removeMotion === 'function') {
+                removeMotion(targetIdx);
+              } else if (Array.isArray(state.motions)) {
+                state.motions.splice(targetIdx, 1);
+                saveToLocalStorage(true, true);
+                renderAll();
+              }
+              customAlert(
+                state.language === 'zh' ? '未通過' : 'Failed',
+                state.language === 'zh' ? `動議【${mTitle}】未通過。` : `Motion 【${mTitle}】 failed.`
+              );
             }
           }
         });
@@ -1411,29 +1492,34 @@
     // Resolution Vote
     const resTitle = (state.voteResolutionTitle || state.resolutionTitle) || 'Draft Resolution 1.1';
     showModal({
-      title: state.language === 'zh' ? '宣布決議案結算' : 'Conclude Draft Resolution',
+      title: state.language === 'zh' ? '宣布決議案結算' : 'Settle Draft Resolution',
       message: state.language === 'zh' 
-        ? `確定主席正式結算並宣布【${resTitle}】通過嗎？`
-        : `Confirm official conclusion and passing of 【${resTitle}】?`,
-      confirmText: state.language === 'zh' ? '結算通過' : 'Conclude & Pass',
+        ? `確定要結算【${resTitle}】嗎？\n(贊成: ${counts.favor}，反對: ${counts.against}，棄權: ${counts.abstain})\n結算結果：${resultLabel}`
+        : `Confirm settlement of 【${resTitle}】?\n(In Favor: ${counts.favor}, Against: ${counts.against}, Abstain: ${counts.abstain})\nResult: ${resultLabel}`,
+      confirmText: state.language === 'zh' ? '確認結算' : 'Settle',
       cancelText: t.cancel || '取消',
       onConfirm: () => {
-        state.resolutionPassed = true;
-        if (window.logAction) window.logAction(state.language === 'zh' ? `決議案結算通過：${resTitle}` : `Resolution passed: ${resTitle}`);
+        state.resolutionPassed = isPassed;
+        if (window.logAction) {
+          window.logAction(state.language === 'zh'
+            ? `決議案結算（${resultLabel}）：${resTitle}（贊成 ${counts.favor} / 反對 ${counts.against} / 棄權 ${counts.abstain}）`
+            : `Resolution settled (${resultLabel}): ${resTitle}`);
+        }
         // 清空所有會期票數與點名選票
         clearAllSessionVotes();
         saveToLocalStorage(true, true);
         renderResolutionVoteGrid();
         renderSessionVotesGrid();
         updateScoreboardAndVerdict();
-        // Set verdict to passed after scoreboard refresh
         const verdictElem = document.getElementById('vote-verdict');
         if (verdictElem) {
-          verdictElem.textContent = (t.passed || 'PASSED').toUpperCase();
-          verdictElem.className = 'text-xs sm:text-sm font-black tracking-wide text-emerald-600';
+          verdictElem.textContent = isPassed ? (t.passed || 'PASSED').toUpperCase() : (t.failed || 'FAILED').toUpperCase();
+          verdictElem.className = isPassed
+            ? 'text-xs sm:text-sm font-black tracking-wide text-emerald-600'
+            : 'text-xs sm:text-sm font-black tracking-wide text-rose-600';
         }
         customAlert(
-          state.language === 'zh' ? '通過' : 'Passed',
+          resultLabel,
           ''
         );
       }
