@@ -462,7 +462,7 @@
     clearInterval(state.recessTimerInterval);
 
     const titleEl = document.getElementById('recess-title');
-    if (titleEl) titleEl.textContent = title || t.recessSuspendedTitle || '休會';
+    if (titleEl) titleEl.textContent = '耶耶耶 ✌️我們好棒😃';
 
     modal.classList.remove('hidden');
     if (window.lucide) window.lucide.createIcons();
