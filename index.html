@@ -697,7 +697,7 @@
         
 
         <!-- Most Disruptive Motion Hero -->
-        <div id="hero-motion-card" class="bg-surface-primary rounded-2xl p-6 text-content-primary shadow-card border border-subtle relative overflow-hidden hidden transition-all shrink-0">
+        <div id="hero-motion-card" class="bg-surface-primary rounded-2xl p-6 sm:p-8 text-content-primary shadow-card border border-subtle relative overflow-hidden hidden transition-all flex-[2] min-h-[160px] flex flex-col justify-center">
           <span id="hero-motion-rule-tag" class="hidden"></span>
           <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
@@ -711,24 +711,15 @@
               <p id="hero-motion-details" class="text-xs text-content-muted mt-1">Total: 10 mins • Individual: 60s</p>
             </div>
             <div class="flex items-center flex-wrap gap-2" id="hero-motion-actions">
-              <!-- Rendered via JS depending on motion type (Second / Vote / Fail) -->
-              <button id="btn-hero-motion-fail" class="btn-vote-motion-fail px-4 py-2 rounded-xl text-xs font-medium transition border border-subtle bg-surface-secondary text-content-secondary hover:text-content-primary hover:bg-surface-tertiary cursor-pointer" data-i18n="fail">
-                否決 / 撤銷
-              </button>
-              <button id="btn-hero-motion-vote" class="px-4 py-2 rounded-xl text-xs font-medium transition flex items-center space-x-1.5 border border-amber-500/30 bg-amber-500/10 text-amber-500 hover:bg-amber-500/20 active:scale-95 cursor-pointer">
-                
-                <span data-i18n="putToVote">交付表決</span>
-              </button>
-              <button id="btn-hero-motion-second" class="px-5 py-2 rounded-xl text-xs font-medium transition flex items-center space-x-1.5 shadow-sm bg-brand text-content-inverse hover:opacity-90 active:scale-95 cursor-pointer">
-                
-                <span id="hero-motion-second-text" data-i18n="passSecond">附議通過</span>
+              <button id="btn-hero-motion-vote" class="px-5 py-2.5 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 border border-amber-500/30 bg-amber-500/10 text-amber-600 hover:bg-amber-500/20 active:scale-95 cursor-pointer">
+                <span data-i18n="goToVote">前往投票</span>
               </button>
             </div>
           </div>
         </div>
 
         <!-- Motions List -->
-        <div class="bg-surface-primary rounded-2xl p-5 shadow-card border border-subtle flex-1 flex flex-col min-h-0">
+        <div class="bg-surface-primary rounded-2xl p-5 shadow-card border border-subtle flex-[3] flex flex-col min-h-0">
           <div class="flex items-center justify-between pb-3 border-b border-subtle shrink-0">
             <div></div>
             <div class="flex items-center space-x-2">
@@ -839,6 +830,12 @@
                 <span class="text-slate-300 mx-1.5">|</span>
                 <span class="text-[11px] text-slate-500 font-semibold whitespace-nowrap">最低 <span id="vote-count-majority" class="text-xs sm:text-sm font-black text-slate-900">0</span> 票</span>
               </div>
+              <button id="btn-voting-motion-fail" class="btn-vote-motion-fail px-3 py-1 rounded-xl text-xs font-medium transition border border-subtle bg-surface-secondary text-content-secondary hover:text-content-primary hover:bg-surface-tertiary cursor-pointer hidden" data-i18n="fail">
+                否決
+              </button>
+              <button id="btn-voting-motion-second" class="px-3 py-1 rounded-xl text-xs font-medium transition flex items-center space-x-1.5 shadow-sm bg-brand text-content-inverse hover:opacity-90 active:scale-95 cursor-pointer hidden">
+                <span id="voting-motion-second-text" data-i18n="passSecond">附議無異議通過</span>
+              </button>
               <button id="btn-motion-vote-execute" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-medium transition shadow-sm hidden flex items-center space-x-1.5 text-xs">
                 <span id="btn-motion-vote-execute-text" data-i18n="executeMotionBtn">執行動議</span>
               </button>

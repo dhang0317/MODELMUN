@@ -351,6 +351,8 @@
     const motionSubtitleEl = document.getElementById('motion-vote-type-subtitle');
     const motionTypeText = document.getElementById('motion-vote-type-text');
     const threshElem = document.getElementById('select-vote-threshold');
+    const btnVotingFail = document.getElementById('btn-voting-motion-fail');
+    const btnVotingSecond = document.getElementById('btn-voting-motion-second');
     const t = I18N[state.language] || I18N.en;
 
     if (threshElem) {
@@ -360,6 +362,12 @@
     if (isMotionVote) {
       const activeMotion = state.votingMotion || (state.motions && state.motions[0]) || null;
       if (activeMotion) {
+        const mRule = (typeof MOTION_RULES !== 'undefined' && MOTION_RULES[activeMotion.type]) ? MOTION_RULES[activeMotion.type] : { requiresVote: false };
+        if (btnVotingFail) btnVotingFail.classList.remove('hidden');
+        if (btnVotingSecond) {
+          if (mRule.requiresVote) btnVotingSecond.classList.add('hidden');
+          else btnVotingSecond.classList.remove('hidden');
+        }
         const motionTypeName = `${formatMotionType(activeMotion.type)}`;
         
         // Hide editable resolution title input; show large motion details title & subtitle
@@ -388,6 +396,8 @@
           }
         }
       } else {
+        if (btnVotingFail) btnVotingFail.classList.add('hidden');
+        if (btnVotingSecond) btnVotingSecond.classList.add('hidden');
         if (titleContainer) titleContainer.classList.remove('hidden');
         if (titleInput) {
           titleInput.value = t.noMotionsAvailableToVote || '無待表決之動議';
@@ -397,6 +407,8 @@
         if (motionSubtitleEl) motionSubtitleEl.classList.add('hidden');
       }
     } else {
+      if (btnVotingFail) btnVotingFail.classList.add('hidden');
+      if (btnVotingSecond) btnVotingSecond.classList.add('hidden');
       if (titleContainer) titleContainer.classList.remove('hidden');
       if (titleInput) {
         titleInput.value = state.voteResolutionTitle || 'Draft Resolution 1.1';

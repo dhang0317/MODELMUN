@@ -989,6 +989,36 @@
       });
     }
 
+    const btnVotingSecond = document.getElementById('btn-voting-motion-second');
+    if (btnVotingSecond) {
+      btnVotingSecond.addEventListener('click', () => {
+        const activeMotion = state.votingMotion || (state.motions && state.motions[0]) || null;
+        if (!activeMotion) return;
+        const idx = state.motions.indexOf(activeMotion);
+        state.votingMotion = null;
+        state.activeVoteTarget = 'resolution';
+        state.voteTopic = '';
+        executeMotion(activeMotion, idx >= 0 ? idx : 0);
+      });
+    }
+
+    const btnVotingFail = document.getElementById('btn-voting-motion-fail');
+    if (btnVotingFail) {
+      btnVotingFail.addEventListener('click', () => {
+        const activeMotion = state.votingMotion || (state.motions && state.motions[0]) || null;
+        if (!activeMotion) return;
+        const idx = state.motions.indexOf(activeMotion);
+        state.votingMotion = null;
+        state.activeVoteTarget = 'resolution';
+        state.voteTopic = '';
+        if (idx >= 0) {
+          removeMotion(idx);
+        } else {
+          renderAll();
+        }
+      });
+    }
+
     // Recess modal click to close/reconvene
     const modalRecess = document.getElementById('modal-recess');
     if (modalRecess) {
