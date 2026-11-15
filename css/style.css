@@ -3712,6 +3712,80 @@ body:not(.light-mode) {
       background: transparent !important;
     }
 
+    /* Unified Typography Scale across all pages */
+    nav#tabs-nav .tab-btn,
+    nav#tabs-nav .tab-btn span,
+    main button,
+    main button span,
+    main input:not(.timer-direct-input),
+    main select,
+    #list-available-countries > div,
+    #list-available-countries > div span,
+    #list-selected-countries > div,
+    #list-selected-countries > div span,
+    #grid-rollcall-delegates .country-name-text,
+    #grid-substantive-ballots .country-name-text,
+    #list-gsl-queue > div,
+    #list-gsl-queue > div span,
+    #list-mod-queue > div,
+    #list-mod-queue > div span,
+    #list-pro-queue > div,
+    #list-pro-queue > div span,
+    #list-con-queue > div,
+    #list-con-queue > div span,
+    #list-motions > div,
+    #list-motions > div span,
+    #panel-session-votes-container,
+    #panel-session-votes-container span {
+      font-size: calc(0.9375rem * var(--content-scale)) !important;
+      line-height: 1.4 !important;
+    }
+
+    main .text-\[10px\],
+    main .text-\[11px\],
+    main .text-xs,
+    main .text-sm,
+    main p,
+    main label,
+    #grid-rollcall-delegates .rollcall-power-text,
+    #hero-motion-details,
+    #motion-vote-type-subtitle,
+    #motion-vote-type-subtitle span {
+      font-size: calc(0.875rem * var(--content-scale)) !important;
+      line-height: 1.4 !important;
+    }
+
+    main h2:not(#gsl-current-name):not(#mod-current-country-name):not(#procon-current-name):not(#single-country-name),
+    main h3,
+    #hero-motion-topic,
+    #motion-vote-details-text,
+    #vote-resolution-title-input {
+      font-size: calc(1.125rem * var(--content-scale)) !important;
+      line-height: 1.35 !important;
+    }
+
+    #gsl-current-name,
+    #mod-current-country-name,
+    #procon-current-name,
+    #single-country-name,
+    #active-voter-name,
+    #vote-count-favor,
+    #vote-count-against,
+    #vote-count-abstain {
+      font-size: calc(2rem * var(--content-scale)) !important;
+      line-height: 1.2 !important;
+    }
+
+    #gsl-timer-display,
+    #mod-speaker-timer-display,
+    #unmod-timer-display,
+    #procon-timer-display,
+    #single-timer-display,
+    .timer-direct-input {
+      font-size: calc(4.5rem * var(--content-scale)) !important;
+      line-height: 1.1 !important;
+    }
+
 
 
 
