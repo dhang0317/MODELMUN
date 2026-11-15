@@ -694,7 +694,7 @@
         btnSubtabRollcall.style.setProperty('border', 'none', 'important');
       } else {
         btnSubtabRollcall.style.setProperty('background-color', 'transparent', 'important');
-        btnSubtabRollcall.style.setProperty('color', isLightMode ? '#3E2723' : '#FFFFFF', 'important');
+        btnSubtabRollcall.style.setProperty('color', '#3E2723', 'important');
         btnSubtabRollcall.style.setProperty('border', 'none', 'important');
       }
     }
@@ -712,7 +712,7 @@
         btnSubtabSession.style.setProperty('border', 'none', 'important');
       } else {
         btnSubtabSession.style.setProperty('background-color', 'transparent', 'important');
-        btnSubtabSession.style.setProperty('color', isLightMode ? '#3E2723' : '#FFFFFF', 'important');
+        btnSubtabSession.style.setProperty('color', '#3E2723', 'important');
         btnSubtabSession.style.setProperty('border', 'none', 'important');
       }
     }
