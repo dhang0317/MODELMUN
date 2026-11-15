@@ -112,7 +112,9 @@
         const item = document.createElement('div');
         const queueList = getQueueList();
         const inQueueCount = keepOpen ? queueList.filter(m => m.id === c.id).length : 0;
-        item.className = 'p-3 flex items-center justify-between bg-[#4E342E] border border-[#6D4C41] hover:bg-[#5D4037] hover:border-[#A1887F] hover:shadow-sm cursor-pointer rounded-xl transition';
+        item.className = keepOpen
+          ? 'p-3 flex items-center justify-between bg-[#4E342E] border border-[#6D4C41] rounded-xl transition'
+          : 'p-3 flex items-center justify-between bg-[#4E342E] border border-[#6D4C41] hover:bg-[#5D4037] hover:border-[#A1887F] hover:shadow-sm cursor-pointer rounded-xl transition';
         item.innerHTML = `
           <div class="flex items-center space-x-3 min-w-0">
             <img src="${getFlagUrl(c)}" class="w-8 h-5.5 object-cover rounded shadow-sm border border-white/20 shrink-0">
@@ -121,21 +123,28 @@
           </div>
           <div class="flex items-center space-x-2 shrink-0 ml-2">
             ${c.powerStatus === 'observer' ? `<span class="text-xs text-[#D7CCC8]">${t.observer}</span>` : ''}
-            ${keepOpen ? `<button type="button" class="px-2.5 py-1 text-xs font-semibold bg-[#3E2723] hover:bg-[#F7F4EE] hover:text-[#3E2723] border border-[#6D4C41] rounded-xl text-[#F7F4EE] transition cursor-pointer">+ ${t.add}</button>` : ''}
+            ${keepOpen ? `<button type="button" class="btn-add-speaker-item px-2.5 py-1 text-xs font-semibold bg-[#3E2723] hover:bg-[#F7F4EE] hover:text-[#3E2723] border border-[#6D4C41] rounded-xl text-[#F7F4EE] transition cursor-pointer">+ ${t.add}</button>` : ''}
           </div>
         `;
-        item.addEventListener('click', (e) => {
-          e.preventDefault();
-          if (!keepOpen) {
+        if (keepOpen) {
+          const addBtn = item.querySelector('.btn-add-speaker-item');
+          if (addBtn) {
+            addBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onSelectCallback(c);
+              if (statusText) statusText.textContent = `${t.queued}: ${getQueueList().length}`;
+              renderSelectable();
+            });
+          }
+        } else {
+          item.addEventListener('click', (e) => {
+            e.preventDefault();
             modal.classList.add('hidden');
             modal.style.display = 'none';
             onSelectCallback(c);
-          } else {
-            onSelectCallback(c);
-            if (statusText) statusText.textContent = `${t.queued}: ${getQueueList().length}`;
-            renderSelectable();
-          }
-        });
+          });
+        }
         container.appendChild(item);
       });
     }
