@@ -3675,6 +3675,23 @@ body:not(.light-mode) {
       color: #ffffff !important;
     }
 
+    /* Disable gray hover/active highlight on list rows */
+    #list-available-countries > div:hover,
+    #list-available-countries > div:active,
+    #list-selected-countries > div:hover,
+    #list-selected-countries > div:active,
+    #list-gsl-queue > div:hover,
+    #list-gsl-queue > div:active,
+    #list-mod-queue > div:hover,
+    #list-mod-queue > div:active,
+    #list-pro-queue > div:hover,
+    #list-pro-queue > div:active,
+    #list-con-queue > div:hover,
+    #list-con-queue > div:active {
+      background-color: transparent !important;
+      background: transparent !important;
+    }
+
 
 
 
