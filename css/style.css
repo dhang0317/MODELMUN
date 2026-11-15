@@ -3302,7 +3302,7 @@ body:not(.light-mode) {
       border-bottom: 3px solid currentColor !important;
     }
     body:not(.light-mode):not(.has-custom-accent) nav#tabs-nav .tab-btn {
-      color: #2C3A1E !important;
+      color: #000000 !important;
     }
     body:not(.light-mode):not(.has-custom-accent) nav#tabs-nav .tab-btn:hover {
       color: #000000 !important;
@@ -3312,7 +3312,7 @@ body:not(.light-mode) {
       border-bottom-color: #000000 !important;
     }
     body.light-mode:not(.has-custom-accent) nav#tabs-nav .tab-btn {
-      color: #2C3A1E !important;
+      color: #000000 !important;
     }
     body.light-mode:not(.has-custom-accent) nav#tabs-nav .tab-btn:hover {
       color: #000000 !important;
