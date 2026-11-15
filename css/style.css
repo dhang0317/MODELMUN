@@ -3675,7 +3675,20 @@ body:not(.light-mode) {
       color: #ffffff !important;
     }
 
-    /* Disable gray hover/active highlight on list rows */
+    /* Disable gray hover/active highlight on list rows & remove nested card boxes */
+    #list-available-countries > div,
+    #list-selected-countries > div {
+      background-color: transparent !important;
+      background: transparent !important;
+      border: none !important;
+      border-bottom: 1px solid #E7E0D8 !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+    #list-available-countries > div:last-child,
+    #list-selected-countries > div:last-child {
+      border-bottom: none !important;
+    }
     #list-available-countries > div:hover,
     #list-available-countries > div:active,
     #list-selected-countries > div:hover,
