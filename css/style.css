@@ -3301,17 +3301,17 @@ body:not(.light-mode) {
       border-bottom: 3px solid currentColor !important;
     }
     body:not(.light-mode):not(.has-custom-accent) nav#tabs-nav .tab-btn {
-      color: #a1a1aa !important;
+      color: #2C3A1E !important;
     }
     body:not(.light-mode):not(.has-custom-accent) nav#tabs-nav .tab-btn:hover {
-      color: #ffffff !important;
+      color: #000000 !important;
     }
     body:not(.light-mode):not(.has-custom-accent) nav#tabs-nav .tab-btn.tab-active {
-      color: #ffffff !important;
-      border-bottom-color: #ffffff !important;
+      color: #000000 !important;
+      border-bottom-color: #000000 !important;
     }
     body.light-mode:not(.has-custom-accent) nav#tabs-nav .tab-btn {
-      color: #64748b !important;
+      color: #2C3A1E !important;
     }
     body.light-mode:not(.has-custom-accent) nav#tabs-nav .tab-btn:hover {
       color: #000000 !important;
