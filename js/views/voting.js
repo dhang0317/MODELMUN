@@ -172,6 +172,31 @@
     const grid = document.getElementById('grid-rollcall-delegates');
     grid.innerHTML = '';
     const t = I18N[state.language] || I18N.en;
+    const isLocked = !!state.rollcallLocked;
+
+    const btnLock = document.getElementById('btn-rollcall-lock');
+    const lockLabel = document.getElementById('rollcall-lock-label');
+    if (btnLock) {
+      if (isLocked) {
+        btnLock.className = 'px-3 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-800 rounded-xl text-xs font-bold transition border border-amber-500/50 cursor-pointer flex items-center space-x-1.5';
+        if (lockLabel) lockLabel.textContent = state.language === 'zh' ? '🔒 已鎖定' : '🔒 Locked';
+      } else {
+        btnLock.className = 'px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition border border-slate-300 cursor-pointer flex items-center space-x-1.5';
+        if (lockLabel) lockLabel.textContent = state.language === 'zh' ? '🔓 鎖定' : '🔓 Lock';
+      }
+    }
+
+    ['btn-set-all-uncalled', 'btn-set-all-present', 'btn-set-all-absent'].forEach(id => {
+      const b = document.getElementById(id);
+      if (b) {
+        b.disabled = isLocked;
+        b.style.opacity = isLocked ? '0.5' : '1';
+        b.style.pointerEvents = isLocked ? 'none' : '';
+      }
+    });
+
+    grid.style.pointerEvents = isLocked ? 'none' : '';
+    grid.style.opacity = isLocked ? '0.85' : '1';
 
     state.selectedCountries.forEach((c) => {
       const card = document.createElement('div');

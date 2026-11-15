@@ -1035,6 +1035,16 @@
       });
     }
 
+    // Roll Call Lock
+    const btnRollcallLock = document.getElementById('btn-rollcall-lock');
+    if (btnRollcallLock) {
+      btnRollcallLock.addEventListener('click', () => {
+        state.rollcallLocked = !state.rollcallLocked;
+        saveToLocalStorage(true, true);
+        renderRollCallGrid();
+      });
+    }
+
     // Roll Call Bulk Actions
     const btnSetAllUncalled = document.getElementById('btn-set-all-uncalled');
     if (btnSetAllUncalled) {
