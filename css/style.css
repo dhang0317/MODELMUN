@@ -438,6 +438,12 @@ body:not(.light-mode) {
       border: none !important;
       box-shadow: none !important;
     }
+    #select-vote-threshold {
+      background: transparent !important;
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
     body:not(.light-mode) main .bg-white *,
     body:not(.light-mode) main .bg-slate-50 *,
     body:not(.light-mode) main .bg-slate-100 *,
