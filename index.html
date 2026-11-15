@@ -642,39 +642,39 @@
 
     <!-- 4. UNMODERATED CAUCUS VIEW (/tabs/unmod) -->
     <div id="view-unmod" class="view-panel absolute inset-0 overflow-y-auto p-4 sm:p-6 bg-slate-50 custom-scroll flex flex-col justify-center items-center hidden">
-      <div class="max-w-4xl w-full mx-auto my-auto space-y-6">
+      <div class="max-w-5xl w-full mx-auto my-auto space-y-6">
         
         <!-- Main Caucus Timer Card (Consistent with Mod Caucus UI) -->
-        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-slate-200 text-center space-y-6">
+        <div class="bg-white rounded-2xl p-8 sm:p-12 shadow-sm border border-slate-200 text-center space-y-8">
           <div class="border-b pb-1 border-slate-100 hidden">
             <span class="text-xs uppercase tracking-wider font-bold text-slate-400 hidden" data-i18n="unmod">自由磋商</span>
             <h2 class="text-2xl font-black text-slate-800 tracking-tight hidden" data-i18n="tabUnmod">自由磋商</h2>
           </div>
 
-          <div class="space-y-4 py-2">
+          <div class="space-y-5 py-2">
             <div class="relative inline-flex items-center justify-center group cursor-pointer" title="點擊直接打字修改時間">
-              <div id="unmod-timer-display" class="text-7xl sm:text-8xl md:text-9xl font-mono font-black text-primary tracking-tight transition group-hover:opacity-75">15:00</div>
-              <input id="unmod-timer-input" type="text" maxlength="5" class="timer-direct-input absolute inset-0 opacity-0 cursor-pointer text-center font-mono font-black text-7xl sm:text-8xl md:text-9xl bg-transparent border-0 outline-none text-transparent caret-white selection:bg-primary/40 focus:opacity-100 focus:text-primary focus:bg-zinc-900/90 rounded-2xl transition z-10" value="15:00" placeholder="15:00">
+              <div id="unmod-timer-display" class="text-8xl sm:text-9xl md:text-[10rem] leading-none font-mono font-black text-primary tracking-tight transition group-hover:opacity-75">15:00</div>
+              <input id="unmod-timer-input" type="text" maxlength="5" class="timer-direct-input absolute inset-0 opacity-0 cursor-pointer text-center font-mono font-black text-8xl sm:text-9xl md:text-[10rem] leading-none bg-transparent border-0 outline-none text-transparent caret-white selection:bg-primary/40 focus:opacity-100 focus:text-primary focus:bg-zinc-900/90 rounded-2xl transition z-10" value="15:00" placeholder="15:00">
             </div>
             
-            <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+            <div class="w-full bg-slate-100 h-3.5 rounded-full overflow-hidden">
               <div id="unmod-total-progress" class="bg-primary h-full w-full transition-all duration-300"></div>
             </div>
             
-            <div class="flex items-center justify-end text-xs font-semibold text-slate-500 pt-1">
+            <div class="flex items-center justify-end text-sm font-semibold text-slate-500 pt-1">
               <span id="unmod-total-timer-text">15:00</span>
             </div>
           </div>
 
           <!-- Controls (順序：重置、開始) -->
-          <div class="flex items-center justify-center space-x-3 pt-2">
-            <button id="btn-unmod-reset" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition cursor-pointer" title="重置">
+          <div class="flex items-center justify-center space-x-4 pt-2">
+            <button id="btn-unmod-reset" class="px-6 py-3.5 text-base bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl transition cursor-pointer" title="重置">
               <span data-i18n="reset">重置</span>
             </button>
-            <button id="btn-unmod-start" class="px-6 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2 cursor-pointer">
+            <button id="btn-unmod-start" class="px-8 py-3.5 text-base bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow transition flex items-center space-x-2 cursor-pointer">
               <span data-i18n="startCaucus">開始</span>
             </button>
-            <button id="btn-unmod-pause" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden cursor-pointer">
+            <button id="btn-unmod-pause" class="px-8 py-3.5 text-base bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow transition flex items-center space-x-2 hidden cursor-pointer">
               <span data-i18n="pause">暫停</span>
             </button>
             
