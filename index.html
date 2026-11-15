@@ -829,16 +829,15 @@
             <!-- Quick select threshold & Action buttons (右上角多數門檻與門檻票數框) -->
             <div class="flex items-center space-x-2 text-xs">
               <span class="text-slate-500 text-[11px] sm:text-xs" data-i18n="majorityRule">多數決門檻：</span>
-              <select id="select-vote-threshold" class="px-2 py-1 border border-slate-200 rounded-lg text-slate-700 bg-transparent text-xs">
-                <option value="simple">Simple Majority (50% + 1)</option>
-                <option value="twothirds">Two-Thirds Majority (2/3)</option>
-                <option value="unsc9">Security Council (9/15)</option>
-                <option value="consensus">Consensus (All Votes)</option>
-              </select>
-              <!-- 右上角門檻票數小方框 -->
-              <div class="bg-slate-50 border border-slate-200 px-2.5 py-1 rounded-xl flex items-center space-x-1.5 shrink-0" title="門檻票數">
-                <span class="text-[10px] text-slate-500 font-semibold" data-i18n="majority">門檻</span>
-                <span id="vote-count-majority" class="text-xs sm:text-sm font-black text-slate-900 leading-none">0</span>
+              <div class="inline-flex items-center bg-slate-50 border border-slate-200 rounded-xl px-2 py-0.5 text-xs">
+                <select id="select-vote-threshold" class="pl-1 pr-1.5 py-0.5 text-slate-700 bg-transparent text-xs font-medium focus:outline-none cursor-pointer">
+                  <option value="simple">Simple Majority (50% + 1)</option>
+                  <option value="twothirds">Two-Thirds Majority (2/3)</option>
+                  <option value="unsc9">Security Council (9/15)</option>
+                  <option value="consensus">Consensus (All Votes)</option>
+                </select>
+                <span class="text-slate-300 mx-1.5">|</span>
+                <span class="text-[11px] text-slate-500 font-semibold whitespace-nowrap">最低 <span id="vote-count-majority" class="text-xs sm:text-sm font-black text-slate-900">0</span> 票</span>
               </div>
               <button id="btn-motion-vote-execute" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-medium transition shadow-sm hidden flex items-center space-x-1.5 text-xs">
                 <span id="btn-motion-vote-execute-text" data-i18n="executeMotionBtn">執行動議</span>
