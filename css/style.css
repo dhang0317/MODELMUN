@@ -1,4 +1,9 @@
-/* Global Button Rapid-Tap Responsiveness */
+/* Global Button Rapid-Tap Responsiveness & Disable Page Zoom */
+html,
+body {
+  touch-action: pan-x pan-y;
+}
+
 button,
 [role="button"] {
   touch-action: manipulation;
