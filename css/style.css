@@ -3481,35 +3481,39 @@ body:not(.light-mode) {
 
     body.light-mode #btn-voting-subtab-rollcall:not(.active),
     body.light-mode #btn-voting-subtab-session:not(.active) {
-      color: #3E2723 !important;
+      color: #6D4C41 !important;
       background-color: transparent !important;
       background: transparent !important;
       border: none !important;
+      border-radius: 0.55rem !important;
+      box-shadow: none !important;
     }
     body.light-mode #btn-voting-subtab-rollcall:not(.active) *,
     body.light-mode #btn-voting-subtab-session:not(.active) * {
-      color: #3E2723 !important;
+      color: #6D4C41 !important;
     }
     body.light-mode #btn-voting-subtab-rollcall:not(.active):hover,
     body.light-mode #btn-voting-subtab-session:not(.active):hover {
-      color: #1F2A14 !important;
-      background-color: rgba(0, 0, 0, 0.05) !important;
-      background: rgba(0, 0, 0, 0.05) !important;
+      color: #3E2723 !important;
+      background-color: rgba(62, 39, 35, 0.06) !important;
+      background: rgba(62, 39, 35, 0.06) !important;
       border: none !important;
     }
     body.light-mode #btn-voting-subtab-rollcall.active,
     body.light-mode #btn-voting-subtab-session.active,
     body.light-mode #btn-voting-subtab-rollcall.active:hover,
     body.light-mode #btn-voting-subtab-session.active:hover {
-      background-color: #B5C99A !important;
-      background: #B5C99A !important;
-      color: #1F2A14 !important;
+      background-color: #FFFFFF !important;
+      background: #FFFFFF !important;
+      color: #3E2723 !important;
+      font-weight: 700 !important;
       border: none !important;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15) !important;
+      border-radius: 0.55rem !important;
+      box-shadow: 0 1px 3px rgba(62, 39, 35, 0.14) !important;
     }
     body.light-mode #btn-voting-subtab-rollcall.active *,
     body.light-mode #btn-voting-subtab-session.active * {
-      color: #1F2A14 !important;
+      color: #3E2723 !important;
     }
 
     /* =====================================================
