@@ -5,10 +5,12 @@
     document.getElementById('mod-label-speaker-time').textContent = formatMinutesSeconds(state.modSpeakerSecs);
 
     if (state.currentModSpeaker) {
-      document.getElementById('mod-current-flag').src = getFlagUrl(state.currentModSpeaker);
+      const modFlag = document.getElementById('mod-current-flag');
+      modFlag.classList.remove('hidden');
+      modFlag.src = getFlagUrl(state.currentModSpeaker);
       document.getElementById('mod-current-country-name').textContent = getCountryDisplayName(state.currentModSpeaker);
     } else {
-      document.getElementById('mod-current-flag').src = 'https://flagcdn.com/w80/un.png';
+      document.getElementById('mod-current-flag').classList.add('hidden');
       document.getElementById('mod-current-country-name').textContent = t.noneSelected;
     }
 

@@ -75,13 +75,15 @@
     if (!state.currentGslSpeaker) {
       emptyDiv.classList.add('hidden');
       activeDiv.classList.remove('hidden');
-      document.getElementById('gsl-current-flag').src = 'https://flagcdn.com/w80/un.png';
+      document.getElementById('gsl-current-flag').classList.add('hidden');
       document.getElementById('gsl-current-name').textContent = t.noneSelected || 'None selected';
     } else {
       emptyDiv.classList.add('hidden');
       activeDiv.classList.remove('hidden');
 
-      document.getElementById('gsl-current-flag').src = getFlagUrl(state.currentGslSpeaker);
+      const gslFlag = document.getElementById('gsl-current-flag');
+      gslFlag.classList.remove('hidden');
+      gslFlag.src = getFlagUrl(state.currentGslSpeaker);
       document.getElementById('gsl-current-name').textContent = getCountryDisplayName(state.currentGslSpeaker);
       document.getElementById('gsl-current-status').textContent = 
         state.currentGslSpeaker.powerStatus === 'observer' ? t.observer : t.delegate;
@@ -245,10 +247,13 @@
     }
 
     if (state.currentProConSpeaker) {
-      if (flagEl) flagEl.src = getFlagUrl(state.currentProConSpeaker);
+      if (flagEl) {
+        flagEl.classList.remove('hidden');
+        flagEl.src = getFlagUrl(state.currentProConSpeaker);
+      }
       if (nameEl) nameEl.textContent = getCountryDisplayName(state.currentProConSpeaker);
     } else {
-      if (flagEl) flagEl.src = 'https://flagcdn.com/w80/un.png';
+      if (flagEl) flagEl.classList.add('hidden');
       if (nameEl) nameEl.textContent = t.noneSelected || 'None selected';
     }
 

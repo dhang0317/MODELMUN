@@ -9,11 +9,13 @@
       }
     }
     if (state.singleSpeaker) {
-      document.getElementById('single-flag').src = getFlagUrl(state.singleSpeaker);
+      const singleFlag = document.getElementById('single-flag');
+      singleFlag.classList.remove('hidden');
+      singleFlag.src = getFlagUrl(state.singleSpeaker);
       document.getElementById('single-country-name').textContent = getCountryDisplayName(state.singleSpeaker);
       document.getElementById('single-purpose').textContent = state.singleTopic || t.designatedSpeaker;
     } else {
-      document.getElementById('single-flag').src = 'https://flagcdn.com/w80/un.png';
+      document.getElementById('single-flag').classList.add('hidden');
       document.getElementById('single-country-name').textContent = t.selectDelegate;
       document.getElementById('single-purpose').textContent = state.singleTopic || t.sponsorPresentation;
     }
