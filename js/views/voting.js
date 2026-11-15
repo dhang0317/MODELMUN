@@ -1458,13 +1458,16 @@
                 executeMotion(curMot, targetIdx);
               }
             } else {
+              state.votingMotion = null;
+              state.activeVoteTarget = 'resolution';
+              state.voteTopic = '';
               if (typeof removeMotion === 'function') {
                 removeMotion(targetIdx);
               } else if (Array.isArray(state.motions)) {
                 state.motions.splice(targetIdx, 1);
-                saveToLocalStorage(true, true);
-                renderAll();
               }
+              saveToLocalStorage(true, true);
+              renderAll();
               customAlert(
                 state.language === 'zh' ? '未通過' : 'Failed',
                 state.language === 'zh' ? `動議【${mTitle}】未通過。` : `Motion 【${mTitle}】 failed.`
