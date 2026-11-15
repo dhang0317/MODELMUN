@@ -1211,8 +1211,8 @@
         btnIncFavor.addEventListener('click', (e) => {
           e.stopPropagation();
           sess.favor = (sess.favor || 0) + 1;
+          if (inputFavor) inputFavor.value = sess.favor;
           saveToLocalStorage(true, true);
-          renderSessionVotesGrid();
           updateScoreboardAndVerdict();
         });
       }
@@ -1221,8 +1221,8 @@
           e.stopPropagation();
           if ((sess.favor || 0) > 0) {
             sess.favor--;
+            if (inputFavor) inputFavor.value = sess.favor;
             saveToLocalStorage(true, true);
-            renderSessionVotesGrid();
             updateScoreboardAndVerdict();
           }
         });
@@ -1230,8 +1230,8 @@
       if (inputFavor) {
         inputFavor.addEventListener('change', (e) => {
           sess.favor = Math.max(0, parseInt(e.target.value) || 0);
+          inputFavor.value = sess.favor;
           saveToLocalStorage(true, true);
-          renderSessionVotesGrid();
           updateScoreboardAndVerdict();
         });
       }
@@ -1244,8 +1244,8 @@
         btnIncAgainst.addEventListener('click', (e) => {
           e.stopPropagation();
           sess.against = (sess.against || 0) + 1;
+          if (inputAgainst) inputAgainst.value = sess.against;
           saveToLocalStorage(true, true);
-          renderSessionVotesGrid();
           updateScoreboardAndVerdict();
         });
       }
@@ -1254,8 +1254,8 @@
           e.stopPropagation();
           if ((sess.against || 0) > 0) {
             sess.against--;
+            if (inputAgainst) inputAgainst.value = sess.against;
             saveToLocalStorage(true, true);
-            renderSessionVotesGrid();
             updateScoreboardAndVerdict();
           }
         });
@@ -1263,8 +1263,8 @@
       if (inputAgainst) {
         inputAgainst.addEventListener('change', (e) => {
           sess.against = Math.max(0, parseInt(e.target.value) || 0);
+          inputAgainst.value = sess.against;
           saveToLocalStorage(true, true);
-          renderSessionVotesGrid();
           updateScoreboardAndVerdict();
         });
       }
@@ -1277,8 +1277,8 @@
         btnIncAbstain.addEventListener('click', (e) => {
           e.stopPropagation();
           sess.abstain = (sess.abstain || 0) + 1;
+          if (inputAbstain) inputAbstain.value = sess.abstain;
           saveToLocalStorage(true, true);
-          renderSessionVotesGrid();
           updateScoreboardAndVerdict();
         });
       }
@@ -1287,8 +1287,8 @@
           e.stopPropagation();
           if ((sess.abstain || 0) > 0) {
             sess.abstain--;
+            if (inputAbstain) inputAbstain.value = sess.abstain;
             saveToLocalStorage(true, true);
-            renderSessionVotesGrid();
             updateScoreboardAndVerdict();
           }
         });
@@ -1296,8 +1296,8 @@
       if (inputAbstain) {
         inputAbstain.addEventListener('change', (e) => {
           sess.abstain = Math.max(0, parseInt(e.target.value) || 0);
+          inputAbstain.value = sess.abstain;
           saveToLocalStorage(true, true);
-          renderSessionVotesGrid();
           updateScoreboardAndVerdict();
         });
       }
