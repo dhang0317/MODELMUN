@@ -3435,37 +3435,48 @@ body:not(.light-mode) {
     }
 
     /* Voting subtabs active & inactive styles */
+    #voting-subtabs-pill,
+    body:not(.light-mode) #voting-subtabs-pill {
+      background-color: #EFEBE9 !important;
+      border: 1px solid #D7CCC8 !important;
+      border-radius: 0.75rem !important;
+      padding: 0.2rem !important;
+    }
     body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active),
     body:not(.light-mode) #btn-voting-subtab-session:not(.active) {
-      color: #FFFFFF !important;
+      color: #6D4C41 !important;
       background-color: transparent !important;
       background: transparent !important;
-      border: 1px solid transparent !important;
+      border: none !important;
+      border-radius: 0.55rem !important;
+      box-shadow: none !important;
     }
     body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active) *,
     body:not(.light-mode) #btn-voting-subtab-session:not(.active) * {
-      color: #FFFFFF !important;
+      color: #6D4C41 !important;
     }
     body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active):hover,
     body:not(.light-mode) #btn-voting-subtab-session:not(.active):hover {
-      color: #ffffff !important;
-      background-color: rgba(255, 255, 255, 0.08) !important;
-      background: rgba(255, 255, 255, 0.08) !important;
-      border: 1px solid #3f3f46 !important;
+      color: #3E2723 !important;
+      background-color: rgba(62, 39, 35, 0.06) !important;
+      background: rgba(62, 39, 35, 0.06) !important;
+      border: none !important;
     }
     body:not(.light-mode) #btn-voting-subtab-rollcall.active,
     body:not(.light-mode) #btn-voting-subtab-session.active,
     body:not(.light-mode) #btn-voting-subtab-rollcall.active:hover,
     body:not(.light-mode) #btn-voting-subtab-session.active:hover {
-      background-color: #B5C99A !important;
-      background: #B5C99A !important;
-      color: #1F2A14 !important;
-      border: 1px solid #B5C99A !important;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2) !important;
+      background-color: #FFFFFF !important;
+      background: #FFFFFF !important;
+      color: #3E2723 !important;
+      font-weight: 700 !important;
+      border: none !important;
+      border-radius: 0.55rem !important;
+      box-shadow: 0 1px 3px rgba(62, 39, 35, 0.14) !important;
     }
     body:not(.light-mode) #btn-voting-subtab-rollcall.active *,
     body:not(.light-mode) #btn-voting-subtab-session.active * {
-      color: #1F2A14 !important;
+      color: #3E2723 !important;
     }
 
     body.light-mode #btn-voting-subtab-rollcall:not(.active),
