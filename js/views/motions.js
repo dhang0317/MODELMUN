@@ -38,8 +38,8 @@
           return `總時間：${fmtSecs(totalSec)} • 個別：${fmtSecs(spkSec)}`;
         }
         return `Duration: ${fmtSecs(totalSec)} • Individual: ${fmtSecs(spkSec)}`;
-      } else if (m.type === 'singlespeaker' || m.type === 'amendment') {
-        const s = m.type === 'amendment' ? (m.speakerSecs || 60) : totalSec;
+      } else if (m.type === 'singlespeaker' || m.type === 'amendment' || m.type === 'intro_amendment') {
+        const s = (m.type === 'amendment' || m.type === 'intro_amendment') ? (m.speakerSecs || 60) : totalSec;
         if (state.language === 'zh') return `發言時間：${fmtSecs(s)}`;
         if (state.language === 'fr') return `Temps de parole : ${fmtSecs(s)}`;
         return `Speaking Time: ${fmtSecs(s)}`;
@@ -267,6 +267,7 @@
         case 'mod': return '主持磋商 (Mod)';
         case 'singlespeaker': return '介紹決議案草案';
         case 'amendment': return '介紹條款';
+        case 'intro_amendment': return '介紹修正案';
         case 'gsl': return '常設發言名單';
         case 'suspend': return '休會';
         case 'adjourn_session': return t.motionAdjournSession;

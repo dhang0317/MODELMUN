@@ -837,7 +837,7 @@
         if (inputTotalM) inputTotalM.value = 1;
         if (inputTotalS) inputTotalS.value = 0;
         if (fieldSpeakerSecs) fieldSpeakerSecs.classList.add('hidden');
-      } else if (type === 'amendment') {
+      } else if (type === 'amendment' || type === 'intro_amendment') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
         if (fieldAmendmentSelect) fieldAmendmentSelect.classList.remove('hidden');
@@ -924,15 +924,15 @@
         } else if (selectDr) {
           topic = selectDr.value;
         }
-      } else if (type === 'amendment') {
+      } else if (type === 'amendment' || type === 'intro_amendment') {
         topic = `Clause ${motionAmendmentNum}`;
       }
-      const defaultMins = (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' ? 0 : (type === 'suspend' ? 15 : ((type === 'singlespeaker' || type === 'amendment') ? 1 : 10)));
+      const defaultMins = (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' ? 0 : (type === 'suspend' ? 15 : ((type === 'singlespeaker' || type === 'amendment' || type === 'intro_amendment') ? 1 : 10)));
       const speakerSecs = parseInt(document.getElementById('input-motion-speaker-secs').value) || 60;
       let rawTotal = parseInt(document.getElementById('input-motion-total-mins').value);
       if (isNaN(rawTotal)) rawTotal = defaultMins * 60;
       // 將秒數換算為儲存的 totalMins（相容計時器計算）
-      const totalMins = (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' || type === 'close') ? 0 : (type === 'amendment' ? Math.max(1, Math.ceil(speakerSecs / 60)) : (rawTotal >= 60 ? Math.round(rawTotal / 60) : Math.max(1, Math.ceil(rawTotal / 60))));
+      const totalMins = (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' || type === 'close') ? 0 : (type === 'amendment' || type === 'intro_amendment' ? Math.max(1, Math.ceil(speakerSecs / 60)) : (rawTotal >= 60 ? Math.round(rawTotal / 60) : Math.max(1, Math.ceil(rawTotal / 60))));
 
       const motion = {
         id: 'M_' + Date.now(),
