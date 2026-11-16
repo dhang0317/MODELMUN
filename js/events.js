@@ -898,18 +898,38 @@
         );
         return;
       }
-      const select = document.getElementById('select-motion-proposer');
-      select.innerHTML = '';
-      state.selectedCountries.forEach(c => {
-        const opt = document.createElement('option');
-        opt.value = getCountryDisplayName(c);
-        opt.textContent = getCountryDisplayName(c);
-        select.appendChild(opt);
-      });
+      const setMotionProposer = (c) => {
+        const input = document.getElementById('select-motion-proposer');
+        const label = document.getElementById('label-motion-proposer-picked');
+        if (!c) return;
+        const name = getCountryDisplayName(c);
+        if (input) input.value = name;
+        if (label) {
+          label.innerHTML = `<img src="${getFlagUrl(c)}" class="w-5 h-3.5 object-cover rounded shadow-sm border border-slate-200 inline-block mr-2 shrink-0"><span>${name}</span>`;
+        }
+      };
+      if (state.selectedCountries.length > 0) {
+        setMotionProposer(state.selectedCountries[0]);
+      }
       updateMotionModalFields();
       addMotionModal.classList.remove('hidden');
       addMotionModal.style.display = 'flex';
     });
+
+    const btnPickMotionProposer = document.getElementById('btn-pick-motion-proposer');
+    if (btnPickMotionProposer) {
+      btnPickMotionProposer.addEventListener('click', () => {
+        openAddSpeakerModal((c) => {
+          const input = document.getElementById('select-motion-proposer');
+          const label = document.getElementById('label-motion-proposer-picked');
+          const name = getCountryDisplayName(c);
+          if (input) input.value = name;
+          if (label) {
+            label.innerHTML = `<img src="${getFlagUrl(c)}" class="w-5 h-3.5 object-cover rounded shadow-sm border border-slate-200 inline-block mr-2 shrink-0"><span>${name}</span>`;
+          }
+        }, false, 'motion');
+      });
+    }
 
     document.getElementById('btn-submit-motion').addEventListener('click', () => {
       syncMotionTimeInputs();
