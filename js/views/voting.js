@@ -770,6 +770,7 @@
   }
 
   function renderResolutionVoteGrid() {
+    try { updateActiveVoterCard(); } catch (e) {}
     const btnR1 = document.getElementById('vote-stage-r1');
     const btnR2 = document.getElementById('vote-stage-r2');
     const btnRights = document.getElementById('vote-stage-rights');
