@@ -3814,3 +3814,10 @@ body:not(.light-mode) {
       box-shadow: none !important;
       color: #1F2A14 !important;
     }
+
+    /* Force solid black text on all nav tabs (no gray/opacity) */
+    nav#tabs-nav .tab-btn,
+    nav#tabs-nav .tab-btn span {
+      color: #000000 !important;
+      opacity: 1 !important;
+    }
