@@ -113,7 +113,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/style.css?v=2026111503">
+  <link rel="stylesheet" href="css/style.css?v=2026111601">
 </head>
 <body class="h-screen w-screen flex flex-col overflow-hidden">
 
@@ -868,6 +868,16 @@
               </div>
             </div>
 
+            <!-- Vote & Headcount Verification Bar -->
+            <div id="vote-headcount-check" class="flex flex-wrap items-center justify-between gap-2 px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs">
+              <div class="flex items-center space-x-3 text-slate-600 font-medium">
+                <span>已投票數：<strong id="vote-check-cast" class="text-slate-900 font-bold">0</strong></span>
+                <span class="text-slate-300">|</span>
+                <span>應投票人數：<strong id="vote-check-eligible" class="text-slate-900 font-bold">0</strong></span>
+              </div>
+              <span id="vote-check-status" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-200 text-slate-700">尚未點名</span>
+            </div>
+
             <!-- Quick pass button if needed (kept hidden unless vote passed) -->
             <button id="btn-quick-pass" type="button" class="hidden"></button>
           </div>
@@ -1517,32 +1527,32 @@
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-  <script src="js/firebase-config.js?v=2026111503"></script>
+  <script src="js/firebase-config.js?v=2026111601"></script>
   <!-- Application Data & Translations -->
-  <script src="data.js?v=2026111503"></script>
-  <script src="js/i18n.js?v=2026111503"></script>
-  <script src="js/countries.js?v=2026111503"></script>
-  <script src="js/state.js?v=2026111503"></script>
+  <script src="data.js?v=2026111601"></script>
+  <script src="js/i18n.js?v=2026111601"></script>
+  <script src="js/countries.js?v=2026111601"></script>
+  <script src="js/state.js?v=2026111601"></script>
     <!-- Utilities, Dialogs & Visual Effects -->
-    <script src="js/dialogs.js?v=2026111503"></script>
-    <script src="js/confetti.js?v=2026111503"></script>
-    <script src="js/theme.js?v=2026111503"></script>
-    <script src="js/modals.js?v=2026111503"></script>
+    <script src="js/dialogs.js?v=2026111601"></script>
+    <script src="js/confetti.js?v=2026111601"></script>
+    <script src="js/theme.js?v=2026111601"></script>
+    <script src="js/modals.js?v=2026111601"></script>
     <!-- View Renderers -->
-    <script src="js/views/header.js?v=2026111503"></script>
-    <script src="js/views/setup.js?v=2026111503"></script>
-    <script src="js/views/gsl.js?v=2026111503"></script>
-    <script src="js/views/mod.js?v=2026111503"></script>
-    <script src="js/views/unmod.js?v=2026111503"></script>
-    <script src="js/views/single.js?v=2026111503"></script>
-    <script src="js/views/motions.js?v=2026111503"></script>
-    <script src="js/views/voting.js?v=2026111503"></script>
+    <script src="js/views/header.js?v=2026111601"></script>
+    <script src="js/views/setup.js?v=2026111601"></script>
+    <script src="js/views/gsl.js?v=2026111601"></script>
+    <script src="js/views/mod.js?v=2026111601"></script>
+    <script src="js/views/unmod.js?v=2026111601"></script>
+    <script src="js/views/single.js?v=2026111601"></script>
+    <script src="js/views/motions.js?v=2026111601"></script>
+    <script src="js/views/voting.js?v=2026111601"></script>
     <!-- Events, Auth & Entry Point -->
-    <script src="js/events.js?v=2026111503"></script>
-    <script src="js/auth.js?v=2026111503"></script>
-    <script src="js/activitylog.js?v=2026111503"></script>
-    <script src="js/adaptive-buttons.js?v=2026111503"></script>
-    <script src="app.js?v=2026111503"></script>
+    <script src="js/events.js?v=2026111601"></script>
+    <script src="js/auth.js?v=2026111601"></script>
+    <script src="js/activitylog.js?v=2026111601"></script>
+    <script src="js/adaptive-buttons.js?v=2026111601"></script>
+    <script src="app.js?v=2026111601"></script>
   <script>
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();

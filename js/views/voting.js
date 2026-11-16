@@ -493,6 +493,34 @@
     if (elAgainst) elAgainst.textContent = againstCount;
     if (elAbstain) elAbstain.textContent = abstainCount;
 
+    const totalCastCheck = favorCount + againstCount + abstainCount;
+    const eligibleCountCheck = (state.selectedCountries || []).filter(c => {
+      if (state.voteType === 'procedural') {
+        return c.attendance === 'present' || c.attendance === 'pv';
+      }
+      return c.powerStatus !== 'observer' && (c.attendance === 'present' || c.attendance === 'pv');
+    }).length;
+    const elCheckCast = document.getElementById('vote-check-cast');
+    const elCheckEligible = document.getElementById('vote-check-eligible');
+    const elCheckStatus = document.getElementById('vote-check-status');
+    if (elCheckCast) elCheckCast.textContent = totalCastCheck;
+    if (elCheckEligible) elCheckEligible.textContent = eligibleCountCheck;
+    if (elCheckStatus) {
+      if (eligibleCountCheck === 0) {
+        elCheckStatus.textContent = '尚未點名';
+        elCheckStatus.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-200 text-slate-700';
+      } else if (totalCastCheck === eligibleCountCheck) {
+        elCheckStatus.textContent = '✓ 票數與人數相符';
+        elCheckStatus.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-800 border border-emerald-500/40';
+      } else if (totalCastCheck < eligibleCountCheck) {
+        elCheckStatus.textContent = `尚差 ${eligibleCountCheck - totalCastCheck} 票未投`;
+        elCheckStatus.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/20 text-amber-800 border border-amber-500/40';
+      } else {
+        elCheckStatus.textContent = `⚠ 票數超出人數 (+${totalCastCheck - eligibleCountCheck})`;
+        elCheckStatus.className = 'px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-500/20 text-rose-800 border border-rose-500/40';
+      }
+    }
+
     const threshElem = document.getElementById('select-vote-threshold');
     if (threshElem) {
       threshElem.value = state.voteThreshold || 'simple';
