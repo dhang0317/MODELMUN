@@ -883,7 +883,7 @@
         if (fieldSpeakerSecs) fieldSpeakerSecs.classList.remove('hidden');
         if (labelSpeakerSecs) labelSpeakerSecs.textContent = state.language === 'zh' ? '發言時間' : 'Speaking Time';
         if (inputSpeakerM) inputSpeakerM.value = 1;
-        if (inputSpeakerS) inputSpeakerS.value = 30;
+        if (inputSpeakerS) inputSpeakerS.value = 0;
       } else if (type === 'adjourn_day' || type === 'adjourn' || type === 'adjourn_session' || type === 'close') {
         if (fieldTopic) fieldTopic.classList.add('hidden');
         if (fieldDrSelect) fieldDrSelect.classList.add('hidden');
