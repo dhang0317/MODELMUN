@@ -1730,6 +1730,37 @@
       }
     }, { passive: false });
 
+    // 點兩下空白處切換全螢幕 (支援桌機 dblclick 與觸控雙擊，排除按鈕與輸入框)
+    function toggleFullscreenSafe() {
+      const doc = document;
+      const el = document.documentElement;
+      const isFs = !!(doc.fullscreenElement || doc.webkitFullscreenElement);
+      if (!isFs) {
+        if (el.requestFullscreen) el.requestFullscreen().catch(() => {});
+        else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      } else {
+        if (doc.exitFullscreen) doc.exitFullscreen().catch(() => {});
+        else if (doc.webkitExitFullscreen) doc.webkitExitFullscreen();
+      }
+    }
+
+    document.addEventListener('dblclick', (e) => {
+      if (e.target && e.target.closest('button, input, select, textarea, a, [role="button"]')) return;
+      toggleFullscreenSafe();
+    });
+
+    let lastBgTap = 0;
+    document.addEventListener('touchend', (e) => {
+      if (e.target && e.target.closest('button, input, select, textarea, a, [role="button"]')) return;
+      const now = Date.now();
+      if (now - lastBgTap < 320 && now - lastBgTap > 40) {
+        lastBgTap = 0;
+        toggleFullscreenSafe();
+      } else {
+        lastBgTap = now;
+      }
+    }, { passive: true });
+
   }
 
   // Celebratory Confetti / Ribbon Burst Animation (Simpler & Elegant for Session Adjournment)
