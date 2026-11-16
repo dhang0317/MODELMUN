@@ -163,7 +163,11 @@
     // Always render roll call grid so it's ready when viewing rollcall
     renderRollCallGrid();
     // Always render resolution vote grid so active voter card is never stuck on static placeholder
-    renderResolutionVoteGrid();
+    try {
+      renderResolutionVoteGrid();
+    } catch (err) {
+      console.error('renderResolutionVoteGrid error:', err);
+    }
   }
 
   function renderRollCallGrid() {
