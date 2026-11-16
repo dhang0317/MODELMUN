@@ -159,9 +159,69 @@
     }
   }
 
+  function updateActiveVoterCard() {
+    const t = I18N[state.language] || I18N.en;
+    const eligibleVoters = (state.selectedCountries || []).filter(c => {
+      if (state.voteType === 'procedural') {
+        return c.attendance === 'present' || c.attendance === 'pv';
+      }
+      return c.powerStatus !== 'observer' && (c.attendance === 'present' || c.attendance === 'pv');
+    });
+    let pool = eligibleVoters;
+    if (state.voteStage === 'r2') {
+      pool = eligibleVoters.filter(c => c.vote === 'pass');
+    }
+    if (typeof state.activeVoterIndex !== 'number' || state.activeVoterIndex < 0) {
+      state.activeVoterIndex = 0;
+    }
+    if (pool.length > 0 && state.activeVoterIndex > pool.length) {
+      state.activeVoterIndex = pool.length;
+    }
+    const isCompleted = pool.length > 0 && state.activeVoterIndex >= pool.length;
+    const currentVoter = (!isCompleted && pool.length > 0) ? (pool[state.activeVoterIndex] || null) : null;
+    const flagEl = document.getElementById('active-voter-flag');
+    const nameEl = document.getElementById('active-voter-name');
+    const statusEl = document.getElementById('active-voter-status');
+
+    if (currentVoter) {
+      if (flagEl) {
+        flagEl.src = getFlagUrl(currentVoter);
+        flagEl.style.display = '';
+        flagEl.classList.remove('hidden');
+      }
+      if (nameEl) nameEl.textContent = getCountryDisplayName(currentVoter);
+      if (statusEl) {
+        let voteDisplayName = '';
+        if (currentVoter.vote === 'favor') voteDisplayName = t.yes || '贊成';
+        else if (currentVoter.vote === 'against') voteDisplayName = t.no || '反對';
+        else if (currentVoter.vote === 'abstain') voteDisplayName = t.abs || '棄權';
+        else if (currentVoter.vote === 'pass') voteDisplayName = t.pass || 'Pass';
+
+        const voteTxt = currentVoter.vote && currentVoter.vote !== 'none'
+          ? `${t.voting || 'Vote'}: ${voteDisplayName}${currentVoter.hasRights ? ' ' + (t.withRightsTag || '(+Rights)') : ''}`
+          : (currentVoter.attendance === 'pv' ? (t.pv || '出席且投票') : (t.present || '出席'));
+        statusEl.textContent = voteTxt;
+      }
+    } else {
+      if (flagEl) {
+        flagEl.src = '';
+        flagEl.style.display = 'none';
+        flagEl.classList.add('hidden');
+      }
+      if (nameEl) nameEl.textContent = pool.length === 0 && state.voteStage === 'r2' ? (t.noPassInRound1Short || 'No delegates passed in Round 1') : (t.allVotesRecorded || 'All votes recorded');
+      if (statusEl) statusEl.textContent = pool.length === 0 ? '' : (t.votingComplete || 'Voting complete');
+    }
+  }
+
   function renderVotingView() {
     // Always render roll call grid so it's ready when viewing rollcall
     renderRollCallGrid();
+    // Always update active voter card (flag + country name)
+    try {
+      updateActiveVoterCard();
+    } catch (err) {
+      console.error('updateActiveVoterCard error:', err);
+    }
     // Always render resolution vote grid so active voter card is never stuck on static placeholder
     try {
       renderResolutionVoteGrid();
