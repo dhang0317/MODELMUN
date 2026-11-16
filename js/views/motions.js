@@ -110,7 +110,7 @@
         btnHeroSecond.classList.add('hidden');
       } else {
         btnHeroSecond.classList.remove('hidden');
-        if (btnHeroSecondText) btnHeroSecondText.textContent = t.passSecond || '附議通過';
+        if (btnHeroSecondText) btnHeroSecondText.textContent = t.passed || '通過';
       }
     }
 
