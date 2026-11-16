@@ -162,10 +162,8 @@
   function renderVotingView() {
     // Always render roll call grid so it's ready when viewing rollcall
     renderRollCallGrid();
-    // Render resolution vote grid if vote tab is active
-    if (state.currentTab === 'vote') {
-      renderResolutionVoteGrid();
-    }
+    // Always render resolution vote grid so active voter card is never stuck on static placeholder
+    renderResolutionVoteGrid();
   }
 
   function renderRollCallGrid() {
