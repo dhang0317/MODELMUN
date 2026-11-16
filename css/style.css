@@ -795,7 +795,7 @@ body:not(.light-mode) {
     body:not(.light-mode) .speaking-subtab-btn,
     body:not(.light-mode) #btn-voting-subtab-rollcall,
     body:not(.light-mode) #btn-voting-subtab-session,
-    body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active),
+    body:not(.light-mode) body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active), body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active),
     body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active),
     body:not(.light-mode) #btn-voting-subtab-session:not(.active) {
       color: #F7F4EE !important;
@@ -807,7 +807,7 @@ body:not(.light-mode) {
     body:not(.light-mode) .speaking-subtab-btn *,
     body:not(.light-mode) #btn-voting-subtab-rollcall *,
     body:not(.light-mode) #btn-voting-subtab-session *,
-    body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active) *,
+    body:not(.light-mode) body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active), body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) *,
     body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active) *,
     body:not(.light-mode) #btn-voting-subtab-session:not(.active) * {
       color: #F7F4EE !important;
@@ -815,7 +815,7 @@ body:not(.light-mode) {
     body:not(.light-mode) .speaking-subtab-btn:hover,
     body:not(.light-mode) #btn-voting-subtab-rollcall:hover,
     body:not(.light-mode) #btn-voting-subtab-session:hover,
-    body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover,
+    body:not(.light-mode) body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active), body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover,
     body:not(.light-mode) #btn-voting-subtab-rollcall:not(.active):hover,
     body:not(.light-mode) #btn-voting-subtab-session:not(.active):hover {
       background-color: #4E342E !important;
@@ -826,7 +826,7 @@ body:not(.light-mode) {
     body:not(.light-mode) .speaking-subtab-btn.active,
     body:not(.light-mode) .speaking-subtab-btn.subtab-active,
     body:not(.light-mode) .speaking-subtab-btn.bg-white,
-    body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active,
+    body:not(.light-mode) body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active, body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active,
     body:not(.light-mode) #btn-speaking-subtab-gsl.subtab-active,
     body:not(.light-mode) #btn-speaking-subtab-mod.subtab-active,
     body:not(.light-mode) #btn-speaking-subtab-intro.subtab-active,
@@ -847,7 +847,7 @@ body:not(.light-mode) {
     body:not(.light-mode) .speaking-subtab-btn.active *,
     body:not(.light-mode) .speaking-subtab-btn.subtab-active *,
     body:not(.light-mode) .speaking-subtab-btn.bg-white *,
-    body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active *,
+    body:not(.light-mode) body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active, body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active *,
     body:not(.light-mode) #btn-speaking-subtab-gsl.subtab-active *,
     body:not(.light-mode) #btn-speaking-subtab-mod.subtab-active *,
     body:not(.light-mode) #btn-speaking-subtab-intro.subtab-active *,
@@ -861,7 +861,7 @@ body:not(.light-mode) {
     }
 
     body.light-mode .speaking-subtab-btn,
-    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) {
+    body.light-mode body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active), body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) {
       color: #F7F4EE !important;
       background-color: #3E2723 !important;
       background: #3E2723 !important;
@@ -869,11 +869,11 @@ body:not(.light-mode) {
       font-weight: 500 !important;
     }
     body.light-mode .speaking-subtab-btn *,
-    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) * {
+    body.light-mode body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active), body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) * {
       color: #F7F4EE !important;
     }
     body.light-mode .speaking-subtab-btn:hover,
-    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover {
+    body.light-mode body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active), body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover {
       background-color: #4E342E !important;
       background: #4E342E !important;
       color: #FFFFFF !important;
@@ -882,7 +882,7 @@ body:not(.light-mode) {
     body.light-mode .speaking-subtab-btn.active,
     body.light-mode .speaking-subtab-btn.subtab-active,
     body.light-mode .speaking-subtab-btn.bg-white,
-    body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active,
+    body.light-mode body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active, body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active,
     body.light-mode #btn-speaking-subtab-gsl.subtab-active,
     body.light-mode #btn-speaking-subtab-mod.subtab-active,
     body.light-mode #btn-speaking-subtab-intro.subtab-active,
@@ -902,7 +902,7 @@ body:not(.light-mode) {
     body.light-mode .speaking-subtab-btn.active *,
     body.light-mode .speaking-subtab-btn.subtab-active *,
     body.light-mode .speaking-subtab-btn.bg-white *,
-    body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active *,
+    body.light-mode body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active, body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active *,
     body.light-mode #btn-speaking-subtab-gsl.subtab-active *,
     body.light-mode #btn-speaking-subtab-mod.subtab-active *,
     body.light-mode #btn-speaking-subtab-intro.subtab-active *,
@@ -3369,29 +3369,29 @@ body:not(.light-mode) {
     }
 
     /* Speaking Subtabs & Pro/Con Cards Dark/Light Mode Fix (統一深色底白字，點擊後淺色底深色字) */
-    body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active),
-    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) {
+    body:not(.light-mode) body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active), body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active),
+    body.light-mode body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active), body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) {
       color: #F7F4EE !important;
       background-color: #3E2723 !important;
       background: #3E2723 !important;
       border: 1px solid #5D4037 !important;
     }
-    body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover,
-    body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover {
+    body:not(.light-mode) body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active), body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover,
+    body.light-mode body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active), body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active):hover {
       color: #ffffff !important;
       background-color: #4E342E !important;
       background: #4E342E !important;
       border: 1px solid #6D4C41 !important;
     }
-    body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active,
-    body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active:hover,
+    body:not(.light-mode) body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active, body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active,
+    body:not(.light-mode) body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active, body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active:hover,
     body:not(.light-mode) #btn-speaking-subtab-gsl.subtab-active,
     body:not(.light-mode) #btn-speaking-subtab-mod.subtab-active,
     body:not(.light-mode) #btn-speaking-subtab-intro.subtab-active,
     body:not(.light-mode) #btn-speaking-subtab-amendment.subtab-active,
     body:not(.light-mode) #btn-speaking-subtab-procon.subtab-active,
-    body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active,
-    body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active:hover,
+    body.light-mode body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active, body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active,
+    body.light-mode body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active, body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active:hover,
     body.light-mode #btn-speaking-subtab-gsl.subtab-active,
     body.light-mode #btn-speaking-subtab-mod.subtab-active,
     body.light-mode #btn-speaking-subtab-intro.subtab-active,
@@ -3403,13 +3403,13 @@ body:not(.light-mode) {
       border: 1px solid #D7CCC8 !important;
       box-shadow: 0 1px 4px rgba(62, 39, 35, 0.12) !important;
     }
-    body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active *,
+    body:not(.light-mode) body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active, body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active *,
     body:not(.light-mode) #btn-speaking-subtab-gsl.subtab-active *,
     body:not(.light-mode) #btn-speaking-subtab-mod.subtab-active *,
     body:not(.light-mode) #btn-speaking-subtab-intro.subtab-active *,
     body:not(.light-mode) #btn-speaking-subtab-amendment.subtab-active *,
     body:not(.light-mode) #btn-speaking-subtab-procon.subtab-active *,
-    body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active *,
+    body.light-mode body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active, body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active *,
     body.light-mode #btn-speaking-subtab-gsl.subtab-active *,
     body.light-mode #btn-speaking-subtab-mod.subtab-active *,
     body.light-mode #btn-speaking-subtab-intro.subtab-active *,
@@ -3800,14 +3800,14 @@ body:not(.light-mode) {
 
 
     /* Speaking subtabs clean segmented pill UI */
-    #view-gsl button.speaking-subtab-btn:not(.subtab-active) {
+    body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active), body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) {
       background: transparent !important;
       background-color: transparent !important;
       border: none !important;
       box-shadow: none !important;
       color: #3E2723 !important;
     }
-    #view-gsl button.speaking-subtab-btn.subtab-active {
+    body:not(.light-mode) #view-gsl button.speaking-subtab-btn.subtab-active, body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active {
       background: #B5C99A !important;
       background-color: #B5C99A !important;
       border: none !important;
