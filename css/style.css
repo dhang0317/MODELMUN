@@ -3798,3 +3798,19 @@ body:not(.light-mode) {
 
 
 
+
+    /* Speaking subtabs clean segmented pill UI */
+    #view-gsl button.speaking-subtab-btn:not(.subtab-active) {
+      background: transparent !important;
+      background-color: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: #3E2723 !important;
+    }
+    #view-gsl button.speaking-subtab-btn.subtab-active {
+      background: #B5C99A !important;
+      background-color: #B5C99A !important;
+      border: none !important;
+      box-shadow: none !important;
+      color: #1F2A14 !important;
+    }
