@@ -949,6 +949,7 @@
       if (flagEl) {
         flagEl.src = getFlagUrl(currentVoter);
         flagEl.style.display = '';
+        flagEl.classList.remove('hidden');
       }
       if (nameEl) nameEl.textContent = getCountryDisplayName(currentVoter);
       if (statusEl) {
@@ -966,8 +967,9 @@
       if (queueEl) queueEl.textContent = `${state.activeVoterIndex + 1} / ${pool.length}`;
     } else {
       if (flagEl) {
-        flagEl.src = 'assets/img/general/all_countries.svg';
+        flagEl.src = '';
         flagEl.style.display = 'none';
+        flagEl.classList.add('hidden');
       }
       if (nameEl) nameEl.textContent = pool.length === 0 && state.voteStage === 'r2' ? (t.noPassInRound1Short || 'No delegates passed in Round 1') : (t.allVotesRecorded || 'All votes recorded');
       if (statusEl) statusEl.textContent = pool.length === 0 ? '' : (t.votingComplete || 'Voting complete');
