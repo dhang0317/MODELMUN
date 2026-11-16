@@ -830,6 +830,7 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-speaking-subtab-gsl.subtab-active,
     body:not(.light-mode) #btn-speaking-subtab-mod.subtab-active,
     body:not(.light-mode) #btn-speaking-subtab-intro.subtab-active,
+    body:not(.light-mode) #btn-speaking-subtab-amendment.subtab-active,
     body:not(.light-mode) #btn-speaking-subtab-procon.subtab-active,
     body:not(.light-mode) #btn-voting-subtab-rollcall.active,
     body:not(.light-mode) #btn-voting-subtab-rollcall.bg-white,
@@ -850,6 +851,7 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-speaking-subtab-gsl.subtab-active *,
     body:not(.light-mode) #btn-speaking-subtab-mod.subtab-active *,
     body:not(.light-mode) #btn-speaking-subtab-intro.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-amendment.subtab-active *,
     body:not(.light-mode) #btn-speaking-subtab-procon.subtab-active *,
     body:not(.light-mode) #btn-voting-subtab-rollcall.active *,
     body:not(.light-mode) #btn-voting-subtab-rollcall.bg-white *,
@@ -884,6 +886,7 @@ body:not(.light-mode) {
     body.light-mode #btn-speaking-subtab-gsl.subtab-active,
     body.light-mode #btn-speaking-subtab-mod.subtab-active,
     body.light-mode #btn-speaking-subtab-intro.subtab-active,
+    body:not(.light-mode) #btn-speaking-subtab-amendment.subtab-active,
     body.light-mode #btn-speaking-subtab-procon.subtab-active,
     body.light-mode #btn-voting-subtab-rollcall.active,
     body.light-mode #btn-voting-subtab-rollcall.bg-white,
@@ -903,6 +906,7 @@ body:not(.light-mode) {
     body.light-mode #btn-speaking-subtab-gsl.subtab-active *,
     body.light-mode #btn-speaking-subtab-mod.subtab-active *,
     body.light-mode #btn-speaking-subtab-intro.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-amendment.subtab-active *,
     body.light-mode #btn-speaking-subtab-procon.subtab-active * {
       color: #3E2723 !important;
     }
@@ -3384,12 +3388,14 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-speaking-subtab-gsl.subtab-active,
     body:not(.light-mode) #btn-speaking-subtab-mod.subtab-active,
     body:not(.light-mode) #btn-speaking-subtab-intro.subtab-active,
+    body:not(.light-mode) #btn-speaking-subtab-amendment.subtab-active,
     body:not(.light-mode) #btn-speaking-subtab-procon.subtab-active,
     body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active,
     body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active:hover,
     body.light-mode #btn-speaking-subtab-gsl.subtab-active,
     body.light-mode #btn-speaking-subtab-mod.subtab-active,
     body.light-mode #btn-speaking-subtab-intro.subtab-active,
+    body:not(.light-mode) #btn-speaking-subtab-amendment.subtab-active,
     body.light-mode #btn-speaking-subtab-procon.subtab-active {
       background-color: #F7F4EE !important;
       background: #F7F4EE !important;
@@ -3401,11 +3407,13 @@ body:not(.light-mode) {
     body:not(.light-mode) #btn-speaking-subtab-gsl.subtab-active *,
     body:not(.light-mode) #btn-speaking-subtab-mod.subtab-active *,
     body:not(.light-mode) #btn-speaking-subtab-intro.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-amendment.subtab-active *,
     body:not(.light-mode) #btn-speaking-subtab-procon.subtab-active *,
     body.light-mode #view-gsl button.speaking-subtab-btn.subtab-active *,
     body.light-mode #btn-speaking-subtab-gsl.subtab-active *,
     body.light-mode #btn-speaking-subtab-mod.subtab-active *,
     body.light-mode #btn-speaking-subtab-intro.subtab-active *,
+    body:not(.light-mode) #btn-speaking-subtab-amendment.subtab-active *,
     body.light-mode #btn-speaking-subtab-procon.subtab-active * {
       color: #3E2723 !important;
     }
