@@ -491,6 +491,14 @@
         renderAll();
       });
     }
+    const btnSubAmendment = document.getElementById('btn-speaking-subtab-amendment');
+    if (btnSubAmendment) {
+      btnSubAmendment.addEventListener('click', () => {
+        state.speakingSubtab = 'amendment';
+        saveToLocalStorage(true, true);
+        renderAll();
+      });
+    }
     const btnSubProcon = document.getElementById('btn-speaking-subtab-procon');
     if (btnSubProcon) {
       btnSubProcon.addEventListener('click', () => {

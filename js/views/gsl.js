@@ -12,6 +12,7 @@
     const btnGsl = document.getElementById('btn-speaking-subtab-gsl');
     const btnMod = document.getElementById('btn-speaking-subtab-mod');
     const btnIntro = document.getElementById('btn-speaking-subtab-intro');
+    const btnAmendment = document.getElementById('btn-speaking-subtab-amendment');
     const btnProcon = document.getElementById('btn-speaking-subtab-procon');
 
     const sub = state.speakingSubtab;
@@ -19,7 +20,7 @@
     // Toggle panels visibility
     if (pGsl) pGsl.classList.toggle('hidden', sub !== 'gsl');
     if (pMod) pMod.classList.toggle('hidden', sub !== 'mod');
-    if (pIntro) pIntro.classList.toggle('hidden', sub !== 'intro');
+    if (pIntro) pIntro.classList.toggle('hidden', sub !== 'intro' && sub !== 'amendment');
     if (pProcon) pProcon.classList.toggle('hidden', sub !== 'procon');
 
     // Update active button styling
@@ -33,6 +34,7 @@
     updateBtn(btnGsl, sub === 'gsl');
     updateBtn(btnMod, sub === 'mod');
     updateBtn(btnIntro, sub === 'intro');
+    updateBtn(btnAmendment, sub === 'amendment');
     updateBtn(btnProcon, sub === 'procon');
   }
 
