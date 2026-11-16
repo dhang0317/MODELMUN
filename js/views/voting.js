@@ -178,13 +178,24 @@
 
     const btnLock = document.getElementById('btn-rollcall-lock');
     const lockLabel = document.getElementById('rollcall-lock-label');
+    const lockTrack = document.getElementById('rollcall-lock-track');
+    const lockThumb = document.getElementById('rollcall-lock-thumb');
     if (btnLock) {
-      if (isLocked) {
-        btnLock.className = 'px-3 py-1.5 bg-amber-500/20 hover:bg-amber-500/30 text-amber-800 rounded-xl text-xs font-bold transition border border-amber-500/50 cursor-pointer flex items-center space-x-1.5';
-        if (lockLabel) lockLabel.textContent = state.language === 'zh' ? '🔒 已鎖定' : '🔒 Locked';
-      } else {
-        btnLock.className = 'px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition border border-slate-300 cursor-pointer flex items-center space-x-1.5';
-        if (lockLabel) lockLabel.textContent = state.language === 'zh' ? '🔓 鎖定' : '🔓 Lock';
+      btnLock.setAttribute('aria-checked', isLocked ? 'true' : 'false');
+      if (lockLabel) {
+        lockLabel.textContent = isLocked
+          ? (state.language === 'zh' ? '已鎖定' : 'Locked')
+          : (state.language === 'zh' ? '鎖定' : 'Lock');
+      }
+      if (lockTrack) {
+        lockTrack.className = `relative inline-flex h-6 w-11 shrink-0 items-center rounded-full transition-colors duration-200 p-0.5 ${
+          isLocked ? 'bg-amber-600' : 'bg-slate-300'
+        }`;
+      }
+      if (lockThumb) {
+        lockThumb.className = `inline-block h-5 w-5 rounded-full bg-white shadow transform transition-transform duration-200 ${
+          isLocked ? 'translate-x-5' : 'translate-x-0'
+        }`;
       }
     }
 
