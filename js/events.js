@@ -1744,14 +1744,19 @@
       }
     }
 
+    const fsExcludeSelector = 'button, input, select, textarea, a, label, [role="button"], .cursor-pointer, [data-tab], #list-available-countries, #list-selected-countries, #list-selectable-speakers, #grid-rollcall-delegates, #grid-substantive-ballots, #panel-session-votes-container, #modal-recess';
+
     document.addEventListener('dblclick', (e) => {
-      if (e.target && e.target.closest('button, input, select, textarea, a, [role="button"]')) return;
+      if (e.target && e.target.closest && e.target.closest(fsExcludeSelector)) return;
       toggleFullscreenSafe();
     });
 
     let lastBgTap = 0;
     document.addEventListener('touchend', (e) => {
-      if (e.target && e.target.closest('button, input, select, textarea, a, [role="button"]')) return;
+      if (e.target && e.target.closest && e.target.closest(fsExcludeSelector)) {
+        lastBgTap = 0;
+        return;
+      }
       const now = Date.now();
       if (now - lastBgTap < 320 && now - lastBgTap > 40) {
         lastBgTap = 0;
