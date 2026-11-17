@@ -212,6 +212,11 @@
       if (statusEl) statusEl.textContent = '';
     }
 
+    const actionsEl = document.getElementById('active-voter-actions');
+    if (actionsEl) {
+      actionsEl.classList.toggle('hidden', !currentVoter);
+    }
+
     const btnAbstainCard = document.getElementById('btn-cast-abstain');
     if (btnAbstainCard) {
       const isPvVoter = !!(currentVoter && currentVoter.attendance === 'pv');
