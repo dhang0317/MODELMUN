@@ -1322,7 +1322,7 @@
               <div class="flex items-center space-x-1.5">
                 <button type="button" class="btn-dec-favor w-7 h-7 rounded-xl bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-700 font-black text-sm flex items-center justify-center transition cursor-pointer" data-id="${sess.id}">-</button>
                 <input type="number" min="0" class="input-val-favor w-14 h-7 text-center font-mono font-bold text-sm bg-white border border-emerald-500/30 rounded-lg text-emerald-700 focus:outline-none focus:ring-1 focus:ring-emerald-500" value="${sess.favor || 0}" data-id="${sess.id}">
-                <button type="button" class="btn-inc-favor w-7 h-7 rounded-xl bg-emerald-500 text-white hover:bg-emerald-600 font-black text-sm flex items-center justify-center transition cursor-pointer shadow-sm" data-id="${sess.id}">+</button>
+                <button type="button" class="btn-inc-favor w-7 h-7 rounded-xl bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 font-black text-sm flex items-center justify-center transition cursor-pointer shadow-sm" data-id="${sess.id}">+</button>
               </div>
             </div>
 
@@ -1335,7 +1335,7 @@
               <div class="flex items-center space-x-1.5">
                 <button type="button" class="btn-dec-against w-7 h-7 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 text-rose-700 font-black text-sm flex items-center justify-center transition cursor-pointer" data-id="${sess.id}">-</button>
                 <input type="number" min="0" class="input-val-against w-14 h-7 text-center font-mono font-bold text-sm bg-white border border-rose-500/30 rounded-lg text-rose-700 focus:outline-none focus:ring-1 focus:ring-rose-500" value="${sess.against || 0}" data-id="${sess.id}">
-                <button type="button" class="btn-inc-against w-7 h-7 rounded-xl bg-rose-500 text-white hover:bg-rose-600 font-black text-sm flex items-center justify-center transition cursor-pointer shadow-sm" data-id="${sess.id}">+</button>
+                <button type="button" class="btn-inc-against w-7 h-7 rounded-xl bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 font-black text-sm flex items-center justify-center transition cursor-pointer shadow-sm" data-id="${sess.id}">+</button>
               </div>
             </div>
 
@@ -1348,7 +1348,7 @@
               <div class="flex items-center space-x-1.5">
                 <button type="button" class="btn-dec-abstain w-7 h-7 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-700 font-black text-sm flex items-center justify-center transition cursor-pointer" data-id="${sess.id}">-</button>
                 <input type="number" min="0" class="input-val-abstain w-14 h-7 text-center font-mono font-bold text-sm bg-white border border-amber-500/30 rounded-lg text-amber-700 focus:outline-none focus:ring-1 focus:ring-amber-500" value="${sess.abstain || 0}" data-id="${sess.id}">
-                <button type="button" class="btn-inc-abstain w-7 h-7 rounded-xl bg-amber-500 text-white hover:bg-amber-600 font-black text-sm flex items-center justify-center transition cursor-pointer shadow-sm" data-id="${sess.id}">+</button>
+                <button type="button" class="btn-inc-abstain w-7 h-7 rounded-xl bg-white text-slate-700 hover:bg-slate-100 border border-slate-200 font-black text-sm flex items-center justify-center transition cursor-pointer shadow-sm" data-id="${sess.id}">+</button>
               </div>
             </div>
           </div>
