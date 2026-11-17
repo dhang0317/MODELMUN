@@ -208,8 +208,8 @@
         flagEl.style.display = 'none';
         flagEl.classList.add('hidden');
       }
-      if (nameEl) nameEl.textContent = pool.length === 0 && state.voteStage === 'r2' ? (t.noPassInRound1Short || 'No delegates passed in Round 1') : (t.allVotesRecorded || 'All votes recorded');
-      if (statusEl) statusEl.textContent = pool.length === 0 ? '' : (t.votingComplete || 'Voting complete');
+      if (nameEl) nameEl.textContent = pool.length === 0 && state.voteStage === 'r2' ? (t.noPassInRound1Short || 'No delegates passed in Round 1') : (t.votingComplete || '表決完成');
+      if (statusEl) statusEl.textContent = '';
     }
   }
 
