@@ -3850,7 +3850,8 @@ body:not(.light-mode) {
       -webkit-backdrop-filter: blur(12px) !important;
     }
 
-    /* Unify #drawer-btn-theme background with other drawer buttons */
+    /* Unify #btn-toggle-theme background with other drawer buttons */
+    #btn-toggle-theme,
     #drawer-btn-theme {
       background: transparent !important;
       background-color: transparent !important;
