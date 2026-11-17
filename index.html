@@ -804,6 +804,15 @@
           </div>
 
           <div class="flex items-center space-x-2 text-xs">
+            <button id="btn-voting-motion-fail" class="btn-vote-motion-fail px-3 py-1 rounded-xl text-xs font-medium transition border border-subtle bg-surface-secondary text-content-secondary hover:text-content-primary hover:bg-surface-tertiary cursor-pointer hidden" data-i18n="fail">
+              否決
+            </button>
+            <button id="btn-voting-motion-second" class="px-3 py-1 rounded-xl text-xs font-medium transition flex items-center space-x-1.5 shadow-sm bg-brand text-content-inverse hover:opacity-90 active:scale-95 cursor-pointer hidden">
+              <span id="voting-motion-second-text" data-i18n="passSecond">附議無異議通過</span>
+            </button>
+            <button id="btn-motion-vote-execute" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-medium transition shadow-sm hidden flex items-center space-x-1.5 text-xs">
+              <span id="btn-motion-vote-execute-text" data-i18n="executeMotionBtn">執行動議</span>
+            </button>
             <button id="btn-adopt-vote" type="button" class="px-3 sm:px-3.5 py-1 sm:py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-sm transition flex items-center space-x-1.5 cursor-pointer text-xs" title="結算當前表決 (Settle Vote)">
               <span data-i18n="concludeVote">結算</span>
             </button>
@@ -829,18 +838,6 @@
               <div id="motion-vote-type-subtitle" class="text-[11px] text-slate-500 font-medium px-1 hidden">
                 <span id="motion-vote-type-text"></span>
               </div>
-            </div>
-            <!-- Quick select threshold & Action buttons (右上角多數門檻與門檻票數框) -->
-            <div class="flex items-center space-x-2 text-xs">
-              <button id="btn-voting-motion-fail" class="btn-vote-motion-fail px-3 py-1 rounded-xl text-xs font-medium transition border border-subtle bg-surface-secondary text-content-secondary hover:text-content-primary hover:bg-surface-tertiary cursor-pointer hidden" data-i18n="fail">
-                否決
-              </button>
-              <button id="btn-voting-motion-second" class="px-3 py-1 rounded-xl text-xs font-medium transition flex items-center space-x-1.5 shadow-sm bg-brand text-content-inverse hover:opacity-90 active:scale-95 cursor-pointer hidden">
-                <span id="voting-motion-second-text" data-i18n="passSecond">附議無異議通過</span>
-              </button>
-              <button id="btn-motion-vote-execute" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-medium transition shadow-sm hidden flex items-center space-x-1.5 text-xs">
-                <span id="btn-motion-vote-execute-text" data-i18n="executeMotionBtn">執行動議</span>
-              </button>
             </div>
           </div>
 
