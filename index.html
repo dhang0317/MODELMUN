@@ -832,15 +832,6 @@
             </div>
             <!-- Quick select threshold & Action buttons (右上角多數門檻與門檻票數框) -->
             <div class="flex items-center space-x-2 text-xs">
-              <span class="text-slate-500 text-[11px] sm:text-xs" data-i18n="majorityRule">多數決門檻：</span>
-              <div class="inline-flex items-center bg-slate-50 border border-slate-200 rounded-xl px-2 py-0.5 text-xs">
-                <select id="select-vote-threshold" class="pl-1 pr-1.5 py-0.5 text-slate-700 bg-transparent text-xs font-medium focus:outline-none cursor-pointer">
-                  <option value="simple">Simple Majority (50% + 1)</option>
-                  <option value="twothirds">Two-Thirds Majority (2/3)</option>
-                </select>
-                <span class="text-slate-300 mx-1.5">|</span>
-                <span class="text-[11px] text-slate-500 font-semibold whitespace-nowrap">最低 <span id="vote-count-majority" class="text-xs sm:text-sm font-black text-slate-900">0</span> 票</span>
-              </div>
               <button id="btn-voting-motion-fail" class="btn-vote-motion-fail px-3 py-1 rounded-xl text-xs font-medium transition border border-subtle bg-surface-secondary text-content-secondary hover:text-content-primary hover:bg-surface-tertiary cursor-pointer hidden" data-i18n="fail">
                 否決
               </button>
@@ -868,18 +859,6 @@
                 <div class="text-[10px] sm:text-[11px] uppercase tracking-wider text-slate-500 font-semibold" data-i18n="abstaining">Abstaining</div>
                 <div id="vote-count-abstain" class="text-xl sm:text-2xl font-black text-slate-900 leading-tight">0</div>
               </div>
-            </div>
-
-            <!-- Vote & Headcount Verification Bar -->
-            <div id="vote-headcount-check" class="flex flex-wrap items-center justify-between gap-2 px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 text-xs">
-              <div class="flex items-center space-x-3 text-slate-600 font-medium">
-                <span>已投票數：<strong id="vote-check-cast" class="text-slate-900 font-bold">0</strong></span>
-                <span class="text-slate-300">|</span>
-                <span>應投票人數：<strong id="vote-check-eligible" class="text-slate-900 font-bold">0</strong></span>
-                <span class="text-slate-300">|</span>
-                <span>PV：<strong id="vote-check-pv" class="text-slate-900 font-bold">0</strong></span>
-              </div>
-              <span id="vote-check-status" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-200 text-slate-700">尚未點名</span>
             </div>
 
             <!-- PV Countries List -->
