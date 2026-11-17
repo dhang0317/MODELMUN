@@ -488,9 +488,13 @@
         }
 
         if (motionSubtitleEl) {
-          motionSubtitleEl.classList.remove('hidden');
-          if (motionTypeText) {
-            motionTypeText.textContent = motionTypeName;
+          if (topicDisplay === motionTypeName) {
+            motionSubtitleEl.classList.add('hidden');
+          } else {
+            motionSubtitleEl.classList.remove('hidden');
+            if (motionTypeText) {
+              motionTypeText.textContent = motionTypeName;
+            }
           }
         }
       } else {
@@ -546,12 +550,9 @@
     let abstainCount = 0;
 
     if (isSessionMode && Array.isArray(state.sessionVotes) && state.sessionVotes.length > 0) {
-      const activeSess = state.sessionVotes.find(s => s.id === state.activeSessionId) || state.sessionVotes[0];
-      if (activeSess) {
-        favorCount = activeSess.favor || 0;
-        againstCount = activeSess.against || 0;
-        abstainCount = activeSess.abstain || 0;
-      }
+      favorCount = state.sessionVotes.reduce((sum, s) => sum + (s.favor || 0), 0);
+      againstCount = state.sessionVotes.reduce((sum, s) => sum + (s.against || 0), 0);
+      abstainCount = state.sessionVotes.reduce((sum, s) => sum + (s.abstain || 0), 0);
     } else {
       favorCount = state.selectedCountries.filter(c => c.vote === 'favor').length;
       againstCount = state.selectedCountries.filter(c => c.vote === 'against').length;
