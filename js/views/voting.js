@@ -1378,6 +1378,7 @@
           if ((sess.favor || 0) > 0) {
             sess.favor--;
             if (inputFavor) inputFavor.value = sess.favor;
+            state.activeSessionId = sess.id;
             saveToLocalStorage(true, true);
             updateScoreboardAndVerdict();
           }
@@ -1413,6 +1414,7 @@
           if ((sess.against || 0) > 0) {
             sess.against--;
             if (inputAgainst) inputAgainst.value = sess.against;
+            state.activeSessionId = sess.id;
             saveToLocalStorage(true, true);
             updateScoreboardAndVerdict();
           }
@@ -1448,6 +1450,7 @@
           if ((sess.abstain || 0) > 0) {
             sess.abstain--;
             if (inputAbstain) inputAbstain.value = sess.abstain;
+            state.activeSessionId = sess.id;
             saveToLocalStorage(true, true);
             updateScoreboardAndVerdict();
           }
