@@ -145,7 +145,6 @@
       {
         name: isZh ? '2. 深巧與柔霧玫瑰粉' : '2. Dark Chocolate & Dusty Rose',
         shades: [
-          { shade: isZh ? '深巧克力色' : 'Dark Chocolate', hex: '#3E2723' },
           { shade: isZh ? '柔霧玫瑰粉' : 'Dusty Rose', hex: '#D8A47F' },
           { shade: isZh ? '淺杏粉' : 'Pale Apricot', hex: '#F5EBE6' }
         ]
@@ -153,7 +152,6 @@
       {
         name: isZh ? '3. 深巧與灰湖藍' : '3. Dark Chocolate & Slate Lake Blue',
         shades: [
-          { shade: isZh ? '深巧克力色' : 'Dark Chocolate', hex: '#3E2723' },
           { shade: isZh ? '灰湖藍' : 'Slate Lake Blue', hex: '#7D9D9C' },
           { shade: isZh ? '晨霧淺灰' : 'Mist Light Grey', hex: '#E4E8E8' }
         ]
@@ -167,17 +165,9 @@
         ]
       },
       {
-        name: isZh ? '5. 經典雙色' : '5. Classic Duo',
-        shades: [
-          { shade: isZh ? '深巧克力色' : 'Dark Chocolate', hex: '#3E2723' },
-          { shade: isZh ? '奶油白' : 'Cream White', hex: '#F7F4EE' }
-        ]
-      },
-      {
-        name: isZh ? '6. 覆盆子酒紅 × 焦糖杏' : '6. Raspberry Wine × Caramel Apricot',
+        name: isZh ? '5. 覆盆子酒紅 × 焦糖杏' : '5. Raspberry Wine × Caramel Apricot',
         shades: [
           { shade: isZh ? '淺酒紅 (覆盆子)' : 'Raspberry Wine', hex: '#913D48' },
-          { shade: isZh ? '奶油白' : 'Cream White', hex: '#F7F4EE' },
           { shade: isZh ? '焦糖杏' : 'Caramel Apricot', hex: '#C48B68' }
         ]
       },
