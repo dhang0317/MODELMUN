@@ -3834,3 +3834,18 @@ body:not(.light-mode) {
     #btn-pick-motion-proposer span {
       color: #3E2723 !important;
     }
+
+    /* Apple Liquid Glass / Frosted Glass style for #modal-add-speaker */
+    #modal-add-speaker > div {
+      background: rgba(38, 26, 22, 0.42) !important;
+      backdrop-filter: blur(28px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(28px) saturate(180%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.32) !important;
+      box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+    }
+    #modal-add-speaker #list-selectable-speakers > div {
+      background: rgba(255, 255, 255, 0.12) !important;
+      border: 1px solid rgba(255, 255, 255, 0.22) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+    }
