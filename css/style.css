@@ -3828,3 +3828,9 @@ body:not(.light-mode) {
       border-radius: 9999px !important;
       padding: 0.35rem 0.85rem !important;
     }
+
+    /* Ensure motion proposer picker button text is dark on white background */
+    #btn-pick-motion-proposer,
+    #btn-pick-motion-proposer span {
+      color: #3E2723 !important;
+    }
