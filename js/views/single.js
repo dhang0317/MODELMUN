@@ -2,7 +2,11 @@
     const t = I18N[state.language] || I18N.en;
     const titleEl = document.getElementById('single-motion-title');
     if (titleEl) {
-      if (state.singleMotionType) {
+      if (state.speakingSubtab === 'amendment') {
+        titleEl.textContent = '介紹修正案';
+      } else if (state.speakingSubtab === 'intro') {
+        titleEl.textContent = '草案介紹';
+      } else if (state.singleMotionType) {
         titleEl.textContent = formatMotionType(state.singleMotionType);
       } else {
         titleEl.textContent = t.draftIntro;
