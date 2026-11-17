@@ -1126,7 +1126,7 @@
         renderAll();
       });
     }
-    document.getElementById('select-vote-threshold').addEventListener('change', (e) => {
+    document.getElementById('select-vote-threshold')?.addEventListener('change', (e) => {
       state.voteThreshold = e.target.value;
       saveToLocalStorage(true, true);
       renderAll();
