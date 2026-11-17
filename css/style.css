@@ -3821,3 +3821,10 @@ body:not(.light-mode) {
       color: #000000 !important;
       opacity: 1 !important;
     }
+
+    /* Prevent sharp-cornered rectangular buttons anywhere in main */
+    main button:not([class*="rounded-"]),
+    #btn-clear-selection {
+      border-radius: 9999px !important;
+      padding: 0.35rem 0.85rem !important;
+    }
