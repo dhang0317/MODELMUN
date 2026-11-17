@@ -211,6 +211,14 @@
       if (nameEl) nameEl.textContent = pool.length === 0 && state.voteStage === 'r2' ? (t.noPassInRound1Short || 'No delegates passed in Round 1') : (t.votingComplete || '表決完成');
       if (statusEl) statusEl.textContent = '';
     }
+
+    const btnAbstainCard = document.getElementById('btn-cast-abstain');
+    if (btnAbstainCard) {
+      const isPvVoter = !!(currentVoter && currentVoter.attendance === 'pv');
+      btnAbstainCard.disabled = !currentVoter || isPvVoter;
+      btnAbstainCard.style.opacity = (!currentVoter || isPvVoter) ? '0.35' : '1';
+      btnAbstainCard.style.pointerEvents = (!currentVoter || isPvVoter) ? 'none' : '';
+    }
   }
 
   function renderVotingView() {
