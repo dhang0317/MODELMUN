@@ -224,7 +224,7 @@
       headerAgendaInput.value = state.agenda || '';
     }
 
-    document.getElementById('stat-present').textContent = stats.presentCount;
+    document.getElementById('stat-present').textContent = Math.max(0, stats.presentCount - stats.pvCount);
     document.getElementById('stat-pv').textContent = stats.pvCount;
     document.getElementById('stat-quorum').textContent = stats.quorum;
     document.getElementById('stat-majority').textContent = stats.majority;
