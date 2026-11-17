@@ -573,11 +573,14 @@
       }
       return c.powerStatus !== 'observer' && (c.attendance === 'present' || c.attendance === 'pv');
     }).length;
+    const pvCountCheck = (state.selectedCountries || []).filter(c => c.attendance === 'pv').length;
     const elCheckCast = document.getElementById('vote-check-cast');
     const elCheckEligible = document.getElementById('vote-check-eligible');
+    const elCheckPv = document.getElementById('vote-check-pv');
     const elCheckStatus = document.getElementById('vote-check-status');
     if (elCheckCast) elCheckCast.textContent = totalCastCheck;
     if (elCheckEligible) elCheckEligible.textContent = eligibleCountCheck;
+    if (elCheckPv) elCheckPv.textContent = pvCountCheck;
     if (elCheckStatus) {
       if (eligibleCountCheck === 0) {
         elCheckStatus.textContent = '尚未點名';
