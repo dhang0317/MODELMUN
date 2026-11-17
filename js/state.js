@@ -140,6 +140,7 @@
     committeeName: '聯合國安全理事會 (UNSC)',
     agenda: '對國際和平與安全之威脅',
     currentTab: 'setup',
+    rollcallLocked: false,
     language: 'zh', // 'en', 'zh', 'fr'
     setupSegment: 'template',
     currentUser: null, // Google user profile: { name, email, picture }
@@ -233,6 +234,7 @@
       committeeName: state.committeeName,
       agenda: state.agenda,
       currentTab: state.currentTab,
+      rollcallLocked: !!state.rollcallLocked,
       selectedCountries: state.selectedCountries,
       gslDefaultTime: state.gslDefaultTime,
       gslRemainingTime: state.gslRemainingTime,
