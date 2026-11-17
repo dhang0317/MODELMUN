@@ -374,6 +374,7 @@
     } else if (motion.type === 'singlespeaker' || motion.type === 'amendment') {
       pauseSingleTimer();
       const durationSecs = motion.type === 'amendment' ? (parseInt(motion.speakerSecs, 10) || 60) : (motion.totalSecs || ((parseInt(motion.totalMins, 10) || 1) * 60));
+      state.singleDefaultTime = durationSecs;
       state.singleTimeRemaining = durationSecs;
       state.singleMotionType = motion.type;
       state.singleMotionTitle = formatMotionType(motion.type);

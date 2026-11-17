@@ -65,7 +65,7 @@
 
   function resetSingleTimer() {
     pauseSingleTimer();
-    state.singleTimeRemaining = 180;
+    state.singleTimeRemaining = state.singleDefaultTime || 180;
     saveToLocalStorage(true);
     renderAll();
   }

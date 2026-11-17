@@ -638,6 +638,7 @@
     setupDirectTimerInput('single-timer-input',
       () => state.singleTimeRemaining,
       (secs) => {
+        state.singleDefaultTime = secs;
         state.singleTimeRemaining = secs;
         saveToLocalStorage(true, true);
         renderAll();
@@ -706,7 +707,9 @@
       const t = I18N[state.language] || I18N.en;
       customPrompt(t.singleSpeaker, t.enterSingleTimePrompt, '3', (val) => {
         if (val) {
-          state.singleTimeRemaining = (parseFloat(val) || 3) * 60;
+          const newSecs = (parseFloat(val) || 3) * 60;
+          state.singleDefaultTime = newSecs;
+          state.singleTimeRemaining = newSecs;
           renderAll();
         }
       });
