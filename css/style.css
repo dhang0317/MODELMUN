@@ -931,9 +931,6 @@ body:not(.light-mode) {
 
     /* Tablet & Responsive Optimization for Voting View: fit screen without scroll */
     @media (min-height: 550px) {
-      #view-vote {
-        overflow: hidden !important;
-      }
       #view-vote > div {
         height: 100% !important;
         max-height: 100% !important;
