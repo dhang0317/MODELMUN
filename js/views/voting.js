@@ -1367,6 +1367,7 @@
           e.stopPropagation();
           sess.favor = (sess.favor || 0) + 1;
           if (inputFavor) inputFavor.value = sess.favor;
+          state.activeSessionId = sess.id;
           saveToLocalStorage(true, true);
           updateScoreboardAndVerdict();
         });
@@ -1386,6 +1387,7 @@
         inputFavor.addEventListener('change', (e) => {
           sess.favor = Math.max(0, parseInt(e.target.value) || 0);
           inputFavor.value = sess.favor;
+          state.activeSessionId = sess.id;
           saveToLocalStorage(true, true);
           updateScoreboardAndVerdict();
         });
@@ -1400,6 +1402,7 @@
           e.stopPropagation();
           sess.against = (sess.against || 0) + 1;
           if (inputAgainst) inputAgainst.value = sess.against;
+          state.activeSessionId = sess.id;
           saveToLocalStorage(true, true);
           updateScoreboardAndVerdict();
         });
@@ -1419,6 +1422,7 @@
         inputAgainst.addEventListener('change', (e) => {
           sess.against = Math.max(0, parseInt(e.target.value) || 0);
           inputAgainst.value = sess.against;
+          state.activeSessionId = sess.id;
           saveToLocalStorage(true, true);
           updateScoreboardAndVerdict();
         });
@@ -1433,6 +1437,7 @@
           e.stopPropagation();
           sess.abstain = (sess.abstain || 0) + 1;
           if (inputAbstain) inputAbstain.value = sess.abstain;
+          state.activeSessionId = sess.id;
           saveToLocalStorage(true, true);
           updateScoreboardAndVerdict();
         });
@@ -1452,6 +1457,7 @@
         inputAbstain.addEventListener('change', (e) => {
           sess.abstain = Math.max(0, parseInt(e.target.value) || 0);
           inputAbstain.value = sess.abstain;
+          state.activeSessionId = sess.id;
           saveToLocalStorage(true, true);
           updateScoreboardAndVerdict();
         });
