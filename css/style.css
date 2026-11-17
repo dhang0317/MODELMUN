@@ -3867,3 +3867,18 @@ body:not(.light-mode) {
     nav#tabs-nav .tab-btn {
       flex: 1 1 0% !important;
     }
+
+    /* Unify voting top bar action buttons */
+    #btn-voting-motion-fail,
+    #btn-voting-motion-second,
+    #btn-motion-vote-execute,
+    #btn-adopt-vote,
+    #btn-reset-votes {
+      background-color: transparent !important;
+      background: transparent !important;
+      border: 1px solid #D7CCC8 !important;
+      color: #3E2723 !important;
+      padding: 0.25rem 0.75rem !important;
+      border-radius: 0.75rem !important;
+      box-shadow: none !important;
+    }
