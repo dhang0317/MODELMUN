@@ -573,14 +573,25 @@
       }
       return c.powerStatus !== 'observer' && (c.attendance === 'present' || c.attendance === 'pv');
     }).length;
-    const pvCountCheck = (state.selectedCountries || []).filter(c => c.attendance === 'pv').length;
+    const pvCountries = (state.selectedCountries || []).filter(c => c.attendance === 'pv');
+    const pvCountCheck = pvCountries.length;
     const elCheckCast = document.getElementById('vote-check-cast');
     const elCheckEligible = document.getElementById('vote-check-eligible');
     const elCheckPv = document.getElementById('vote-check-pv');
     const elCheckStatus = document.getElementById('vote-check-status');
+    const elPvList = document.getElementById('vote-pv-countries-list');
     if (elCheckCast) elCheckCast.textContent = totalCastCheck;
     if (elCheckEligible) elCheckEligible.textContent = eligibleCountCheck;
     if (elCheckPv) elCheckPv.textContent = pvCountCheck;
+    if (elPvList) {
+      if (pvCountries.length === 0) {
+        elPvList.innerHTML = '<span class="font-semibold">PV 國家：</span><span>無</span>';
+      } else {
+        elPvList.innerHTML = '<span class="font-semibold mr-1">PV 國家：</span>' + pvCountries.map(c =>
+          `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white border border-slate-200 text-slate-800 font-medium"><img src="${getFlagUrl(c)}" class="w-4 h-3 object-cover rounded-sm border border-slate-200 shrink-0"><span>${getCountryDisplayName(c)}</span></span>`
+        ).join('');
+      }
+    }
     if (elCheckStatus) {
       if (eligibleCountCheck === 0) {
         elCheckStatus.textContent = '尚未點名';
@@ -1647,6 +1658,9 @@
       cancelText: t.cancel || '取消',
       onConfirm: () => {
         state.resolutionPassed = isPassed;
+        state.voteResolutionTitle = '';
+        const titleInput = document.getElementById('vote-resolution-title-input');
+        if (titleInput) titleInput.value = '';
         if (window.logAction) {
           window.logAction(state.language === 'zh'
             ? `決議案結算（${resultLabel}）：${resTitle}（贊成 ${counts.favor} / 反對 ${counts.against} / 棄權 ${counts.abstain}）`
