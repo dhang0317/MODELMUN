@@ -146,14 +146,14 @@
             </div>
           </div>
           <div class="flex items-center space-x-2 flex-shrink-0">
-            <button class="btn-vote-motion-fail px-3 py-1.5 rounded-xl text-xs font-medium border border-rose-500/30 bg-rose-500/15 text-rose-700 hover:bg-rose-500/25 transition cursor-pointer">
+            <button class="btn-vote-motion-fail px-3 py-1.5 rounded-xl text-xs font-medium border border-rose-500/30 bg-rose-500/15 text-rose-700 hover:bg-rose-500/25 transition cursor-pointer" style="background-color: rgba(244, 63, 94, 0.16) !important; border: 1px solid rgba(244, 63, 94, 0.4) !important; color: #be123c !important;">
               ${t.fail || '否決'}
             </button>
-            <button class="btn-vote-motion-vote px-3 py-1.5 rounded-xl text-xs font-medium border border-amber-500/35 bg-amber-500/20 text-amber-700 hover:bg-amber-500/30 transition cursor-pointer">
+            <button class="btn-vote-motion-vote px-3 py-1.5 rounded-xl text-xs font-medium border border-amber-500/35 bg-amber-500/20 text-amber-700 hover:bg-amber-500/30 transition cursor-pointer" style="background-color: rgba(245, 158, 11, 0.2) !important; border: 1px solid rgba(245, 158, 11, 0.45) !important; color: #b45309 !important;">
               ${t.putToVote || '交付表決'}
             </button>
             ${!mRule.requiresVote ? `
-              <button class="btn-vote-motion-pass px-3 py-1.5 rounded-xl text-xs font-medium border border-emerald-500/35 bg-emerald-500/20 text-emerald-700 hover:bg-emerald-500/30 transition cursor-pointer">
+              <button class="btn-vote-motion-pass px-3 py-1.5 rounded-xl text-xs font-medium border border-emerald-500/35 bg-emerald-500/20 text-emerald-700 hover:bg-emerald-500/30 transition cursor-pointer" style="background-color: rgba(16, 185, 129, 0.2) !important; border: 1px solid rgba(16, 185, 129, 0.45) !important; color: #047857 !important;">
                 ${t.passSecond || '附議通過'}
               </button>
             ` : ''}
