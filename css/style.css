@@ -3889,7 +3889,9 @@ body:not(.light-mode) {
       background-color: var(--theme-accent) !important;
       background: var(--theme-accent) !important;
       color: var(--theme-text, #1F2A14) !important;
+      font-weight: normal !important;
     }
     html body.has-custom-accent #view-gsl button.speaking-subtab-btn.subtab-active * {
       color: var(--theme-text, #1F2A14) !important;
+      font-weight: normal !important;
     }
