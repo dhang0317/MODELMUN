@@ -1624,10 +1624,11 @@
     // Modal Close Buttons (General & Settings)
     document.querySelectorAll('.btn-close-modal').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('#modal-add-speaker, #modal-define-time, #modal-mod-config, #modal-add-motion').forEach(m => {
-          m.classList.add('hidden');
-          m.style.display = 'none';
-        });
+        const targetModal = btn.closest('#modal-add-speaker, #modal-define-time, #modal-mod-config, #modal-add-motion');
+        if (targetModal) {
+          targetModal.classList.add('hidden');
+          targetModal.style.display = 'none';
+        }
       });
     });
 
