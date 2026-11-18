@@ -1495,6 +1495,9 @@
           state.activeVoterIndex = idx + 1;
           saveToLocalStorage(true, true);
           renderResolutionVoteGrid();
+          if (state.activeVoterIndex >= pool.length && typeof window.adoptCurrentVote === 'function') {
+            window.adoptCurrentVote();
+          }
         }, 280);
       } else {
         // Abstain / Pass - immediate single click action and advance
@@ -1504,6 +1507,9 @@
         state.activeVoterIndex = idx + 1;
         saveToLocalStorage(true, true);
         renderResolutionVoteGrid();
+        if (state.activeVoterIndex >= pool.length && typeof window.adoptCurrentVote === 'function') {
+          window.adoptCurrentVote();
+        }
       }
     }
 
