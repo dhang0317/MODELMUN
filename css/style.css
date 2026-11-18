@@ -3865,7 +3865,7 @@ body:not(.light-mode) {
       flex: 1 1 0% !important;
     }
 
-    /* Unify voting top bar & rollcall bulk action buttons */
+    /* Unify voting top bar, rollcall bulk & motion hero action buttons */
     #btn-voting-motion-fail,
     #btn-voting-motion-second,
     #btn-motion-vote-execute,
@@ -3873,7 +3873,10 @@ body:not(.light-mode) {
     #btn-reset-votes,
     #btn-set-all-uncalled,
     #btn-set-all-present,
-    #btn-set-all-absent {
+    #btn-set-all-absent,
+    #btn-hero-motion-fail,
+    #btn-hero-motion-vote,
+    #btn-hero-motion-second {
       background-color: transparent !important;
       background: transparent !important;
       border: 1px solid #D7CCC8 !important;
