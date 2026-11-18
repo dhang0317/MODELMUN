@@ -3913,6 +3913,23 @@ body:not(.light-mode) {
       box-shadow: none !important;
     }
 
+    /* Motion list action button colors */
+    html body #view-motions .btn-vote-motion-fail {
+      background-color: rgba(244, 63, 94, 0.16) !important;
+      border-color: rgba(244, 63, 94, 0.35) !important;
+      color: #9f1239 !important;
+    }
+    html body #view-motions .btn-vote-motion-vote {
+      background-color: rgba(245, 158, 11, 0.2) !important;
+      border-color: rgba(245, 158, 11, 0.4) !important;
+      color: #92400e !important;
+    }
+    html body #view-motions .btn-vote-motion-pass {
+      background-color: rgba(16, 185, 129, 0.2) !important;
+      border-color: rgba(16, 185, 129, 0.4) !important;
+      color: #065f46 !important;
+    }
+
     /* Remove seam (border and shadow) between header/nav and main */
     html body #main-header,
     html body nav#tabs-nav {
