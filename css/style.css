@@ -3895,3 +3895,11 @@ body:not(.light-mode) {
       color: var(--theme-text, #1F2A14) !important;
       font-weight: normal !important;
     }
+
+    /* Remove border on session + buttons */
+    html body .btn-inc-favor,
+    html body .btn-inc-against,
+    html body .btn-inc-abstain {
+      border: none !important;
+      box-shadow: none !important;
+    }
