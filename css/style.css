@@ -3900,9 +3900,17 @@ body:not(.light-mode) {
     }
 
     /* Remove border on session + buttons */
-    html body .btn-inc-favor,
-    html body .btn-inc-against,
-    html body .btn-inc-abstain {
-      border: none !important;
+    html body #panel-session-votes-container .btn-inc-favor,
+    html body #panel-session-votes-container .btn-inc-against,
+    html body #panel-session-votes-container .btn-inc-abstain {
+      border: 0 none transparent !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Remove seam (border and shadow) between header/nav and main */
+    html body #main-header,
+    html body nav#tabs-nav {
+      border-bottom: none !important;
       box-shadow: none !important;
     }
