@@ -294,11 +294,11 @@
     </div>
 
     <!-- 2. SPEAKING VIEW (/tabs/gsl) - 包含 GSL, MOD, INTRO, 正反方發言 -->
-    <div id="view-gsl" class="view-panel absolute inset-0 overflow-y-auto p-3 sm:p-5 lg:p-6 bg-slate-50 custom-scroll hidden">
-      <div class="max-w-6xl w-full mx-auto space-y-4">
+    <div id="view-gsl" class="view-panel absolute inset-0 overflow-y-auto lg:overflow-hidden p-3 sm:p-5 lg:p-6 bg-slate-50 custom-scroll flex flex-col hidden">
+      <div class="max-w-6xl w-full mx-auto flex-1 flex flex-col min-h-0 space-y-4">
 
         <!-- Speaking Sub-tabs Navigation Bar -->
-        <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 p-1 bg-slate-100 rounded-xl border border-slate-200 w-full">
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 p-1 bg-slate-100 rounded-xl border border-slate-200 w-full shrink-0">
           <button id="btn-speaking-subtab-gsl" type="button" class="speaking-subtab-btn w-full text-center px-3 py-2.5 rounded-xl text-xs subtab-active font-bold transition cursor-pointer" data-i18n="speakingSubtabGsl">
             GSL (一般發言)
           </button>
@@ -317,8 +317,8 @@
         </div>
 
         <!-- 2.1 SUBTAB PANEL: GSL -->
-        <div id="panel-speaking-gsl">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch lg:h-[420px]">
+        <div id="panel-speaking-gsl" class="flex-1 flex flex-col min-h-0">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch flex-1 min-h-0">
             <!-- Left: Current Speaker & Big Timer (7 cols on lg) -->
             <div class="lg:col-span-7 bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-center relative overflow-hidden flex flex-col justify-between space-y-6">
               <div>
@@ -410,8 +410,8 @@
         </div>
 
         <!-- 2.2 SUBTAB PANEL: MOD (有主持磋商) -->
-        <div id="panel-speaking-mod" class="hidden">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch lg:h-[420px]">
+        <div id="panel-speaking-mod" class="hidden flex-1 flex flex-col min-h-0">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch flex-1 min-h-0">
             <!-- Individual Speaker Timer (7 cols on lg) -->
             <div class="lg:col-span-7 bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-center space-y-6 flex flex-col justify-between">
               <div>
@@ -491,8 +491,8 @@
         </div>
 
         <!-- 2.3 SUBTAB PANEL: INTRO (介紹決議草案及修正案 / Single Speaker) -->
-        <div id="panel-speaking-intro" class="hidden">
-          <div class="w-full lg:h-[420px] bg-white rounded-2xl p-6 sm:p-7 shadow-sm border border-slate-200 text-center space-y-4 flex flex-col justify-between">
+        <div id="panel-speaking-intro" class="hidden flex-1 flex flex-col min-h-0">
+          <div class="w-full flex-1 min-h-0 bg-white rounded-2xl p-6 sm:p-7 shadow-sm border border-slate-200 text-center space-y-4 flex flex-col justify-between">
             <div class="flex items-center justify-between pb-1">
               <div>
                 <h2 id="single-motion-title" class="text-lg sm:text-xl font-black text-slate-800" data-i18n="draftIntro">介紹決議案草案及修正案</h2>
@@ -537,8 +537,8 @@
         </div>
 
         <!-- 2.4 SUBTAB PANEL: PRO / CON (正反方辯論發言) -->
-        <div id="panel-speaking-procon" class="hidden">
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch lg:h-[420px]">
+        <div id="panel-speaking-procon" class="hidden flex-1 flex flex-col min-h-0">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch flex-1 min-h-0">
             
             <!-- Left: Current Pro / Con Speaker & Timer (7 cols on lg) -->
             <div class="lg:col-span-7 bg-white rounded-2xl p-6 shadow-sm border border-slate-200 text-center flex flex-col justify-between space-y-6">
@@ -641,11 +641,11 @@
     </div>
 
     <!-- 4. UNMODERATED CAUCUS VIEW (/tabs/unmod) -->
-    <div id="view-unmod" class="view-panel absolute inset-0 overflow-y-auto p-3 sm:p-5 lg:p-6 bg-slate-50 custom-scroll flex flex-col justify-start items-center hidden">
-      <div class="max-w-6xl w-full mx-auto space-y-6">
+    <div id="view-unmod" class="view-panel absolute inset-0 overflow-y-auto lg:overflow-hidden p-3 sm:p-5 lg:p-6 bg-slate-50 custom-scroll flex flex-col justify-start items-center hidden">
+      <div class="max-w-6xl w-full mx-auto flex-1 flex flex-col min-h-0">
         
         <!-- Main Caucus Timer Card (Consistent with Mod Caucus UI) -->
-        <div class="bg-white rounded-2xl p-6 sm:p-8 lg:h-[480px] shadow-sm border border-slate-200 text-center space-y-6 flex flex-col justify-center">
+        <div class="bg-white rounded-2xl p-6 sm:p-8 flex-1 min-h-0 shadow-sm border border-slate-200 text-center space-y-6 flex flex-col justify-center">
           <div class="border-b pb-1 border-slate-100 hidden">
             <span class="text-xs uppercase tracking-wider font-bold text-slate-400 hidden" data-i18n="unmod">自由磋商</span>
             <h2 class="text-2xl font-black text-slate-800 tracking-tight hidden" data-i18n="tabUnmod">自由磋商</h2>
@@ -693,7 +693,7 @@
 
     <!-- 6. MOTIONS VIEW (/tabs/motions) -->
     <div id="view-motions" class="view-panel absolute inset-0 overflow-hidden p-3 sm:p-5 lg:p-6 bg-slate-50 flex flex-col hidden">
-      <div class="max-w-6xl w-full mx-auto flex-1 lg:flex-none lg:h-[480px] lg:max-h-[480px] flex flex-col min-h-0 space-y-4">
+      <div class="max-w-6xl w-full mx-auto flex-1 flex flex-col min-h-0 space-y-4">
         
 
         <!-- Most Disruptive Motion Hero -->
@@ -769,7 +769,7 @@
 
     <!-- 8. RESOLUTION VOTE VIEW (/tabs/vote) - MUN Command Style (Compact & Scroll-Free) -->
     <div id="view-vote" class="view-panel absolute inset-0 overflow-y-auto sm:overflow-hidden p-3 sm:p-5 lg:p-6 bg-slate-50 custom-scroll flex flex-col justify-start hidden">
-      <div class="max-w-6xl w-full mx-auto flex flex-col space-y-3">
+      <div class="max-w-6xl w-full mx-auto flex-1 flex flex-col min-h-0 space-y-3">
 
         <!-- Top Header & Stages Bar -->
         <div class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-2 shrink-0">
@@ -868,7 +868,7 @@
         </div>
 
         <!-- MUN Command Active Calling Card (當前正在點名投票的國家卡片 - ROLLCALL VOTING 子分頁) -->
-        <div id="panel-active-voter-card" class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-sm border border-slate-200 flex flex-col items-center text-center space-y-2 shrink-0">
+        <div id="panel-active-voter-card" class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-4 shadow-sm border border-slate-200 flex-1 min-h-0 flex flex-col items-center justify-center text-center space-y-2">
           <div class="text-[10px] uppercase tracking-wider text-slate-400 font-semibold" id="label-active-voter-stage"></div>
           <div class="flex items-center justify-center gap-3">
             <img id="active-voter-flag" src="" alt="Flag" class="w-12 h-8 sm:w-14 sm:h-9 object-cover rounded-lg shadow border border-slate-200 shrink-0 hidden">
