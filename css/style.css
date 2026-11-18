@@ -3879,3 +3879,14 @@ body:not(.light-mode) {
       border-radius: 0.75rem !important;
       box-shadow: none !important;
     }
+
+    /* Make active speaking subtab follow custom theme accent */
+    html body.has-custom-accent #view-gsl button.speaking-subtab-btn.subtab-active,
+    html body.has-custom-accent #view-gsl button.speaking-subtab-btn.subtab-active:hover {
+      background-color: var(--theme-accent) !important;
+      background: var(--theme-accent) !important;
+      color: var(--theme-text, #1F2A14) !important;
+    }
+    html body.has-custom-accent #view-gsl button.speaking-subtab-btn.subtab-active * {
+      color: var(--theme-text, #1F2A14) !important;
+    }
