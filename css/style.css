@@ -3865,12 +3865,15 @@ body:not(.light-mode) {
       flex: 1 1 0% !important;
     }
 
-    /* Unify voting top bar action buttons */
+    /* Unify voting top bar & rollcall bulk action buttons */
     #btn-voting-motion-fail,
     #btn-voting-motion-second,
     #btn-motion-vote-execute,
     #btn-adopt-vote,
-    #btn-reset-votes {
+    #btn-reset-votes,
+    #btn-set-all-uncalled,
+    #btn-set-all-present,
+    #btn-set-all-absent {
       background-color: transparent !important;
       background: transparent !important;
       border: 1px solid #D7CCC8 !important;
