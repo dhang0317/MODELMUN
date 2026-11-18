@@ -3855,9 +3855,12 @@ body:not(.light-mode) {
     }
 
     /* Remove grayish tint on inner boxes in light mode */
+    html body.light-mode #voting-scoreboard .bg-slate-50,
+    html body.light-mode #voting-scoreboard .bg-slate-100,
     html body.light-mode .bg-slate-50,
     html body.light-mode .bg-slate-100 {
       background-color: transparent !important;
+      background: transparent !important;
     }
 
     /* Uniform width for all navigation tab buttons */
