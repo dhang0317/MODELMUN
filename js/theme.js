@@ -204,10 +204,8 @@
         <div class="text-[12px] font-bold text-slate-300 tracking-wide">${group.name}</div>
         <div class="grid grid-cols-3 gap-2">
           ${group.shades.map(s => `
-            <button data-hex="${s.hex}" class="btn-theme-swatch group relative p-1.5 rounded-xl border border-slate-700 hover:border-white transition flex flex-col items-center space-y-1 bg-slate-900/50 ${baseColor.toLowerCase() === s.hex.toLowerCase() ? 'ring-2 ring-white border-transparent' : ''}" title="${group.name} - ${s.shade} (${s.hex})">
-              <span class="w-full h-7 rounded-md shadow-inner border border-white/20 transition group-hover:scale-105" style="background-color: ${s.hex}"></span>
-              <span class="text-[11px] font-medium text-slate-300 w-full text-center truncate">${s.shade}</span>
-              <span class="text-[9px] font-mono text-slate-400">${s.hex}</span>
+            <button data-hex="${s.hex}" class="btn-theme-swatch group relative p-1.5 rounded-xl border border-slate-700 hover:border-white transition flex flex-col items-center bg-slate-900/50 ${baseColor.toLowerCase() === s.hex.toLowerCase() ? 'ring-2 ring-white border-transparent' : ''}" title="${group.name} - ${s.shade} (${s.hex})">
+              <span class="w-full h-8 rounded-md shadow-inner border border-white/20 transition group-hover:scale-105" style="background-color: ${s.hex}"></span>
             </button>
           `).join('')}
         </div>
@@ -277,6 +275,9 @@
     }
     box.querySelector('.modal-close-icon').onclick = cleanup;
     box.querySelector('.modal-close-btn').onclick = cleanup;
+    backdrop.onclick = (e) => {
+      if (e.target === backdrop) cleanup();
+    };
 
     const picker = box.querySelector('#theme-color-input');
     const hexInput = box.querySelector('#theme-color-hex-text');
