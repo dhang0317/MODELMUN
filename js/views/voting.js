@@ -301,40 +301,36 @@
       const pvLabel = state.language === 'zh' ? '出席且投票' : (t.pv || 'P & Voting');
 
       if (isUncalled) {
-        // 出席缺席大小要一樣，透亮半透明色彩 (橄欖抹茶綠 #7D9462 / 覆盆子紅 #913D48)
         rightContent = `
           <div class="rollcall-btn-container flex items-center space-x-2 shrink-0">
-            <button type="button" class="btn-rollcall-present flex-1 rounded-xl font-black text-center cursor-pointer" style="border: 1.5px solid #7D9462 !important; color: #7D9462 !important; background-color: rgba(125, 148, 98, 0.2) !important;">
+            <button type="button" class="btn-rollcall-present flex-1 rounded-xl font-black text-center cursor-pointer">
               ${presentLabel}
             </button>
-            <button type="button" class="btn-rollcall-absent flex-1 rounded-xl font-black text-center cursor-pointer" style="border: 1.5px solid #913D48 !important; color: #913D48 !important; background-color: rgba(145, 61, 72, 0.15) !important;">
+            <button type="button" class="btn-rollcall-absent flex-1 rounded-xl font-black text-center cursor-pointer">
               ${absentLabel}
             </button>
           </div>
         `;
       } else if (isPresent) {
-        // 出席（橄欖抹茶綠）：透亮半透明綠底 (rgba(125, 148, 98, 0.32))，搭配橄欖抹茶綠邊框 (#7D9462)
         rightContent = `
           <div class="rollcall-btn-container shrink-0 flex justify-end">
-            <button type="button" class="btn-rollcall-expanded btn-rollcall-status-present w-full rounded-xl font-black text-center cursor-pointer" style="background-color: rgba(125, 148, 98, 0.32) !important; background: rgba(125, 148, 98, 0.32) !important; color: #5B6D46 !important; border: 2px solid #7D9462 !important;">
+            <button type="button" class="btn-rollcall-expanded btn-rollcall-status-present w-full rounded-xl font-black text-center cursor-pointer">
               ${presentLabel}
             </button>
           </div>
         `;
       } else if (isPv) {
-        // 出席且投票（PV 琥珀金/香檳金）：透亮半透明金底，搭配金色邊框與文字
         rightContent = `
           <div class="rollcall-btn-container shrink-0 flex justify-end">
-            <button type="button" class="btn-rollcall-expanded btn-rollcall-status-pv w-full rounded-xl font-black text-center cursor-pointer" style="background-color: rgba(214, 181, 117, 0.28) !important; background: rgba(214, 181, 117, 0.28) !important; color: #B58A38 !important; border: 2px solid #D6B575 !important;">
+            <button type="button" class="btn-rollcall-expanded btn-rollcall-status-pv w-full rounded-xl font-black text-center cursor-pointer">
               ${pvLabel}
             </button>
           </div>
         `;
       } else if (isAbsent) {
-        // 缺席（覆盆子紅）：透亮半透明紅底 (rgba(145, 61, 72, 0.25))，搭配覆盆子紅邊框與文字
         rightContent = `
           <div class="rollcall-btn-container shrink-0 flex justify-end">
-            <button type="button" class="btn-rollcall-expanded btn-rollcall-status-absent w-full rounded-xl font-black text-center cursor-pointer" style="background-color: rgba(145, 61, 72, 0.25) !important; background: rgba(145, 61, 72, 0.25) !important; color: #913D48 !important; border: 2px solid #913D48 !important;">
+            <button type="button" class="btn-rollcall-expanded btn-rollcall-status-absent w-full rounded-xl font-black text-center cursor-pointer">
               ${absentLabel}
             </button>
           </div>
@@ -373,10 +369,10 @@
           if (isUn) {
             newRight = `
               <div class="rollcall-btn-container flex items-center space-x-2 shrink-0">
-                <button type="button" class="btn-rollcall-present flex-1 rounded-xl font-black text-center cursor-pointer" style="border: 1.5px solid #7D9462 !important; color: #7D9462 !important; background-color: rgba(125, 148, 98, 0.2) !important;">
+                <button type="button" class="btn-rollcall-present flex-1 rounded-xl font-black text-center cursor-pointer">
                   ${presentLabel}
                 </button>
-                <button type="button" class="btn-rollcall-absent flex-1 rounded-xl font-black text-center cursor-pointer" style="border: 1.5px solid #913D48 !important; color: #913D48 !important; background-color: rgba(145, 61, 72, 0.15) !important;">
+                <button type="button" class="btn-rollcall-absent flex-1 rounded-xl font-black text-center cursor-pointer">
                   ${absentLabel}
                 </button>
               </div>
@@ -384,7 +380,7 @@
           } else if (isPres) {
             newRight = `
               <div class="rollcall-btn-container shrink-0 flex justify-end">
-                <button type="button" class="btn-rollcall-expanded btn-rollcall-status-present w-full rounded-xl font-black text-center cursor-pointer" style="background-color: rgba(125, 148, 98, 0.32) !important; background: rgba(125, 148, 98, 0.32) !important; color: #5B6D46 !important; border: 2px solid #7D9462 !important;">
+                <button type="button" class="btn-rollcall-expanded btn-rollcall-status-present w-full rounded-xl font-black text-center cursor-pointer">
                   ${presentLabel}
                 </button>
               </div>
@@ -392,7 +388,7 @@
           } else if (isP) {
             newRight = `
               <div class="rollcall-btn-container shrink-0 flex justify-end">
-                <button type="button" class="btn-rollcall-expanded btn-rollcall-status-pv w-full rounded-xl font-black text-center cursor-pointer" style="background-color: rgba(214, 181, 117, 0.28) !important; background: rgba(214, 181, 117, 0.28) !important; color: #B58A38 !important; border: 2px solid #D6B575 !important;">
+                <button type="button" class="btn-rollcall-expanded btn-rollcall-status-pv w-full rounded-xl font-black text-center cursor-pointer">
                   ${pvLabel}
                 </button>
               </div>
@@ -400,7 +396,7 @@
           } else if (isAbs) {
             newRight = `
               <div class="rollcall-btn-container shrink-0 flex justify-end">
-                <button type="button" class="btn-rollcall-expanded btn-rollcall-status-absent w-full rounded-xl font-black text-center cursor-pointer" style="background-color: rgba(145, 61, 72, 0.25) !important; background: rgba(145, 61, 72, 0.25) !important; color: #913D48 !important; border: 2px solid #913D48 !important;">
+                <button type="button" class="btn-rollcall-expanded btn-rollcall-status-absent w-full rounded-xl font-black text-center cursor-pointer">
                   ${absentLabel}
                 </button>
               </div>
