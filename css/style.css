@@ -3932,8 +3932,12 @@ body:not(.light-mode) {
       display: none !important;
     }
 
-    /* Fix inactive speaking subtab text color on dark brown bar */
-    html:not(#_):not(#__) body #view-gsl button.speaking-subtab-btn:not(.subtab-active),
-    html:not(#_):not(#__) body #view-gsl button.speaking-subtab-btn:not(.subtab-active) * {
+    /* Fix inactive speaking subtab text color based on dark/light mode */
+    html:not(#_):not(#__) body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active),
+    html:not(#_):not(#__) body:not(.light-mode) #view-gsl button.speaking-subtab-btn:not(.subtab-active) * {
       color: #F7F4EE !important;
+    }
+    html:not(#_):not(#__) body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active),
+    html:not(#_):not(#__) body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) * {
+      color: #3E2723 !important;
     }
