@@ -3931,3 +3931,9 @@ body:not(.light-mode) {
     html:not(#_):not(#__) body :is(svg.lucide, i[data-lucide], i[class*="fa-"]):not(#btn-open-drawer *):not(#btn-close-drawer *):not(#btn-close-settings-modal *):not(#activity-log-close *):not(.btn-close-modal *):not(.modal-close-icon *):not(.btn-del-queue *):not(.btn-del-mod-queue *):not(.btn-top-queue *):not(.btn-del-pro *):not(.btn-del-con *):not(#btn-gsl-set-time *):not(#btn-procon-set-time *) {
       display: none !important;
     }
+
+    /* Fix inactive speaking subtab text color on dark brown bar */
+    html:not(#_):not(#__) body #view-gsl button.speaking-subtab-btn:not(.subtab-active),
+    html:not(#_):not(#__) body #view-gsl button.speaking-subtab-btn:not(.subtab-active) * {
+      color: #F7F4EE !important;
+    }
