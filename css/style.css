@@ -3880,3 +3880,11 @@ body:not(.light-mode) {
       background: #E7E0D8 !important;
       color: #3E2723 !important;
     }
+
+    /* Soft cream background & dark brown text for motion type select dropdown */
+    #modal-add-motion select,
+    #modal-add-motion select option {
+      color-scheme: light !important;
+      background-color: #E7E0D8 !important;
+      color: #3E2723 !important;
+    }
