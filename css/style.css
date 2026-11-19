@@ -3585,10 +3585,16 @@ body:not(.light-mode) {
       box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
     }
     #modal-add-speaker #list-selectable-speakers > div {
-      background: rgba(255, 255, 255, 0.12) !important;
-      border: 1px solid rgba(255, 255, 255, 0.22) !important;
-      backdrop-filter: blur(12px) !important;
-      -webkit-backdrop-filter: blur(12px) !important;
+      background: #E7E0D8 !important;
+      background-color: #E7E0D8 !important;
+      color: #3E2723 !important;
+      border: none !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+    #modal-add-speaker #list-selectable-speakers > div * {
+      color: #3E2723 !important;
     }
 
     /* Unify #btn-toggle-theme background with other drawer buttons */
