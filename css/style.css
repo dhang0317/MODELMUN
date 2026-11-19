@@ -3656,7 +3656,7 @@ body:not(.light-mode) {
       color: #F7F4EE !important;
     }
 
-    /* 2. Positive / Soft Matcha Green Buttons (結算 / 通過 / 開始 / 出席 / 贊成 / 儲存 / 確認) */
+    /* 2. Positive / Soft Matcha Green Buttons (結算 / 通過 / 出席 / 贊成 / 儲存 / 確認) */
     html:not(#_):not(#__):not(#___):not(#____) body :is(
       #btn-adopt-vote,
       #btn-quick-pass,
@@ -3666,12 +3666,6 @@ body:not(.light-mode) {
       #btn-hero-motion-pass,
       .btn-vote-motion-pass,
       #btn-set-all-present,
-      #btn-gsl-start,
-      #btn-mod-start,
-      #btn-single-start,
-      #btn-procon-start,
-      #btn-unmod-start,
-      #btn-recess-toggle-timer,
       #btn-intro-to-procon,
       #btn-procon-add-pro,
       #btn-procon-side-pro.bg-emerald-600,
@@ -3708,12 +3702,6 @@ body:not(.light-mode) {
       #btn-hero-motion-pass,
       .btn-vote-motion-pass,
       #btn-set-all-present,
-      #btn-gsl-start,
-      #btn-mod-start,
-      #btn-single-start,
-      #btn-procon-start,
-      #btn-unmod-start,
-      #btn-recess-toggle-timer,
       #btn-intro-to-procon,
       #btn-procon-add-pro,
       #btn-procon-side-pro.bg-emerald-600,
@@ -3792,8 +3780,14 @@ body:not(.light-mode) {
       color: #4A1A20 !important;
     }
 
-    /* 4. Warning / Soft Amber Buttons (暫停 / 交付表決 / 棄權 / Pass / 出席且投票) */
+    /* 4. Warning / Soft Amber Buttons (開始 / 暫停 / 交付表決 / 棄權 / Pass / 出席且投票) */
     html:not(#_):not(#__):not(#___):not(#____) body :is(
+      #btn-gsl-start,
+      #btn-mod-start,
+      #btn-single-start,
+      #btn-procon-start,
+      #btn-unmod-start,
+      #btn-recess-toggle-timer,
       #btn-gsl-pause,
       #btn-mod-pause,
       #btn-single-pause,
@@ -3817,6 +3811,12 @@ body:not(.light-mode) {
       box-shadow: none !important;
     }
     html:not(#_):not(#__):not(#___):not(#____) body :is(
+      #btn-gsl-start,
+      #btn-mod-start,
+      #btn-single-start,
+      #btn-procon-start,
+      #btn-unmod-start,
+      #btn-recess-toggle-timer,
       #btn-gsl-pause,
       #btn-mod-pause,
       #btn-single-pause,
