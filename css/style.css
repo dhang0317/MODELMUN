@@ -3870,7 +3870,7 @@ body:not(.light-mode) {
     }
 
     /* Unify all main action buttons across the site with voting top bar style (結算 / 重置票數 UI 設計) */
-    html body:not(.light-mode) main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-inc-favor):not(.btn-inc-against):not(.btn-inc-abstain):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item),
+    html body:not(.light-mode) main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-inc-favor):not(.btn-inc-against):not(.btn-inc-abstain):not(.btn-dec-favor):not(.btn-dec-against):not(.btn-dec-abstain):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item),
     html body:not(.light-mode) #view-motions #list-motions .btn-vote-motion-fail,
     html body:not(.light-mode) #view-motions #list-motions .btn-vote-motion-vote,
     html body:not(.light-mode) #view-motions #list-motions .btn-vote-motion-pass,
@@ -3923,7 +3923,7 @@ body:not(.light-mode) {
       box-shadow: none !important;
     }
 
-    html body:not(.light-mode) main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-inc-favor):not(.btn-inc-against):not(.btn-inc-abstain):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item) *,
+    html body:not(.light-mode) main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-inc-favor):not(.btn-inc-against):not(.btn-inc-abstain):not(.btn-dec-favor):not(.btn-dec-against):not(.btn-dec-abstain):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item) *,
     html body:not(.light-mode) #btn-gsl-start *,
     html body:not(.light-mode) #btn-gsl-pause *,
     html body:not(.light-mode) #btn-gsl-next *,
@@ -3945,7 +3945,7 @@ body:not(.light-mode) {
       color: #3E2723 !important;
     }
 
-    html body.light-mode main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-inc-favor):not(.btn-inc-against):not(.btn-inc-abstain):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item),
+    html body.light-mode main button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(.btn-inc-favor):not(.btn-inc-against):not(.btn-inc-abstain):not(.btn-dec-favor):not(.btn-dec-against):not(.btn-dec-abstain):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item),
     html body.light-mode #view-motions #list-motions .btn-vote-motion-fail,
     html body.light-mode #view-motions #list-motions .btn-vote-motion-vote,
     html body.light-mode #view-motions #list-motions .btn-vote-motion-pass,
