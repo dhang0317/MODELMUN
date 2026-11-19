@@ -3890,8 +3890,8 @@ body:not(.light-mode) {
     }
 
     /* Flatten #voting-scoreboard stat boxes and #grid-rollcall-delegates items (no floating card border/shadow/fill) */
-    #voting-scoreboard .grid > div,
-    #grid-rollcall-delegates > div {
+    html:not(#_):not(#__) body #voting-scoreboard .grid > div,
+    html:not(#_):not(#__) body #grid-rollcall-delegates > div {
       background-color: transparent !important;
       background: transparent !important;
       border: none !important;
