@@ -584,7 +584,7 @@ body:not(.light-mode) {
     }
     /* Text & Headings inside main view cards and panels */
     body:not(.light-mode) main p,
-    body:not(.light-mode) main span:not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.badge):not(#label-voter-queue-status):not(#btn-gsl-start *):not(#btn-mod-start *):not(#btn-single-start *):not(#btn-procon-start *):not(#btn-unmod-start *):not(#btn-gsl-pause *):not(#btn-mod-pause *):not(#btn-single-pause *):not(#btn-procon-pause *):not(#btn-unmod-pause *):not(#btn-hero-motion-second *):not(#btn-save-settings-done *):not(#cfg-btn-auth-action *),
+    body:not(.light-mode) main span:not(button *):not(.attendance-present):not(.attendance-absent):not(.attendance-pv):not(.attendance-uncalled):not(.badge):not(#label-voter-queue-status),
     body:not(.light-mode) main h1,
     body:not(.light-mode) main h2,
     body:not(.light-mode) main h3,
@@ -1623,11 +1623,7 @@ body:not(.light-mode) {
       color: #e3e3e3 !important;
       border-color: #282828 !important;
     }
-    body:not(.light-mode) button:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):hover {
-      background-color: rgba(255, 255, 255, 0.08) !important;
-      background: rgba(255, 255, 255, 0.08) !important;
-      color: #ffffff !important;
-    }
+    /* Legacy dark-mode general button hover rule removed; handled by unified borderless button system */
     body:not(.light-mode) #main-header button:hover {
       background-color: rgba(247, 244, 238, 0.12) !important;
       color: #FFFFFF !important;
@@ -1851,9 +1847,7 @@ body:not(.light-mode) {
       box-shadow: none !important;
       filter: brightness(1.15) !important;
     }
-    body:not(.light-mode) button:not(.speaking-subtab-btn):not(.tab-btn):not(#btn-open-drawer):not(#btn-open-settings):not(#btn-close-drawer):not(.btn-close-modal):not(.modal-close-icon):not(#btn-user-avatar):not(#btn-logo-home):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item):not(.btn-extend-unmod):not(:has(i[data-lucide="plus"])):not(:has(i[data-lucide="x"])):not(:has(i[class*="fa-plus"])):not(:has(i[class*="fa-xmark"])) {
-      border: 1px solid #333333 !important;
-    }
+    /* Legacy 5-ID button border rule removed; all buttons are borderless via unified button system */
     #btn-open-drawer,
     #btn-open-drawer i,
     #btn-open-drawer svg,
@@ -2213,7 +2207,7 @@ body:not(.light-mode) {
     body.light-mode main .text-slate-200,
     body.light-mode main .text-zinc-100,
     body.light-mode main .text-zinc-200,
-    body.light-mode main .text-white:not(.btn-vote-choice *):not(.attendance-present *):not(.attendance-absent *):not(.attendance-pv *):not(.attendance-uncalled *):not(#btn-gsl-start *):not(#btn-gsl-next *):not(#btn-mod-start *):not(#btn-mod-next *) {
+    body.light-mode main .text-white:not(button):not(button *):not(.btn-vote-choice *):not(.attendance-present *):not(.attendance-absent *):not(.attendance-pv *):not(.attendance-uncalled *) {
       color: #F7F4EE !important;
     }
     body.light-mode main .text-slate-500,
@@ -3429,93 +3423,12 @@ body:not(.light-mode) {
       background-color: transparent !important;
     }
 
-    /* Dark Mode normal button press flash & tactile ring */
-    body:not(.light-mode) button:not(:disabled):not(.tab-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):active,
-    body:not(.light-mode) button:not(:disabled):not(.tab-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session).btn-pressed-flash {
-      background-color: rgba(255, 255, 255, 0.3) !important;
-      background: rgba(255, 255, 255, 0.3) !important;
-      border-color: #ffffff !important;
-      box-shadow: 0 0 18px rgba(255, 255, 255, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.25) !important;
-      color: #ffffff !important;
-    }
-
-    /* Light Mode normal button press flash & tactile ring */
-    body.light-mode button:not(:disabled):not(.tab-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#main-header button):active,
-    body.light-mode button:not(:disabled):not(.tab-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#main-header button).btn-pressed-flash {
-      background-color: rgba(15, 23, 42, 0.22) !important;
-      background: rgba(15, 23, 42, 0.22) !important;
-      border-color: #0f172a !important;
-      box-shadow: 0 0 14px rgba(15, 23, 42, 0.22), inset 0 1px 4px rgba(15, 23, 42, 0.2) !important;
-    }
-
-    /* Semantic / Colored Buttons Press Glow (Favor / Present / Pass = Matcha Olive #7D9462) */
-    body:not(.light-mode) #btn-cast-favor:active,
-    body:not(.light-mode) #btn-cast-favor.btn-pressed-flash,
-    body:not(.light-mode) .btn-inc-favor:active,
-    body:not(.light-mode) .btn-inc-favor.btn-pressed-flash,
-    body:not(.light-mode) #btn-adopt-vote:active,
-    body:not(.light-mode) #btn-adopt-vote.btn-pressed-flash,
-    body:not(.light-mode) #btn-rollcall-mark-present:active,
-    body:not(.light-mode) #btn-rollcall-mark-present.btn-pressed-flash,
-    body:not(.light-mode) #btn-procon-add-pro:active,
-    body:not(.light-mode) #btn-procon-add-pro.btn-pressed-flash,
-    body:not(.light-mode) .btn-rollcall-present:active,
-    body:not(.light-mode) .btn-rollcall-present.btn-pressed-flash {
-      background-color: #7D9462 !important;
-      background: #7D9462 !important;
-      border-color: #92AA74 !important;
-      box-shadow: 0 0 20px rgba(125, 148, 98, 0.65), inset 0 0 10px rgba(125, 148, 98, 0.3) !important;
-      color: #ffffff !important;
-    }
-
-    /* Semantic / Colored Buttons Press Glow (Against / Absent / Fail / Reset = Raspberry Wine Red #913D48) */
-    body:not(.light-mode) #btn-cast-against:active,
-    body:not(.light-mode) #btn-cast-against.btn-pressed-flash,
-    body:not(.light-mode) .btn-inc-against:active,
-    body:not(.light-mode) .btn-inc-against.btn-pressed-flash,
-    body:not(.light-mode) #btn-rollcall-mark-absent:active,
-    body:not(.light-mode) #btn-rollcall-mark-absent.btn-pressed-flash,
-    body:not(.light-mode) #btn-procon-add-con:active,
-    body:not(.light-mode) #btn-procon-add-con.btn-pressed-flash,
-    body:not(.light-mode) .btn-rollcall-absent:active,
-    body:not(.light-mode) .btn-rollcall-absent.btn-pressed-flash,
-    body:not(.light-mode) .btn-remove-country:active,
-    body:not(.light-mode) .btn-remove-country.btn-pressed-flash,
-    body:not(.light-mode) .btn-del-mod-queue:active,
-    body:not(.light-mode) .btn-del-mod-queue.btn-pressed-flash,
-    body:not(.light-mode) .btn-del-queue:active,
-    body:not(.light-mode) .btn-del-queue.btn-pressed-flash {
-      background-color: #913D48 !important;
-      background: #913D48 !important;
-      border-color: #D47481 !important;
-      box-shadow: 0 0 20px rgba(145, 61, 72, 0.65), inset 0 0 10px rgba(145, 61, 72, 0.3) !important;
-      color: #ffffff !important;
-    }
-
-    /* Semantic / Colored Buttons Press Glow (Abstain / Pass / Warning = Amber) */
-    body:not(.light-mode) #btn-cast-abstain:active,
-    body:not(.light-mode) #btn-cast-abstain.btn-pressed-flash,
-    body:not(.light-mode) .btn-inc-abstain:active,
-    body:not(.light-mode) .btn-inc-abstain.btn-pressed-flash,
-    body:not(.light-mode) #btn-cast-pass:active,
-    body:not(.light-mode) #btn-cast-pass.btn-pressed-flash {
-      background-color: rgba(245, 158, 11, 0.6) !important;
-      background: rgba(245, 158, 11, 0.6) !important;
-      border-color: #fbbf24 !important;
-      box-shadow: 0 0 20px rgba(245, 158, 11, 0.65), inset 0 0 10px rgba(245, 158, 11, 0.3) !important;
-      color: #ffffff !important;
-    }
-
-    /* Semantic / Colored Buttons Press Glow (PV / Primary = Indigo/Sky) */
-    body:not(.light-mode) #btn-rollcall-mark-pv:active,
-    body:not(.light-mode) #btn-rollcall-mark-pv.btn-pressed-flash,
-    body:not(.light-mode) .btn-add-country-item:active,
-    body:not(.light-mode) .btn-add-country-item.btn-pressed-flash {
-      background-color: rgba(56, 189, 248, 0.5) !important;
-      background: rgba(56, 189, 248, 0.5) !important;
-      border-color: #38bdf8 !important;
-      box-shadow: 0 0 18px rgba(56, 189, 248, 0.55), inset 0 0 10px rgba(56, 189, 248, 0.3) !important;
-      color: #ffffff !important;
+    /* Clean borderless, shadowless press feedback across all buttons */
+    body button:not(:disabled):not(.tab-btn):not(.cfg-nav-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):active,
+    body button:not(:disabled):not(.tab-btn):not(.cfg-nav-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session).btn-pressed-flash {
+      border: none !important;
+      box-shadow: none !important;
+      filter: brightness(0.9) !important;
     }
 
     /* Disable gray hover/active highlight on list rows & remove nested card boxes */
@@ -3702,15 +3615,18 @@ body:not(.light-mode) {
     }
 
     /* =====================================================
-       UNIFIED SOFT-FILLED BORDERLESS BUTTON SYSTEM (比照投票「結算」按鈕風格)
+       UNIFIED SOFT-FILLED BORDERLESS BUTTON SYSTEM (比照投票「結算」按鈕風格 — 全站統一)
        ===================================================== */
-    /* 1. Default / Neutral Action Buttons (Specificity: 2,0,4 dark / 2,1,4 light) */
-    html:not(#_):not(#__) body main button:where(:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#btn-rollcall-lock):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item):not(.btn-rollcall-present):not(.btn-rollcall-absent):not(.btn-rollcall-expanded)),
-    html:not(#_):not(#__) body #btn-amendment-num-dec,
-    html:not(#_):not(#__) body #btn-amendment-num-inc,
-    html:not(#_):not(#__) body #cfg-btn-reset-scale,
-    html:not(#_):not(#__) body #cfg-btn-open-palette,
-    html:not(#_):not(#__) body #cfg-btn-sync-now {
+    /* 0. Site-wide Borderless & Shadowless Guarantee on ALL buttons (except underline nav tabs) */
+    html:not(#_):not(#__):not(#___) body button:where(:not(.tab-btn):not(.cfg-nav-btn)) {
+      border: none !important;
+      border-width: 0 !important;
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    /* 1. Default / Neutral Soft-Filled Action Buttons (Site-wide: main + modals + dialogs + drawer + settings + portal) */
+    html:not(#_):not(#__):not(#___) body button:where(:not(.tab-btn):not(.cfg-nav-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#btn-rollcall-lock):not(#btn-open-settings):not(#btn-open-drawer):not(#btn-logo-home):not(#btn-user-avatar):not(#btn-close-drawer):not(#btn-close-settings-modal):not(#activity-log-close):not(.modal-close-icon):not(.btn-del-queue):not(.btn-del-mod-queue):not(.btn-top-queue):not(.btn-del-pro):not(.btn-del-con):not(#btn-gsl-set-time):not(#btn-procon-set-time):not(#btn-rollcall-warning):not(.btn-theme-swatch):not(.btn-close-modal:has(i, svg))) {
       background-color: #E7E0D8 !important;
       background: #E7E0D8 !important;
       color: #3E2723 !important;
@@ -3719,15 +3635,10 @@ body:not(.light-mode) {
       box-shadow: none !important;
       transition: filter 0.15s ease, transform 0.15s ease !important;
     }
-    html:not(#_):not(#__) body main button:where(:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#btn-rollcall-lock):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item):not(.btn-rollcall-present):not(.btn-rollcall-absent):not(.btn-rollcall-expanded)) *,
-    html:not(#_):not(#__) body #btn-amendment-num-dec *,
-    html:not(#_):not(#__) body #btn-amendment-num-inc *,
-    html:not(#_):not(#__) body #cfg-btn-reset-scale *,
-    html:not(#_):not(#__) body #cfg-btn-open-palette *,
-    html:not(#_):not(#__) body #cfg-btn-sync-now * {
+    html:not(#_):not(#__):not(#___) body button:where(:not(.tab-btn):not(.cfg-nav-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#btn-rollcall-lock):not(#btn-open-settings):not(#btn-open-drawer):not(#btn-logo-home):not(#btn-user-avatar):not(#btn-close-drawer):not(#btn-close-settings-modal):not(#activity-log-close):not(.modal-close-icon):not(.btn-del-queue):not(.btn-del-mod-queue):not(.btn-top-queue):not(.btn-del-pro):not(.btn-del-con):not(#btn-gsl-set-time):not(#btn-procon-set-time):not(#btn-rollcall-warning):not(.btn-theme-swatch):not(.btn-close-modal:has(i, svg))) * {
       color: #3E2723 !important;
     }
-    html:not(#_):not(#__) body.light-mode main button:where(:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#btn-rollcall-lock):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item):not(.btn-rollcall-present):not(.btn-rollcall-absent):not(.btn-rollcall-expanded)) {
+    html:not(#_):not(#__):not(#___) body.light-mode button:where(:not(.tab-btn):not(.cfg-nav-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#btn-rollcall-lock):not(#btn-open-settings):not(#btn-open-drawer):not(#btn-logo-home):not(#btn-user-avatar):not(#btn-close-drawer):not(#btn-close-settings-modal):not(#activity-log-close):not(.modal-close-icon):not(.btn-del-queue):not(.btn-del-mod-queue):not(.btn-top-queue):not(.btn-del-pro):not(.btn-del-con):not(#btn-gsl-set-time):not(#btn-procon-set-time):not(#btn-rollcall-warning):not(.btn-theme-swatch):not(.btn-close-modal:has(i, svg))) {
       background-color: #5D4037 !important;
       background: #5D4037 !important;
       color: #F7F4EE !important;
@@ -3735,41 +3646,53 @@ body:not(.light-mode) {
       border-radius: 0.75rem !important;
       box-shadow: none !important;
     }
-    html:not(#_):not(#__) body.light-mode main button:where(:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#btn-rollcall-lock):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item):not(.btn-rollcall-present):not(.btn-rollcall-absent):not(.btn-rollcall-expanded)) * {
+    html:not(#_):not(#__):not(#___) body.light-mode button:where(:not(.tab-btn):not(.cfg-nav-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#btn-rollcall-lock):not(#btn-open-settings):not(#btn-open-drawer):not(#btn-logo-home):not(#btn-user-avatar):not(#btn-close-drawer):not(#btn-close-settings-modal):not(#activity-log-close):not(.modal-close-icon):not(.btn-del-queue):not(.btn-del-mod-queue):not(.btn-top-queue):not(.btn-del-pro):not(.btn-del-con):not(#btn-gsl-set-time):not(#btn-procon-set-time):not(#btn-rollcall-warning):not(.btn-theme-swatch):not(.btn-close-modal:has(i, svg))) * {
       color: #F7F4EE !important;
     }
 
-    /* 2. Positive / Green Soft-Filled Buttons (結算 / 通過 / 開始 / 下一位 / 出席 / 贊成 / 新增 / 儲存) */
-    html:not(#_):not(#__) body #btn-adopt-vote,
-    html:not(#_):not(#__) body #btn-motion-vote-execute,
-    html:not(#_):not(#__) body #btn-voting-motion-second,
-    html:not(#_):not(#__) body #btn-hero-motion-second,
-    html:not(#_):not(#__) body #view-motions #list-motions .btn-vote-motion-pass,
-    html:not(#_):not(#__) body #btn-set-all-present,
-    html:not(#_):not(#__) body #btn-gsl-start,
-    html:not(#_):not(#__) body #btn-mod-start,
-    html:not(#_):not(#__) body #btn-single-start,
-    html:not(#_):not(#__) body #btn-procon-start,
-    html:not(#_):not(#__) body #btn-unmod-start,
-    html:not(#_):not(#__) body #btn-gsl-next,
-    html:not(#_):not(#__) body #btn-mod-next,
-    html:not(#_):not(#__) body #btn-procon-next,
-    html:not(#_):not(#__) body #btn-intro-to-procon,
-    html:not(#_):not(#__) body #btn-procon-add-pro,
-    html:not(#_):not(#__) body #btn-cast-favor,
-    html:not(#_):not(#__) body #btn-trigger-upload,
-    html:not(#_):not(#__) body #btn-open-add-speaker,
-    html:not(#_):not(#__) body #btn-mod-add-speaker,
-    html:not(#_):not(#__) body #btn-add-motion,
-    html:not(#_):not(#__) body #btn-save-speaking-time,
-    html:not(#_):not(#__) body #btn-save-mod-config,
-    html:not(#_):not(#__) body #btn-submit-motion,
-    html:not(#_):not(#__) body #btn-save-vote-config,
-    html:not(#_):not(#__) body #btn-save-settings-done,
-    html:not(#_):not(#__) body #panel-session-votes-container .btn-dec-favor,
-    html:not(#_):not(#__) body #panel-session-votes-container .btn-inc-favor,
-    html:not(#_):not(#__) body #grid-rollcall-delegates .btn-rollcall-present,
-    html:not(#_):not(#__) body #grid-rollcall-delegates .btn-rollcall-status-present {
+    /* 2. Positive / Soft Matcha Green Buttons (結算 / 通過 / 開始 / 下一位 / 出席 / 贊成 / 新增 / 儲存 / 確認) */
+    html:not(#_):not(#__):not(#___):not(#____) body :is(
+      #btn-adopt-vote,
+      #btn-quick-pass,
+      #btn-motion-vote-execute,
+      #btn-voting-motion-second,
+      #btn-hero-motion-second,
+      #btn-hero-motion-pass,
+      .btn-vote-motion-pass,
+      #btn-set-all-present,
+      #btn-gsl-start,
+      #btn-mod-start,
+      #btn-single-start,
+      #btn-procon-start,
+      #btn-unmod-start,
+      #btn-recess-toggle-timer,
+      #btn-gsl-next,
+      #btn-mod-next,
+      #btn-procon-next,
+      #btn-intro-to-procon,
+      #btn-procon-add-pro,
+      #btn-procon-side-pro.bg-emerald-600,
+      #btn-cast-favor,
+      .btn-vote-choice.vote-favor,
+      #btn-trigger-upload,
+      #btn-open-add-speaker,
+      #btn-mod-add-speaker,
+      .btn-add-speaker-item,
+      .btn-add-country-item,
+      #btn-add-motion,
+      #btn-save-speaking-time,
+      #btn-save-mod-config,
+      #btn-submit-motion,
+      #btn-save-vote-config,
+      #btn-save-settings-done,
+      #btn-done-add-speaker,
+      .modal-btn-confirm,
+      #btn-apply-custom-color,
+      .btn-dec-favor,
+      .btn-inc-favor,
+      .btn-rollcall-present,
+      .btn-rollcall-status-present
+    ) {
       background-color: #B5C99A !important;
       background: #B5C99A !important;
       color: #1F2A14 !important;
@@ -3777,54 +3700,75 @@ body:not(.light-mode) {
       border-radius: 0.75rem !important;
       box-shadow: none !important;
     }
-    html:not(#_):not(#__) body #btn-adopt-vote *,
-    html:not(#_):not(#__) body #btn-motion-vote-execute *,
-    html:not(#_):not(#__) body #btn-voting-motion-second *,
-    html:not(#_):not(#__) body #btn-hero-motion-second *,
-    html:not(#_):not(#__) body #view-motions #list-motions .btn-vote-motion-pass *,
-    html:not(#_):not(#__) body #btn-set-all-present *,
-    html:not(#_):not(#__) body #btn-gsl-start *,
-    html:not(#_):not(#__) body #btn-mod-start *,
-    html:not(#_):not(#__) body #btn-single-start *,
-    html:not(#_):not(#__) body #btn-procon-start *,
-    html:not(#_):not(#__) body #btn-unmod-start *,
-    html:not(#_):not(#__) body #btn-gsl-next *,
-    html:not(#_):not(#__) body #btn-mod-next *,
-    html:not(#_):not(#__) body #btn-procon-next *,
-    html:not(#_):not(#__) body #btn-intro-to-procon *,
-    html:not(#_):not(#__) body #btn-procon-add-pro *,
-    html:not(#_):not(#__) body #btn-cast-favor *,
-    html:not(#_):not(#__) body #btn-trigger-upload *,
-    html:not(#_):not(#__) body #btn-open-add-speaker *,
-    html:not(#_):not(#__) body #btn-mod-add-speaker *,
-    html:not(#_):not(#__) body #btn-add-motion *,
-    html:not(#_):not(#__) body #btn-save-speaking-time *,
-    html:not(#_):not(#__) body #btn-save-mod-config *,
-    html:not(#_):not(#__) body #btn-submit-motion *,
-    html:not(#_):not(#__) body #btn-save-vote-config *,
-    html:not(#_):not(#__) body #btn-save-settings-done *,
-    html:not(#_):not(#__) body #panel-session-votes-container .btn-dec-favor *,
-    html:not(#_):not(#__) body #panel-session-votes-container .btn-inc-favor *,
-    html:not(#_):not(#__) body #grid-rollcall-delegates .btn-rollcall-present *,
-    html:not(#_):not(#__) body #grid-rollcall-delegates .btn-rollcall-status-present * {
+    html:not(#_):not(#__):not(#___):not(#____) body :is(
+      #btn-adopt-vote,
+      #btn-quick-pass,
+      #btn-motion-vote-execute,
+      #btn-voting-motion-second,
+      #btn-hero-motion-second,
+      #btn-hero-motion-pass,
+      .btn-vote-motion-pass,
+      #btn-set-all-present,
+      #btn-gsl-start,
+      #btn-mod-start,
+      #btn-single-start,
+      #btn-procon-start,
+      #btn-unmod-start,
+      #btn-recess-toggle-timer,
+      #btn-gsl-next,
+      #btn-mod-next,
+      #btn-procon-next,
+      #btn-intro-to-procon,
+      #btn-procon-add-pro,
+      #btn-procon-side-pro.bg-emerald-600,
+      #btn-cast-favor,
+      .btn-vote-choice.vote-favor,
+      #btn-trigger-upload,
+      #btn-open-add-speaker,
+      #btn-mod-add-speaker,
+      .btn-add-speaker-item,
+      .btn-add-country-item,
+      #btn-add-motion,
+      #btn-save-speaking-time,
+      #btn-save-mod-config,
+      #btn-submit-motion,
+      #btn-save-vote-config,
+      #btn-save-settings-done,
+      #btn-done-add-speaker,
+      .modal-btn-confirm,
+      #btn-apply-custom-color,
+      .btn-dec-favor,
+      .btn-inc-favor,
+      .btn-rollcall-present,
+      .btn-rollcall-status-present
+    ) * {
       color: #1F2A14 !important;
     }
 
-    /* 3. Negative / Rose Soft-Filled Buttons (重置票數 / 否決 / 缺席 / 反對 / 清除選取 / 重置會議) */
-    html:not(#_):not(#__) body #btn-reset-votes,
-    html:not(#_):not(#__) body #btn-clear-selection,
-    html:not(#_):not(#__) body #btn-set-all-absent,
-    html:not(#_):not(#__) body #btn-voting-motion-fail,
-    html:not(#_):not(#__) body #btn-hero-motion-fail,
-    html:not(#_):not(#__) body #view-motions #list-motions .btn-vote-motion-fail,
-    html:not(#_):not(#__) body #btn-procon-add-con,
-    html:not(#_):not(#__) body #btn-cast-against,
-    html:not(#_):not(#__) body #cfg-btn-reset-conference,
-    html:not(#_):not(#__) body #btn-google-logout,
-    html:not(#_):not(#__) body #panel-session-votes-container .btn-dec-against,
-    html:not(#_):not(#__) body #panel-session-votes-container .btn-inc-against,
-    html:not(#_):not(#__) body #grid-rollcall-delegates .btn-rollcall-absent,
-    html:not(#_):not(#__) body #grid-rollcall-delegates .btn-rollcall-status-absent {
+    /* 3. Negative / Soft Rose Buttons (重置票數 / 否決 / 缺席 / 反對 / 清除 / 移除 / 登出) */
+    html:not(#_):not(#__):not(#___):not(#____) body :is(
+      #btn-reset-votes,
+      #btn-reset-current-session,
+      #btn-reset-all-sessions,
+      #btn-clear-selection,
+      #btn-set-all-absent,
+      #btn-voting-motion-fail,
+      #btn-hero-motion-fail,
+      .btn-vote-motion-fail,
+      #btn-procon-add-con,
+      #btn-procon-side-con.bg-rose-600,
+      #btn-cast-against,
+      .btn-vote-choice.vote-against,
+      .btn-remove-country,
+      #cfg-btn-reset-conference,
+      #btn-google-logout,
+      #activity-log-clear,
+      #btn-reset-theme-color,
+      .btn-dec-against,
+      .btn-inc-against,
+      .btn-rollcall-absent,
+      .btn-rollcall-status-absent
+    ) {
       background-color: #E59EA6 !important;
       background: #E59EA6 !important;
       color: #4A1A20 !important;
@@ -3832,35 +3776,49 @@ body:not(.light-mode) {
       border-radius: 0.75rem !important;
       box-shadow: none !important;
     }
-    html:not(#_):not(#__) body #btn-reset-votes *,
-    html:not(#_):not(#__) body #btn-clear-selection *,
-    html:not(#_):not(#__) body #btn-set-all-absent *,
-    html:not(#_):not(#__) body #btn-voting-motion-fail *,
-    html:not(#_):not(#__) body #btn-hero-motion-fail *,
-    html:not(#_):not(#__) body #view-motions #list-motions .btn-vote-motion-fail *,
-    html:not(#_):not(#__) body #btn-procon-add-con *,
-    html:not(#_):not(#__) body #btn-cast-against *,
-    html:not(#_):not(#__) body #cfg-btn-reset-conference *,
-    html:not(#_):not(#__) body #btn-google-logout *,
-    html:not(#_):not(#__) body #panel-session-votes-container .btn-dec-against *,
-    html:not(#_):not(#__) body #panel-session-votes-container .btn-inc-against *,
-    html:not(#_):not(#__) body #grid-rollcall-delegates .btn-rollcall-absent *,
-    html:not(#_):not(#__) body #grid-rollcall-delegates .btn-rollcall-status-absent * {
+    html:not(#_):not(#__):not(#___):not(#____) body :is(
+      #btn-reset-votes,
+      #btn-reset-current-session,
+      #btn-reset-all-sessions,
+      #btn-clear-selection,
+      #btn-set-all-absent,
+      #btn-voting-motion-fail,
+      #btn-hero-motion-fail,
+      .btn-vote-motion-fail,
+      #btn-procon-add-con,
+      #btn-procon-side-con.bg-rose-600,
+      #btn-cast-against,
+      .btn-vote-choice.vote-against,
+      .btn-remove-country,
+      #cfg-btn-reset-conference,
+      #btn-google-logout,
+      #activity-log-clear,
+      #btn-reset-theme-color,
+      .btn-dec-against,
+      .btn-inc-against,
+      .btn-rollcall-absent,
+      .btn-rollcall-status-absent
+    ) * {
       color: #4A1A20 !important;
     }
 
-    /* 4. Warning / Amber Soft-Filled Buttons (暫停 / 交付表決 / 棄權 / 出席且投票) */
-    html:not(#_):not(#__) body #btn-gsl-pause,
-    html:not(#_):not(#__) body #btn-mod-pause,
-    html:not(#_):not(#__) body #btn-single-pause,
-    html:not(#_):not(#__) body #btn-procon-pause,
-    html:not(#_):not(#__) body #btn-unmod-pause,
-    html:not(#_):not(#__) body #btn-hero-motion-vote,
-    html:not(#_):not(#__) body #view-motions #list-motions .btn-vote-motion-vote,
-    html:not(#_):not(#__) body #btn-cast-abstain,
-    html:not(#_):not(#__) body #panel-session-votes-container .btn-dec-abstain,
-    html:not(#_):not(#__) body #panel-session-votes-container .btn-inc-abstain,
-    html:not(#_):not(#__) body #grid-rollcall-delegates .btn-rollcall-status-pv {
+    /* 4. Warning / Soft Amber Buttons (暫停 / 交付表決 / 棄權 / Pass / 出席且投票) */
+    html:not(#_):not(#__):not(#___):not(#____) body :is(
+      #btn-gsl-pause,
+      #btn-mod-pause,
+      #btn-single-pause,
+      #btn-procon-pause,
+      #btn-unmod-pause,
+      #btn-hero-motion-vote,
+      .btn-vote-motion-vote,
+      #btn-cast-abstain,
+      #btn-cast-pass,
+      .btn-vote-choice.vote-abstain,
+      .btn-vote-choice.vote-pass,
+      .btn-dec-abstain,
+      .btn-inc-abstain,
+      .btn-rollcall-status-pv
+    ) {
       background-color: #EED296 !important;
       background: #EED296 !important;
       color: #4A3208 !important;
@@ -3868,23 +3826,35 @@ body:not(.light-mode) {
       border-radius: 0.75rem !important;
       box-shadow: none !important;
     }
-    html:not(#_):not(#__) body #btn-gsl-pause *,
-    html:not(#_):not(#__) body #btn-mod-pause *,
-    html:not(#_):not(#__) body #btn-single-pause *,
-    html:not(#_):not(#__) body #btn-procon-pause *,
-    html:not(#_):not(#__) body #btn-unmod-pause *,
-    html:not(#_):not(#__) body #btn-hero-motion-vote *,
-    html:not(#_):not(#__) body #view-motions #list-motions .btn-vote-motion-vote *,
-    html:not(#_):not(#__) body #btn-cast-abstain *,
-    html:not(#_):not(#__) body #panel-session-votes-container .btn-dec-abstain *,
-    html:not(#_):not(#__) body #panel-session-votes-container .btn-inc-abstain *,
-    html:not(#_):not(#__) body #grid-rollcall-delegates .btn-rollcall-status-pv * {
+    html:not(#_):not(#__):not(#___):not(#____) body :is(
+      #btn-gsl-pause,
+      #btn-mod-pause,
+      #btn-single-pause,
+      #btn-procon-pause,
+      #btn-unmod-pause,
+      #btn-hero-motion-vote,
+      .btn-vote-motion-vote,
+      #btn-cast-abstain,
+      #btn-cast-pass,
+      .btn-vote-choice.vote-abstain,
+      .btn-vote-choice.vote-pass,
+      .btn-dec-abstain,
+      .btn-inc-abstain,
+      .btn-rollcall-status-pv
+    ) * {
       color: #4A3208 !important;
     }
 
-    /* 5. Subtle hover feedback for all unified soft-filled buttons */
-    html:not(#_):not(#__) body main button:where(:not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#btn-rollcall-lock):not(.btn-remove-country):not(.btn-del-mod-queue):not(.btn-del-queue):not(.btn-add-country-item)):hover {
+    /* 5. Subtle hover & active feedback for all unified soft-filled buttons */
+    html:not(#_):not(#__):not(#___):not(#____) body button:where(:not(.tab-btn):not(.cfg-nav-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#btn-rollcall-lock):not(#btn-open-settings):not(#btn-open-drawer):not(#btn-logo-home):not(#btn-user-avatar):not(#btn-close-drawer):not(#btn-close-settings-modal):not(#activity-log-close):not(.modal-close-icon):not(.btn-del-queue):not(.btn-del-mod-queue):not(.btn-top-queue):not(.btn-del-pro):not(.btn-del-con):not(#btn-gsl-set-time):not(#btn-procon-set-time):not(#btn-rollcall-warning):not(.btn-theme-swatch):not(.btn-close-modal:has(i, svg))):hover {
       filter: brightness(0.94) !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    html:not(#_):not(#__):not(#___):not(#____) body button:where(:not(.tab-btn):not(.cfg-nav-btn):not(.speaking-subtab-btn):not(#btn-voting-subtab-rollcall):not(#btn-voting-subtab-session):not(#btn-rollcall-lock):not(#btn-open-settings):not(#btn-open-drawer):not(#btn-logo-home):not(#btn-user-avatar):not(#btn-close-drawer):not(#btn-close-settings-modal):not(#activity-log-close):not(.modal-close-icon):not(.btn-del-queue):not(.btn-del-mod-queue):not(.btn-top-queue):not(.btn-del-pro):not(.btn-del-con):not(#btn-gsl-set-time):not(#btn-procon-set-time):not(#btn-rollcall-warning):not(.btn-theme-swatch):not(.btn-close-modal:has(i, svg))):active {
+      filter: brightness(0.88) !important;
+      border: none !important;
+      box-shadow: none !important;
     }
 
     /* Make active speaking subtab follow custom theme accent */
