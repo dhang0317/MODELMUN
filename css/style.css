@@ -3867,3 +3867,10 @@ body:not(.light-mode) {
       padding: 0.25rem 1.25rem !important;
       width: auto !important;
     }
+
+    /* Restore visible soft pill background for selected delegates count badge */
+    #badge-selected-count {
+      background-color: #E7E0D8 !important;
+      background: #E7E0D8 !important;
+      color: #3E2723 !important;
+    }
