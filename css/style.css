@@ -3888,3 +3888,11 @@ body:not(.light-mode) {
       background-color: #E7E0D8 !important;
       color: #3E2723 !important;
     }
+
+    /* Flatten #voting-scoreboard stat boxes (no floating card border/shadow/fill) */
+    #voting-scoreboard .grid > div {
+      background-color: transparent !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
