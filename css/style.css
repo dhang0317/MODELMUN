@@ -3919,7 +3919,10 @@ body:not(.light-mode) {
       touch-action: pan-y !important;
     }
 
-    /* Remove all floating shadows site-wide */
-    html body *:not(.toast-slide-in) {
+    /* Remove all floating shadows site-wide (including pseudo-elements & text-shadow) */
+    html body *:not(.toast-slide-in),
+    html body *::before,
+    html body *::after {
       box-shadow: none !important;
+      text-shadow: none !important;
     }
