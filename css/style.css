@@ -3731,7 +3731,7 @@ body:not(.light-mode) {
       color: #1F2A14 !important;
     }
 
-    /* 3. Negative / Soft Rose Buttons (重置票數 / 否決 / 缺席 / 反對 / 清除 / 移除 / 登出) */
+    /* 3. Negative / Soft Rose Buttons (重置票數 / 否決 / 缺席 / 反對 / 清除 / 登出) */
     html:not(#_):not(#__):not(#___):not(#____) body :is(
       #btn-reset-votes,
       #btn-reset-current-session,
@@ -3745,7 +3745,6 @@ body:not(.light-mode) {
       #btn-procon-side-con.bg-rose-600,
       #btn-cast-against,
       .btn-vote-choice.vote-against,
-      .btn-remove-country,
       #cfg-btn-reset-conference,
       #btn-google-logout,
       #activity-log-clear,
@@ -3775,7 +3774,6 @@ body:not(.light-mode) {
       #btn-procon-side-con.bg-rose-600,
       #btn-cast-against,
       .btn-vote-choice.vote-against,
-      .btn-remove-country,
       #cfg-btn-reset-conference,
       #btn-google-logout,
       #activity-log-clear,
