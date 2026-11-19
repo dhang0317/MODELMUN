@@ -3896,3 +3896,8 @@ body:not(.light-mode) {
       border: none !important;
       box-shadow: none !important;
     }
+
+    /* Remove all floating shadows site-wide */
+    html body *:not(.toast-slide-in) {
+      box-shadow: none !important;
+    }
