@@ -3951,3 +3951,11 @@ body:not(.light-mode) {
       align-items: center !important;
       justify-content: center !important;
     }
+
+    /* Remove outer background card on all view panels except #view-setup */
+    html:not(#_):not(#__) body .view-panel:not(#view-setup) {
+      background-color: transparent !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
