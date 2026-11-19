@@ -3941,3 +3941,13 @@ body:not(.light-mode) {
     html:not(#_):not(#__) body.light-mode #view-gsl button.speaking-subtab-btn:not(.subtab-active) * {
       color: #F7F4EE !important;
     }
+
+    /* Unify + 加入正方 and + 加入反方 button sizes */
+    #btn-procon-add-pro,
+    #btn-procon-add-con {
+      min-width: 6.5rem !important;
+      padding: 0.375rem 0.75rem !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
