@@ -4063,3 +4063,10 @@ body:not(.light-mode) {
       border-bottom: none !important;
       box-shadow: none !important;
     }
+
+    /* Give timer direct input comfortable breathing room when focused */
+    .timer-direct-input:focus {
+      inset: -0.25rem -1.25rem !important;
+      padding: 0.25rem 1.25rem !important;
+      width: auto !important;
+    }
