@@ -560,6 +560,7 @@
     }
     if (parsed.committeeName) state.committeeName = parsed.committeeName;
     if (parsed.agenda) state.agenda = parsed.agenda;
+    if (typeof parsed.rollcallLocked !== 'undefined') state.rollcallLocked = !!parsed.rollcallLocked;
     if (Array.isArray(parsed.selectedCountries) && parsed.selectedCountries.length > 0) {
       const rawMap = {};
       (window.MUN_COUNTRIES || []).forEach(item => { rawMap[item.id] = item; });
