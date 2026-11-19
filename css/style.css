@@ -3926,3 +3926,8 @@ body:not(.light-mode) {
       box-shadow: none !important;
       text-shadow: none !important;
     }
+
+    /* Hide all decorative icons site-wide (keep essential icon-only controls & country flags) */
+    html:not(#_):not(#__) body :is(svg.lucide, i[data-lucide], i[class*="fa-"]):not(#btn-open-drawer *):not(#btn-close-drawer *):not(#btn-close-settings-modal *):not(#activity-log-close *):not(.btn-close-modal *):not(.modal-close-icon *):not(.btn-del-queue *):not(.btn-del-mod-queue *):not(.btn-top-queue *):not(.btn-del-pro *):not(.btn-del-con *):not(#btn-gsl-set-time *):not(#btn-procon-set-time *) {
+      display: none !important;
+    }
