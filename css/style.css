@@ -4033,28 +4033,45 @@ body:not(.light-mode) {
       font-weight: normal !important;
     }
 
-    /* Unified session voting -/+ stepper buttons */
+    /* Unified session voting -/+ stepper buttons with semantic colors */
     html body #panel-session-votes-container .btn-dec-favor,
+    html body #panel-session-votes-container .btn-inc-favor {
+      background-color: rgba(125, 148, 98, 0.18) !important;
+      background: rgba(125, 148, 98, 0.18) !important;
+      border: 1px solid rgba(125, 148, 98, 0.45) !important;
+      color: #4B5A38 !important;
+      border-radius: 0.5rem !important;
+      box-shadow: none !important;
+    }
     html body #panel-session-votes-container .btn-dec-against,
+    html body #panel-session-votes-container .btn-inc-against {
+      background-color: rgba(145, 61, 72, 0.15) !important;
+      background: rgba(145, 61, 72, 0.15) !important;
+      border: 1px solid rgba(145, 61, 72, 0.45) !important;
+      color: #913D48 !important;
+      border-radius: 0.5rem !important;
+      box-shadow: none !important;
+    }
     html body #panel-session-votes-container .btn-dec-abstain,
-    html body #panel-session-votes-container .btn-inc-favor,
-    html body #panel-session-votes-container .btn-inc-against,
     html body #panel-session-votes-container .btn-inc-abstain {
-      background-color: transparent !important;
-      background: transparent !important;
-      border: 1px solid #D7CCC8 !important;
-      color: #3E2723 !important;
+      background-color: rgba(245, 158, 11, 0.16) !important;
+      background: rgba(245, 158, 11, 0.16) !important;
+      border: 1px solid rgba(245, 158, 11, 0.45) !important;
+      color: #b45309 !important;
       border-radius: 0.5rem !important;
       box-shadow: none !important;
     }
     html body.light-mode #panel-session-votes-container .btn-dec-favor,
+    html body.light-mode #panel-session-votes-container .btn-inc-favor {
+      color: #B5C99A !important;
+    }
     html body.light-mode #panel-session-votes-container .btn-dec-against,
+    html body.light-mode #panel-session-votes-container .btn-inc-against {
+      color: #fda4af !important;
+    }
     html body.light-mode #panel-session-votes-container .btn-dec-abstain,
-    html body.light-mode #panel-session-votes-container .btn-inc-favor,
-    html body.light-mode #panel-session-votes-container .btn-inc-against,
     html body.light-mode #panel-session-votes-container .btn-inc-abstain {
-      border-color: #6D4C41 !important;
-      color: #F7F4EE !important;
+      color: #fcd34d !important;
     }
 
     /* Remove seam (border and shadow) between header/nav and main */
