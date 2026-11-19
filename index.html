@@ -295,7 +295,8 @@
 
     <!-- 2. SPEAKING VIEW (/tabs/gsl) - 包含 GSL, MOD, INTRO, 正反方發言 -->
     <div id="view-gsl" class="view-panel absolute inset-0 overflow-y-auto lg:overflow-hidden p-3 sm:p-5 lg:p-6 bg-slate-50 custom-scroll flex flex-col hidden">
-      <div class="max-w-6xl w-full mx-auto flex-1 flex flex-col min-h-0 space-y-4">
+      <div class="max-w-6xl w-full mx-auto flex-1 flex flex-col min-h-0">
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 flex-1 flex flex-col min-h-0 space-y-4">
 
         <!-- Speaking Sub-tabs Navigation Bar -->
         <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 p-1 bg-slate-100 rounded-xl border border-slate-200 w-full shrink-0">
@@ -638,11 +639,13 @@
         </div>
 
       </div>
+      </div>
     </div>
 
     <!-- 4. UNMODERATED CAUCUS VIEW (/tabs/unmod) -->
     <div id="view-unmod" class="view-panel absolute inset-0 overflow-y-auto lg:overflow-hidden p-3 sm:p-5 lg:p-6 bg-slate-50 custom-scroll flex flex-col justify-start items-center hidden">
       <div class="max-w-6xl w-full mx-auto flex-1 flex flex-col min-h-0">
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 flex-1 flex flex-col min-h-0">
         
         <!-- Main Caucus Timer Card (Consistent with Mod Caucus UI) -->
         <div class="bg-white rounded-2xl p-6 sm:p-8 flex-1 min-h-0 shadow-sm border border-slate-200 text-center space-y-6 flex flex-col justify-center">
@@ -687,13 +690,15 @@
         </div>
 
       </div>
+      </div>
     </div>
 
 
 
     <!-- 6. MOTIONS VIEW (/tabs/motions) -->
     <div id="view-motions" class="view-panel absolute inset-0 overflow-hidden p-3 sm:p-5 lg:p-6 bg-slate-50 flex flex-col hidden">
-      <div class="max-w-6xl w-full mx-auto flex-1 flex flex-col min-h-0 space-y-4">
+      <div class="max-w-6xl w-full mx-auto flex-1 flex flex-col min-h-0">
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 flex-1 flex flex-col min-h-0 space-y-4">
         
 
         <!-- Most Disruptive Motion Hero -->
@@ -741,6 +746,7 @@
         </div>
 
       </div>
+      </div>
     </div>
 
     <!-- 7. ROLL CALL VIEW (/tabs/rollcall) -->
@@ -769,7 +775,8 @@
 
     <!-- 8. RESOLUTION VOTE VIEW (/tabs/vote) - MUN Command Style (Compact & Scroll-Free) -->
     <div id="view-vote" class="view-panel absolute inset-0 overflow-y-auto sm:overflow-hidden p-3 sm:p-5 lg:p-6 bg-slate-50 custom-scroll flex flex-col justify-start hidden">
-      <div class="max-w-6xl w-full mx-auto flex-1 flex flex-col min-h-0 space-y-3">
+      <div class="max-w-6xl w-full mx-auto flex-1 flex flex-col min-h-0">
+        <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200 flex-1 flex flex-col min-h-0 space-y-3">
 
         <!-- Top Header & Stages Bar -->
         <div class="bg-white rounded-xl sm:rounded-2xl p-2.5 sm:p-3 shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-2 shrink-0">
@@ -904,6 +911,7 @@
           </div>
         </div>
 
+      </div>
       </div>
     </div>
 
