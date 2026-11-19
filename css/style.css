@@ -3910,6 +3910,13 @@ body:not(.light-mode) {
       border-bottom: none !important;
     }
 
+    /* Ensure rollcall delegates list scrolls smoothly on iOS Safari */
+    #grid-rollcall-delegates {
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+      touch-action: pan-y !important;
+    }
+
     /* Remove all floating shadows site-wide */
     html body *:not(.toast-slide-in) {
       box-shadow: none !important;
