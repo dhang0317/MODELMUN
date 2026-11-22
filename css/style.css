@@ -3959,3 +3959,21 @@ body:not(.light-mode) {
       border: none !important;
       box-shadow: none !important;
     }
+
+    /* Unify #modal-activity-log colors with current theme */
+    html:not(#_):not(#__) body:not(.light-mode) #modal-activity-log > div {
+      background-color: #F7F4EE !important;
+      background: #F7F4EE !important;
+      color: #3E2723 !important;
+    }
+    html:not(#_):not(#__) body:not(.light-mode) #modal-activity-log > div :is(h1, h2, h3, p, span, div, button#activity-log-close) {
+      color: #3E2723 !important;
+    }
+    html:not(#_):not(#__) body.light-mode #modal-activity-log > div {
+      background-color: #3E2723 !important;
+      background: #3E2723 !important;
+      color: #F7F4EE !important;
+    }
+    html:not(#_):not(#__) body.light-mode #modal-activity-log > div :is(h1, h2, h3, p, span, div, button#activity-log-close) {
+      color: #F7F4EE !important;
+    }
